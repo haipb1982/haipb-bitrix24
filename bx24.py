@@ -39,6 +39,7 @@ def addNewDeal():
 def updateDeal(dealID):
     res = bx24.callMethod("crm.deal.get", id=dealID)
     print(f'updateDeal',dealID)
+    return res
 
 
 # lay product by deal id

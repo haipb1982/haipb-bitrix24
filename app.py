@@ -29,7 +29,15 @@ endpoint = '/api/v1/bitrix24/'
 def api_deal_updated():
     print('api_deal_updated')
     print(request.values)
-    
+
+    print('api_deal_updated request:')
+    for item in request:
+      print(item)
+
+    print('api_deal_updated request.values:')
+    for val in request.values:
+      print(val)
+
     Bx24.updateDeal(3259)
 
     return {'message': '/api/v1/bitrix24/get/deal done'}
