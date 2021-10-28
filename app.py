@@ -25,6 +25,7 @@ def webhook_deal():
 
 endpoint = '/api/v1/bitrix24/'
 
+
 @app.route(endpoint + 'orders/updated', methods=['GET', 'POST'])
 def api_deal_updated():
     print('api_deal_updated')
@@ -34,9 +35,21 @@ def api_deal_updated():
     # for item in request:
     #   print(item)
 
-    # print('api_deal_updated request.values:')
-    # for val in request.values:
-    #   print(val)
+    print('api_deal_updated request.values:')
+    for val in request.values:
+      print(val)
+
+    _agrs = request.args
+    print(f'haravan agrs:', _agrs)
+
+    _form = request.form
+    print(f'haravan form:', _form)
+
+    _data = request.data
+    print(f'haravan data:', _data)
+
+    _json = request.json
+    print(f'haravan json:', _json)
 
     Bx24.updateDeal(3259)
 
