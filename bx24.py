@@ -2,6 +2,7 @@ import json
 import requests
 from bitrix24 import *
 from datetime import datetime
+import migration.deal as Deal
 
 bx24 = Bitrix24('https://blusaigon.bitrix24.com/rest/2069/pc3dgsz0s0ohfz6v/crm.deal.list.json')
 
@@ -36,9 +37,13 @@ def addNewDeal():
     print(res)
 
 
-def updateDeal(dealID):
-    res = bx24.callMethod("crm.deal.get", id=dealID)
-    print(f'updateDeal',dealID)
+def updateDeal(haravan_data):
+
+    # xu ly haravan_request de pass data vao fields
+    data_fields = Deal.HaravanToBitrix24(haravan_data)
+
+    res = bx24.callMethod("crm.deal.update", id = 3259 , fields = data_fields)
+    print(f'updateDeal', haravan_data)
     return res
 
 
