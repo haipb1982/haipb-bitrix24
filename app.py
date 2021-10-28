@@ -25,16 +25,42 @@ def webhook_deal():
 
 endpoint = '/api/v1/bitrix24/'
 
-
 @app.route(endpoint + 'orders/updated', methods=['GET', 'POST'])
 def api_deal_updated():
 
     print('api_deal_updated')
     req = request.json
     Bx24.updateDeal(req)
-    
+
     return {'message': endpoint + 'orders/updated'}
 
+@app.route(endpoint + 'orders/create', methods=['GET', 'POST'])
+def api_deal_create():
+
+    print('api_deal_create')
+    req = request.json
+    # Bx24.createDeal(req)
+
+    return {'message': endpoint + 'orders/create'}
+
+@app.route(endpoint + 'orders/paid', methods=['GET', 'POST'])
+def api_deal_paid():
+
+    print('api_deal_paid')
+    req = request.json
+    # Bx24.paidDeal(req)
+
+    return {'message': endpoint + 'orders/paid'}
+
+
+@app.route(endpoint + 'orders/delete', methods=['GET', 'POST'])
+def api_deal_delete():
+
+    print('api_deal_delete')
+    req = request.json
+    # Bx24.deleteDeal(req)
+
+    return {'message': endpoint + 'orders/delete'}
 
 if __name__ == "__main__":
     app.run(use_reloader=True)
