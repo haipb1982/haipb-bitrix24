@@ -71,11 +71,13 @@ def getBluProducts():
 # main
 if __name__ == "__main__":
     print('rock!!!')
-    res = readJsonFile('blu-products.json')
-    for  item in res :
-        sku = item['variants'][0]['sku']
-        if not sku:
-            print(item)
+    # res = readJsonFile('blu-products.json')
+    # for  item in res :
+    #     sku = item['variants'][0]['sku']
+    #     if not sku:
+    #         print(item)
             # print(item['variants'][0]['sku'])
     # print(len(res))
+
+    getDealList()
     pass

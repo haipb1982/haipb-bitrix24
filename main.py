@@ -1,8 +1,5 @@
 from flask import Flask, request, jsonify
-try:
-  import bx24 as Bx24
-except:
-  pass
+import bx24 as Bx24
 
 app= Flask(__name__)
 
@@ -21,6 +18,7 @@ def webhook_deal():
 
 @app.route('/api/v1/bitrix24/get/deal',methods=['GET', 'POST'])
 def api_get_deal():
+  
   Bx24.getDealList()
 
   return { 'message': '/api/v1/bitrix24/get/deal done'}
