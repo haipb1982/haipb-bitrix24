@@ -5,20 +5,24 @@ app= Flask(__name__)
 
 @app.route('/')
 def home():
-  return "<h1>Welcome to CodingX</h1>"
+  return "<h1>Welcome to HAIPB1982 APIs</h1>"
 
 @app.route('/api/v1/bitrix24/webhooks/deal',methods=['GET', 'POST'])
 def webhook_deal():
 
   _form = request.form
-  print(f'bitrix24 _form:', _form)
-  print(f'bitrix24 _form:', _form['data[FIELDS][ID]'])
+  _dealID = _form['data[FIELDS][ID]']
+  _data = Bx24.getDeal(_dealID)
 
-  return { 'message': '/api/v1/bitrix24/webhooks/deal done'}
+  print(f'bitrix24 _form:', _form)
+  print(f'data[FIELDS][ID]: DEAL ID', _dealID)
+  print(f'get deal detail ', _data) 
+
+  return { 'message': '/api/v1/bitrix24/webhooks/deal done', 'data' : _data}
 
 @app.route('/api/v1/bitrix24/get/deal',methods=['GET', 'POST'])
 def api_get_deal():
-  
+
   Bx24.getDealList()
 
   return { 'message': '/api/v1/bitrix24/get/deal done'}
