@@ -2,7 +2,11 @@ import requests
 import json
 
 url = 'https://apis.haravan.com/com/customers.json'
-my_headers = {'Authorization': 'Bearer 64DAB7780429D201D87D99BEA745223EA9116C3A10AD9EB3FCE817C5FF0912C4'}
+# blusaigon
+# my_headers = {'Authorization': 'Bearer 64DAB7780429D201D87D99BEA745223EA9116C3A10AD9EB3FCE817C5FF0912C4'}
+# haipb-haravan
+my_headers = {'Authorization': 'Bearer AB75EDC1B3127319BD4C6237364CD2D7D742FCA8C18D9A577422CEDCE89BE9D8'}
+
 def getBluOrders():
    
     response = requests.get(url, headers=my_headers)

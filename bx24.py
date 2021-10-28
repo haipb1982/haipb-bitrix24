@@ -15,9 +15,10 @@ deal = {
 def getDealList():
     print(bx24.callMethod('crm.deal.list'))
 
-def getDeal(id):
-    res = bx24.callMethod("crm.deal.get", id=id)
-    print(res)
+def getDeal(dealID):
+    res = bx24.callMethod("crm.deal.get", id=dealID)
+    # print(res)
+    return res
 
 def addNewDeal():
     try:
@@ -34,16 +35,22 @@ def addNewDeal():
     res = bx24.callMethod("crm.deal.get", id = 3255 )
     print(res)
 
+
+def updateDeal(dealID):
+    res = bx24.callMethod("crm.deal.get", id=dealID)
+    print(f'updateDeal',dealID)
+
+
 # lay product by deal id
-def getProductByDealID(id):
-    res = bx24.callMethod("crm.deal.productrows.get", id=id)
+def getProductByDealID(dealID):
+    res = bx24.callMethod("crm.deal.productrows.get", id=dealID)
     print(res)
 
 # # # # # # # # # # # # # # # CONTACT FUNCTIONS # # # # # # # # # # # # # # # 
 
 # lay contact by id
-def getContactByID(id):
-    print(id)
+def getContactByID(contactID):
+    print(contactID)
     res = bx24.callMethod("crm.contact.get", id = 236901 )
     return res
 
