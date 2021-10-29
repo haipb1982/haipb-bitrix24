@@ -4,6 +4,7 @@ from bitrix24 import *
 from datetime import datetime
 import migration.deal as Deal
 
+
 bx24 = Bitrix24('https://blusaigon.bitrix24.com/rest/2069/pc3dgsz0s0ohfz6v/crm.deal.list.json')
 
 # # # # # # 
