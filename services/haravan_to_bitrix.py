@@ -18,10 +18,10 @@ def create_deal_bitrix(payload=None):
     today = datetime.now()
     next_month_of_today = today + timedelta(mdays[today.month])
     LOGGER.info("create_deal_bitrix: ", extra={"payload": payload, "today": today})
-    id = payload.get("id")
+    number = payload.get("number")
 
     # Sử dụng database để mapping giữa haravan và bitrix
-    haravan_order = deal_dao.getHaravanID(id)
+    haravan_order = deal_dao.getHaravanID(number)
     if haravan_order:
         return None, False
     fields = {
@@ -47,8 +47,8 @@ def update_deal_bitrix(payload=None):
     LOGGER.info("create_deal_bitrix: ", extra={"payload": payload, "today": today})
 
     # Sử dụng database để mapping giữa haravan và bitrix
-    id = payload.get("id")
-    haravan_order = deal_dao.getHaravanID(id)
+    number = payload.get("number")
+    haravan_order = deal_dao.getHaravanID(number)
     if not haravan_order:
         return create_deal_bitrix(payload)
     fields = {
@@ -67,9 +67,9 @@ def paid_deal_bitrix(payload=None):
     today = datetime.now()
     LOGGER.info("create_deal_bitrix: ", extra={"payload": payload, "today": today})
 
-    id = payload.get("id")
+    number = payload.get("number")
     # Sử dụng database để mapping giữa haravan và bitrix
-    haravan_order = deal_dao.getHaravanID(id)
+    haravan_order = deal_dao.getHaravanID(number)
     if not haravan_order:
         return create_deal_bitrix(payload)
     fields = {
@@ -87,10 +87,10 @@ def cancelled_deal_bitrix(payload=None):
         payload = {}
     today = datetime.now()
     LOGGER.info("create_deal_bitrix: ", extra={"payload": payload, "today": today})
-    id = payload.get("id")
+    number = payload.get("number")
 
     # Sử dụng database để mapping giữa haravan và bitrix
-    haravan_order = deal_dao.getHaravanID(id)
+    haravan_order = deal_dao.getHaravanID(number)
     if not haravan_order:
         return create_deal_bitrix(payload)
     fields = {
@@ -107,10 +107,10 @@ def fulfilled_deal_bitrix(payload=None):
         payload = {}
     today = datetime.now()
     LOGGER.info("fulfilled_deal_bitrix: ", extra={"payload": payload, "today": today})
-    id = payload.get("id")
+    number = payload.get("number")
 
     # Sử dụng database để mapping giữa haravan và bitrix
-    haravan_order = deal_dao.getHaravanID(id)
+    haravan_order = deal_dao.getHaravanID(number)
     if not haravan_order:
         return create_deal_bitrix(payload)
     fields = {
