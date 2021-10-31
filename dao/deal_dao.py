@@ -1,3 +1,5 @@
+import os
+import pathlib
 import sqlite3
 
 
@@ -5,14 +7,20 @@ def addNewDeal(hanravan_id, bitrix24_id, note):
     sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id, note) VALUES (?,?,?)'''
     pamrs = [hanravan_id, bitrix24_id, note]
     res = fetchSQL(sql, pamrs)
-    return res
+    if res.get("status"):
+        return True
+    else:
+        print(res.get("data"))
+        return False
 
 
 def getHaravanID(id):
     sql = '''SELECT * FROM tbl_deal_order WHERE haravan_id = ?'''
     pamrs = [id]
     res = fetchSQL(sql, pamrs)
-    return res
+    if res.get("status"):
+        return res.get("data")
+    return None
 
 
 def getBitrix24ID(id):
@@ -44,7 +52,9 @@ def initDB():
 
 def fetchSQL(sql, pamrs):
     result = {}
-    con = sqlite3.connect('blusaigon.db')
+    DIR_PATH = os.path.dirname(os.path.realpath(__file__))
+    strdir = os.path.join(DIR_PATH, "", 'blusaigon.db')
+    con = sqlite3.connect(strdir)
     cur = con.cursor()
     try:
         cur.execute(sql, pamrs)

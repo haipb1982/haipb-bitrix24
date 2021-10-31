@@ -1,0 +1,42 @@
+[
+  {
+    "NAME": "New",
+    "SORT": 10,
+    "STATUS_ID": "NEW"
+  },
+  {
+    "NAME": "Create papers",
+    "SORT": 20,
+    "STATUS_ID": "PREPARATION"
+  },
+  {
+    "NAME": "Invoice",
+    "SORT": 40,
+    "STATUS_ID": "PREPAYMENT_INVOICE"
+  },
+  {
+    "NAME": "In progress",
+    "SORT": 50,
+    "STATUS_ID": "EXECUTING"
+  },
+  {
+    "NAME": "Final invoice",
+    "SORT": 60,
+    "STATUS_ID": "FINAL_INVOICE"
+  },
+  {
+    "NAME": "Deal won",
+    "SORT": 70,
+    "STATUS_ID": "WON"
+  },
+  {
+    "NAME": "Deal lost",
+    "SORT": 80,
+    "STATUS_ID": "LOSE"
+  },
+  {
+    "NAME": "Analyze failure",
+    "SORT": 90,
+    "STATUS_ID": "APOLOGY"
+  }
+]
