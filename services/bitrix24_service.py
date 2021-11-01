@@ -7,8 +7,10 @@ from utils import log
 LOGGER = log.get_logger(__name__)
 
 
-# bx24 = Bitrix24('https://blusaigon.bitrix24.com/rest/2069/pc3dgsz0s0ohfz6v/crm.deal.fields.json')
-bx24 = Bitrix24('https://b24-hfk65b.bitrix24.com/rest/1/ppyzdjwvsgune1od/crm.deal.fields.json') # TuanNA
+bx24 = Bitrix24('https://blusaigon.bitrix24.com/rest/2069/pc3dgsz0s0ohfz6v/crm.deal.fields.json')
+# bx24 = Bitrix24('https://b24-hfk65b.bitrix24.com/rest/1/ppyzdjwvsgune1od/crm.deal.fields.json') # TuanNA
+
+
 
 def get_deals():
     res = bx24.callMethod('crm.deal.list')
@@ -68,9 +70,9 @@ def getContactByID(contactID):
     return res
 
 # lay contact id by phone
-def getContactIDbyPhone():
+def getContactIDbyPhone(phone):
     res = bx24.callMethod("crm.contact.list", filter = { "PHONE": "0915453110" })
-    print(res)
+    return res
 
 # # # # # # # # # # # # # # # PRODUCT FUNCTIONS # # # # # # # # # # # # # # #
 
