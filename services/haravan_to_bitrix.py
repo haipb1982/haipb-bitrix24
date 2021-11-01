@@ -6,6 +6,7 @@ from flask import Flask
 from . import bitrix24_service as bx24
 from dao import deal_dao
 from utils import log
+import migration.deal as Deal
 
 LOGGER = log.get_logger(__name__)
 
@@ -15,24 +16,17 @@ app = Flask(__name__)
 def create_deal_bitrix(payload=None):
     if payload is None:
         payload = {}
-    today = datetime.now()
-    next_month_of_today = today + timedelta(mdays[today.month])
-    LOGGER.info("create_deal_bitrix: ", extra={"payload": payload, "today": today})
-    number = payload.get("number")
+   
+    LOGGER.info("create_deal_bitrix: ", extra={"payload": payload})    
 
     # Sử dụng database để mapping giữa haravan và bitrix
-    haravan_order = deal_dao.getHaravanID(number)
+    haravan_id = payload.get("id") or payload.get("number")
+    haravan_order = deal_dao.getHaravanID(haravan_id)
+
     if haravan_order:
         return None, False
-    fields = {
-        "TITLE": "ORDER-" + payload.get("order_number").replace("#", ""),
-        "ADDITIONAL_INFO": payload.get("note"),
-        "OPPORTUNITY": payload.get("total_price"),
-        "STAGE_ID": "NEW",
-        # "CURRENCY_ID": "VND",
-        "BEGINDATE": today,
-        "CLOSEDATE": next_month_of_today
-    }
+    fields = Deal.HaravanToBitrix24(payload) 
+
     # Tạo deal mới trên bitrix
     bitrix24_id = bx24.add_new_deal(fields)
     # Lưu dữ liệu từ bitrix vào db để mapping giữa haravan và bitrix
@@ -43,19 +37,18 @@ def create_deal_bitrix(payload=None):
 def update_deal_bitrix(payload=None):
     if payload is None:
         payload = {}
-    today = datetime.now()
-    LOGGER.info("create_deal_bitrix: ", extra={"payload": payload, "today": today})
+   
+#    LOGGER.info("create_deal_bitrix: ", extra={"payload": payload })
 
     # Sử dụng database để mapping giữa haravan và bitrix
-    number = payload.get("number")
-    haravan_order = deal_dao.getHaravanID(number)
+    haravan_id = payload.get("id") or payload.get("number")
+    haravan_order = deal_dao.getHaravanID(haravan_id)
+
     if not haravan_order:
         return create_deal_bitrix(payload)
-    fields = {
-        "ID": haravan_order[2],
-        "ADDITIONAL_INFO": payload.get("note"),
-        "OPPORTUNITY": payload.get("total_price"),
-    }
+    
+    fields = Deal.HaravanToBitrix24(payload) 
+
     # Tạo deal mới trên bitrix
     result = bx24.update_deal(fields)
     return result, True
@@ -64,19 +57,18 @@ def update_deal_bitrix(payload=None):
 def paid_deal_bitrix(payload=None):
     if payload is None:
         payload = {}
-    today = datetime.now()
-    LOGGER.info("create_deal_bitrix: ", extra={"payload": payload, "today": today})
+        
+    LOGGER.info("create_deal_bitrix: ", extra={"payload": payload})
 
-    number = payload.get("number")
     # Sử dụng database để mapping giữa haravan và bitrix
-    haravan_order = deal_dao.getHaravanID(number)
+    haravan_id = payload.get("id") or payload.get("number")
+    haravan_order = deal_dao.getHaravanID(haravan_id)
+
     if not haravan_order:
         return create_deal_bitrix(payload)
-    fields = {
-        "ID": haravan_order[2],
-        "STAGE_ID": "FINAL_INVOICE",
-        # Trạng thái sẽ lấy từ dealcategory_stage.json -> Cần xác định trạng thái của hệ thống vì nó là dynamic
-    }
+    
+    fields = Deal.HaravanToBitrix24(payload) 
+    fields['STAGE_ID'] = "FINAL_INVOICE"
     # Tạo deal mới trên bitrix
     result = bx24.update_deal(fields)
     return result, True
@@ -85,18 +77,17 @@ def paid_deal_bitrix(payload=None):
 def cancelled_deal_bitrix(payload=None):
     if payload is None:
         payload = {}
-    today = datetime.now()
-    LOGGER.info("create_deal_bitrix: ", extra={"payload": payload, "today": today})
-    number = payload.get("number")
-
+        
+    LOGGER.info("create_deal_bitrix: ", extra={"payload": payload})
     # Sử dụng database để mapping giữa haravan và bitrix
-    haravan_order = deal_dao.getHaravanID(number)
+    haravan_id = payload.get("id") or payload.get("number")
+    haravan_order = deal_dao.getHaravanID(haravan_id)
+
     if not haravan_order:
         return create_deal_bitrix(payload)
-    fields = {
-        "ID": haravan_order[2],
-        "STAGE_ID": "LOSE",
-    }
+    
+    fields = Deal.HaravanToBitrix24(payload) 
+    fields['STAGE_ID'] = "LOSE"
     # Tạo deal mới trên bitrix0
     result = bx24.update_deal(fields)
     return result, True
@@ -105,18 +96,18 @@ def cancelled_deal_bitrix(payload=None):
 def fulfilled_deal_bitrix(payload=None):
     if payload is None:
         payload = {}
-    today = datetime.now()
-    LOGGER.info("fulfilled_deal_bitrix: ", extra={"payload": payload, "today": today})
-    number = payload.get("number")
-
+        
+    LOGGER.info("fulfilled_deal_bitrix: ", extra={"payload": payload})
+    
     # Sử dụng database để mapping giữa haravan và bitrix
-    haravan_order = deal_dao.getHaravanID(number)
+    haravan_id = payload.get("id") or payload.get("number")
+    haravan_order = deal_dao.getHaravanID(haravan_id)
+
     if not haravan_order:
         return create_deal_bitrix(payload)
-    fields = {
-        "ID": haravan_order[2],
-        "STAGE_ID": "WON",
-    }
+    
+    fields = Deal.HaravanToBitrix24(payload) 
+    fields['STAGE_ID'] = "WON"
     # Tạo deal mới trên bitrix
     result = bx24.update_deal(fields)
     return result, True
