@@ -1,0 +1,65 @@
+{
+  "message": "REQUEST: ",
+  "headers": "Host: haipb-bitrix24.herokuapp.com\r\nConnection: close\r\nAccept: application/json, text/plain, */*\r\nContent-Type: application/json\r\nX-Haravan-Topic: products/create\r\nUser-Agent: axios/0.23.0\r\nX-Request-Id: 81894c3b-7a41-4da9-8c32-422a25cd7fc1\r\nX-Forwarded-For: 35.173.129.196\r\nX-Forwarded-Proto: https\r\nX-Forwarded-Port: 443\r\nVia: 1.1 vegur\r\nConnect-Time: 0\r\nX-Request-Start: 1635775023970\r\nTotal-Route-Time: 6157\r\nContent-Length: 1110\r\n\r\n",
+  "body": {
+    "body_html": null,
+    "body_plain": null,
+    "created_at": "2021-11-01T13:56:52.133Z",
+    "handle": "tuanna-test",
+    "id": 1036420896,
+    "images": [],
+    "product_type": "Khác",
+    "published_at": "2021-11-01T13:56:37.781Z",
+    "published_scope": "global",
+    "tags": null,
+    "template_suffix": "product",
+    "title": "TuanNA test",
+    "updated_at": "2021-11-01T13:56:52.138Z",
+    "variants": [
+      {
+        "barcode": null,
+        "compare_at_price": 0,
+        "created_at": "2021-11-01T13:56:52.133Z",
+        "fulfillment_service": null,
+        "grams": 0,
+        "id": 1079743318,
+        "inventory_management": "haravan",
+        "inventory_policy": "deny",
+        "inventory_quantity": 0,
+        "position": 1,
+        "price": 0,
+        "product_id": 1036420896,
+        "requires_shipping": true,
+        "sku": null,
+        "taxable": true,
+        "title": "Default Title",
+        "updated_at": "2021-11-01T13:56:52.138Z",
+        "image_id": null,
+        "option1": "Default Title",
+        "option2": null,
+        "option3": null,
+        "inventory_advance": {
+          "qty_available": 0,
+          "qty_onhand": 0,
+          "qty_commited": 0,
+          "qty_incoming": 0
+        }
+      }
+    ],
+    "vendor": "Apple",
+    "options": [
+      {
+        "name": "Title",
+        "id": 2497066822,
+        "position": 1,
+        "product_id": 1036420896
+      }
+    ],
+    "only_hide_from_list": false,
+    "metafields_global_title_tag": "TuanNA test",
+    "metafields_global_description_tag": null,
+    "not_allow_promotion": false
+  },
+  "timestamp": "2021-11-01T13:57:10.129107",
+  "level": "INFO"
+}

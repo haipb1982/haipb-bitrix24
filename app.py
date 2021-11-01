@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from flask import Flask, request
 
 import bx24 as Bx24
-from dao import deal_dao
+from dao import deal_dao, db
 from services import haravan_to_bitrix
 from utils import log
 from utils.common import build_response_200
@@ -19,7 +19,7 @@ def home():
     return "<h1>Welcome to HAIPB1982 APIs</h1>"
 
 
-@app.route('/webhooks', methods=['GET', 'POST'])
+@app.route('/haravan/webhooks', methods=['GET', 'POST'])
 def webhooks():
     body = request.get_json()
     headers = request.headers
@@ -72,6 +72,13 @@ def webhooks():
     elif topic == 'orders/delete':
         id = body.get("id")
         result, status = haravan_to_bitrix.delete_deal_bitrix(id)
+        if status:
+            return build_response_200("Xóa dữ liệu thành công")
+        else:
+            return build_response_200("Xóa dữ liệu không thành công")
+
+    elif topic == 'products/create':
+        result, status = haravan_to_bitrix.create_product_bitrix(body)
         if status:
             return build_response_200("Xóa dữ liệu thành công")
         else:
@@ -133,5 +140,5 @@ def api_deal_delete():
 
 
 if __name__ == "__main__":
-    deal_dao.initDB()
-    app.run(host="localhost", port=5500, use_reloader=True)
+    db.init_db()
+    app.run(host="localhost", port=5000, use_reloader=True)
