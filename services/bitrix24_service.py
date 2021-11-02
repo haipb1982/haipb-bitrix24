@@ -10,48 +10,105 @@ LOGGER = log.get_logger(__name__)
 # bx24 = Bitrix24('https://blusaigon.bitrix24.com/rest/2069/pc3dgsz0s0ohfz6v/crm.deal.fields.json')
 bx24 = Bitrix24('https://b24-hfk65b.bitrix24.com/rest/1/ppyzdjwvsgune1od/crm.deal.fields.json') # TuanNA
 
-def get_deals():
-    res = bx24.callMethod('crm.deal.list')
-    return res
+class Deal():
 
-def get_deal(dealID):
-    res = bx24.callMethod("crm.deal.get", id=dealID)
-    # print(res)
-    return res
+    @staticmethod
+    def list():
+        res = bx24.callMethod('crm.deal.list')
+        return res
 
-def get_fields():
-    res = bx24.callMethod("crm.deal.fields")
-    return res
+    @staticmethod
+    def get(dealID):
+        res = bx24.callMethod("crm.deal.get", id=dealID)
+        # print(res)
+        return res
 
-def add_new_deal(fields):
-    try:
-        id = bx24.callMethod("crm.deal.add", fields = fields,
-                             params = { "REGISTER_SONET_EVENT": "Y" }	)
-        return id
+    @staticmethod
+    def get_fields():
+        res = bx24.callMethod("crm.deal.fields")
+        return res
 
-    except BitrixError as e:
-        LOGGER.info('add_new_deal::exception: ', extra={"e": e})
-        return None
+    @staticmethod
+    def insert(fields):
+        try:
+            id = bx24.callMethod("crm.deal.add", fields = fields,
+                                 params = { "REGISTER_SONET_EVENT": "Y" }	)
+            return id
+
+        except BitrixError as e:
+            LOGGER.info('add_new_deal::exception: ', extra={"e": e})
+            return None
+
+    @staticmethod
+    def update(data_fields):
+        # xu ly haravan_request de pass data vao fields
+        try:
+            res = bx24.callMethod("crm.deal.update", id = data_fields.get("ID") , fields = data_fields)
+            LOGGER.info('update_deal: ', extra={"res": res})
+            return True
+        except Exception as e:
+            LOGGER.info('update_deal::exception: ', extra={"e": e})
+            return False
+
+    @staticmethod
+    def delete(id):
+        try:
+            res = bx24.callMethod("crm.deal.delete", id = id)
+            LOGGER.info('delete_deal: ', extra={"res": res})
+            return True
+        except Exception as e:
+            LOGGER.info('delete_deal::exception: ', extra={"e": e})
+            return False
 
 
-def update_deal(data_fields):
-    # xu ly haravan_request de pass data vao fields
-    try:
-        res = bx24.callMethod("crm.deal.update", id = data_fields.get("ID") , fields = data_fields)
-        LOGGER.info('update_deal: ', extra={"res": res})
-        return True
-    except Exception as e:
-        LOGGER.info('update_deal::exception: ', extra={"e": e})
-        return False
+class Product():
 
-def delete_deal(id):
-    try:
-        res = bx24.callMethod("crm.deal.delete", id = id)
-        LOGGER.info('delete_deal: ', extra={"res": res})
-        return True
-    except Exception as e:
-        LOGGER.info('delete_deal::exception: ', extra={"e": e})
-        return False
+    @staticmethod
+    def list():
+        res = bx24.callMethod('crm.product.list')
+        return res
+
+    @staticmethod
+    def get(id):
+        res = bx24.callMethod("crm.product.get", id=id)
+        # print(res)
+        return res
+
+    @staticmethod
+    def get_fields():
+        res = bx24.callMethod("crm.product.fields")
+        return res
+
+    @staticmethod
+    def insert(fields):
+        try:
+            id = bx24.callMethod("crm.product.add", fields = fields	)
+            return id
+
+        except BitrixError as e:
+            LOGGER.info('Product::insert::exception: ', extra={"e": e})
+            return None
+
+    @staticmethod
+    def update(data_fields):
+        # xu ly haravan_request de pass data vao fields
+        try:
+            res = bx24.callMethod("crm.product.update", id = data_fields.get("ID") , fields = data_fields)
+            LOGGER.info('Product:update: ', extra={"res": res})
+            return True
+        except Exception as e:
+            LOGGER.info('Product::update::exception: ', extra={"e": e})
+            return False
+
+    @staticmethod
+    def delete(id):
+        try:
+            res = bx24.callMethod("crm.product.delete", id = id)
+            LOGGER.info('Product::delete: ', extra={"res": res})
+            return True
+        except Exception as e:
+            LOGGER.info('Product::delete::exception: ', extra={"e": e})
+            return False
 
 
 # lay product by deal id
@@ -68,9 +125,9 @@ def getContactByID(contactID):
     return res
 
 # lay contact id by phone
-def getContactIDbyPhone():
+def getContactIDbyPhone(phone):
     res = bx24.callMethod("crm.contact.list", filter = { "PHONE": "0915453110" })
-    print(res)
+    return res
 
 # # # # # # # # # # # # # # # PRODUCT FUNCTIONS # # # # # # # # # # # # # # #
 
@@ -93,4 +150,3 @@ def readJsonFile(filename):
     with open(filename) as json_file:
         data = json.load(json_file)
     return data
-
