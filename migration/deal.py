@@ -4,15 +4,15 @@ from datetime import datetime, timedelta
 def HaravanToBitrix24(ha):
 
     bx = {}    
-    bx['ID'] = ha['id'] or 0
-    bx['TITLE'] = 'Haravan Order ' + (ha['name'] or 'not_found')
-    bx['ADDITIONAL_INFO'] = ha['note'] or 'no information'
-    bx['OPPORTUNITY'] = ha['total_price']
+    bx['ID'] = ha.get('id' , 0)
+    bx['TITLE'] = 'Haravan Order ' + ha.get('name', 'not_found')
+    bx['ADDITIONAL_INFO'] = ha.get('note', 'no information')
+    bx['OPPORTUNITY'] = ha.get('total_price', 0)
     # bx['DATE_CREATE'] = datetime.strptime(ha['created_at'][0:10],'%Y-%m-%d')
-    bx['DATE_CREATE'] = ha['created_at'][0:10]
-    bx['BEGINDATE'] = ha['created_at'][0:10]
+    bx['DATE_CREATE'] = ha.get('created_at')[0:10]
+    bx['BEGINDATE'] = ha.get('created_at')[0:10]
 
-    contact_id =  bx24.getContactIDbyPhone(ha['customer']['phone'] or ha['billing_address']['phone'])[0]['ID'] or 0
+    contact_id =  bx24.getContactIDbyPhone(ha['customer']['phone'] or ha['billing_address']['phone'])[0] or [{'ID':'0'}]['ID']
     bx['CONTACT_ID'] = contact_id
     bx['STAGE_ID'] = "C18:NEW"
     bx['CURRENCY_ID'] = "VND"
@@ -30,3 +30,6 @@ def Bitrix24ToHaravan(bx):
     ha['name'] = bx.TITLE
 
     return ha
+
+def replaceString(str):
+    return str
