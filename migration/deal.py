@@ -2,7 +2,7 @@
 import services.bitrix24_service as bx24
 from datetime import datetime, timedelta
 def HaravanToBitrix24(ha):
-
+    
     bx = {}    
     bx['ID'] = ha.get('id' , 0)
     bx['TITLE'] = 'Haravan Order ' + ha.get('name', 'not_found')
@@ -19,6 +19,8 @@ def HaravanToBitrix24(ha):
     bx['IS_MANUAL_OPPORTUNITY'] = "N"
     bx['CATEGORY_ID'] = "18"
     bx['STAGE_SEMANTIC_ID'] = "P"
+
+    print('HaravanToBitrix24',bx)
 
     return bx
 
