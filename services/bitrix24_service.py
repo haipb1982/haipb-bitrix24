@@ -84,7 +84,6 @@ class Product():
         try:
             id = bx24.callMethod("crm.product.add", fields = fields	)
             return id
-
         except BitrixError as e:
             LOGGER.info('Product::insert::exception: ', extra={"e": e})
             return None

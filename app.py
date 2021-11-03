@@ -80,6 +80,20 @@ def webhooks():
     elif topic == 'products/create':
         result, status = haravan_to_bitrix.create_product_bitrix(body)
         if status:
+            return build_response_200("Thêm dữ liệu thành công")
+        else:
+            return build_response_200("Thêm dữ liệu không thành công")
+
+    elif topic == 'products/update':
+        result, status = haravan_to_bitrix.update_product_bitrix(body)
+        if status:
+            return build_response_200("Cập nhật dữ liệu thành công")
+        else:
+            return build_response_200("Cập nhật dữ liệu không thành công")
+    elif topic == 'orders/delete':
+        id = body.get("id")
+        result, status = haravan_to_bitrix.deleted_product_bitrix(id)
+        if status:
             return build_response_200("Xóa dữ liệu thành công")
         else:
             return build_response_200("Xóa dữ liệu không thành công")

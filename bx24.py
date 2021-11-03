@@ -132,13 +132,13 @@ if __name__ == "__main__":
     # print(getDeal(2))
     # res = bx24.callMethod("crm.deal.update", id = 3259 , fields = deal)
     # print(res)
-    fields = {
-        "ID": "1",
-        "TITLE": """ORDER\#1234""",
-        "ADDITIONAL_INFO": "TEST",
-    }
-    id = bx24.callMethod("crm.deal.add", fields = fields,
-                         params = { "REGISTER_SONET_EVENT": "Y" }	)
+    # fields = {
+    #     "ID": "1",
+    #     "TITLE": """ORDER\#1234""",
+    #     "ADDITIONAL_INFO": "TEST",
+    # }
+    # id = bx24.callMethod("crm.deal.add", fields = fields,
+    #                      params = { "REGISTER_SONET_EVENT": "Y" }	)
     # print(id)
     # res = bx24.callMethod("crm.deal.fields")
     # res = bx24.callMethod("crm.dealcategory.stage.list")
@@ -147,5 +147,11 @@ if __name__ == "__main__":
     #
     # res1 = bx24.callMethod("crm.deal.userfield.list")
     # res1 = bx24.callMethod("crm.deal.list")
-    # print(json.dumps(res))
+    # res = bx24.callMethod("crm.product.property.list")
+    # res = bx24.callMethod("crm.product.property.types")
+    # res = bx24.callMethod("crm.productrow.list")
+    # res = bx24.callMethod("crm.product.list")
+    # res = bx24.callMethod("crm.product.property.list")
+    res = bx24.callMethod("crm.productsection.list")
+    print(json.dumps(res))
     # print(json.dumps(getDealList()))
