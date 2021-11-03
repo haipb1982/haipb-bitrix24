@@ -104,8 +104,9 @@ def webhooks():
 @app.route('/api/v1/bitrix24/webhooks/deal', methods=['GET', 'POST'])
 def webhook_deal():
     _form = request.form
-    _dealID = _form['data[FIELDS][ID]']
-    _data = Bx24.getDeal(_dealID)
+    _dealID = _form.get('data[FIELDS][ID]',0)
+    if _dealID > 0:
+        _data = Bx24.getDeal(_dealID)
 
     print(f'bitrix24 _form:', _form)
     print(f'data[FIELDS][ID]: DEAL ID', _dealID)
