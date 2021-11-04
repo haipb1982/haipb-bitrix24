@@ -115,6 +115,20 @@ def webhook_deal():
 
     return {'message': f'/api/v1/bitrix24/webhooks/deal done _dealID {_dealID}' }
 
+@app.route('/api/v1/bitrix24/webhooks/product', methods=['GET', 'POST'])
+def webhook_product():
+    _form = request.form
+    _productID = _form.get('data[FIELDS][ID]', None)
+
+    return {'message': f'/api/v1/bitrix24/webhooks/product done _productID {_productID}' }
+
+@app.route('/api/v1/bitrix24/webhooks/contact', methods=['GET', 'POST'])
+def webhook_contact():
+    _form = request.form
+    _contactID = _form.get('data[FIELDS][ID]', None)
+
+    return {'message': f'/api/v1/bitrix24/webhooks/contact done _contactID {_contactID}' }
+
 
 endpoint = '/api/v1/bitrix24/'
 
