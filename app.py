@@ -169,6 +169,6 @@ def api_deal_delete():
     return {'message': endpoint + 'orders/delete'}
 
 
+db.init_db()
 if __name__ == "__main__":
-    db.init_db()
     app.run(host="localhost", port=5000, use_reloader=True)
