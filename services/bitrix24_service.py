@@ -8,7 +8,9 @@ LOGGER = log.get_logger(__name__)
 
 
 # bx24 = Bitrix24('https://blusaigon.bitrix24.com/rest/2069/pc3dgsz0s0ohfz6v/crm.deal.fields.json')
-bx24 = Bitrix24('https://b24-hfk65b.bitrix24.com/rest/1/ppyzdjwvsgune1od/crm.deal.fields.json') # TuanNA
+# bx24 = Bitrix24('https://b24-hfk65b.bitrix24.com/rest/1/ppyzdjwvsgune1od/crm.deal.fields.json') # TuanNA
+bx24 = Bitrix24('https://b24-nd8219.bitrix24.vn/rest/1/m2m6w31choovp2nx/') #Haipb
+
 
 class Deal():
 
