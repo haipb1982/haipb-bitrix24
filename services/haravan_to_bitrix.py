@@ -181,3 +181,12 @@ def deleted_product_bitrix(id):
         if bitrix24_id:
             product_dao.delete_by_haravan_id(id)
     return None, True
+
+def create_contact_bitrix():
+    pass
+
+def update_contact_bitrix():
+    pass
+
+def delete_contact_bitrix():
+    pass

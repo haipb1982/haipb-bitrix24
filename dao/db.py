@@ -26,7 +26,9 @@ def _init_deal():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             haravan_id INTEGER NOT NULL UNIQUE,
             bitrix24_id INTEGER NOT NULL UNIQUE,
-            note text )'''
+            haravan_data text,
+             bitrix_data text
+             )'''
     res = fetchSQL(sql, pamrs)
     if res['status']:
         print(res['data'])
@@ -46,7 +48,30 @@ def _init_product():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             haravan_id INTEGER NOT NULL UNIQUE,
             bitrix24_id INTEGER NOT NULL UNIQUE,
-            note text )'''
+            haravan_data text,
+             bitrix_data text
+            )'''
+    res = fetchSQL(sql, pamrs)
+    if res['status']:
+        print(res['data'])
+
+    sql = '''
+        SELECT * FROM tbl_deal_order
+        '''
+    res = fetchSQL(sql, pamrs)
+    if res['status']:
+        print(res['data'])
+
+def _init_customer():
+    pamrs = []
+    # Create table
+    sql = '''CREATE TABLE tbl_contact_customer (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            haravan_id INTEGER NOT NULL UNIQUE,
+            bitrix24_id INTEGER NOT NULL UNIQUE,
+            haravan_data text,
+             bitrix_data text
+             )'''
     res = fetchSQL(sql, pamrs)
     if res['status']:
         print(res['data'])
@@ -61,3 +86,4 @@ def _init_product():
 def init_db():
     _init_deal()
     _init_product()
+    _init_customer()

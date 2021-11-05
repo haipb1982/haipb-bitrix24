@@ -6,7 +6,7 @@ from dao import db
 
 
 def addNewDeal(hanravan_id, bitrix24_id, note):
-    sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id, note) VALUES (?,?,?)'''
+    sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id, haravan_data, bitrix_data) VALUES (?,?,?)'''
     pamrs = [hanravan_id, bitrix24_id, note]
     res = db.fetchSQL(sql, pamrs)
     if res.get("status"):
