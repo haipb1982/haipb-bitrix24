@@ -35,7 +35,7 @@ def webhooks():
     LOGGER.info("TIME: ", extra={"today": today})
 
     if topic == 'orders/create':
-        result, status = haravan_to_bitrix.create_deal_bitrix(body)
+        status = haravan_to_bitrix.create_deal_bitrix(body)
         if status:
             return build_response_200("Thêm dữ liệu thành công")
         else:
@@ -43,28 +43,28 @@ def webhooks():
 
     # Nếu đã có dữ liệu thì sẽ cập nhật còn nếu ko thì sẽ tạo mới rồi lưu vào database
     if topic == 'orders/updated':
-        result, status = haravan_to_bitrix.update_deal_bitrix(body)
+        status = haravan_to_bitrix.update_deal_bitrix(body)
         if status:
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
             return build_response_200("Cập nhật dữ liệu không thành công")
 
     elif topic == 'orders/paid':
-        result, status = haravan_to_bitrix.paid_deal_bitrix(body)
+        status = haravan_to_bitrix.paid_deal_bitrix(body)
         if status:
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
             return build_response_200("Cập nhật dữ liệu không thành công")
 
     elif topic == 'orders/cancelled':
-        result, status = haravan_to_bitrix.cancelled_deal_bitrix(body)
+        status = haravan_to_bitrix.cancelled_deal_bitrix(body)
         if status:
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
             return build_response_200("Cập nhật dữ liệu không thành công")
 
     elif topic == 'orders/fulfilled':
-        result, status = haravan_to_bitrix.fulfilled_deal_bitrix(body)
+        status = haravan_to_bitrix.fulfilled_deal_bitrix(body)
         if status:
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
@@ -72,7 +72,7 @@ def webhooks():
 
     elif topic == 'orders/delete':
         id = body.get("id")
-        result, status = haravan_to_bitrix.delete_deal_bitrix(id)
+        status = haravan_to_bitrix.delete_deal_bitrix(id)
         if status:
             return build_response_200("Xóa dữ liệu thành công")
         else:
@@ -122,16 +122,7 @@ def webhooks():
     return build_response_200()
 
 
-@app.route('/bitrix/webhooks', methods=['GET'])
-def bitrix_webhooks():
-    body = request.get_json()
-    _form = request.form
-    headers = request.headers
-    LOGGER.info("REQUEST: ", extra={"headers": headers, "body": body, "form": _form})
-    print(json.dumps(_form))
-    return build_response_200()
-
-@app.route('/bitrix/webhooks', methods=['POST'])
+@app.route('/bitrix/webhooks', methods=['GET', 'POST'])
 def bitrix_webhooks():
     body = request.get_json()
     _form = request.form
@@ -144,8 +135,10 @@ def bitrix_webhooks():
     if not event:
         return build_response_200()
 
+    ID = _form.get('data[FIELDS][ID]')
+
     if event == "ONCRMDEALUPDATE":
-        bitrix_to_haravan
+        bitrix_to_haravan.create_order_haravan(ID)
 
     return build_response_200()
 

@@ -1,0 +1,10 @@
+{
+  "event": "ONCRMDEALUPDATE",
+  "data[FIELDS][ID]": "88",
+  "ts": "1636206917",
+  "auth[domain]": "b24-hfk65b.bitrix24.com",
+  "auth[client_endpoint]": "https://b24-hfk65b.bitrix24.com/rest/",
+  "auth[server_endpoint]": "https://oauth.bitrix.info/rest/",
+  "auth[member_id]": "d6178d9826b269ea2ccf30200391154d",
+  "auth[application_token]": "w4ubld8gbzedzrx78tisxuj71o3zyysu"
+}

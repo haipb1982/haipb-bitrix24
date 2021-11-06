@@ -21,14 +21,14 @@ def create_deal_bitrix(payload=None):
     haravan_order = deal_dao.getHaravanID(haravan_id)
 
     if haravan_order:
-        return None, False
+        return False
+
     fields = Deal.HaravanToBitrix24(payload) 
 
     # Tạo deal mới trên bitrix
-    bitrix24_id = bitrix24_service.Deal.insert(fields)
+    bitrix24_deal = bitrix24_service.Deal.insert(fields)
     # Lưu dữ liệu từ bitrix vào db để mapping giữa haravan và bitrix
-    result = deal_dao.addNewDeal(hanravan_id=haravan_id, bitrix24_id=bitrix24_id, haravan_data="",bitrix_data="")
-    return result, True
+    return deal_dao.addNewDeal(hanravan_id=haravan_id, bitrix24_id=bitrix24_deal.get("ID"), haravan_data=json.dumps(payload),bitrix_data=json.dumps(bitrix24_deal))
 
 
 def update_deal_bitrix(payload=None):
@@ -43,6 +43,9 @@ def update_deal_bitrix(payload=None):
 
     if not haravan_order:
         return create_deal_bitrix(payload)
+
+    # TODO: Với trường hợp update thì sẽ cần kiểm tra dữ liệu của webhook data so với dữ liệu trong DB.
+    # Nếu khác nhau sẽ cho cập nhật
     
     fields = Deal.HaravanToBitrix24(payload)
     fields["ID"] = haravan_order[2]
@@ -50,7 +53,9 @@ def update_deal_bitrix(payload=None):
 
     # Tạo deal mới trên bitrix
     result = bitrix24_service.Deal.update(fields)
-    return result, True
+    if not result:
+        return False
+    return deal_dao.updateDeal(haravan_id, json.dumps(payload), json.dumps(result))
 
 
 def paid_deal_bitrix(payload=None):
@@ -70,14 +75,16 @@ def paid_deal_bitrix(payload=None):
     fields['STAGE_ID'] = "FINAL_INVOICE"
     # Tạo deal mới trên bitrix
     result = bitrix24_service.Deal.update(fields)
-    return result, True
+    if not result:
+        return False
+    return deal_dao.updateDeal(haravan_id, json.dumps(payload), json.dumps(result))
 
 
 def cancelled_deal_bitrix(payload=None):
     if payload is None:
         payload = {}
         
-    LOGGER.info("create_deal_bitrix: ", extra={"payload": payload})
+    LOGGER.info("cancelled_deal_bitrix: ", extra={"payload": payload})
     # Sử dụng database để mapping giữa haravan và bitrix
     haravan_id = payload.get("id") or payload.get("number")
     haravan_order = deal_dao.getHaravanID(haravan_id)
@@ -89,7 +96,9 @@ def cancelled_deal_bitrix(payload=None):
     fields['STAGE_ID'] = "LOSE"
     # Tạo deal mới trên bitrix0
     result = bitrix24_service.Deal.update(fields)
-    return result, True
+    if not result:
+        return False
+    return deal_dao.updateDeal(haravan_id, json.dumps(payload), json.dumps(result))
 
 
 def fulfilled_deal_bitrix(payload=None):
@@ -109,19 +118,20 @@ def fulfilled_deal_bitrix(payload=None):
     fields['STAGE_ID'] = "WON"
     # Tạo deal mới trên bitrix
     result = bitrix24_service.Deal.update(fields)
-    return result, True
+    if not result:
+        return False
+    return deal_dao.updateDeal(haravan_id, json.dumps(payload), json.dumps(result))
 
 
 def delete_deal_bitrix(id):
     today = datetime.now()
     LOGGER.info("delete_deal_bitrix: ", extra={"today": today})
     haravan_order = deal_dao.getHaravanID(id)
-    if not haravan_order:
-        return None, True
+    if not haravan_order or haravan_order[5] == "DELETE":
+        return True
     # Tạo deal mới trên bitrix
-    result = bitrix24_service.Deal.delete(haravan_order[2])
-    deal_dao.deleteHaravanID(id)
-    return result, True
+    bitrix24_service.Deal.delete(haravan_order[2])
+    return deal_dao.deleteHaravanID(id)
 
 def create_product_bitrix(payload):
     id = payload.get("id")

@@ -42,12 +42,13 @@ class Deal():
     def update(data_fields):
         # xu ly haravan_request de pass data vao fields
         try:
-            res = bx24.callMethod("crm.deal.update", id=data_fields.get("ID"), fields=data_fields)
+            id = data_fields.get("ID")
+            res = bx24.callMethod("crm.deal.update", id=id, fields=data_fields)
             LOGGER.info('update_deal: ', extra={"res": res})
-            return True
+            return Deal.get(id)
         except Exception as e:
             LOGGER.info('update_deal::exception: ', extra={"e": e})
-            return False
+            return None
 
     @staticmethod
     def delete(id):

@@ -27,7 +27,8 @@ def _init_deal():
             haravan_id INTEGER NOT NULL UNIQUE,
             bitrix24_id INTEGER NOT NULL UNIQUE,
             haravan_data text,
-             bitrix_data text
+             bitrix_data text,
+             status VARCHAR(365)
              )'''
     res = fetchSQL(sql, pamrs)
     if res['status']:
@@ -49,14 +50,15 @@ def _init_product():
             haravan_id INTEGER NOT NULL UNIQUE,
             bitrix24_id INTEGER NOT NULL UNIQUE,
             haravan_data text,
-             bitrix_data text
+             bitrix_data text,
+             status VARCHAR(365)
             )'''
     res = fetchSQL(sql, pamrs)
     if res['status']:
         print(res['data'])
 
     sql = '''
-        SELECT * FROM tbl_deal_order
+        SELECT * FROM tbl_product
         '''
     res = fetchSQL(sql, pamrs)
     if res['status']:
@@ -70,14 +72,15 @@ def _init_customer():
             haravan_id INTEGER NOT NULL UNIQUE,
             bitrix24_id INTEGER NOT NULL UNIQUE,
             haravan_data text,
-             bitrix_data text
+             bitrix_data text,
+             status VARCHAR(365)
              )'''
     res = fetchSQL(sql, pamrs)
     if res['status']:
         print(res['data'])
 
     sql = '''
-        SELECT * FROM tbl_deal_order
+        SELECT * FROM tbl_contact_customer
         '''
     res = fetchSQL(sql, pamrs)
     if res['status']:
