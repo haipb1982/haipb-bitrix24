@@ -6,6 +6,7 @@ from . import bitrix24_service as bx24, bitrix24_service
 from dao import deal_dao, product_dao, contact_dao
 from utils import log
 import migration.deal as Deal
+from .mapping_service import convert_object, product_mapping
 
 LOGGER = log.get_logger(__name__)
 
@@ -133,13 +134,15 @@ def create_product_bitrix(payload):
     #     if not variant.get("id"):
     #         continue
 
-    product = {
-        "NAME": payload.get("title"),
-        "DESCRIPTION": payload.get("body_html"),
-        "PRICE": payload.get("variants")[0].get("price"),
-        "DATE_CREATE": payload.get("created_at"),
-        "CURRENCY_ID": "VND",
-    }
+    # product = {
+    #     "NAME": payload.get("title"),
+    #     "DESCRIPTION": payload.get("body_html"),
+    #     "PRICE": payload.get("variants")[0].get("price"),
+    #     "DATE_CREATE": payload.get("created_at"),
+    #     "CURRENCY_ID": "VND",
+    # }
+    product = convert_object(payload, product_mapping, "BITRIX")
+    product["PRICE"] = payload.get("variants")[0].get("price")
     if len(payload.get("images")) > 0:
         product["PREVIEW_PICTURE"] = payload.get("images")[0].get("src")
         product["DETAIL_PICTURE"] = payload.get("images")[0].get("src")

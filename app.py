@@ -121,6 +121,13 @@ def webhooks():
     return build_response_200()
 
 
+@app.route('/bitrix/webhooks', methods=['GET', 'POST'])
+def bitrix_webhooks():
+    body = request.get_json()
+    headers = request.headers
+    LOGGER.info("REQUEST: ", extra={"headers": headers, "body": body})
+
+
 @app.route('/api/v1/bitrix24/webhooks/deal', methods=['GET', 'POST'])
 def webhook_deal():
     _form = request.form
