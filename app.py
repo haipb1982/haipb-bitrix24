@@ -1,3 +1,4 @@
+import json
 from calendar import mdays
 from datetime import datetime, timedelta
 
@@ -5,7 +6,7 @@ from flask import Flask, request
 
 import bx24 as Bx24
 from dao import deal_dao, db
-from services import haravan_to_bitrix
+from services import haravan_to_bitrix, bitrix_to_haravan
 from utils import log
 from utils.common import build_response_200
 
@@ -121,11 +122,32 @@ def webhooks():
     return build_response_200()
 
 
-@app.route('/bitrix/webhooks', methods=['GET', 'POST'])
+@app.route('/bitrix/webhooks', methods=['GET'])
 def bitrix_webhooks():
     body = request.get_json()
+    _form = request.form
     headers = request.headers
-    LOGGER.info("REQUEST: ", extra={"headers": headers, "body": body})
+    LOGGER.info("REQUEST: ", extra={"headers": headers, "body": body, "form": _form})
+    print(json.dumps(_form))
+    return build_response_200()
+
+@app.route('/bitrix/webhooks', methods=['POST'])
+def bitrix_webhooks():
+    body = request.get_json()
+    _form = request.form
+    headers = request.headers
+    LOGGER.info("REQUEST: ", extra={"headers": headers, "body": body, "form": _form})
+    print(json.dumps(_form))
+
+    event = _form.get("event")
+
+    if not event:
+        return build_response_200()
+
+    if event == "ONCRMDEALUPDATE":
+        bitrix_to_haravan
+
+    return build_response_200()
 
 
 @app.route('/api/v1/bitrix24/webhooks/deal', methods=['GET', 'POST'])

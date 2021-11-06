@@ -21,7 +21,6 @@ class Deal():
     @staticmethod
     def get(dealID):
         res = bx24.callMethod("crm.deal.get", id=dealID)
-        # print(res)
         return res
 
     @staticmethod
@@ -34,8 +33,7 @@ class Deal():
         try:
             id = bx24.callMethod("crm.deal.add", fields=fields,
                                  params={"REGISTER_SONET_EVENT": "Y"})
-            return id
-
+            return Deal.get(id)
         except BitrixError as e:
             LOGGER.info('add_new_deal::exception: ', extra={"e": e})
             return None
@@ -133,7 +131,8 @@ class Contact():
     def insert(fields):
         try:
             id = bx24.callMethod("crm.contact.add", fields=fields, params={"REGISTER_SONET_EVENT": "Y"})
-            return id
+            res = Contact.get(id)
+            return res
         except BitrixError as e:
             LOGGER.info('Contact::insert::exception: ', extra={"e": e})
             return None
@@ -142,8 +141,9 @@ class Contact():
     def update(data_fields):
         # xu ly haravan_request de pass data vao fields
         try:
-            res = bx24.callMethod("crm.contact.update", id=data_fields.get("ID"), fields=data_fields)
-            LOGGER.info('Contact:update: ', extra={"res": res})
+            id = bx24.callMethod("crm.contact.update", id=data_fields.get("ID"), fields=data_fields)
+            LOGGER.info('Contact:update: ', extra={"id": id})
+            res = Contact.get(id)
             return True
         except Exception as e:
             LOGGER.info('Contact::update::exception: ', extra={"e": e})

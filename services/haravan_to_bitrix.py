@@ -27,7 +27,7 @@ def create_deal_bitrix(payload=None):
     # Tạo deal mới trên bitrix
     bitrix24_id = bitrix24_service.Deal.insert(fields)
     # Lưu dữ liệu từ bitrix vào db để mapping giữa haravan và bitrix
-    result = deal_dao.addNewDeal(hanravan_id=id, bitrix24_id=bitrix24_id, note="")
+    result = deal_dao.addNewDeal(hanravan_id=haravan_id, bitrix24_id=bitrix24_id, haravan_data="",bitrix_data="")
     return result, True
 
 
