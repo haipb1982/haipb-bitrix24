@@ -4,9 +4,9 @@ import sqlite3
 from dao import db
 
 
-def add_new_product(hanravan_id, bitrix24_id, note):
+def add_new_product(hanravan_id, bitrix24_id, haravan_data, bitrix_data):
     sql = '''INSERT INTO tbl_product(haravan_id, bitrix24_id, haravan_data, bitrix_data) VALUES (?,?,?)'''
-    pamrs = [hanravan_id, bitrix24_id, note]
+    pamrs = [hanravan_id, bitrix24_id, haravan_data, bitrix_data]
     res = db.fetchSQL(sql, pamrs)
     if res.get("status"):
         return True

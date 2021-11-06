@@ -90,9 +90,29 @@ def webhooks():
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
             return build_response_200("Cập nhật dữ liệu không thành công")
-    elif topic == 'orders/delete':
+    elif topic == 'products/delete':
         id = body.get("id")
         result, status = haravan_to_bitrix.deleted_product_bitrix(id)
+        if status:
+            return build_response_200("Xóa dữ liệu thành công")
+        else:
+            return build_response_200("Xóa dữ liệu không thành công")
+    elif topic == 'customers/create':
+        result, status = haravan_to_bitrix.create_contact_bitrix(body)
+        if status:
+            return build_response_200("Thêm dữ liệu thành công")
+        else:
+            return build_response_200("Thêm dữ liệu không thành công")
+
+    elif topic == 'customers/update':
+        result, status = haravan_to_bitrix.update_contact_bitrix(body)
+        if status:
+            return build_response_200("Cập nhật dữ liệu thành công")
+        else:
+            return build_response_200("Cập nhật dữ liệu không thành công")
+    elif topic == 'customers/delete':
+        id = body.get("id")
+        result, status = haravan_to_bitrix.delete_contact_bitrix(id)
         if status:
             return build_response_200("Xóa dữ liệu thành công")
         else:

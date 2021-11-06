@@ -1,8 +1,9 @@
+import json
 from calendar import mdays
 from datetime import datetime, timedelta
 
 from . import bitrix24_service as bx24, bitrix24_service
-from dao import deal_dao, product_dao
+from dao import deal_dao, product_dao, contact_dao
 from utils import log
 import migration.deal as Deal
 
@@ -182,11 +183,60 @@ def deleted_product_bitrix(id):
             product_dao.delete_by_haravan_id(id)
     return None, True
 
-def create_contact_bitrix():
-    pass
+def create_contact_bitrix(payload):
+    id = payload.get("id")
+    haravan_contact = contact_dao.get_by_haravan_id(id)
+    if haravan_contact:
+        return None, True
+    contact = {
+        "NAME": payload.get("default_address").get("name"),
+        "SECOND_NAME": payload.get("default_address").get("first_name"),
+        "LAST_NAME": payload.get("default_address").get("last_name"),
+        "ADDRESS": payload.get("default_address").get("address1"),
+        "ADDRESS_CITY": payload.get("default_address").get("city"),
+        "ADDRESS_POSTAL_CODE": payload.get("default_address").get("zip"),
+        "ADDRESS_COUNTRY": payload.get("default_address").get("country"),
+        "PHONE": [ { "VALUE": payload.get("default_address").get("phone"), "VALUE_TYPE": "WORK" } ],
+        "TYPE_ID": "CLIENT",
+        "ADDRESS_PROVINCE": payload.get("default_address").get("province"),
+        "OPENED": "Y",
+    }
+    bitrix24_id = bitrix24_service.Contact.insert(fields=contact)
+    if bitrix24_id:
+        contact_dao.add_new_contact(id, bitrix24_id, json.dumps(payload), None)
+        return bitrix24_id, True
 
-def update_contact_bitrix():
-    pass
+    return None, False
 
-def delete_contact_bitrix():
-    pass
+def update_contact_bitrix(payload):
+    id = payload.get("id")
+    haravan_contact = contact_dao.get_by_haravan_id(id)
+    if not haravan_contact:
+        return create_contact_bitrix(payload)
+    contact = {
+        "ID": haravan_contact[2],
+        "NAME": payload.get("default_address").get("name"),
+        "SECOND_NAME": payload.get("default_address").get("first_name"),
+        "LAST_NAME": payload.get("default_address").get("last_name"),
+        "ADDRESS": payload.get("default_address").get("address1"),
+        "ADDRESS_CITY": payload.get("default_address").get("city"),
+        "ADDRESS_POSTAL_CODE": payload.get("default_address").get("zip"),
+        "ADDRESS_COUNTRY": payload.get("default_address").get("country"),
+        "PHONE": [ { "VALUE": payload.get("default_address").get("phone"), "VALUE_TYPE": "WORK" } ],
+        "TYPE_ID": "CLIENT",
+        "ADDRESS_PROVINCE": payload.get("default_address").get("province"),
+        "OPENED": "Y",
+    }
+    bitrix24_id = bitrix24_service.Contact.update(contact)
+    if bitrix24_id:
+        return bitrix24_id, True
+    
+    return None, False
+
+def delete_contact_bitrix(id):
+    haravan_contact = contact_dao.get_by_haravan_id(id)
+    if haravan_contact:
+        bitrix24_id = bitrix24_service.Contact.delete(haravan_contact[2])
+        if bitrix24_id:
+            contact_dao.delete_by_haravan_id(id)
+    return None, True
