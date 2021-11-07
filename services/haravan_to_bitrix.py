@@ -133,7 +133,7 @@ def delete_deal_bitrix(id):
         return True
     # Tạo deal mới trên bitrix
     bitrix24_service.Deal.delete(haravan_order[2])
-    return deal_dao.deleteHaravanID(id)
+    return deal_dao.delete_by_haravan_id(id)
 
 def create_product_bitrix(payload):
     id = payload.get("id")

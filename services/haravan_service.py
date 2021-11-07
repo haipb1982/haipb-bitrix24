@@ -59,6 +59,19 @@ class Order:
             LOGGER.error("Deal:update:exception: ", extra={"exception": e})
             return None
 
+    @staticmethod
+    def delete(id):
+        try:
+            headers = {
+                "Content-Type": "application/json",
+                **my_headers
+            }
+            requests.delete(f'https://apis.haravan.com/com/orders/{id}.json', headers=headers)
+            return True
+        except Exception as e:
+            LOGGER.error("Product::delete:exception", extra={"exception": e})
+            return False
+
 class Product:
 
     @staticmethod

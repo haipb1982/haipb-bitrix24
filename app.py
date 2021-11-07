@@ -139,12 +139,24 @@ def bitrix_webhooks():
 
     if event == "ONCRMDEALADD":
         res = bitrix_to_haravan.create_order_haravan(ID)
+    if event == "ONCRMDEALUPDATE":
+        res = bitrix_to_haravan.update_order_haravan(ID)
+    if event == "ONCRMPRODUCTDELETE":
+        res = bitrix_to_haravan.delete_order_haravan(ID)
+
     if event == "ONCRMPRODUCTADD":
         res = bitrix_to_haravan.create_product_haravan(ID)
     if event == "ONCRMPRODUCTUPDATE":
         res = bitrix_to_haravan.update_product_haravan(ID)
     if event == "ONCRMPRODUCTDELETE":
         res = bitrix_to_haravan.delete_product_haravan(ID)
+
+    if event == "ONCRMCONTACTADD":
+        res = bitrix_to_haravan.create_contact_haravan(ID)
+    if event == "ONCRMCONTACTUPDATE":
+        res = bitrix_to_haravan.update_contact_haravan(ID)
+    if event == "ONCRMCONTACTDELETE":
+        res = bitrix_to_haravan.delete_contact_haravan(ID)
 
     return build_response_200()
 

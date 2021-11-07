@@ -53,13 +53,19 @@ def create_order_haravan(id):
     else:
         return None
 
-
+# Haravan chỉ cho phép chỉnh sửa note, shipping_address, tags còn những thong tin khác ko cho chỉnh sửa
+# TODO: Sẽ cần xử lý về sau
 def update_order_haravan(id):
     if not id:
         LOGGER.error("Can not get ID from event")
         return None
 
     result = deal_dao.getBitrix24ID(id)
+
+    # Nếu đã có dữ liệu để tạo thì sẽ không cần tạo lại nữa. Tránh trường hợp bitrix gửi sai hoặc bị vòng lặp
+    # Nếu dữ liệu của haravan hoặc bitrix bị xóa thì sẽ ko cho xử lý
+    if not result or result[5] == "DELETE" and result[6] == "DELETE":
+        return None
 
     haravan_id = result[1]
 
@@ -76,12 +82,34 @@ def update_order_haravan(id):
 
     LOGGER.info("RESULT: ", extra={"data_update": data_update})
 
-    new_deal = haravan_service.Order.update(haravan_id, data_update)
+    order_haravan = haravan_service.Order.update(haravan_id, data_update)
 
-    if not new_deal:
+    if not order_haravan:
         return
-    return deal_dao.updateDeal(haravan_id, haravan_data=json.dumps(new_deal), bitrix_data=json.dumps(new_data))
+    return deal_dao.updateDeal(haravan_id, haravan_data=json.dumps(order_haravan), bitrix_data=json.dumps(new_data))
 
+def delete_order_haravan(id):
+    if not id:
+        LOGGER.error("Can not get ID from event")
+        return None
+
+    result = deal_dao.getBitrix24ID(id)
+
+    # Nếu dữ liệu của haravan hoặc bitrix bị xóa thì sẽ ko cho xử lý
+    if not result or result[5] == "DELETE" and result[6] == "DELETE":
+        return None
+
+    # Xóa dữ liệu được trigger từ bitrix trong DB -> Đánh dấu là DELETE
+    deal_dao.delete_by_bitrix_id(id)
+
+    haravan_id = result[1]
+
+    status = haravan_service.Order.delete(haravan_id)
+
+    if status:
+        return deal_dao.delete_by_haravan_id(haravan_id)
+    else:
+        return None
 
 def get_changed_data(old_data: dict, new_data: dict):
     differents = list(dictdiffer.diff(old_data, new_data))
@@ -197,3 +225,12 @@ def delete_product_haravan(id):
         return product_dao.delete_by_haravan_id(haravan_id)
     else:
         return None
+
+def create_contact_haravan(id):
+    pass
+
+def update_contact_haravan(id):
+    pass
+
+def delete_contact_haravan(id):
+    pass
