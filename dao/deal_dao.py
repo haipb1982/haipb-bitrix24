@@ -40,13 +40,17 @@ def getBitrix24ID(id):
     sql = '''SELECT * FROM tbl_deal_order WHERE bitrix24_id = ?'''
     pamrs = [id]
     res = db.fetchSQL(sql, pamrs)
-    return res
+    if res.get("status"):
+        return res.get("data")
+    return None
 
 def deleteHaravanID(id):
     sql = '''UPDATE tbl_deal_order SET status = ? WHERE haravan_id = ?'''
     pamrs = ["DELETE", id]
     res = db.fetchSQL(sql, pamrs)
-    return res
+    if res.get("status"):
+        return res.get("data")
+    return None
 
 
 

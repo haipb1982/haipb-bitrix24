@@ -42,6 +42,21 @@ product_mapping = [
     }
 ]
 
+deal_mapping = [
+    {
+        "h_key": "name",
+        "b_key": "TITLE",
+    },
+    {
+        "h_key": "note",
+        "b_key": "ADDITIONAL_INFO",
+    },
+    {
+        "h_key": "total_price",
+        "b_key": "OPPORTUNITY",
+    },
+]
+
 # Hàm chỉ map những thuộc tính cơ bản giữa haravan và bitrix 24 theo field mapping định nghĩa trước
 # Đối với việc mapping phức tạp sẽ phải mapping bằng tay
 def convert_object(object: dict, mapping, type):
@@ -60,6 +75,9 @@ def bitrix_to_haravan(object, mapping):
             continue
         value = get_value(object, item["b_key"], item.get("h_default_value"))
 
+        if not value:
+            continue
+
         haravan[item["h_key"]] = value
     return haravan
 
@@ -69,6 +87,8 @@ def haravan_to_bitrix(object, mapping):
         if not item.get("b_key"):
             continue
         value = get_value(object, item["h_key"], item.get("b_default_value"))
+        if not value:
+            continue
 
         bitrix[item["b_key"]] = value
     return bitrix

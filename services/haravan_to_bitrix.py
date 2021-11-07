@@ -46,6 +46,8 @@ def update_deal_bitrix(payload=None):
 
     # TODO: Với trường hợp update thì sẽ cần kiểm tra dữ liệu của webhook data so với dữ liệu trong DB.
     # Nếu khác nhau sẽ cho cập nhật
+
+
     
     fields = Deal.HaravanToBitrix24(payload)
     fields["ID"] = haravan_order[2]
