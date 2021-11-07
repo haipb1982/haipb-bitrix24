@@ -1,8 +1,6 @@
 import requests
 import json
 
-import simplejson
-
 from utils import log
 
 LOGGER = log.get_logger(__name__)
@@ -37,7 +35,7 @@ class Order:
             "Content-Type": "application/json",
             **my_headers
         }
-        response = requests.post('https://apis.haravan.com/com/orders.json'.format(id), headers=headers, data=json.dumps(payload))
+        response = requests.post('https://apis.haravan.com/com/orders.json', headers=headers, data=json.dumps(payload))
         return response.json()
 
     # https://docs.haravan.com/support/solutions/articles/42000087683-orders
@@ -87,6 +85,34 @@ class Product:
         response = requests.post(f'https://apis.haravan.com/com/products.json', headers=headers, data=json.dumps(payload))
         return response.json()
 
+    @staticmethod
+    def update(id, data):
+        payload = {
+            "product": {
+                "id": id,
+                **data
+            }
+        }
+        headers = {
+            "Content-Type": "application/json",
+            **my_headers
+        }
+        response = requests.put(f'https://apis.haravan.com/com/products/{id}.json', headers=headers, data=json.dumps(payload))
+        return response.json()
+
+    @staticmethod
+    def delete(id):
+        try:
+            headers = {
+                "Content-Type": "application/json",
+                **my_headers
+            }
+            requests.delete(f'https://apis.haravan.com/com/products/{id}.json', headers=headers)
+            return True
+        except Exception as e:
+            LOGGER.error("Product::delete:exception", extra={"exception": e})
+            return False
+
 def getBluOrders():
 
     response = requests.get('https://apis.haravan.com/com/orders.json', headers=my_headers)
@@ -128,6 +154,9 @@ if __name__ == "__main__":
     # res = getBluCustomers()
     # writeFile(res.json(),'blu-customers.json')
 
+    # res = getBluProducts()
+    # writeFile(res.json(),'blu-products.json')
+
     # res = getBluOrders()
     # writeFile(res.json(),'blu-orders.json')
     # res = Order.get(1236239555)
@@ -135,13 +164,15 @@ if __name__ == "__main__":
     #
     # res = Order.update(1236239555, {"note": "OKOKOKOKOKO"})
     # print(res)
-    products = Product.list()
-    product = products.get("products")[0]
-    print(product)
-    res = Order.create({"note": "OKOKOKOKOKO",     "line_items": [
-        {
-            "variant_id": product.get("variants")[0].get("id"),
-            "quantity": 1
-        }
-    ]})
-    print(res)
+    # products = Product.list()
+    # product = products.get("products")[0]
+    # print(product)
+    # res = Order.create({"note": "OKOKOKOKOKO",     "line_items": [
+    #     {
+    #         "variant_id": product.get("variants")[0].get("id"),
+    #         "quantity": 1
+    #     }
+    # ]})
+    # print(res)
+
+    print(Product.get(1036868200))

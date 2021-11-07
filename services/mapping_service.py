@@ -39,6 +39,10 @@ product_mapping = [
     {
         "h_key": "",
         "b_key": "ACTIVE"
+    },
+    {
+        "h_key": "handle",
+        "b_key": "CODE"
     }
 ]
 

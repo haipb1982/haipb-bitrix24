@@ -17,24 +17,41 @@ def create_order_haravan(id):
 
     deal_data = deal_dao.getBitrix24ID(id)
 
-    if deal_data:
-        return
+    if deal_data or (deal_data and (deal_data[5] == "DELETE" and deal_data[6] == "DELETE")):
+        return None
 
-    deal_bitrix = deal_dao.getBitrix24ID(id)
+    deal_bitrix = bitrix24_service.Deal.get(id)
 
-    if deal_bitrix:
+    if not deal_bitrix:
         return False
 
     # Nếu dữ liệu có thay đổi thì sẽ cho cập lại những thay đổi
-    data_update = mapping_service.convert_object(deal_bitrix, deal_mapping, "HARAVAN")
+    data = mapping_service.convert_object(deal_bitrix, deal_mapping, "HARAVAN")
 
-    LOGGER.info("RESULT: ", extra={"data_update": data_update})
+    LOGGER.info("RESULT: ", extra={"data": data})
 
-    # new_deal = haravan_service.Order.create(haravan_id, data_update)
-    #
-    # if not new_deal:
-    #     return
-    # return deal_dao.updateDeal(haravan_id, haravan_data=json.dumps(new_deal),bitrix_data=json.dumps(new_data))
+    # TODO: Đây sẽ là dữ liệu tạm thời để có thể tạo order bitrix sang haravan
+    # Cần lấy sản phẩm đúng thay vì mock sản phẩm
+    product_variant_id = 1080334722
+
+    haravan_data = {
+        **data,
+        "line_items": [
+            {
+                "variant_id": product_variant_id,
+                "quantity": 1
+            }
+        ]}
+
+    order_haravan = haravan_service.Order.create(haravan_data)
+
+    # Xử lý nếu data haravan trả về đúng
+    if order_haravan and order_haravan.get("order"):
+        order = order_haravan.get("order")
+        haravan_id = order.get("id")
+        return deal_dao.addNewDeal(haravan_id, id, haravan_data=json.dumps(order), bitrix_data=json.dumps(deal_bitrix))
+    else:
+        return None
 
 
 def update_order_haravan(id):
@@ -88,14 +105,95 @@ def create_product_haravan(id):
     product_data = product_dao.get_by_bitrix24_id(id)
 
     # Nếu đã có dữ liệu để tạo thì sẽ không cần tạo lại nữa. Tránh trường hợp bitrix gửi sai hoặc bị vòng lặp
-    if product_data:
+    # Nếu dữ liệu của haravan hoặc bitrix bị xóa thì sẽ ko cho xử lý
+    if product_data or (product_data and (product_data[5] == "DELETE" and product_data[6] == "DELETE")):
         return None
-    data = mapping_service.convert_object(product_data, product_mapping, "HARAVAN")
+
+    product_bitrix = bitrix24_service.Product.get(id)
+
+    data = mapping_service.convert_object(product_bitrix, product_mapping, "HARAVAN")
+
+    # Cần phải mock data đẻ tạo được sản phẩm
+    data = {
+        "title": data.get("title"),
+        "vendor": "Samsung",
+        "product_type": "Khác",
+    }
 
     product_haravan = haravan_service.Product.create(data)
 
+    # Xử lý nếu data haravan trả về đúng
     if product_haravan and product_haravan.get("product"):
         product = product_haravan.get("product")
         haravan_id = product.get("id")
         return product_dao.add_new_product(haravan_id, id, haravan_data=json.dumps(product),
-                                           bitrix_data=json.dumps(product_data))
+                                           bitrix_data=json.dumps(product_bitrix))
+    else:
+        return None
+
+
+def update_product_haravan(id):
+    if not id:
+        LOGGER.error("Can not get ID from event")
+        return None
+
+    product_data = product_dao.get_by_bitrix24_id(id)
+
+    # Nếu đã có dữ liệu để tạo thì sẽ không cần tạo lại nữa. Tránh trường hợp bitrix gửi sai hoặc bị vòng lặp
+    # Nếu dữ liệu của haravan hoặc bitrix bị xóa thì sẽ ko cho xử lý
+    if not product_data or product_data[5] == "DELETE" and product_data[6] == "DELETE":
+        return None
+
+    haravan_id = product_data[1]
+
+    old_data = json.loads(product_data[4])
+    product_bitrix = bitrix24_service.Product.get(id)
+    changed_data = get_changed_data(old_data, product_bitrix)
+
+    # Nếu data ko có gì sẽ thay đổi thì sẽ ko cần cập nhật vào haravan nữa tránh tình trạng bị trigger vòng tròn
+    if not changed_data:
+        return
+
+    data = mapping_service.convert_object(changed_data, product_mapping, "HARAVAN")
+
+    # Cần phải mock data đẻ tạo được sản phẩm
+    # data = {
+    #     "title": data.get("title"),
+    #     "vendor": "Samsung",
+    #     "product_type": "Khác",
+    # }
+
+    product_haravan = haravan_service.Product.update(haravan_id, data)
+
+    # Xử lý nếu data haravan trả về đúng
+    if product_haravan and product_haravan.get("product"):
+        product = product_haravan.get("product")
+        return product_dao.update_by_haravan_id(haravan_id, haravan_data=json.dumps(product),
+                                                bitrix_data=json.dumps(product_bitrix))
+    else:
+        return None
+
+
+def delete_product_haravan(id):
+    if not id:
+        LOGGER.error("Can not get ID from event")
+        return None
+
+    product_data = product_dao.get_by_bitrix24_id(id)
+
+    # Nếu đã có dữ liệu để tạo thì sẽ không cần tạo lại nữa. Tránh trường hợp bitrix gửi sai hoặc bị vòng lặp
+    # Nếu dữ liệu của haravan hoặc bitrix bị xóa thì sẽ ko cho xử lý
+    if not product_data or product_data[5] == "DELETE" and product_data[6] == "DELETE":
+        return None
+
+    # Xóa dữ liệu được trigger từ bitrix trong DB -> Đánh dấu là DELETE
+    product_dao.delete_by_bitrix_id(id)
+
+    # Sau khi cập nhật bitrix trong DB sẽ xóa product haravan và cập nhật lại vào DB
+    haravan_id = product_data[1]
+    status = haravan_service.Product.delete(haravan_id)
+
+    if status:
+        return product_dao.delete_by_haravan_id(haravan_id)
+    else:
+        return None

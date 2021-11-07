@@ -28,7 +28,8 @@ def _init_deal():
             bitrix24_id INTEGER NOT NULL UNIQUE,
             haravan_data text,
              bitrix_data text,
-             status VARCHAR(365)
+             haravan_status VARCHAR(365),
+             bitrix_status VARCHAR(365)
              )'''
     res = fetchSQL(sql, pamrs)
     if res['status']:
@@ -51,7 +52,8 @@ def _init_product():
             bitrix24_id INTEGER NOT NULL UNIQUE,
             haravan_data text,
              bitrix_data text,
-             status VARCHAR(365)
+             haravan_status VARCHAR(365),
+             bitrix_status VARCHAR(365)
             )'''
     res = fetchSQL(sql, pamrs)
     if res['status']:
@@ -73,7 +75,8 @@ def _init_customer():
             bitrix24_id INTEGER NOT NULL UNIQUE,
             haravan_data text,
              bitrix_data text,
-             status VARCHAR(365)
+             haravan_status VARCHAR(365),
+             bitrix_status VARCHAR(365)
              )'''
     res = fetchSQL(sql, pamrs)
     if res['status']:

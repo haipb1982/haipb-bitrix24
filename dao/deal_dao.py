@@ -6,8 +6,8 @@ from dao import db
 
 
 def addNewDeal(hanravan_id, bitrix24_id, haravan_data="", bitrix_data=""):
-    sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id, haravan_data, bitrix_data, status) VALUES (?,?,?,?, ?)'''
-    pamrs = [hanravan_id, bitrix24_id, haravan_data, bitrix_data, "ACTIVE"]
+    sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id, haravan_data, bitrix_data) VALUES (?,?,?,?)'''
+    pamrs = [hanravan_id, bitrix24_id, haravan_data, bitrix_data]
     res = db.fetchSQL(sql, pamrs)
     if res.get("status"):
         return True
@@ -45,7 +45,15 @@ def getBitrix24ID(id):
     return None
 
 def deleteHaravanID(id):
-    sql = '''UPDATE tbl_deal_order SET status = ? WHERE haravan_id = ?'''
+    sql = '''UPDATE tbl_deal_order SET haravan_status = ? WHERE haravan_id = ?'''
+    pamrs = ["DELETE", id]
+    res = db.fetchSQL(sql, pamrs)
+    if res.get("status"):
+        return res.get("data")
+    return None
+
+def delete_by_bitrix_id(id):
+    sql = '''UPDATE tbl_deal_order SET bitrix_status = ? WHERE bitrix_id = ?'''
     pamrs = ["DELETE", id]
     res = db.fetchSQL(sql, pamrs)
     if res.get("status"):
