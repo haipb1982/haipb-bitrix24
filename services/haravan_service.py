@@ -126,6 +126,60 @@ class Product:
             LOGGER.error("Product::delete:exception", extra={"exception": e})
             return False
 
+class Contact:
+
+    @staticmethod
+    def list():
+        response = requests.get('https://apis.haravan.com/com/contacts.json', headers=my_headers)
+        return response.json()
+
+    @staticmethod
+    def get(id):
+        response = requests.get(f'https://apis.haravan.com/com/contacts/{id}.json', headers=my_headers)
+        return response.json()
+
+    @staticmethod
+    def create(data):
+        payload = {
+            "customer": {
+                **data
+            }
+        }
+        headers = {
+            "Content-Type": "application/json",
+            **my_headers
+        }
+        response = requests.post(f'https://apis.haravan.com/com/customers.json', headers=headers, data=json.dumps(payload))
+        return response.json()
+
+    @staticmethod
+    def update(id, data):
+        payload = {
+            "contact": {
+                "id": id,
+                **data
+            }
+        }
+        headers = {
+            "Content-Type": "application/json",
+            **my_headers
+        }
+        response = requests.put(f'https://apis.haravan.com/com/contacts/{id}.json', headers=headers, data=json.dumps(payload))
+        return response.json()
+
+    @staticmethod
+    def delete(id):
+        try:
+            headers = {
+                "Content-Type": "application/json",
+                **my_headers
+            }
+            requests.delete(f'https://apis.haravan.com/com/contacts/{id}.json', headers=headers)
+            return True
+        except Exception as e:
+            LOGGER.error("Contact::delete:exception", extra={"exception": e})
+            return False
+
 def getBluOrders():
 
     response = requests.get('https://apis.haravan.com/com/orders.json', headers=my_headers)

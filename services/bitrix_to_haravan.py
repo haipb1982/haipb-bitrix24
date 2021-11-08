@@ -2,9 +2,9 @@ import json
 
 import dictdiffer
 
-from dao import deal_dao, product_dao
+from dao import deal_dao, product_dao, contact_dao
 from services import bitrix24_service, mapping_service, haravan_service
-from services.mapping_service import product_mapping, deal_mapping
+from services.mapping_service import product_mapping, deal_mapping, contact_mapping
 from utils import log
 
 LOGGER = log.get_logger(__name__)
@@ -227,7 +227,32 @@ def delete_product_haravan(id):
         return None
 
 def create_contact_haravan(id):
-    pass
+    if not id:
+        LOGGER.error("Can not get ID from event")
+        return None
+
+    contact_data = contact_dao.get_by_bitrix24_id(id)
+
+    # Nếu đã có dữ liệu để tạo thì sẽ không cần tạo lại nữa. Tránh trường hợp bitrix gửi sai hoặc bị vòng lặp
+    # Nếu dữ liệu của haravan hoặc bitrix bị xóa thì sẽ ko cho xử lý
+    if contact_data or (contact_data and (contact_data[5] == "DELETE" and contact_data[6] == "DELETE")):
+        return None
+
+    contact_bitrix = bitrix24_service.Contact.get(id)
+
+    data = mapping_service.convert_object(contact_bitrix, contact_mapping, "HARAVAN")
+
+    # Cần phải mock data đẻ tạo được sản phẩm
+    contact_haravan = haravan_service.Contact.create(data)
+
+    # Xử lý nếu data haravan trả về đúng
+    if contact_haravan and contact_haravan.get("customer"):
+        customer = contact_haravan.get("customer")
+        haravan_id = customer.get("id")
+        return contact_dao.add_new_contact(haravan_id, id, haravan_data=json.dumps(customer),
+                                           bitrix_data=json.dumps(contact_bitrix))
+    else:
+        return None
 
 def update_contact_haravan(id):
     pass

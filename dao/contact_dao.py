@@ -28,7 +28,9 @@ def get_by_bitrix24_id(id):
     sql = '''SELECT * FROM tbl_contact_customer WHERE bitrix24_id = ?'''
     pamrs = [id]
     res = db.fetchSQL(sql, pamrs)
-    return res
+    if res.get("status"):
+        return res.get("data")
+    return None
 
 def delete_by_haravan_id(id):
     sql = '''UPDATE tbl_contact_customer SET bitrix_status = ? WHERE bitrix_id = ?'''

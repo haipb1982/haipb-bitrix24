@@ -61,6 +61,67 @@ deal_mapping = [
     },
 ]
 
+contact_mapping = [
+    {
+        "h_key": "default_address.name",
+        "b_key": "NAME",
+    },
+    {
+        "h_key": "default_address.first_name",
+        "b_key": "SECOND_NAME",
+    },
+    {
+        "h_key": "default_address.last_name",
+        "b_key": "LAST_NAME",
+    },
+    {
+        "h_key": "default_address.address1",
+        "b_key": "ADDRESS",
+    },
+    {
+        "h_key": "default_address.city",
+        "b_key": "ADDRESS_CITY",
+    },
+    {
+        "h_key": "default_address.zip",
+        "b_key": "ADDRESS_POSTAL_CODE",
+    },
+    {
+        "h_key": "default_address.country",
+        "b_key": "ADDRESS_COUNTRY",
+    },
+    {
+        "h_key": "default_address.zip",
+        "b_key": "ADDRESS_POSTAL_CODE",
+    },
+    {
+        "h_key": "default_address.province",
+        "b_key": "ADDRESS_PROVINCE",
+    },
+    {
+        "h_key": "first_name",
+        "b_key": "SECOND_NAME",
+    },
+    {
+        "h_key": "last_name",
+        "b_key": "LAST_NAME",
+    },
+    {
+        "h_key": "default_address.address1",
+        "b_key": "ADDRESS",
+    },
+    {
+        "h_key": "",
+        "b_key": "TYPE_ID",
+        "b_default_value": "CLIENT",
+    },
+    {
+        "h_key": "",
+        "b_key": "OPENED",
+        "b_default_value": "Y",
+    },
+]
+
 # Hàm chỉ map những thuộc tính cơ bản giữa haravan và bitrix 24 theo field mapping định nghĩa trước
 # Đối với việc mapping phức tạp sẽ phải mapping bằng tay
 def convert_object(object: dict, mapping, type):
@@ -81,10 +142,23 @@ def bitrix_to_haravan(object, mapping):
 
         if not value:
             continue
-
-        haravan[item["h_key"]] = value
+        d = get_dict(item["h_key"], value)
+        haravan = merge(haravan, d)
     return haravan
 
+# Merge 2 dict thành 1 dict
+def merge(source, destination):
+    for key, value in source.items():
+        if isinstance(value, dict):
+            # get node or create one
+            node = destination.setdefault(key, {})
+            merge(value, node)
+        else:
+            destination[key] = value
+
+    return destination
+
+# Data của bitrix là 1 mặt phẳng ko phân chia cấp nên ko cần thiết phải set vào từng thành con
 def haravan_to_bitrix(object, mapping):
     bitrix = {}
     for item in mapping:
@@ -110,3 +184,27 @@ def get_value(object, key_item, default_value=""):
             value = value[b_k] if value.get(b_k) else default_value
             break
     return value if isinstance(value, str) else default_value
+
+
+# Set giá trị cho haravan với data dạng kiểu default_address.name thành {"default_address": {"name": "Name"}}
+def get_dict(key_item, value) -> dict:
+    keys = key_item.split(".")
+    data = {}
+    i = 0
+    for k in reversed(keys):
+        if i == len(keys):
+            break
+        if i == 0:
+            data[k] = value
+        else:
+            data1 = {}
+            data1[k] = data
+            data = data1
+        i = i + 1
+    return data
+
+def set_data(d1: dict, d2: dict):
+    d_temp1 = {}
+    d_temp2 = {}
+    for k in d1.keys():
+        pass
