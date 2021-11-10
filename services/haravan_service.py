@@ -242,4 +242,4 @@ if __name__ == "__main__":
     # ]})
     # print(res)
 
-    print(Product.get(1036868200))
+    print(json.dumps(Product.get(1036936921)))

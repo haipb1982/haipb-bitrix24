@@ -255,7 +255,59 @@ def create_contact_haravan(id):
         return None
 
 def update_contact_haravan(id):
-    pass
+    if not id:
+        LOGGER.error("Can not get ID from event")
+        return None
+
+    contact_data = contact_dao.get_by_bitrix24_id(id)
+
+    # Nếu đã có dữ liệu để tạo thì sẽ không cần tạo lại nữa. Tránh trường hợp bitrix gửi sai hoặc bị vòng lặp
+    # Nếu dữ liệu của haravan hoặc bitrix bị xóa thì sẽ ko cho xử lý
+    if not contact_data or contact_data[5] == "DELETE" and contact_data[6] == "DELETE":
+        return None
+
+    haravan_id = contact_data[1]
+
+    old_data = json.loads(contact_data[4])
+    contact_bitrix = bitrix24_service.Contact.get(id)
+    changed_data = get_changed_data(old_data, contact_bitrix)
+
+    # Nếu data ko có gì sẽ thay đổi thì sẽ ko cần cập nhật vào haravan nữa tránh tình trạng bị trigger vòng tròn
+    if not changed_data:
+        return
+
+    data = mapping_service.convert_object(changed_data, contact_mapping, "HARAVAN")
+
+    contact_haravan = haravan_service.Contact.update(haravan_id, data)
+
+    # Xử lý nếu data haravan trả về đúng
+    if contact_haravan and contact_haravan.get("product"):
+        contact = contact_haravan.get("product")
+        return contact_dao.update_by_haravan_id(haravan_id, haravan_data=json.dumps(contact),
+                                                bitrix_data=json.dumps(contact_haravan))
+    else:
+        return None
 
 def delete_contact_haravan(id):
-    pass
+    if not id:
+        LOGGER.error("Can not get ID from event")
+        return None
+
+    contact_data = contact_dao.get_by_bitrix24_id(id)
+
+    # Nếu đã có dữ liệu để tạo thì sẽ không cần tạo lại nữa. Tránh trường hợp bitrix gửi sai hoặc bị vòng lặp
+    # Nếu dữ liệu của haravan hoặc bitrix bị xóa thì sẽ ko cho xử lý
+    if not contact_data or contact_data[5] == "DELETE" and contact_data[6] == "DELETE":
+        return None
+
+    # Xóa dữ liệu được trigger từ bitrix trong DB -> Đánh dấu là DELETE
+    contact_dao.delete_by_bitrix_id(id)
+
+    # Sau khi cập nhật bitrix trong DB sẽ xóa product haravan và cập nhật lại vào DB
+    haravan_id = contact_data[1]
+    status = haravan_service.Contact.delete(haravan_id)
+
+    if status:
+        return contact_dao.delete_by_haravan_id(haravan_id)
+    else:
+        return None

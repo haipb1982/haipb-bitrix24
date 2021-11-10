@@ -32,8 +32,26 @@ def get_by_bitrix24_id(id):
         return res.get("data")
     return None
 
+def delete_by_bitrix_id(id):
+    sql = '''UPDATE tbl_contact_customer SET bitrix_status = ? WHERE bitrix24_id = ?'''
+    pamrs = ["DELETE", id]
+    res = db.fetchSQL(sql, pamrs)
+    if res.get("status"):
+        return res.get("data")
+    return None
+
+def update_by_haravan_id(id, haravan_data="", bitrix_data=""):
+    sql = '''UPDATE tbl_contact_customer SET haravan_data=?, bitrix_data=? WHERE haravan_id=?'''
+    pamrs = [haravan_data, bitrix_data, id]
+    res = db.fetchSQL(sql, pamrs)
+    if res.get("status"):
+        return True
+    else:
+        print(res.get("data"))
+        return False
+
 def delete_by_haravan_id(id):
-    sql = '''UPDATE tbl_contact_customer SET bitrix_status = ? WHERE bitrix_id = ?'''
+    sql = '''UPDATE tbl_contact_customer SET haravan_status = ? WHERE haravan_id = ?'''
     pamrs = ["DELETE", id]
     res = db.fetchSQL(sql, pamrs)
     if res.get("status"):
