@@ -2,7 +2,12 @@ import json
 
 import dictdiffer
 
-from dao import deal_dao, product_dao, contact_dao
+# from dao import deal_dao, product_dao, contact_dao
+
+import mysqldb.dao.DealDAO as deal_dao
+import mysqldb.dao.ProductDAO as product_dao
+import mysqldb.dao.ContactDAO as contact_dao
+
 from services import bitrix24_service, mapping_service, haravan_service
 from services.mapping_service import product_mapping, deal_mapping, contact_mapping
 from utils import log

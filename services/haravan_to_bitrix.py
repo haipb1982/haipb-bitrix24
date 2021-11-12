@@ -3,7 +3,11 @@ from calendar import mdays
 from datetime import datetime, timedelta
 
 from . import bitrix24_service as bx24, bitrix24_service
-from dao import deal_dao, product_dao, contact_dao
+# from dao import deal_dao, product_dao, contact_dao
+import mysqldb.dao.DealDAO as deal_dao
+import mysqldb.dao.ProductDAO as product_dao
+import mysqldb.dao.ContactDAO as contact_dao
+
 from utils import log
 import migration.deal as Deal
 from .mapping_service import convert_object, product_mapping
@@ -255,3 +259,8 @@ def delete_contact_bitrix(id):
         if bitrix24_id:
             contact_dao.delete_by_haravan_id(id)
     return None, True
+
+def testCon():
+    print(deal_dao.getAllDeals())
+    print(contact_dao.getAllContacts())
+    print(product_dao.getAllProducts())
