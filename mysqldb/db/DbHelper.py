@@ -1,6 +1,6 @@
 import pymysql.cursors
 import pymysql
-from mysqldb import config
+from mysqldb.config import config
 
 
 class DbHelper:
@@ -17,9 +17,24 @@ class DbHelper:
                                             charset = 'utf8mb4',
                                             cursorclass = pymysql.cursors.DictCursor);
         self.__cursor = self.__connection.cursor();
+    
+    # def query(self, query, params):
+    #    self.__cursor.execute(query, params)
+    #    return self.__cursor;
+
     def query(self, query, params):
-       self.__cursor.execute(query, params)
-       return self.__cursor;
+        result = {}
+        try:
+            s =self.__cursor.execute(query, params)
+            print(s)
+            result['status'] = True
+            result['data'] = self.__cursor.fetchall()
+            self.__connection.commit()
+        except pymysql.Error as err:
+            result['status'] = False
+            result['data'] = err
+            self.__connection.rollback()
+        return result
 
     def close(self):
         self.__connection.close();

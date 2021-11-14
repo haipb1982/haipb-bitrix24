@@ -30,9 +30,9 @@ def webhooks():
 
     topic = headers.get("x-haravan-topic")
 
-    today = datetime.now()
-    next_month_of_today = today + timedelta(mdays[today.month])
-    LOGGER.info("TIME: ", extra={"today": today})
+    # today = datetime.now()
+    # next_month_of_today = today + timedelta(mdays[today.month])
+    # LOGGER.info("TIME: ", extra={"today": today})
 
     if topic == 'orders/create':
         status = haravan_to_bitrix.create_deal_bitrix(body)
@@ -124,6 +124,8 @@ def webhooks():
 
 @app.route('/bitrix/webhooks', methods=['GET', 'POST'])
 def bitrix_webhooks():
+    # return build_response_200()
+
     body = request.get_json()
     _form = request.form
     headers = request.headers

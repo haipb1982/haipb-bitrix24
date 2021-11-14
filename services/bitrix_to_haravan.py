@@ -4,9 +4,13 @@ import dictdiffer
 
 # from dao import deal_dao, product_dao, contact_dao
 
-import mysqldb.dao.DealDAO as deal_dao
-import mysqldb.dao.ProductDAO as product_dao
-import mysqldb.dao.ContactDAO as contact_dao
+from mysqldb.dao.DealDAO import DealDAO
+from mysqldb.dao.ProductDAO import ProductDAO 
+from mysqldb.dao.ContactDAO import ContactDAO 
+
+deal_dao = DealDAO()
+product_dao = ProductDAO()
+contact_dao = ContactDAO()
 
 from services import bitrix24_service, mapping_service, haravan_service
 from services.mapping_service import product_mapping, deal_mapping, contact_mapping
@@ -22,7 +26,7 @@ def create_order_haravan(id):
 
     deal_data = deal_dao.getBitrix24ID(id)
 
-    if deal_data or (deal_data and (deal_data[5] == "DELETE" and deal_data[6] == "DELETE")):
+    if deal_data or (deal_data and (deal_data[0].get('status') == "DELETE")):
         return None
 
     deal_bitrix = bitrix24_service.Deal.get(id)
@@ -69,12 +73,12 @@ def update_order_haravan(id):
 
     # Nếu đã có dữ liệu để tạo thì sẽ không cần tạo lại nữa. Tránh trường hợp bitrix gửi sai hoặc bị vòng lặp
     # Nếu dữ liệu của haravan hoặc bitrix bị xóa thì sẽ ko cho xử lý
-    if not result or result[5] == "DELETE" and result[6] == "DELETE":
+    if not result or result[0].get('status') == "DELETE":
         return None
 
-    haravan_id = result[1]
+    haravan_id = result[0].get('haravan_id')
 
-    old_data = json.loads(result[4])
+    old_data = json.loads(result[0].get('bitrix_data'))
     new_data = bitrix24_service.Deal.get(id)
     changed_data = get_changed_data(old_data, new_data)
 
@@ -101,13 +105,13 @@ def delete_order_haravan(id):
     result = deal_dao.getBitrix24ID(id)
 
     # Nếu dữ liệu của haravan hoặc bitrix bị xóa thì sẽ ko cho xử lý
-    if not result or result[5] == "DELETE" and result[6] == "DELETE":
+    if not result or result[0].get('status') == "DELETE":
         return None
 
     # Xóa dữ liệu được trigger từ bitrix trong DB -> Đánh dấu là DELETE
     deal_dao.delete_by_bitrix_id(id)
 
-    haravan_id = result[1]
+    haravan_id = result[0].get('haravan_id')
 
     status = haravan_service.Order.delete(haravan_id)
 
