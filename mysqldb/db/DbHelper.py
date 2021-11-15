@@ -25,8 +25,8 @@ class DbHelper:
     def query(self, query, params):
         result = {}
         try:
-            s =self.__cursor.execute(query, params)
-            print(s)
+            print('mySQL:',query, params)
+            self.__cursor.execute(query, params)            
             result['status'] = True
             result['data'] = self.__cursor.fetchall()
             self.__connection.commit()
