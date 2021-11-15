@@ -127,7 +127,7 @@ def webhooks():
 
 @app.route('/bitrix/webhooks', methods=['GET', 'POST'])
 def bitrix_webhooks():
-    # return build_response_200()
+    return build_response_200()
 
     body = request.get_json()
     _form = request.form
