@@ -24,11 +24,14 @@ def home():
 def webhooks():
     body = request.get_json()
     headers = request.headers
-    LOGGER.info("REQUEST: ", extra={"headers": headers, "body": body})
+    topic = headers.get("x-haravan-topic")
+
+    LOGGER.info("/haravan/webhooks TOPIC: ", extra={"topic": topic})
+    LOGGER.info("/haravan/webhooks REQUEST: ",
+                extra={"headers": headers, "body": body})
+
     # if id != '1236954857':
     #     return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
-
-    topic = headers.get("x-haravan-topic")
 
     # today = datetime.now()
     # next_month_of_today = today + timedelta(mdays[today.month])
@@ -129,7 +132,8 @@ def bitrix_webhooks():
     body = request.get_json()
     _form = request.form
     headers = request.headers
-    LOGGER.info("REQUEST: ", extra={"headers": headers, "body": body, "form": _form})
+    LOGGER.info("REQUEST: ", extra={
+                "headers": headers, "body": body, "form": _form})
     print(json.dumps(_form))
 
     event = _form.get("event")
@@ -175,21 +179,23 @@ def webhook_deal():
     # print(f'data[FIELDS][ID]: DEAL ID', _dealID)
     # print(f'get deal detail ', _data)
 
-    return {'message': f'/api/v1/bitrix24/webhooks/deal done _dealID {_dealID}' }
+    return {'message': f'/api/v1/bitrix24/webhooks/deal done _dealID {_dealID}'}
+
 
 @app.route('/api/v1/bitrix24/webhooks/product', methods=['GET', 'POST'])
 def webhook_product():
     _form = request.form
     _productID = _form.get('data[FIELDS][ID]', None)
 
-    return {'message': f'/api/v1/bitrix24/webhooks/product done _productID {_productID}' }
+    return {'message': f'/api/v1/bitrix24/webhooks/product done _productID {_productID}'}
+
 
 @app.route('/api/v1/bitrix24/webhooks/contact', methods=['GET', 'POST'])
 def webhook_contact():
     _form = request.form
     _contactID = _form.get('data[FIELDS][ID]', None)
 
-    return {'message': f'/api/v1/bitrix24/webhooks/contact done _contactID {_contactID}' }
+    return {'message': f'/api/v1/bitrix24/webhooks/contact done _contactID {_contactID}'}
 
 
 endpoint = '/api/v1/bitrix24/'
