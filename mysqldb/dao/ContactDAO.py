@@ -30,7 +30,9 @@ class ContactDAO(object):
         res = self.__db.query(sql, pamrs)
 
         if res.get("status"):
-            return res.get("data")
+            data = res.get("data")
+            if len(data) > 0 :
+                return data[0]
         return None
 
 
@@ -41,7 +43,9 @@ class ContactDAO(object):
         res = self.__db.query(sql, pamrs)
 
         if res.get("status"):
-            return res.get("data")
+            data = res.get("data")
+            if len(data) > 0 :
+                return data[0]
         return None
 
     def delete_by_bitrix_id(self, id):

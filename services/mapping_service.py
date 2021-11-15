@@ -1,5 +1,7 @@
 import json
 
+import dictdiffer
+
 product_mapping = [
     {
         "h_key": "title",
@@ -203,8 +205,15 @@ def get_dict(key_item, value) -> dict:
         i = i + 1
     return data
 
-def set_data(d1: dict, d2: dict):
-    d_temp1 = {}
-    d_temp2 = {}
-    for k in d1.keys():
-        pass
+def get_changed_data(old_data: dict, new_data: dict):
+    differents = list(dictdiffer.diff(old_data, new_data))
+
+    new = {}
+
+    for diff in differents:
+        if diff[0] == 'add' or diff[0] == 'change':
+            new[diff[1]] = diff[2][1]
+        elif diff[0] == 'remove':
+            new[diff[1]] = ""
+
+    return new

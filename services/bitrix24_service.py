@@ -7,7 +7,7 @@ from utils import log
 LOGGER = log.get_logger(__name__)
 
 # bx24 = Bitrix24('https://blusaigon.bitrix24.com/rest/2069/pc3dgsz0s0ohfz6v/crm.deal.fields.json')
-# bx24 = Bitrix24('https://b24-hfk65b.bitrix24.com/rest/1/ppyzdjwvsgune1od/crm.deal.fields.json') # TuanNA
+# bx24 = Bitrix24('https://b24-0o3r9m.bitrix24.com/rest/1/34vvg27jk5appc39/profile.json') # TuanNA
 bx24 = Bitrix24('https://b24-nd8219.bitrix24.vn/rest/1/cjgdujez4jbs6nch/profile.json')  # HaiPB
 
 
@@ -83,7 +83,7 @@ class Product():
     def insert(fields):
         try:
             id = bx24.callMethod("crm.product.add", fields=fields)
-            return id
+            return Product.get(id)
         except BitrixError as e:
             LOGGER.info('Product::insert::exception: ', extra={"e": e})
             return None
@@ -94,10 +94,10 @@ class Product():
         try:
             res = bx24.callMethod("crm.product.update", id=data_fields.get("ID"), fields=data_fields)
             LOGGER.info('Product:update: ', extra={"res": res})
-            return True
+            return Product.get(data_fields.get("ID"))
         except Exception as e:
             LOGGER.info('Product::update::exception: ', extra={"e": e})
-            return False
+            return None
 
     @staticmethod
     def delete(id):
@@ -142,13 +142,13 @@ class Contact():
     def update(data_fields):
         # xu ly haravan_request de pass data vao fields
         try:
-            id = bx24.callMethod("crm.contact.update", id=data_fields.get("ID"), fields=data_fields)
             LOGGER.info('Contact:update: ', extra={"id": id})
-            res = Contact.get(id)
-            return True
+            result = bx24.callMethod("crm.contact.update", id=data_fields.get("ID"), fields=data_fields)
+            if result:
+                return Contact.get(data_fields.get("ID"))
         except Exception as e:
             LOGGER.info('Contact::update::exception: ', extra={"e": e})
-            return False
+            return None
 
     @staticmethod
     def delete(id):
