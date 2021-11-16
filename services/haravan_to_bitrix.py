@@ -248,9 +248,12 @@ def create_contact_bitrix(payload):
 
     # Nếu đã có dữ liệu để tạo thì sẽ không cần tạo lại nữa. Tránh trường hợp bitrix gửi sai hoặc bị vòng lặp
     # Nếu dữ liệu của haravan hoặc bitrix bị xóa thì sẽ ko cho xử lý
-    if haravan_contact or (haravan_contact and (haravan_contact.get("haravan_status") == "DELETE" and haravan_contact.get("bitrix_status") == "DELETE")):
+    if haravan_contact:
+        print('HaravanID đã có trong database! Tạo mới thất bại!')
         return None
-
+    if (haravan_contact and (haravan_contact.get("haravan_status") == "DELETE" and haravan_contact.get("bitrix_status") == "DELETE")):
+        print('HaravanID đã tồn tại trong database! Tạo mới thất bại!')
+        return None
     # contact = {
     #     "NAME": payload.get("default_address").get("name"),
     #     "SECOND_NAME": payload.get("default_address").get("first_name"),
@@ -270,6 +273,7 @@ def create_contact_bitrix(payload):
     bitrix24_data = bitrix24_service.Contact.insert(fields=contact)
     if bitrix24_data:
         contact_dao.add_new_contact(id, bitrix24_data.get("ID"), json.dumps(payload), json.dumps(bitrix24_data))
+        print('Tạo mới Contact Bitrix24 thành công!')
         return bitrix24_data
 
     return None

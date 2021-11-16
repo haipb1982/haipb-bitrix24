@@ -84,13 +84,14 @@ def getProductByDealID(dealID):
 
 # lay contact by id
 def getContactByID(contactID):
-    print(contactID)
-    res = bx24.callMethod("crm.contact.get", id = 236901 )
+    
+    res = bx24.callMethod("crm.contact.get", id = contactID )
+    print(res)
     return res
 
 # lay contact id by phone
-def getContactIDbyPhone():
-    res = bx24.callMethod("crm.contact.list", filter = { "PHONE": "0915453110" })
+def getContactIDbyPhone(phone='0915453110'):
+    res = bx24.callMethod("crm.contact.list", filter = { "PHONE": phone })
     print(res)
 
 # # # # # # # # # # # # # # # PRODUCT FUNCTIONS # # # # # # # # # # # # # # # 
@@ -133,14 +134,14 @@ if __name__ == "__main__":
     # print(getDeal(2))
     # res = bx24.callMethod("crm.deal.update", id = 3259 , fields = deal)
     # print(res)
-    fields = {
-        "ID": "1",
-        "TITLE": """ORDER\#1234""",
-        "ADDITIONAL_INFO": "TEST",
-    }
-    id = bx24.callMethod("crm.deal.add", fields = fields,
-                         params = { "REGISTER_SONET_EVENT": "Y" }	)
-    print(id)
+    # fields = {
+    #     "ID": "1",
+    #     "TITLE": """ORDER\#1234""",
+    #     "ADDITIONAL_INFO": "TEST",
+    # }
+    # id = bx24.callMethod("crm.deal.add", fields = fields,
+    #                      params = { "REGISTER_SONET_EVENT": "Y" }	)
+    # print(id)
     # res = bx24.callMethod("crm.deal.fields")
     # res = bx24.callMethod("crm.dealcategory.stage.list")
     # res = bx24.callMethod("crm.dealcategory.list")
@@ -162,3 +163,5 @@ if __name__ == "__main__":
     # payload = {"billing_address": {"address1": None, "address2": None, "city": None, "company": None, "country": "Vietnam", "first_name": None, "id": 1053472936, "last_name": None, "phone": None, "province": None, "zip": None, "name": "", "province_code": None, "country_code": "VN", "default": True, "district": None, "district_code": None, "ward": None, "ward_code": None}, "browser_ip": None, "buyer_accepts_marketing": False, "cancel_reason": None, "cancelled_at": None, "cart_token": "b3e448c11ed24d57b55cb60770ee3491", "checkout_token": "b3e448c11ed24d57b55cb60770ee3491", "client_details": {"accept_language": None, "browser_ip": None, "session_hash": None, "user_agent": None, "browser_height": None, "browser_width": None}, "closed_at": None, "created_at": "2021-10-31T15:36:11.847Z", "currency": "VND", "customer": {"accepts_marketing": False, "addresses": [], "created_at": "2021-10-25T14:36:51.919Z", "default_address": None, "email": "guest@haravan.com", "phone": None, "first_name": None, "id": 1053472936, "last_name": None, "last_order_id": 1238522156, "last_order_name": "#100023", "note": "haipb", "orders_count": 7, "state": "disabled", "tags": None, "total_spent": 3320000, "updated_at": "2021-11-02T06:28:25Z", "verified_email": False, "birthday": None, "gender": None, "last_order_date": "2021-10-31T15:44:36Z", "multipass_identifier": None}, "discount_codes": [], "email": "guest@haravan.com", "financial_status": "paid", "fulfillments": [], "fulfillment_status": "notfulfilled", "tags": "", "gateway": "Chuy\u1ec3n kho\u1ea3n qua ng\u00e2n h\u00e0ng", "gateway_code": "bankdeposit", "id": 1238520665, "landing_site": None, "landing_site_ref": None, "source": "haravan_draft_order", "line_items": [{"fulfillable_quantity": 1, "fulfillment_service": None, "fulfillment_status": "notfulfilled", "grams": 0, "id": 1324848821, "price": 980000, "price_original": 980000, "price_promotion": 0, "product_id": 1035974156, "quantity": 1, "requires_shipping": True, "sku": None, "title": "\u0110\u1ed3ng h\u1ed3 th\u00f4ng minh smartwatch DZ09", "variant_id": 1079017264, "variant_title": "N\u00e2u", "vendor": "Apple", "type": "Kh\u00e1c", "name": "\u0110\u1ed3ng h\u1ed3 th\u00f4ng minh smartwatch DZ09 - N\u00e2u", "gift_card": False, "taxable": True, "tax_lines": None, "product_exists": True, "barcode": None, "properties": [], "applied_discounts": [], "total_discount": 0, "image": {"src": "https://product.hstatic.net/200000421849/product/44_6ce020f0-3215-48b2-ba8b-3aa5b099ab88_f6f12cdbf52d488282ddbf2b04d5bbfc.jpg"}, "not_allow_promotion": False, "ma_cost_amount": 0}], "name": "#100022", "note": "new orders", "number": 1238520665, "order_number": "#100022", "processing_method": None, "referring_site": "haravan_draft_order", "refunds": [], "shipping_address": {"address1": None, "address2": None, "city": None, "company": None, "country": "Vietnam", "first_name": None, "last_name": None, "latitude": None, "longitude": None, "phone": None, "province": None, "zip": None, "name": "", "province_code": None, "country_code": "VN", "district_code": None, "district": None, "ward_code": None, "ward": None}, "shipping_lines": [{"code": None, "price": 0, "source": None, "title": None}], "source_name": "haravan_draft_order", "subtotal_price": 980000, "tax_lines": None, "taxes_included": False, "token": "b3e448c11ed24d57b55cb60770ee3491", "total_discounts": 0, "total_line_items_price": 980000, "total_price": 980000, "total_tax": 0, "total_weight": 0, "updated_at": "2021-11-03T03:33:02.313Z", "transactions": [{"amount": 980000, "authorization": None, "created_at": "2021-10-31T15:36:11.885Z", "device_id": None, "gateway": "Chuy\u1ec3n kho\u1ea3n qua ng\u00e2n h\u00e0ng", "id": 1097043594, "kind": "pending", "order_id": 1238520665, "receipt": None, "status": None, "user_id": 200000905615, "location_id": 1181286, "payment_details": None, "parent_id": None, "currency": None, "haravan_transaction_id": None, "external_transaction_id": None}, {"amount": 980000, "authorization": None, "created_at": "2021-10-31T15:36:44.05Z", "device_id": None, "gateway": "Chuy\u1ec3n kho\u1ea3n qua ng\u00e2n h\u00e0ng", "id": 1097043631, "kind": "capture", "order_id": 1238520665, "receipt": None, "status": None, "user_id": 200000905615, "location_id": 1181286, "payment_details": None, "parent_id": 1097043594, "currency": None, "haravan_transaction_id": None, "external_transaction_id": None}], "note_attributes": [], "confirmed_at": "2021-10-31T15:36:12.036Z", "closed_status": "unclosed", "cancelled_status": "uncancelled", "confirmed_status": "confirmed", "assigned_location_id": None, "assigned_location_at": None, "exported_confirm_at": None, "user_id": 200000905615, "device_id": None, "location_id": 1181286, "ref_order_id": 0, "ref_order_number": None, "utm_source": None, "utm_medium": None, "utm_campaign": None, "utm_term": None, "utm_content": None, "payment_url": None, "contact_email": "guest@haravan.com", "order_processing_status": "confirmed", "redeem_model": None}
     # res = Deal.HaravanToBitrix24(payload)
     # print(res)
+
+    getContactByID(272)

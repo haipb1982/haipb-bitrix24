@@ -101,6 +101,10 @@ contact_mapping = [
         "b_key": "ADDRESS_PROVINCE",
     },
     {
+        "h_key": "default_address.phone",
+        "b_key": "PHONE",
+    },
+    {
         "h_key": "first_name",
         "b_key": "SECOND_NAME",
     },
