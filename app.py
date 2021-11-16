@@ -6,7 +6,7 @@ from flask import Flask, request
 
 import bx24 as Bx24
 from dao import deal_dao, db
-from services import haravan_to_bitrix, bitrix_to_haravan
+from services import haravan_to_bitrix, bitrix_to_haravan, haravan_service
 from utils import log
 from utils.common import build_response_200
 
@@ -124,6 +124,10 @@ def webhooks():
 
     return build_response_200()
 
+@app.route('/haravan-to-bitrix', methods=['GET', 'POST'])
+def haravan_to_bitrix():
+    haravan_customer = bitrix_to_haravan.migrate_customer_haravan_to_bitrix()
+    return build_response_200(data=haravan_customer)
 
 @app.route('/bitrix/webhooks', methods=['GET', 'POST'])
 def bitrix_webhooks():

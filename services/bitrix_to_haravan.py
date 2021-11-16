@@ -252,7 +252,7 @@ def create_contact_haravan(id):
     data = mapping_service.convert_object(contact_bitrix, contact_mapping, "HARAVAN")
 
     # Cần phải mock data đẻ tạo được sản phẩm
-    contact_haravan = haravan_service.Contact.create(data)
+    contact_haravan = haravan_service.Customer.create(data)
 
     # Xử lý nếu data haravan trả về đúng
     if contact_haravan and contact_haravan.get("customer"):
@@ -287,7 +287,7 @@ def update_contact_haravan(id):
 
     data = mapping_service.convert_object(changed_data, contact_mapping, "HARAVAN")
 
-    contact_haravan = haravan_service.Contact.update(haravan_id, data)
+    contact_haravan = haravan_service.Customer.update(haravan_id, data)
 
     # Xử lý nếu data haravan trả về đúng
     if contact_haravan and contact_haravan.get("product"):
@@ -314,9 +314,32 @@ def delete_contact_haravan(id):
 
     # Sau khi cập nhật bitrix trong DB sẽ xóa product haravan và cập nhật lại vào DB
     haravan_id = contact_data[1]
-    status = haravan_service.Contact.delete(haravan_id)
+    status = haravan_service.Customer.delete(haravan_id)
 
     if status:
         return contact_dao.delete_by_haravan_id(haravan_id)
     else:
         return None
+
+def migrate_customer_haravan_to_bitrix():
+    # Lấy danh sách customer
+    haravan_customers = haravan_service.Customer.list()
+    print(haravan_customers)
+
+    customers = haravan_customers.get("customers")
+
+    # Migrate dữ liệu customer từ haravan sang cho bitrix
+    for customer in customers:
+        id = customer.get("id")
+        haravan_contact = contact_dao.get_by_haravan_id(id)
+        if haravan_contact:
+            print('HaravanID đã có trong database! Tạo mới thất bại!')
+            continue
+
+        contact = mapping_service.convert_object(customer, contact_mapping, "BITRIX")
+
+        bitrix24_data = bitrix24_service.Contact.insert(fields=contact)
+        if bitrix24_data:
+            contact_dao.add_new_contact(id, bitrix24_data.get("ID"), json.dumps(customer), json.dumps(bitrix24_data))
+            print('Tạo mới Contact Bitrix24 thành công!')
+

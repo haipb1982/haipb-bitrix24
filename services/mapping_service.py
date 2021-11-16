@@ -65,20 +65,16 @@ deal_mapping = [
 
 contact_mapping = [
     {
-        "h_key": "default_address.name",
+        "h_key": "last_name",
         "b_key": "NAME",
-    },
-    {
-        "h_key": "default_address.first_name",
-        "b_key": "SECOND_NAME",
-    },
-    {
-        "h_key": "default_address.last_name",
-        "b_key": "LAST_NAME",
     },
     {
         "h_key": "default_address.address1",
         "b_key": "ADDRESS",
+    },
+    {
+        "h_key": "birthday",
+        "b_key": "BIRTHDAY",
     },
     {
         "h_key": "default_address.city",
@@ -101,7 +97,7 @@ contact_mapping = [
         "b_key": "ADDRESS_PROVINCE",
     },
     {
-        "h_key": "default_address.phone",
+        "h_key": "phone",
         "b_key": "PHONE",
     },
     {
@@ -126,6 +122,10 @@ contact_mapping = [
         "b_key": "OPENED",
         "b_default_value": "Y",
     },
+    {
+        "h_key": "email",
+        "b_key": "EMAIL",
+    }
 ]
 
 # Hàm chỉ map những thuộc tính cơ bản giữa haravan và bitrix 24 theo field mapping định nghĩa trước

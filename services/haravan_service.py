@@ -126,16 +126,16 @@ class Product:
             LOGGER.error("Product::delete:exception", extra={"exception": e})
             return False
 
-class Contact:
+class Customer:
 
     @staticmethod
     def list():
-        response = requests.get('https://apis.haravan.com/com/contacts.json', headers=my_headers)
+        response = requests.get('https://apis.haravan.com/com/customers.json', headers=my_headers)
         return response.json()
 
     @staticmethod
     def get(id):
-        response = requests.get(f'https://apis.haravan.com/com/contacts/{id}.json', headers=my_headers)
+        response = requests.get(f'https://apis.haravan.com/com/customers/{id}.json', headers=my_headers)
         return response.json()
 
     @staticmethod
@@ -164,7 +164,7 @@ class Contact:
             "Content-Type": "application/json",
             **my_headers
         }
-        response = requests.put(f'https://apis.haravan.com/com/contacts/{id}.json', headers=headers, data=json.dumps(payload))
+        response = requests.put(f'https://apis.haravan.com/com/customers/{id}.json', headers=headers, data=json.dumps(payload))
         return response.json()
 
     @staticmethod
@@ -174,7 +174,7 @@ class Contact:
                 "Content-Type": "application/json",
                 **my_headers
             }
-            requests.delete(f'https://apis.haravan.com/com/contacts/{id}.json', headers=headers)
+            requests.delete(f'https://apis.haravan.com/com/customers/{id}.json', headers=headers)
             return True
         except Exception as e:
             LOGGER.error("Contact::delete:exception", extra={"exception": e})
