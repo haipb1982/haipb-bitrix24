@@ -2,7 +2,7 @@ import json
 
 from bitrix24 import *
 
-from utils import log
+from utils import log, common
 
 LOGGER = log.get_logger(__name__)
 
@@ -114,7 +114,7 @@ class Contact():
 
     @staticmethod
     def list():
-        res = bx24.callMethod('crm.contact.list')
+        res = bx24.callMethod('crm.contact.list', select=[ "*", "UF_*", "PHONE", "EMAIL" ]) # Lay cac thong tin ma list bi han che
         return res
 
     @staticmethod
@@ -187,22 +187,12 @@ def getContactIDbyPhone(phone):
 # lay product list
 def getProductListToFile():
     res = bx24.callMethod("crm.product.list")
-    writeFile(res, "crm.contact.list.json")
+    common.writeFile(res, "crm.contact.list.json")
 
 
-# # # # # # # # # # # # # # # ULTIL FUNCTIONS # # # # # # # # # # # # # # #
 
-# ghi file
-def writeFile(res, filename):
-    f = open(filename, "w+", encoding='utf-8')
-    f.write(json.dumps(res))
-    f.close()
-
-
-def readJsonFile(filename):
-    # data = {}
-    with open(filename) as json_file:
-        data = json.load(json_file)
-    return data
 
 # Deal.update({"ID": 104, "ADDITIONAL_INFO": "12345"})
+
+# print(json.dumps(Contact.list()))
+# print(json.dumps(Contact.get(437)))

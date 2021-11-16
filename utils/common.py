@@ -70,3 +70,18 @@ def decrypt_data(data):
     except Exception as e:
         LOGGER.debug(f"utils.decrypt_data:: Exception when decrypt data: {str(e)}")
         return None
+
+# # # # # # # # # # # # # # # ULTIL FUNCTIONS # # # # # # # # # # # # # # #
+
+# ghi file
+def writeFile(res, filename):
+    f = open(filename, "w+", encoding='utf-8')
+    f.write(json.dumps(res))
+    f.close()
+
+
+def readJsonFile(filename):
+    # data = {}
+    with open(filename) as json_file:
+        data = json.load(json_file)
+    return data

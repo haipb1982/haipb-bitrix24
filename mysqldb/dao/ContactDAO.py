@@ -7,8 +7,12 @@ class ContactDAO(object):
     def __init__(self):
         self.__db = DbHelper()
 
-    def getAllContacts(self):
-        return self.__db.query("SELECT * FROM tbl_contact_customer", None)
+    def get_contacts(self):
+        res = self.__db.query("SELECT * FROM tbl_contact_customer", None)
+        if res.get("status"):
+            return res.get("data")
+        else:
+            return None
 
     def add_new_contact(self,hanravan_id, bitrix24_id, haravan_data, bitrix_data):
         sql = '''INSERT INTO tbl_contact_customer(haravan_id, bitrix24_id, haravan_data, bitrix_data) VALUES (%s,%s,%s,%s)'''

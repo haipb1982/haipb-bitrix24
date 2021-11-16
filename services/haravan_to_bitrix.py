@@ -2,7 +2,7 @@ import json
 from calendar import mdays
 from datetime import datetime, timedelta
 
-from . import bitrix24_service as bx24, bitrix24_service, mapping_service
+from . import bitrix24_service as bx24, bitrix24_service, mapping_service, haravan_service
 # from dao import deal_dao, product_dao, contact_dao
 from mysqldb.dao.DealDAO import DealDAO 
 from mysqldb.dao.ProductDAO import ProductDAO
@@ -12,7 +12,7 @@ deal_dao = DealDAO()
 product_dao = ProductDAO()
 contact_dao = ContactDAO()
 
-from utils import log
+from utils import log, common
 import migration.deal as Deal
 from .mapping_service import convert_object, product_mapping, contact_mapping
 
@@ -346,7 +346,96 @@ def delete_contact_bitrix(id):
         return True
     return False
 
+
+def migrate_customer_haravan_to_bitrix():
+    # Lấy danh sách customer
+    haravan_customers = haravan_service.Customer.list()
+    # Su dung de test
+    # haravan_customers = common.readJsonFile("data/haravan/blu-customers.json")
+    print(haravan_customers)
+
+    contacts = bitrix24_service.Contact.list()
+
+    customers = haravan_customers.get("customers")
+
+    # Migrate dữ liệu customer từ haravan sang cho bitrix
+    for customer in customers:
+        id = customer.get("id")
+        haravan_contact = contact_dao.get_by_haravan_id(id)
+        if haravan_contact:
+            print('HaravanID đã có trong database! Tạo mới thất bại!')
+            continue
+
+        haravan_contact = find_contact_bitrix_by_email_phone(contacts, customer)
+
+        # Đảm bảo dữ liệu từ haravan dc thêm vào bitrix 24
+        # Nếu 2 hệ thống đã có dữ liệu mà chưa mapping vào hệ thống backend thì sẽ phải lưu lại và ko tạo lại sang bitrix nữa
+        if haravan_contact:
+            contact_dao.add_new_contact(id, haravan_contact.get("ID"), json.dumps(customer), json.dumps(haravan_contact))
+            print('Cập nhật vào DB Contact thành công!')
+            continue
+
+        contact = mapping_service.convert_object(customer, contact_mapping, "BITRIX")
+        if customer.get("phone"):
+            contact["PHONE"] = [{
+                "VALUE_TYPE": "WORK",
+                "VALUE": customer.get("phone"),
+                "TYPE_ID": "PHONE"
+            }]
+        if customer.get("email"):
+            contact["EMAIL"] = [{
+                "VALUE_TYPE": "WORK",
+                "VALUE": customer.get("email"),
+                "TYPE_ID": "EMAIL"
+            }]
+
+        bitrix24_data = bitrix24_service.Contact.insert(fields=contact)
+        if bitrix24_data:
+            contact_dao.add_new_contact(id, bitrix24_data.get("ID"), json.dumps(customer), json.dumps(bitrix24_data))
+            print('Tạo mới Contact Bitrix24 thành công!')
+
+def migrate_product_haravan_to_bitrix():
+    # Lấy danh sách customer
+    haravan_products = haravan_service.Product.list()
+    print(haravan_products)
+
+    products = haravan_products.get("products")
+
+    # Migrate dữ liệu customer từ haravan sang cho bitrix
+    for product in products:
+        id = product.get("id")
+        haravan_contact = product_dao.get_by_haravan_id(id)
+        if haravan_contact:
+            print('HaravanID đã có trong database! Tạo mới thất bại!')
+            continue
+
+        product = mapping_service.convert_object(product, product_mapping, "BITRIX")
+
+        bitrix24_data = bitrix24_service.Product.insert(fields=product)
+        if bitrix24_data:
+            product_dao.add_new_product(id, bitrix24_data.get("ID"), json.dumps(product), json.dumps(bitrix24_data))
+            print('Tạo mới Product Bitrix24 thành công!')
+
+def find_contact_bitrix_by_email_phone(contacts, customer):
+    if not contacts:
+        return None
+    phone = customer.get("phone")
+    email = customer.get("email")
+    for contact in contacts: #{"PHONE":[{"ID":"853377","VALUE_TYPE":"WORK","VALUE":"0915453110","TYPE_ID":"PHONE"}],"EMAIL":[{"ID":"853379","VALUE_TYPE":"WORK","VALUE":"haipb1982@gmail.com","TYPE_ID":"EMAIL"}]}
+        contact_emails = contact.get("EMAIL")
+        contact_phones = contact.get("PHONE")
+        if contact_emails and len(contact_emails) > 0:
+            for contact_email in contact_emails:
+                if contact_email.get("VALUE") == email:
+                    return contact
+        if contact_phones and len(contact_phones) > 0:
+            for contact_email in contact_phones:
+                if contact_email.get("VALUE") == phone:
+                    return contact
+    return None
+
 def testCon():
     print(deal_dao.getAllDeals())
     # print(contact_dao.getAllContacts())
     # print(product_dao.getAllProducts())
+

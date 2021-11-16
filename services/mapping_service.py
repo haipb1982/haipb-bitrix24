@@ -96,10 +96,10 @@ contact_mapping = [
         "h_key": "default_address.province",
         "b_key": "ADDRESS_PROVINCE",
     },
-    {
-        "h_key": "phone",
-        "b_key": "PHONE",
-    },
+    # { # CAN XU LY BANG TAY
+    #     "h_key": "phone",
+    #     "b_key": "PHONE",
+    # },
     {
         "h_key": "first_name",
         "b_key": "SECOND_NAME",
@@ -122,10 +122,10 @@ contact_mapping = [
         "b_key": "OPENED",
         "b_default_value": "Y",
     },
-    {
-        "h_key": "email",
-        "b_key": "EMAIL",
-    }
+    # { # CAN XU LY BANG TAY
+    #     "h_key": "email",
+    #     "b_key": "EMAIL",
+    # }
 ]
 
 # Hàm chỉ map những thuộc tính cơ bản giữa haravan và bitrix 24 theo field mapping định nghĩa trước

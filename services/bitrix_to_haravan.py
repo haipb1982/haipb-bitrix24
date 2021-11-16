@@ -320,26 +320,3 @@ def delete_contact_haravan(id):
         return contact_dao.delete_by_haravan_id(haravan_id)
     else:
         return None
-
-def migrate_customer_haravan_to_bitrix():
-    # Lấy danh sách customer
-    haravan_customers = haravan_service.Customer.list()
-    print(haravan_customers)
-
-    customers = haravan_customers.get("customers")
-
-    # Migrate dữ liệu customer từ haravan sang cho bitrix
-    for customer in customers:
-        id = customer.get("id")
-        haravan_contact = contact_dao.get_by_haravan_id(id)
-        if haravan_contact:
-            print('HaravanID đã có trong database! Tạo mới thất bại!')
-            continue
-
-        contact = mapping_service.convert_object(customer, contact_mapping, "BITRIX")
-
-        bitrix24_data = bitrix24_service.Contact.insert(fields=contact)
-        if bitrix24_data:
-            contact_dao.add_new_contact(id, bitrix24_data.get("ID"), json.dumps(customer), json.dumps(bitrix24_data))
-            print('Tạo mới Contact Bitrix24 thành công!')
-
