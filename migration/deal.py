@@ -6,7 +6,8 @@ def HaravanToBitrix24(ha):
     
     bx = {}    
     # bx['ID'] = ha.get('id' , 0)
-    bx['TITLE'] = 'Haravan Order ' + ha.get('name', 'not_found')
+    # Phai xoa # de dam bao order binh thuong, neu ko se xay ra loi
+    bx['TITLE'] = 'Haravan Order ' + ha.get('name', 'not_found').replace("#", "")
     bx['ADDITIONAL_INFO'] = ha.get('note', 'no information')
     bx['OPPORTUNITY'] = ha.get('total_price', 0)
     # bx['DATE_CREATE'] = datetime.strptime(ha['created_at'][0:10],'%Y-%m-%d')
