@@ -4,10 +4,12 @@ import services.bitrix24_service as bx24
 from datetime import datetime, timedelta
 def HaravanToBitrix24(ha):
     
-    bx = {}    
-    # bx['ID'] = ha.get('id' , 0)
-    # Phai xoa # de dam bao order binh thuong, neu ko se xay ra loi
+    bx = {}
+        
+    # bx['ID'] = ha.get('id' , 0) # set value ở haravab_to_bitrix24
+    # tên Deal
     bx['TITLE'] = 'Haravan Order ' + ha.get('name', 'not_found').replace("#", "")
+    #
     bx['ADDITIONAL_INFO'] = ha.get('note', 'no information')
     bx['OPPORTUNITY'] = ha.get('total_price', 0)
     # bx['DATE_CREATE'] = datetime.strptime(ha['created_at'][0:10],'%Y-%m-%d')
@@ -16,11 +18,26 @@ def HaravanToBitrix24(ha):
 
     # contact_id =  bx24.getContactIDbyPhone(ha['customer']['phone'] or ha['billing_address']['phone'])[0] or [{'ID':'0'}]['ID']
     # bx['CONTACT_ID'] = contact_id
-    # bx['STAGE_ID'] = "C18:NEW"
+    
+    bx['STAGE_ID'] = "C18:NEW" # set value ở haravab_to_bitrix24
     bx['CURRENCY_ID'] = "VND"
     bx['IS_MANUAL_OPPORTUNITY'] = "N"
-    # bx['CATEGORY_ID'] = "18"
+    bx['CATEGORY_ID'] = "18"
     bx['STAGE_SEMANTIC_ID'] = "P"
+
+    # Đơn hàng Haravan
+    
+    bx['UF_CRM_1637252157269'] = ha.get('name','New Order') # mã đơn
+    bx['UF_CRM_1623725469652'] = 'https://blusaigon.myharavan.com/admin/orders/' + ha.get('id','0') # đơn hàng haravan
+    bx['UF_CRM_1623809034975'] = ha.get('id','0') # haravan ID
+    bx['UF_CRM_1627457986'] = ha.get('note','Không tìm thấy ghi chú') # ghi chú đơn hàng
+    bx['UF_CRM_1628149922667'] = ha.get('fulfillment_status','Chưa rõ trạng thái') # trạng thái đơn hàng
+    bx['UF_CRM_1628149984252'] = ha.get('order_processing_status','confirmed') # trạng thái giao hàng
+    
+    # More
+
+    bx['UF_CRM_1630417157521'] = 'HARAVAN-BITRIX APP' # người tạo đơn
+    bx['UF_CRM_1630417292478'] = ha.get('source_name','New Order') # Kênh bán hàng 
 
     # print('HaravanToBitrix24',bx)
 

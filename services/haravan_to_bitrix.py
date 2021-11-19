@@ -47,8 +47,8 @@ def create_deal_bitrix(payload=None):
 
     fields = Deal.HaravanToBitrix24(payload)
     fields["CONTACT_ID"] = contact_bitrix_id
-    fields["STAGE_ID"] = "NEW"
-    fields["UF_CRM_1637252157269"] = str(payload.get("id"))
+    fields["STAGE_ID"] = "C18:NEW"
+    # fields["UF_CRM_1637252157269"] = str(payload.get("id"))
 
     # Tạo deal mới trên bitrix
     bitrix24_deal = bitrix24_service.Deal.insert(fields)
@@ -140,7 +140,7 @@ def paid_deal_bitrix(payload=None):
         return create_deal_bitrix(payload)
     
     fields = Deal.HaravanToBitrix24(payload) 
-    fields['STAGE_ID'] = "FINAL_INVOICE"
+    fields['STAGE_ID'] = "C18:FINAL_INVOICE"
     # Tạo deal mới trên bitrix
     result = bitrix24_service.Deal.update(fields)
     if not result:
@@ -162,7 +162,7 @@ def cancelled_deal_bitrix(payload=None):
         return create_deal_bitrix(payload)
     
     fields = Deal.HaravanToBitrix24(payload) 
-    fields['STAGE_ID'] = "LOSE"
+    fields['STAGE_ID'] = "C18:LOSE"
     # Tạo deal mới trên bitrix0
     result = bitrix24_service.Deal.update(fields)
     if not result:
@@ -186,7 +186,7 @@ def fulfilled_deal_bitrix(payload=None):
         return create_deal_bitrix(payload)
     
     fields = Deal.HaravanToBitrix24(payload) 
-    fields['STAGE_ID'] = "WON"
+    fields['STAGE_ID'] = "C18:WON"
     # Tạo deal mới trên bitrix
     result = bitrix24_service.Deal.update(fields)
     if not result:
