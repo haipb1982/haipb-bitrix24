@@ -40,7 +40,6 @@ def HaravanToBitrix24(ha):
     bx['UF_CRM_1630417292478'] = ha.get('source_name','New Order') # Kênh bán hàng 
 
     # print('HaravanToBitrix24',bx)
-
     return bx
 
 
