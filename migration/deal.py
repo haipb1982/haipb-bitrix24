@@ -28,8 +28,8 @@ def HaravanToBitrix24(ha):
     # Đơn hàng Haravan
     
     bx['UF_CRM_1637252157269'] = ha.get('name','New Order') # mã đơn
-    bx['UF_CRM_1623725469652'] = 'https://blusaigon.myharavan.com/admin/orders/' + ha.get('id',0) # đơn hàng haravan
-    bx['UF_CRM_1623809034975'] = ha.get('id',0) # haravan ID
+    bx['UF_CRM_1623725469652'] = 'https://blusaigon.myharavan.com/admin/orders/' + str(ha.get('id',0)) # đơn hàng haravan
+    bx['UF_CRM_1623809034975'] = str(ha.get('id',0)) # haravan ID
     bx['UF_CRM_1627457986'] = ha.get('note','Không tìm thấy ghi chú') # ghi chú đơn hàng
     bx['UF_CRM_1628149922667'] = ha.get('fulfillment_status','Chưa rõ trạng thái') # trạng thái đơn hàng
     bx['UF_CRM_1628149984252'] = ha.get('order_processing_status','confirmed') # trạng thái giao hàng
