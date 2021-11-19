@@ -6,7 +6,7 @@ from utils import log, common
 
 LOGGER = log.get_logger(__name__)
 
-bx24 = Bitrix24('https://blusaigon.bitrix24.com/rest/2069/84crttyoydwwky0a/profile.json')
+bx24 = Bitrix24('https://blusaigon.bitrix24.com/rest/2069/nxf12nyf735bfbrl/')
 # bx24 = Bitrix24('https://b24-0o3r9m.bitrix24.com/rest/1/om3gcd13tk2eca64/profile.json')  # TuanNA
 # bx24 = Bitrix24('https://b24-nd8219.bitrix24.vn/rest/1/cjgdujez4jbs6nch/profile.json')  # HaiPB
 
