@@ -285,7 +285,7 @@ def getProductListToFile():
 #     "xmlId":"bx123123",
 #
 # })
-res = bx24.callMethod("crm.deal.productrows.get", id="19")
+# res = bx24.callMethod("crm.deal.productrows.get", id="19")
 # res = bx24.callMethod("crm.deal.list")
 # res = bx24.callMethod("crm.deal.productrows.set", id="3301", rows=[
 #     {
@@ -301,7 +301,7 @@ res = bx24.callMethod("crm.deal.productrows.get", id="19")
 #                                                            "0": { "PRODUCT_ID": 689, "PRICE": 100.00, "QUANTITY": 4 },
 #                                                            "1": { "PRODUCT_ID": 690, "PRICE": 400.00, "QUANTITY": 1 },
 #                                                        })
-print(json.dumps(res))
+# print(json.dumps(res))
 # res = bx24.callMethod("crm.product.list")
 # res = bx24.callMethod("crm.deal.list")
 # res = bx24.callMethod("crm.deal.get", id="25")
