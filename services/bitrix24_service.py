@@ -6,8 +6,8 @@ from utils import log, common
 
 LOGGER = log.get_logger(__name__)
 
-bx24 = Bitrix24('https://blusaigon.bitrix24.com/rest/2069/nxf12nyf735bfbrl/')
-# bx24 = Bitrix24('https://b24-0o3r9m.bitrix24.com/rest/1/om3gcd13tk2eca64/profile.json')  # TuanNA
+# bx24 = Bitrix24('https://blusaigon.bitrix24.com/rest/2069/nxf12nyf735bfbrl/')
+bx24 = Bitrix24('https://b24-0o3r9m.bitrix24.com/rest/1/om3gcd13tk2eca64/profile.json')  # TuanNA
 # bx24 = Bitrix24('https://b24-nd8219.bitrix24.vn/rest/1/cjgdujez4jbs6nch/profile.json')  # HaiPB
 
 
@@ -335,5 +335,15 @@ def getProductListToFile():
 
 # Deal.update({"ID": 104, "ADDITIONAL_INFO": "12345"})
 
+bx24 = Bitrix24('https://blusaigon.bitrix24.com/rest/2069/nxf12nyf735bfbrl/')
+# bx24 = Bitrix24('https://b24-0o3r9m.bitrix24.com/rest/1/om3gcd13tk2eca64/profile.json')  # TuanNA
+
 # print(json.dumps(Contact.list()))
 # print(json.dumps(Contact.get(437)))
+# print(json.dumps(Deal.get(77)))
+# print(json.dumps(Deal.get_fields()))
+# res = bx24.callMethod("crm.status.list", filter={"ENTITY_ID": "DEAL_STAGE"}) # Lay trang thai va id cua stage deal
+# res = bx24.callMethod("crm.status.entity.types")
+# res = bx24.callMethod("crm.status.fields")
+res = bx24.callMethod("crm.status.entity.items", entityId="DEAL_STAGE")
+print(json.dumps(res))

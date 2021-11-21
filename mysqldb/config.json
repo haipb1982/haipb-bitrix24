@@ -1,8 +1,8 @@
 {
     "mysql":{
-        "host":"45.252.249.23",
-        "user":"asuofvsy_haipb",
-        "password":"@Vietnam68",
+        "host":"localhost",
+        "user":"root",
+        "password":"root",
         "db":"asuofvsy_blu"
     }
 }

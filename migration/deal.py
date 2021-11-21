@@ -37,7 +37,12 @@ def HaravanToBitrix24(ha):
     # More
 
     bx['UF_CRM_1630417157521'] = 'HARAVAN-BITRIX APP' # người tạo đơn
-    bx['UF_CRM_1630417292478'] = ha.get('source_name','New Order') # Kênh bán hàng 
+    bx['UF_CRM_1630417292478'] = ha.get('source_name','New Order') # Kênh bán hàng
+
+    # Status
+    financial_status = ha.get("financial_status")
+    if financial_status == "refunded":
+        bx[""] =
 
     # print('HaravanToBitrix24',bx)
     return bx
