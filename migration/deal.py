@@ -18,15 +18,62 @@ def HaravanToBitrix24(ha):
 
     # contact_id =  bx24.getContactIDbyPhone(ha['customer']['phone'] or ha['billing_address']['phone'])[0] or [{'ID':'0'}]['ID']
     # bx['CONTACT_ID'] = contact_id
-    
-    bx['STAGE_ID'] = "C18:NEW" # set value ở haravab_to_bitrix24
+
+
     bx['CURRENCY_ID'] = "VND"
     bx['IS_MANUAL_OPPORTUNITY'] = "N"
     bx['CATEGORY_ID'] = "18"
     bx['STAGE_SEMANTIC_ID'] = "P"
 
+
+    # Bitrix
+    #
+    # Đặt hàng thành công = C18:NEW
+    # Chuyển đơn cho sản xuất = C18:4
+    # Đang chuyển về showroom = C18:6
+    # Đã nhận và đang đóng gói = C18:5
+    # Đã giao cho nhà vận chuyển = C18:PREPARATION
+    #
+    # ĐƠN HÀNG TREO = C18:LOSE
+    #
+    # Haravan
+    # financial_status - Trạng thái của các khoản thanh toán
+    # pending: Các khoản thanh toán đang chờ xử lý. Thanh toán có thể không thành công ở trạng thái này. Kiểm tra lại để xác nhận xem các khoản thanh toán đã được thanh toán thành công hay chưa.
+    # authorized: Các khoản thanh toán đã được ủy quyền.
+    # partially_paid: Đơn hàng đã được thanh toán một phần.
+    # paid: Các khoản thanh toán đã được thanh toán.
+    # partially_refunded: Các khoản thanh toán đã được hoàn trả một phần.
+    # refunded: Các khoản thanh toán đã được hoàn trả.
+    # voided: Các khoản thanh toán đã bị vô hiệu.
+
+    # fulfillment_status - Trạng thái của đơn hàng về các mục hàng đã đáp ứng
+    # notfulfilled
+    # fulfilled: Mọi chi tiết đơn hàng trong đơn đặt hàng đã được hoàn thành.
+    # null: Không có chi tiết đơn hàng nào trong đơn đặt hàng đã được đáp ứng.
+    # partial: Ít nhất một mục hàng trong đơn hàng đã được đáp ứng.
+    # restocked: Mọi chi tiết đơn hàng trong đơn đặt hàng đã được bổ sung và đơn đặt hàng đã bị hủy.
+
+    # Kiểm tra trạng thái của đơn hàng
+
+    order_status = ha["order_processing_status"]
+
+    fulfillment_status = ha["fulfillment_status"] # Trạng thái của đơn hàng
+
+    financial_status = ha["financial_status"] # Trạng thái thanh toán của đơn hàng
+
+    if order_status == "complete":
+        bx['STAGE_ID'] = "WIN"
+    elif order_status == "cancel":
+        bx['STAGE_ID'] = "C18:LOSE"
+    elif order_status == "confirmed" and fulfillment_status == "notfulfilled":
+        bx['STAGE_ID'] = "C18:NEW"
+    elif order_status == "confirmed" and fulfillment_status == "notfulfilled" and financial_status == "pending":
+        bx['STAGE_ID'] = "C18:NEW"
+    elif order_status == "confirmed" and fulfillment_status == "notfulfilled" and financial_status == "paid":
+        bx['STAGE_ID'] = "P"
+
+
     # Đơn hàng Haravan
-    
     bx['UF_CRM_1637252157269'] = ha.get('name','New Order') # mã đơn
     bx['UF_CRM_1623725469652'] = 'https://blusaigon.myharavan.com/admin/orders/' + str(ha.get('id',0)) # đơn hàng haravan
     bx['UF_CRM_1623809034975'] = str(ha.get('id',0)) # haravan ID

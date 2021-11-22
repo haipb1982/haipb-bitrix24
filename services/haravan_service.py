@@ -243,4 +243,4 @@ if __name__ == "__main__":
     # print(res)
 
     # print(json.dumps(Product.get(1036936921)))
-    print(json.dumps(Customer.list()))
+    print(json.dumps(Order.list()))
