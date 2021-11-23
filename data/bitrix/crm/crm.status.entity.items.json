@@ -1,0 +1,37 @@
+[
+  {
+    "NAME": "NHẬN YÊU CẦU",
+    "SORT": 10,
+    "STATUS_ID": "3"
+  },
+  {
+    "NAME": "THIẾT KẾ VÀ CHÍNH SÁCH CHUNG",
+    "SORT": 20,
+    "STATUS_ID": "9"
+  },
+  {
+    "NAME": "GỬI SẢN PHẨM MẪU",
+    "SORT": 30,
+    "STATUS_ID": "11"
+  },
+  {
+    "NAME": "CHỐT BÁO GIÁ & THỜI GIAN",
+    "SORT": 40,
+    "STATUS_ID": "NEW"
+  },
+  {
+    "NAME": "THƯƠNG LƯỢNG HỢP ĐỒNG",
+    "SORT": 50,
+    "STATUS_ID": "10"
+  },
+  {
+    "NAME": "ĐÃ KÝ HĐ",
+    "SORT": 60,
+    "STATUS_ID": "WON"
+  },
+  {
+    "NAME": "KHÔNG ĐẶT HÀNG",
+    "SORT": 70,
+    "STATUS_ID": "LOSE"
+  }
+]

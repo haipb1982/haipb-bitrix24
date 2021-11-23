@@ -1,0 +1,2178 @@
+[
+  {
+    "ID": "1",
+    "ENTITY_ID": "STATUS",
+    "STATUS_ID": "NEW",
+    "NAME": "TIẾP NHẬN VÀ SÀNG LỌC KH",
+    "NAME_INIT": "Unassigned",
+    "SORT": "10",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": "#a2a8b0",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#a2a8b0"
+    }
+  },
+  {
+    "ID": "35",
+    "ENTITY_ID": "CONTACT_TYPE",
+    "STATUS_ID": "CLIENT",
+    "NAME": "KHÁCH HÀNG",
+    "NAME_INIT": "",
+    "SORT": "10",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "43",
+    "ENTITY_ID": "COMPANY_TYPE",
+    "STATUS_ID": "CUSTOMER",
+    "NAME": "KHÁCH HÀNG",
+    "NAME_INIT": "",
+    "SORT": "10",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "53",
+    "ENTITY_ID": "EMPLOYEES",
+    "STATUS_ID": "EMPLOYEES_1",
+    "NAME": "ÍT HƠN 50",
+    "NAME_INIT": "less than 50",
+    "SORT": "10",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "61",
+    "ENTITY_ID": "CALL_LIST",
+    "STATUS_ID": "IN_WORK",
+    "NAME": "Lên Lịch",
+    "NAME_INIT": "Scheduled",
+    "SORT": "10",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "69",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "IT",
+    "NAME": "Công Nghệ Thông Tin",
+    "NAME_INIT": "",
+    "SORT": "10",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "91",
+    "ENTITY_ID": "DEAL_TYPE",
+    "STATUS_ID": "SALE",
+    "NAME": "Đơn hàng lẻ",
+    "NAME_INIT": "Sales",
+    "SORT": "10",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "117",
+    "ENTITY_ID": "DEAL_STATE",
+    "STATUS_ID": "PLANNED",
+    "NAME": "Planned",
+    "NAME_INIT": "",
+    "SORT": "10",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "125",
+    "ENTITY_ID": "EVENT_TYPE",
+    "STATUS_ID": "INFO",
+    "NAME": "Thông Tin",
+    "NAME_INIT": "Information",
+    "SORT": "10",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "131",
+    "ENTITY_ID": "QUOTE_STATUS",
+    "STATUS_ID": "DRAFT",
+    "NAME": "MỚI",
+    "NAME_INIT": "New",
+    "SORT": "10",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": "#39A8EF",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#39A8EF"
+    }
+  },
+  {
+    "ID": "147",
+    "ENTITY_ID": "HONORIFIC",
+    "STATUS_ID": "HNR_EN_4",
+    "NAME": "Mr",
+    "NAME_INIT": "",
+    "SORT": "10",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "148",
+    "ENTITY_ID": "INVOICE_STATUS",
+    "STATUS_ID": "N",
+    "NAME": "MỚI",
+    "NAME_INIT": "New",
+    "SORT": "10",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": "#39A8EF",
+    "SEMANTICS": null
+  },
+  {
+    "ID": "191",
+    "ENTITY_ID": "DEAL_STAGE_5",
+    "STATUS_ID": "C5:NEW",
+    "NAME": "DANH SÁCH ĐƠN HÀNG",
+    "NAME_INIT": "Trong giai đoạn phát triển",
+    "SORT": "10",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "5",
+    "COLOR": "#39a8ef",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#39a8ef"
+    }
+  },
+  {
+    "ID": "305",
+    "ENTITY_ID": "DEAL_STAGE",
+    "STATUS_ID": "3",
+    "NAME": "NHẬN YÊU CẦU",
+    "NAME_INIT": "",
+    "SORT": "10",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": "#aae9fc",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#aae9fc"
+    }
+  },
+  {
+    "ID": "398",
+    "ENTITY_ID": "PRODUCT",
+    "STATUS_ID": "1",
+    "NAME": "BÚT",
+    "NAME_INIT": "",
+    "SORT": "10",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "570",
+    "ENTITY_ID": "DEAL_STAGE_18",
+    "STATUS_ID": "C18:NEW",
+    "NAME": "ĐẶT HÀNG THÀNH CÔNG",
+    "NAME_INIT": "Trong giai đoạn phát triển",
+    "SORT": "10",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "18",
+    "COLOR": "#39a8ef",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#39a8ef"
+    }
+  },
+  {
+    "ID": "636",
+    "ENTITY_ID": "DEAL_STAGE_26",
+    "STATUS_ID": "C26:NEW",
+    "NAME": "NHẬN YÊU CẦU BẢO HÀNH",
+    "NAME_INIT": "Trong giai đoạn phát triển",
+    "SORT": "10",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "26",
+    "COLOR": "#39a8ef",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#39a8ef"
+    }
+  },
+  {
+    "ID": "668",
+    "ENTITY_ID": "DEAL_STAGE_30",
+    "STATUS_ID": "C30:NEW",
+    "NAME": "ĐƠN HÀNG MỚI",
+    "NAME_INIT": "Trong giai đoạn phát triển",
+    "SORT": "10",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "30",
+    "COLOR": "#39a8ef",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#39a8ef"
+    }
+  },
+  {
+    "ID": "717",
+    "ENTITY_ID": "DEAL_STAGE_31",
+    "STATUS_ID": "C31:NEW",
+    "NAME": "NGÀY 1",
+    "NAME_INIT": "Trong giai đoạn phát triển",
+    "SORT": "10",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "31",
+    "COLOR": "#39a8ef",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#39a8ef"
+    }
+  },
+  {
+    "ID": "747",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "19",
+    "NAME": "Keyed in",
+    "NAME_INIT": "",
+    "SORT": "10",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "11",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "CALL",
+    "NAME": "Call",
+    "NAME_INIT": "Call",
+    "SORT": "20",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "37",
+    "ENTITY_ID": "CONTACT_TYPE",
+    "STATUS_ID": "SUPPLIER",
+    "NAME": "NHÀ CUNG CẤP",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "45",
+    "ENTITY_ID": "COMPANY_TYPE",
+    "STATUS_ID": "SUPPLIER",
+    "NAME": "NHÀ CUNG CẤP",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "55",
+    "ENTITY_ID": "EMPLOYEES",
+    "STATUS_ID": "EMPLOYEES_2",
+    "NAME": "50 ĐẾN 250",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "63",
+    "ENTITY_ID": "CALL_LIST",
+    "STATUS_ID": "SUCCESS",
+    "NAME": "Thành Công",
+    "NAME_INIT": "Success",
+    "SORT": "20",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "71",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "TELECOM",
+    "NAME": "Viễn Thông",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "93",
+    "ENTITY_ID": "DEAL_TYPE",
+    "STATUS_ID": "COMPLEX",
+    "NAME": "Đơn hàng sỉ",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "119",
+    "ENTITY_ID": "DEAL_STATE",
+    "STATUS_ID": "PROCESS",
+    "NAME": "In progress",
+    "NAME_INIT": "In progress",
+    "SORT": "20",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "127",
+    "ENTITY_ID": "EVENT_TYPE",
+    "STATUS_ID": "PHONE",
+    "NAME": "Cuộc Điện Thoại",
+    "NAME_INIT": "Phone call",
+    "SORT": "20",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "133",
+    "ENTITY_ID": "QUOTE_STATUS",
+    "STATUS_ID": "SENT",
+    "NAME": "ĐÃ GỬI BÁO GIÁ",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": "#2FC6F6",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#2FC6F6"
+    }
+  },
+  {
+    "ID": "154",
+    "ENTITY_ID": "INVOICE_STATUS",
+    "STATUS_ID": "S",
+    "NAME": "GỬI TỚI KHÁCH HÀNG",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": "#2FC6F6",
+    "SEMANTICS": null
+  },
+  {
+    "ID": "368",
+    "ENTITY_ID": "DEAL_STAGE_14",
+    "STATUS_ID": "C14:NEW",
+    "NAME": "KH ĐÃ TIẾP CẬN THÔNG TIN",
+    "NAME_INIT": "New",
+    "SORT": "20",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "14",
+    "COLOR": "#39a8ef",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#39a8ef"
+    }
+  },
+  {
+    "ID": "390",
+    "ENTITY_ID": "DEAL_STAGE_5",
+    "STATUS_ID": "C5:5",
+    "NAME": "ĐƠN HÀNG THỰC",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "5",
+    "COLOR": "#47e4c2",
+    "SEMANTICS": "",
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#47e4c2"
+    }
+  },
+  {
+    "ID": "400",
+    "ENTITY_ID": "PRODUCT",
+    "STATUS_ID": "2",
+    "NAME": "NÚT ÁO",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "638",
+    "ENTITY_ID": "DEAL_STAGE_26",
+    "STATUS_ID": "C26:PREPARATION",
+    "NAME": "LIÊN LẠC KH NHẬN BÚT",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "26",
+    "COLOR": "#2fc6f6",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#2fc6f6"
+    }
+  },
+  {
+    "ID": "683",
+    "ENTITY_ID": "DEAL_STAGE",
+    "STATUS_ID": "9",
+    "NAME": "THIẾT KẾ VÀ CHÍNH SÁCH CHUNG",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#468ee5",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#468ee5"
+    }
+  },
+  {
+    "ID": "703",
+    "ENTITY_ID": "DEAL_STAGE_18",
+    "STATUS_ID": "C18:4",
+    "NAME": "CHUYỂN ĐƠN CHO SẢN XUẤT",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "18",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "721",
+    "ENTITY_ID": "DEAL_STAGE_31",
+    "STATUS_ID": "C31:PREPAYMENT_INVOICE",
+    "NAME": "NGÀY 2",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "31",
+    "COLOR": "#55d0e0",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#55d0e0"
+    }
+  },
+  {
+    "ID": "745",
+    "ENTITY_ID": "HONORIFIC",
+    "STATUS_ID": "1",
+    "NAME": "Ms",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "757",
+    "ENTITY_ID": "DEAL_STAGE_30",
+    "STATUS_ID": "C30:2",
+    "NAME": "CHỜ SẢN XUẤT",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "30",
+    "COLOR": "#47d1e2",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#47d1e2"
+    }
+  },
+  {
+    "ID": "759",
+    "ENTITY_ID": "STATUS",
+    "STATUS_ID": "2",
+    "NAME": "ĐÃ SUBSCRIBE VOUCHER",
+    "NAME_INIT": "",
+    "SORT": "20",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#922091",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#922091"
+    }
+  },
+  {
+    "ID": "737",
+    "ENTITY_ID": "DEAL_STAGE_5",
+    "STATUS_ID": "C5:6",
+    "NAME": "THU MỘT PHẦN TIỀN",
+    "NAME_INIT": "",
+    "SORT": "21",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "5",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "777",
+    "ENTITY_ID": "DEAL_STAGE_31",
+    "STATUS_ID": "C31:1",
+    "NAME": "NGÀY 3",
+    "NAME_INIT": "",
+    "SORT": "21",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "31",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "779",
+    "ENTITY_ID": "DEAL_STAGE_31",
+    "STATUS_ID": "C31:2",
+    "NAME": "NGÀY 4",
+    "NAME_INIT": "",
+    "SORT": "22",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "31",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "781",
+    "ENTITY_ID": "DEAL_STAGE_31",
+    "STATUS_ID": "C31:3",
+    "NAME": "NGÀY 5",
+    "NAME_INIT": "",
+    "SORT": "23",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "31",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "783",
+    "ENTITY_ID": "DEAL_STAGE_31",
+    "STATUS_ID": "C31:4",
+    "NAME": "NGÀY 6",
+    "NAME_INIT": "",
+    "SORT": "24",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "31",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "785",
+    "ENTITY_ID": "DEAL_STAGE_31",
+    "STATUS_ID": "C31:5",
+    "NAME": "NGÀY 7",
+    "NAME_INIT": "",
+    "SORT": "25",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "31",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "39",
+    "ENTITY_ID": "CONTACT_TYPE",
+    "STATUS_ID": "PARTNER",
+    "NAME": "ĐỐI TÁC ĐẠI LÝ",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "47",
+    "ENTITY_ID": "COMPANY_TYPE",
+    "STATUS_ID": "COMPETITOR",
+    "NAME": "ĐỐI THỦ",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "57",
+    "ENTITY_ID": "EMPLOYEES",
+    "STATUS_ID": "EMPLOYEES_3",
+    "NAME": "250 ĐẾN 500",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "65",
+    "ENTITY_ID": "CALL_LIST",
+    "STATUS_ID": "WRONG_NUMBER",
+    "NAME": "Số Phone Sai",
+    "NAME_INIT": "Invalid number",
+    "SORT": "30",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "73",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "MANUFACTURING",
+    "NAME": "Sản Xuất",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "95",
+    "ENTITY_ID": "DEAL_TYPE",
+    "STATUS_ID": "GOODS",
+    "NAME": "Đơn hàng CTV",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "121",
+    "ENTITY_ID": "DEAL_STATE",
+    "STATUS_ID": "COMPLETE",
+    "NAME": "Completed",
+    "NAME_INIT": "Completed",
+    "SORT": "30",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "129",
+    "ENTITY_ID": "EVENT_TYPE",
+    "STATUS_ID": "MESSAGE",
+    "NAME": "Đã Gửi Email",
+    "NAME_INIT": "E-mail has been sent",
+    "SORT": "30",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "135",
+    "ENTITY_ID": "QUOTE_STATUS",
+    "STATUS_ID": "APPROVED",
+    "NAME": "CHẤP NHẬN",
+    "NAME_INIT": "Accepted",
+    "SORT": "30",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": "#7BD500",
+    "SEMANTICS": "S",
+    "EXTRA": {
+      "SEMANTICS": "success",
+      "COLOR": "#7BD500"
+    }
+  },
+  {
+    "ID": "152",
+    "ENTITY_ID": "INVOICE_STATUS",
+    "STATUS_ID": "P",
+    "NAME": "ĐÃ THANH TOÁN",
+    "NAME_INIT": "Paid",
+    "SORT": "30",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": "#7BD500",
+    "SEMANTICS": "S"
+  },
+  {
+    "ID": "155",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "FACE_TRACKER",
+    "NAME": "Face Tracker",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "195",
+    "ENTITY_ID": "DEAL_STAGE_5",
+    "STATUS_ID": "C5:PREPAYMENT_INVOICE",
+    "NAME": "THU",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "5",
+    "COLOR": "#55d0e0",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#55d0e0"
+    }
+  },
+  {
+    "ID": "402",
+    "ENTITY_ID": "PRODUCT",
+    "STATUS_ID": "3",
+    "NAME": "TRANG SỨC",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "640",
+    "ENTITY_ID": "DEAL_STAGE_26",
+    "STATUS_ID": "C26:PREPAYMENT_INVOICE",
+    "NAME": "GỬI BÚT VỀ XƯỞNG",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "26",
+    "COLOR": "#55d0e0",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#55d0e0"
+    }
+  },
+  {
+    "ID": "670",
+    "ENTITY_ID": "DEAL_STAGE_30",
+    "STATUS_ID": "C30:PREPARATION",
+    "NAME": "ĐANG SẢN XUẤT",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "30",
+    "COLOR": "#2fc6f6",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#2fc6f6"
+    }
+  },
+  {
+    "ID": "711",
+    "ENTITY_ID": "DEAL_STAGE_14",
+    "STATUS_ID": "C14:2",
+    "NAME": "HẸN TRAO ĐỔI",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "14",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "727",
+    "ENTITY_ID": "DEAL_STAGE_31",
+    "STATUS_ID": "C31:WON",
+    "NAME": "HOÀN THÀNH CSKH CTV",
+    "NAME_INIT": "Thắng",
+    "SORT": "30",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "31",
+    "COLOR": "#7bd500",
+    "SEMANTICS": "S",
+    "EXTRA": {
+      "SEMANTICS": "success",
+      "COLOR": "#7bd500"
+    }
+  },
+  {
+    "ID": "739",
+    "ENTITY_ID": "STATUS",
+    "STATUS_ID": "1",
+    "NAME": "TƯ VẤN VÀ HIỂU NHU CẦU",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#468ee5",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#468ee5"
+    }
+  },
+  {
+    "ID": "755",
+    "ENTITY_ID": "DEAL_STAGE_18",
+    "STATUS_ID": "C18:6",
+    "NAME": "ĐANG CHUYỂN VỀ SHOWROOM",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "18",
+    "COLOR": "#00c4fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#00c4fb"
+    }
+  },
+  {
+    "ID": "803",
+    "ENTITY_ID": "DEAL_STAGE",
+    "STATUS_ID": "11",
+    "NAME": "GỬI SẢN PHẨM MẪU",
+    "NAME_INIT": "",
+    "SORT": "30",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#468ee5",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#468ee5"
+    }
+  },
+  {
+    "ID": "7",
+    "ENTITY_ID": "STATUS",
+    "STATUS_ID": "CONVERTED",
+    "NAME": "KH CÓ NHU CẦU MUA",
+    "NAME_INIT": "Good lead",
+    "SORT": "40",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": "#7bd500",
+    "SEMANTICS": "S",
+    "EXTRA": {
+      "SEMANTICS": "success",
+      "COLOR": "#7bd500"
+    }
+  },
+  {
+    "ID": "13",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "EMAIL",
+    "NAME": "E-Mail",
+    "NAME_INIT": "",
+    "SORT": "40",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "41",
+    "ENTITY_ID": "CONTACT_TYPE",
+    "STATUS_ID": "OTHER",
+    "NAME": "ĐỐI TÁC CTV",
+    "NAME_INIT": "",
+    "SORT": "40",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "49",
+    "ENTITY_ID": "COMPANY_TYPE",
+    "STATUS_ID": "PARTNER",
+    "NAME": "ĐỐI TÁC",
+    "NAME_INIT": "",
+    "SORT": "40",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "59",
+    "ENTITY_ID": "EMPLOYEES",
+    "STATUS_ID": "EMPLOYEES_4",
+    "NAME": "HƠN 500",
+    "NAME_INIT": "",
+    "SORT": "40",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "67",
+    "ENTITY_ID": "CALL_LIST",
+    "STATUS_ID": "STOP_CALLING",
+    "NAME": "Không Gọi",
+    "NAME_INIT": "Do not call",
+    "SORT": "40",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "75",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "BANKING",
+    "NAME": "Ngân Hàng",
+    "NAME_INIT": "",
+    "SORT": "40",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "97",
+    "ENTITY_ID": "DEAL_TYPE",
+    "STATUS_ID": "SERVICES",
+    "NAME": "Đơn hàng Đại lý",
+    "NAME_INIT": "",
+    "SORT": "40",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "101",
+    "ENTITY_ID": "DEAL_STAGE",
+    "STATUS_ID": "NEW",
+    "NAME": "CHỐT BÁO GIÁ & THỜI GIAN",
+    "NAME_INIT": "New",
+    "SORT": "40",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": "#ffad97",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ffad97"
+    }
+  },
+  {
+    "ID": "123",
+    "ENTITY_ID": "DEAL_STATE",
+    "STATUS_ID": "CANCELED",
+    "NAME": "Canceled",
+    "NAME_INIT": "Canceled",
+    "SORT": "40",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "137",
+    "ENTITY_ID": "QUOTE_STATUS",
+    "STATUS_ID": "DECLAINED",
+    "NAME": "TỪ CHỐI",
+    "NAME_INIT": "Declined",
+    "SORT": "40",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": "#FF5752",
+    "SEMANTICS": "F",
+    "EXTRA": {
+      "SEMANTICS": "failure",
+      "COLOR": "#FF5752"
+    }
+  },
+  {
+    "ID": "150",
+    "ENTITY_ID": "INVOICE_STATUS",
+    "STATUS_ID": "D",
+    "NAME": "CHƯA THANH TOÁN",
+    "NAME_INIT": "Unpaid",
+    "SORT": "40",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": "#FF5752",
+    "SEMANTICS": "F"
+  },
+  {
+    "ID": "201",
+    "ENTITY_ID": "DEAL_STAGE_5",
+    "STATUS_ID": "C5:WON",
+    "NAME": "ĐÃ THU 100%",
+    "NAME_INIT": "Thắng",
+    "SORT": "40",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "5",
+    "COLOR": "#7bd500",
+    "SEMANTICS": "S",
+    "EXTRA": {
+      "SEMANTICS": "success",
+      "COLOR": "#7bd500"
+    }
+  },
+  {
+    "ID": "404",
+    "ENTITY_ID": "PRODUCT",
+    "STATUS_ID": "4",
+    "NAME": "PHỤ KIỆN DA",
+    "NAME_INIT": "",
+    "SORT": "40",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "642",
+    "ENTITY_ID": "DEAL_STAGE_26",
+    "STATUS_ID": "C26:EXECUTING",
+    "NAME": "NHẬN & GIAO ĐẾN KH",
+    "NAME_INIT": "",
+    "SORT": "40",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "26",
+    "COLOR": "#47e4c2",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#47e4c2"
+    }
+  },
+  {
+    "ID": "672",
+    "ENTITY_ID": "DEAL_STAGE_30",
+    "STATUS_ID": "C30:PREPAYMENT_INVOICE",
+    "NAME": "ĐANG KHẮC TÊN",
+    "NAME_INIT": "",
+    "SORT": "40",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "30",
+    "COLOR": "#55d0e0",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#55d0e0"
+    }
+  },
+  {
+    "ID": "705",
+    "ENTITY_ID": "DEAL_STAGE_18",
+    "STATUS_ID": "C18:5",
+    "NAME": "ĐÃ NHẬN VÀ ĐANG ĐÓNG GÓI",
+    "NAME_INIT": "",
+    "SORT": "40",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "18",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "729",
+    "ENTITY_ID": "DEAL_STAGE_31",
+    "STATUS_ID": "C31:LOSE",
+    "NAME": "Thất bại",
+    "NAME_INIT": "Thất bại",
+    "SORT": "40",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "31",
+    "COLOR": "#FF5752",
+    "SEMANTICS": "F",
+    "EXTRA": {
+      "SEMANTICS": "failure",
+      "COLOR": "#FF5752"
+    }
+  },
+  {
+    "ID": "733",
+    "ENTITY_ID": "DEAL_STAGE_14",
+    "STATUS_ID": "C14:4",
+    "NAME": "ĐÃ GẶP MẶT (ON & OFFLINE)",
+    "NAME_INIT": "",
+    "SORT": "40",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "14",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "9",
+    "ENTITY_ID": "STATUS",
+    "STATUS_ID": "JUNK",
+    "NAME": "KH KHÔNG CÓ Ý MUA",
+    "NAME_INIT": "Junk Lead",
+    "SORT": "50",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": "#ff5752",
+    "SEMANTICS": "F",
+    "EXTRA": {
+      "SEMANTICS": "failure",
+      "COLOR": "#ff5752"
+    }
+  },
+  {
+    "ID": "17",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "ADVERTISING",
+    "NAME": "Advertising",
+    "NAME_INIT": "",
+    "SORT": "50",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "51",
+    "ENTITY_ID": "COMPANY_TYPE",
+    "STATUS_ID": "OTHER",
+    "NAME": "KHÁC",
+    "NAME_INIT": "",
+    "SORT": "50",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "77",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "CONSULTING",
+    "NAME": "Tư Vấn",
+    "NAME_INIT": "",
+    "SORT": "50",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "203",
+    "ENTITY_ID": "DEAL_STAGE_5",
+    "STATUS_ID": "C5:LOSE",
+    "NAME": "NỢ",
+    "NAME_INIT": "Thất bại",
+    "SORT": "50",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "5",
+    "COLOR": "#ff5752",
+    "SEMANTICS": "F",
+    "EXTRA": {
+      "SEMANTICS": "failure",
+      "COLOR": "#ff5752"
+    }
+  },
+  {
+    "ID": "406",
+    "ENTITY_ID": "PRODUCT",
+    "STATUS_ID": "5",
+    "NAME": "RUỘT BÚT",
+    "NAME_INIT": "",
+    "SORT": "50",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "572",
+    "ENTITY_ID": "DEAL_STAGE_18",
+    "STATUS_ID": "C18:PREPARATION",
+    "NAME": "ĐÃ GIAO NHÀ VẬN CHUYỂN",
+    "NAME_INIT": "",
+    "SORT": "50",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "18",
+    "COLOR": "#2fc6f6",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#2fc6f6"
+    }
+  },
+  {
+    "ID": "687",
+    "ENTITY_ID": "DEAL_STAGE",
+    "STATUS_ID": "10",
+    "NAME": "THƯƠNG LƯỢNG HỢP ĐỒNG",
+    "NAME_INIT": "",
+    "SORT": "50",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#468ee5",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#468ee5"
+    }
+  },
+  {
+    "ID": "735",
+    "ENTITY_ID": "DEAL_STAGE_14",
+    "STATUS_ID": "C14:5",
+    "NAME": "TƯ VẤN THƯƠNG LƯỢNG",
+    "NAME_INIT": "",
+    "SORT": "50",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "14",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "753",
+    "ENTITY_ID": "DEAL_STAGE_30",
+    "STATUS_ID": "C30:1",
+    "NAME": "ĐÃ CHUYỂN VỀ SHOWROOM",
+    "NAME_INIT": "",
+    "SORT": "50",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "30",
+    "COLOR": "#00c4fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#00c4fb"
+    }
+  },
+  {
+    "ID": "769",
+    "ENTITY_ID": "CONTACT_TYPE",
+    "STATUS_ID": "1",
+    "NAME": "KHÁC",
+    "NAME_INIT": "",
+    "SORT": "50",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "805",
+    "ENTITY_ID": "DEAL_STAGE_26",
+    "STATUS_ID": "C26:1",
+    "NAME": "HOÀN THÀNH BẢO HÀNH",
+    "NAME_INIT": "",
+    "SORT": "50",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "26",
+    "COLOR": "#468ee5",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#468ee5"
+    }
+  },
+  {
+    "ID": "19",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "PARTNER",
+    "NAME": "Existing Client",
+    "NAME_INIT": "",
+    "SORT": "60",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "79",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "FINANCE",
+    "NAME": "Tài Chính",
+    "NAME_INIT": "",
+    "SORT": "60",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "111",
+    "ENTITY_ID": "DEAL_STAGE",
+    "STATUS_ID": "WON",
+    "NAME": "ĐÃ KÝ HĐ",
+    "NAME_INIT": "Deal won",
+    "SORT": "60",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": "#7bd500",
+    "SEMANTICS": "S",
+    "EXTRA": {
+      "SEMANTICS": "success",
+      "COLOR": "#7bd500"
+    }
+  },
+  {
+    "ID": "372",
+    "ENTITY_ID": "DEAL_STAGE_14",
+    "STATUS_ID": "C14:PREPAYMENT_INVOICE",
+    "NAME": "KHÁCH RA QUYẾT ĐỊNH",
+    "NAME_INIT": "",
+    "SORT": "60",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "14",
+    "COLOR": "#55d0e0",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#55d0e0"
+    }
+  },
+  {
+    "ID": "580",
+    "ENTITY_ID": "DEAL_STAGE_18",
+    "STATUS_ID": "C18:WON",
+    "NAME": "KHÁCH ĐÃ NHẬN HÀNG",
+    "NAME_INIT": "Thắng",
+    "SORT": "60",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "18",
+    "COLOR": "#7bd500",
+    "SEMANTICS": "S",
+    "EXTRA": {
+      "SEMANTICS": "success",
+      "COLOR": "#7bd500"
+    }
+  },
+  {
+    "ID": "646",
+    "ENTITY_ID": "DEAL_STAGE_26",
+    "STATUS_ID": "C26:WON",
+    "NAME": "KHÔNG SỬ DỤNG",
+    "NAME_INIT": "Thắng",
+    "SORT": "60",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "26",
+    "COLOR": "#7bd500",
+    "SEMANTICS": "S",
+    "EXTRA": {
+      "SEMANTICS": "success",
+      "COLOR": "#7bd500"
+    }
+  },
+  {
+    "ID": "678",
+    "ENTITY_ID": "DEAL_STAGE_30",
+    "STATUS_ID": "C30:WON",
+    "NAME": "Thành công",
+    "NAME_INIT": "Thắng",
+    "SORT": "60",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "30",
+    "COLOR": "#7bd500",
+    "SEMANTICS": "S",
+    "EXTRA": {
+      "SEMANTICS": "success",
+      "COLOR": "#7bd500"
+    }
+  },
+  {
+    "ID": "21",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "RECOMMENDATION",
+    "NAME": "By Recommendation",
+    "NAME_INIT": "",
+    "SORT": "70",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "81",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "GOVERNMENT",
+    "NAME": "Chính Phủ",
+    "NAME_INIT": "",
+    "SORT": "70",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "113",
+    "ENTITY_ID": "DEAL_STAGE",
+    "STATUS_ID": "LOSE",
+    "NAME": "KHÔNG ĐẶT HÀNG",
+    "NAME_INIT": "Deal lost",
+    "SORT": "70",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": "#ff5752",
+    "SEMANTICS": "F",
+    "EXTRA": {
+      "SEMANTICS": "failure",
+      "COLOR": "#ff5752"
+    }
+  },
+  {
+    "ID": "582",
+    "ENTITY_ID": "DEAL_STAGE_18",
+    "STATUS_ID": "C18:LOSE",
+    "NAME": "ĐƠN HÀNG TREO",
+    "NAME_INIT": "Thất bại",
+    "SORT": "70",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "18",
+    "COLOR": "#ff5752",
+    "SEMANTICS": "F",
+    "EXTRA": {
+      "SEMANTICS": "failure",
+      "COLOR": "#ff5752"
+    }
+  },
+  {
+    "ID": "648",
+    "ENTITY_ID": "DEAL_STAGE_26",
+    "STATUS_ID": "C26:LOSE",
+    "NAME": "KHÔNG SỬ DỤNG",
+    "NAME_INIT": "Thất bại",
+    "SORT": "70",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "26",
+    "COLOR": "#ff5752",
+    "SEMANTICS": "F",
+    "EXTRA": {
+      "SEMANTICS": "failure",
+      "COLOR": "#ff5752"
+    }
+  },
+  {
+    "ID": "680",
+    "ENTITY_ID": "DEAL_STAGE_30",
+    "STATUS_ID": "C30:LOSE",
+    "NAME": "Thất bại",
+    "NAME_INIT": "Thất bại",
+    "SORT": "70",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "30",
+    "COLOR": "#FF5752",
+    "SEMANTICS": "F",
+    "EXTRA": {
+      "SEMANTICS": "failure",
+      "COLOR": "#FF5752"
+    }
+  },
+  {
+    "ID": "763",
+    "ENTITY_ID": "DEAL_STAGE_14",
+    "STATUS_ID": "C14:7",
+    "NAME": "HỢP ĐỒNG CHỜ KÝ",
+    "NAME_INIT": "",
+    "SORT": "70",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "14",
+    "COLOR": "#468ee5",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#468ee5"
+    }
+  },
+  {
+    "ID": "23",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "TRADE_SHOW",
+    "NAME": "Show/Exhibition",
+    "NAME_INIT": "",
+    "SORT": "80",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "83",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "DELIVERY",
+    "NAME": "Giao Hàng",
+    "NAME_INIT": "",
+    "SORT": "80",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "775",
+    "ENTITY_ID": "DEAL_STAGE_14",
+    "STATUS_ID": "C14:9",
+    "NAME": "ĐÃ KÝ HỢP ĐỒNG CTV",
+    "NAME_INIT": "",
+    "SORT": "80",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "14",
+    "COLOR": "#468ee5",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#468ee5"
+    }
+  },
+  {
+    "ID": "25",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "WEBFORM",
+    "NAME": "CRM form",
+    "NAME_INIT": "CRM form",
+    "SORT": "90",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "85",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "ENTERTAINMENT",
+    "NAME": "Giải Trí",
+    "NAME_INIT": "",
+    "SORT": "90",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "765",
+    "ENTITY_ID": "DEAL_STAGE_14",
+    "STATUS_ID": "C14:8",
+    "NAME": "ĐÃ KÝ HỢP ĐỒNG ĐẠI LÝ",
+    "NAME_INIT": "",
+    "SORT": "90",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "14",
+    "COLOR": "#8ec82f",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#8ec82f"
+    }
+  },
+  {
+    "ID": "27",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "CALLBACK",
+    "NAME": "Callback",
+    "NAME_INIT": "Callback",
+    "SORT": "100",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "87",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "NOTPROFIT",
+    "NAME": "Phi Lợi Nhuận",
+    "NAME_INIT": "",
+    "SORT": "100",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "378",
+    "ENTITY_ID": "DEAL_STAGE_14",
+    "STATUS_ID": "C14:WON",
+    "NAME": "KHÔNG SỬ DỤNG GIAI ĐOẠN NÀY",
+    "NAME_INIT": "Deal won",
+    "SORT": "100",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "14",
+    "COLOR": "#7bd500",
+    "SEMANTICS": "S",
+    "EXTRA": {
+      "SEMANTICS": "success",
+      "COLOR": "#7bd500"
+    }
+  },
+  {
+    "ID": "586",
+    "ENTITY_ID": "DEAL_STAGE_20",
+    "STATUS_ID": "C20:NEW",
+    "NAME": "Ngày 1",
+    "NAME_INIT": "Trong giai đoạn phát triển",
+    "SORT": "100",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "20",
+    "COLOR": "#39a8ef",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#39a8ef"
+    }
+  },
+  {
+    "ID": "652",
+    "ENTITY_ID": "DEAL_STAGE_28",
+    "STATUS_ID": "C28:NEW",
+    "NAME": "NHẬN THÔNG TIN XUẤT VAT",
+    "NAME_INIT": "Trong giai đoạn phát triển",
+    "SORT": "100",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "28",
+    "COLOR": "#39a8ef",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#39a8ef"
+    }
+  },
+  {
+    "ID": "89",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "OTHER",
+    "NAME": "Xây Dựng",
+    "NAME_INIT": "Other",
+    "SORT": "110",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "380",
+    "ENTITY_ID": "DEAL_STAGE_14",
+    "STATUS_ID": "C14:LOSE",
+    "NAME": "KHÔNG PHÙ HỢP",
+    "NAME_INIT": "Deal lost",
+    "SORT": "110",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "14",
+    "COLOR": "#ff5752",
+    "SEMANTICS": "F",
+    "EXTRA": {
+      "SEMANTICS": "failure",
+      "COLOR": "#ff5752"
+    }
+  },
+  {
+    "ID": "751",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "45|OPENLINE",
+    "NAME": "Live chat - TEST",
+    "NAME_INIT": "",
+    "SORT": "110",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "29",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "RC_GENERATOR",
+    "NAME": "Sales boost",
+    "NAME_INIT": "Sales boost",
+    "SORT": "120",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "318",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "1",
+    "NAME": "Bất Động Sản",
+    "NAME_INIT": "",
+    "SORT": "120",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "31",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "STORE",
+    "NAME": "Online Store",
+    "NAME_INIT": "Online Store",
+    "SORT": "130",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "320",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "2",
+    "NAME": "Quà Tặng",
+    "NAME_INIT": "",
+    "SORT": "130",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "33",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "OTHER",
+    "NAME": "Other",
+    "NAME_INIT": "",
+    "SORT": "140",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "322",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "3",
+    "NAME": "Trang Sức",
+    "NAME_INIT": "",
+    "SORT": "140",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "173",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "1|OPENLINE",
+    "NAME": "Live chat - Kênh Mở",
+    "NAME_INIT": "",
+    "SORT": "150",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "324",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "4",
+    "NAME": "Thời Trang",
+    "NAME_INIT": "",
+    "SORT": "150",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "296",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "1|FACEBOOK",
+    "NAME": "Facebook - Website và FB",
+    "NAME_INIT": "",
+    "SORT": "160",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "326",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "5",
+    "NAME": "Spa",
+    "NAME_INIT": "",
+    "SORT": "160",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "298",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "1|FACEBOOKCOMMENTS",
+    "NAME": "Facebook: Comments - Website và FB",
+    "NAME_INIT": "",
+    "SORT": "170",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "328",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "6",
+    "NAME": "Hoa Tươi",
+    "NAME_INIT": "",
+    "SORT": "170",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "306",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "14|INSTAGRAM",
+    "NAME": "Instagram Business - Instagram",
+    "NAME_INIT": "",
+    "SORT": "180",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "330",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "7",
+    "NAME": "Nhà Hàng",
+    "NAME_INIT": "",
+    "SORT": "180",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "310",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "18|WHATSAPPBYTWILIO",
+    "NAME": "WhatsApp - Whatsapp",
+    "NAME_INIT": "",
+    "SORT": "190",
+    "SYSTEM": "N",
+    "CATEGORY_ID": null,
+    "COLOR": null,
+    "SEMANTICS": null
+  },
+  {
+    "ID": "332",
+    "ENTITY_ID": "INDUSTRY",
+    "STATUS_ID": "8",
+    "NAME": "Khách Sạn",
+    "NAME_INIT": "",
+    "SORT": "190",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "654",
+    "ENTITY_ID": "DEAL_STAGE_28",
+    "STATUS_ID": "C28:PREPARATION",
+    "NAME": "KẾ TOÁN ĐÃ NHẬN",
+    "NAME_INIT": "",
+    "SORT": "200",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "28",
+    "COLOR": "#2fc6f6",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#2fc6f6"
+    }
+  },
+  {
+    "ID": "697",
+    "ENTITY_ID": "DEAL_STAGE_20",
+    "STATUS_ID": "C20:2",
+    "NAME": "NGÀY 2",
+    "NAME_INIT": "",
+    "SORT": "200",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "20",
+    "COLOR": "#47d1e2",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#47d1e2"
+    }
+  },
+  {
+    "ID": "767",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "46",
+    "NAME": "Voucher subscribe VI",
+    "NAME_INIT": "",
+    "SORT": "200",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "773",
+    "ENTITY_ID": "SOURCE",
+    "STATUS_ID": "47",
+    "NAME": "Voucher subscribe EN",
+    "NAME_INIT": "",
+    "SORT": "210",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "0",
+    "COLOR": "#D3EEF9",
+    "SEMANTICS": ""
+  },
+  {
+    "ID": "656",
+    "ENTITY_ID": "DEAL_STAGE_28",
+    "STATUS_ID": "C28:PREPAYMENT_INVOICE",
+    "NAME": "CẦN THÊM THÔNG TIN/ĐIỀU CHỈNH",
+    "NAME_INIT": "",
+    "SORT": "300",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "28",
+    "COLOR": "#55d0e0",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#55d0e0"
+    }
+  },
+  {
+    "ID": "789",
+    "ENTITY_ID": "DEAL_STAGE_20",
+    "STATUS_ID": "C20:4",
+    "NAME": "NGÀY 4",
+    "NAME_INIT": "",
+    "SORT": "301",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "20",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "797",
+    "ENTITY_ID": "DEAL_STAGE_20",
+    "STATUS_ID": "C20:8",
+    "NAME": "NGÀY 3",
+    "NAME_INIT": "",
+    "SORT": "301",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "20",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "793",
+    "ENTITY_ID": "DEAL_STAGE_20",
+    "STATUS_ID": "C20:6",
+    "NAME": "NGÀY 6",
+    "NAME_INIT": "",
+    "SORT": "303",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "20",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "799",
+    "ENTITY_ID": "DEAL_STAGE_20",
+    "STATUS_ID": "C20:9",
+    "NAME": "NGÀY 5",
+    "NAME_INIT": "",
+    "SORT": "303",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "20",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "795",
+    "ENTITY_ID": "DEAL_STAGE_20",
+    "STATUS_ID": "C20:7",
+    "NAME": "NGÀY 7",
+    "NAME_INIT": "",
+    "SORT": "304",
+    "SYSTEM": "N",
+    "CATEGORY_ID": "20",
+    "COLOR": "#ace9fb",
+    "SEMANTICS": null,
+    "EXTRA": {
+      "SEMANTICS": "process",
+      "COLOR": "#ace9fb"
+    }
+  },
+  {
+    "ID": "596",
+    "ENTITY_ID": "DEAL_STAGE_20",
+    "STATUS_ID": "C20:WON",
+    "NAME": "HOÀN THÀNH CSKH ĐẠI LÝ",
+    "NAME_INIT": "Thắng",
+    "SORT": "400",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "20",
+    "COLOR": "#7bd500",
+    "SEMANTICS": "S",
+    "EXTRA": {
+      "SEMANTICS": "success",
+      "COLOR": "#7bd500"
+    }
+  },
+  {
+    "ID": "662",
+    "ENTITY_ID": "DEAL_STAGE_28",
+    "STATUS_ID": "C28:WON",
+    "NAME": "ĐÃ XUẤT HĐ",
+    "NAME_INIT": "Thắng",
+    "SORT": "400",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "28",
+    "COLOR": "#7bd500",
+    "SEMANTICS": "S",
+    "EXTRA": {
+      "SEMANTICS": "success",
+      "COLOR": "#7bd500"
+    }
+  },
+  {
+    "ID": "598",
+    "ENTITY_ID": "DEAL_STAGE_20",
+    "STATUS_ID": "C20:LOSE",
+    "NAME": "Thất bại",
+    "NAME_INIT": "Thất bại",
+    "SORT": "500",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "20",
+    "COLOR": "#ff5752",
+    "SEMANTICS": "F",
+    "EXTRA": {
+      "SEMANTICS": "failure",
+      "COLOR": "#ff5752"
+    }
+  },
+  {
+    "ID": "664",
+    "ENTITY_ID": "DEAL_STAGE_28",
+    "STATUS_ID": "C28:LOSE",
+    "NAME": "HỦY XUẤT",
+    "NAME_INIT": "Thất bại",
+    "SORT": "500",
+    "SYSTEM": "Y",
+    "CATEGORY_ID": "28",
+    "COLOR": "#ff5752",
+    "SEMANTICS": "F",
+    "EXTRA": {
+      "SEMANTICS": "failure",
+      "COLOR": "#ff5752"
+    }
+  }
+]

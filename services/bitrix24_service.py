@@ -222,7 +222,7 @@ def getProductListToFile():
     common.writeFile(res, "crm.contact.list.json")
 
 
-# res = bx24.callMethod("crm.catalog.list")
+
 # res = bx24.callMethod("catalog.product.list",
 #                       select=[
 #                           "id",
@@ -302,15 +302,7 @@ def getProductListToFile():
 #                                                            "1": { "PRODUCT_ID": 690, "PRICE": 400.00, "QUANTITY": 1 },
 #                                                        })
 # print(json.dumps(res))
-# res = bx24.callMethod("crm.product.list")
-# res = bx24.callMethod("crm.deal.list")
-# res = bx24.callMethod("crm.deal.get", id="25")
-# res = bx24.callMethod("crm.deal.productrows.get", id="3301")
-# res = bx24.callMethod("crm.productrow.fields")
-# res = bx24.callMethod("catalog.section.getFields")
-# res = bx24.callMethod("catalog.section.list",filter={"iblockId": 25})
-# res = bx24.callMethod("crm.deal.userfield.list")
-# res = bx24.callMethod("crm.deal.userfield.get", id="201")
+
 # fields={}
 # fields["CONTACT_ID"] = 443
 # fields["STAGE_ID"] = "NEW"
@@ -342,8 +334,20 @@ bx24 = Bitrix24('https://blusaigon.bitrix24.com/rest/2069/nxf12nyf735bfbrl/')
 # print(json.dumps(Contact.get(437)))
 # print(json.dumps(Deal.get(77)))
 # print(json.dumps(Deal.get_fields()))
+# res = bx24.callMethod("crm.status.list") # Lay trang thai va id cua stage deal
 # res = bx24.callMethod("crm.status.list", filter={"ENTITY_ID": "DEAL_STAGE"}) # Lay trang thai va id cua stage deal
 # res = bx24.callMethod("crm.status.entity.types")
 # res = bx24.callMethod("crm.status.fields")
-res = bx24.callMethod("crm.status.entity.items", entityId="DEAL_STAGE")
-print(json.dumps(res))
+# res = bx24.callMethod("crm.status.entity.items", entityId="DEAL_STAGE")
+# res = bx24.callMethod("crm.catalog.list")
+# res = bx24.callMethod("crm.product.list")
+# res = bx24.callMethod("crm.deal.list")
+# res = bx24.callMethod("crm.deal.get", id="25")
+# res = bx24.callMethod("crm.deal.productrows.get", id="3301")
+# res = bx24.callMethod("crm.productrow.fields")
+# res = bx24.callMethod("catalog.section.getFields")
+# res = bx24.callMethod("catalog.section.list",filter={"iblockId": 25})
+# res = bx24.callMethod("crm.deal.userfield.list")
+# res = bx24.callMethod("crm.deal.userfield.get", id="201")
+# common.writeFile(res, "../data/bitrix/crm/deal/crm.productrow.fields.json")
+# print(json.dumps(res))

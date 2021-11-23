@@ -1,0 +1,101 @@
+{
+  "ID": {
+    "type": "integer",
+    "isRequired": false,
+    "isReadOnly": true,
+    "isImmutable": false,
+    "isMultiple": false,
+    "isDynamic": false,
+    "title": "ID"
+  },
+  "ENTITY_ID": {
+    "type": "string",
+    "isRequired": true,
+    "isReadOnly": false,
+    "isImmutable": true,
+    "isMultiple": false,
+    "isDynamic": false,
+    "title": "Entity ID"
+  },
+  "STATUS_ID": {
+    "type": "string",
+    "isRequired": true,
+    "isReadOnly": false,
+    "isImmutable": true,
+    "isMultiple": false,
+    "isDynamic": false,
+    "title": "Status"
+  },
+  "SORT": {
+    "type": "integer",
+    "isRequired": false,
+    "isReadOnly": false,
+    "isImmutable": false,
+    "isMultiple": false,
+    "isDynamic": false,
+    "title": "Sort"
+  },
+  "NAME": {
+    "type": "string",
+    "isRequired": true,
+    "isReadOnly": false,
+    "isImmutable": false,
+    "isMultiple": false,
+    "isDynamic": false,
+    "title": "Name"
+  },
+  "NAME_INIT": {
+    "type": "string",
+    "isRequired": false,
+    "isReadOnly": true,
+    "isImmutable": false,
+    "isMultiple": false,
+    "isDynamic": false,
+    "title": "Default name"
+  },
+  "SYSTEM": {
+    "type": "char",
+    "isRequired": false,
+    "isReadOnly": true,
+    "isImmutable": false,
+    "isMultiple": false,
+    "isDynamic": false,
+    "title": "System"
+  },
+  "CATEGORY_ID": {
+    "type": "integer",
+    "isRequired": false,
+    "isReadOnly": false,
+    "isImmutable": true,
+    "isMultiple": false,
+    "isDynamic": false,
+    "title": "CATEGORY_ID"
+  },
+  "COLOR": {
+    "type": "string",
+    "isRequired": false,
+    "isReadOnly": false,
+    "isImmutable": false,
+    "isMultiple": false,
+    "isDynamic": false,
+    "title": "COLOR"
+  },
+  "SEMANTICS": {
+    "type": "char",
+    "isRequired": false,
+    "isReadOnly": false,
+    "isImmutable": true,
+    "isMultiple": false,
+    "isDynamic": false,
+    "title": "SEMANTICS"
+  },
+  "EXTRA": {
+    "type": "crm_status_extra",
+    "isRequired": false,
+    "isReadOnly": false,
+    "isImmutable": false,
+    "isMultiple": false,
+    "isDynamic": false,
+    "title": "Additional fields"
+  }
+}

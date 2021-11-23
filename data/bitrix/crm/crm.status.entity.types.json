@@ -1,0 +1,197 @@
+[
+  {
+    "ID": "STATUS",
+    "NAME": "Lead statuses",
+    "SEMANTIC_INFO": {
+      "START_FIELD": "NEW",
+      "FINAL_SUCCESS_FIELD": "CONVERTED",
+      "FINAL_UNSUCCESS_FIELD": "JUNK",
+      "FINAL_SORT": 0
+    },
+    "ENTITY_TYPE_ID": 1
+  },
+  {
+    "ID": "SOURCE",
+    "NAME": "Sources"
+  },
+  {
+    "ID": "CONTACT_TYPE",
+    "NAME": "Contact Type"
+  },
+  {
+    "ID": "COMPANY_TYPE",
+    "NAME": "Company Type"
+  },
+  {
+    "ID": "EMPLOYEES",
+    "NAME": "Employees"
+  },
+  {
+    "ID": "INDUSTRY",
+    "NAME": "Industry"
+  },
+  {
+    "ID": "DEAL_TYPE",
+    "NAME": "Deal Type"
+  },
+  {
+    "ID": "INVOICE_STATUS",
+    "NAME": "Invoice statuses",
+    "SEMANTIC_INFO": {
+      "START_FIELD": "N",
+      "FINAL_SUCCESS_FIELD": "P",
+      "FINAL_UNSUCCESS_FIELD": "D",
+      "FINAL_SORT": 0
+    }
+  },
+  {
+    "ID": "DEAL_STAGE",
+    "NAME": "LÀM HỢP ĐỒNG KH ĐẶC BIỆT deal stages",
+    "SEMANTIC_INFO": {
+      "START_FIELD": "NEW",
+      "FINAL_SUCCESS_FIELD": "WON",
+      "FINAL_UNSUCCESS_FIELD": "LOSE",
+      "FINAL_SORT": 0
+    },
+    "FIELD_ATTRIBUTE_SCOPE": "",
+    "ENTITY_TYPE_ID": 2
+  },
+  {
+    "ID": "DEAL_STAGE_14",
+    "NAME": "LÀM HỢP ĐỒNG CTV & ĐẠI LÝ deal stages",
+    "PARENT_ID": "DEAL_STAGE",
+    "SEMANTIC_INFO": {
+      "START_FIELD": "C14:NEW",
+      "FINAL_SUCCESS_FIELD": "C14:WON",
+      "FINAL_UNSUCCESS_FIELD": "C14:LOSE",
+      "FINAL_SORT": 0
+    },
+    "PREFIX": "C14",
+    "FIELD_ATTRIBUTE_SCOPE": "category_14",
+    "ENTITY_TYPE_ID": 2
+  },
+  {
+    "ID": "DEAL_STAGE_18",
+    "NAME": "ĐẶT HÀNG KH ĐẶC BIỆT, CTV ,Đại lý deal stages",
+    "PARENT_ID": "DEAL_STAGE",
+    "SEMANTIC_INFO": {
+      "START_FIELD": "C18:NEW",
+      "FINAL_SUCCESS_FIELD": "C18:WON",
+      "FINAL_UNSUCCESS_FIELD": "C18:LOSE",
+      "FINAL_SORT": 0
+    },
+    "PREFIX": "C18",
+    "FIELD_ATTRIBUTE_SCOPE": "category_18",
+    "ENTITY_TYPE_ID": 2
+  },
+  {
+    "ID": "DEAL_STAGE_31",
+    "NAME": "CSKH CTV deal stages",
+    "PARENT_ID": "DEAL_STAGE",
+    "SEMANTIC_INFO": {
+      "START_FIELD": "C31:NEW",
+      "FINAL_SUCCESS_FIELD": "C31:WON",
+      "FINAL_UNSUCCESS_FIELD": "C31:LOSE",
+      "FINAL_SORT": 0
+    },
+    "PREFIX": "C31",
+    "FIELD_ATTRIBUTE_SCOPE": "category_31",
+    "ENTITY_TYPE_ID": 2
+  },
+  {
+    "ID": "DEAL_STAGE_20",
+    "NAME": "CSKH - ĐẠI LÝ deal stages",
+    "PARENT_ID": "DEAL_STAGE",
+    "SEMANTIC_INFO": {
+      "START_FIELD": "C20:NEW",
+      "FINAL_SUCCESS_FIELD": "C20:WON",
+      "FINAL_UNSUCCESS_FIELD": "C20:LOSE",
+      "FINAL_SORT": 0
+    },
+    "PREFIX": "C20",
+    "FIELD_ATTRIBUTE_SCOPE": "category_20",
+    "ENTITY_TYPE_ID": 2
+  },
+  {
+    "ID": "DEAL_STAGE_30",
+    "NAME": "SẢN XUẤT deal stages",
+    "PARENT_ID": "DEAL_STAGE",
+    "SEMANTIC_INFO": {
+      "START_FIELD": "C30:NEW",
+      "FINAL_SUCCESS_FIELD": "C30:WON",
+      "FINAL_UNSUCCESS_FIELD": "C30:LOSE",
+      "FINAL_SORT": 0
+    },
+    "PREFIX": "C30",
+    "FIELD_ATTRIBUTE_SCOPE": "category_30",
+    "ENTITY_TYPE_ID": 2
+  },
+  {
+    "ID": "DEAL_STAGE_5",
+    "NAME": "KẾ TOÁN deal stages",
+    "PARENT_ID": "DEAL_STAGE",
+    "SEMANTIC_INFO": {
+      "START_FIELD": "C5:NEW",
+      "FINAL_SUCCESS_FIELD": "C5:WON",
+      "FINAL_UNSUCCESS_FIELD": "C5:LOSE",
+      "FINAL_SORT": 0
+    },
+    "PREFIX": "C5",
+    "FIELD_ATTRIBUTE_SCOPE": "category_5",
+    "ENTITY_TYPE_ID": 2
+  },
+  {
+    "ID": "DEAL_STAGE_28",
+    "NAME": "XUẤT HÓA ĐƠN deal stages",
+    "PARENT_ID": "DEAL_STAGE",
+    "SEMANTIC_INFO": {
+      "START_FIELD": "C28:NEW",
+      "FINAL_SUCCESS_FIELD": "C28:WON",
+      "FINAL_UNSUCCESS_FIELD": "C28:LOSE",
+      "FINAL_SORT": 0
+    },
+    "PREFIX": "C28",
+    "FIELD_ATTRIBUTE_SCOPE": "category_28",
+    "ENTITY_TYPE_ID": 2
+  },
+  {
+    "ID": "DEAL_STAGE_26",
+    "NAME": "BẢO HÀNH VÀ SỬA CHỮA deal stages",
+    "PARENT_ID": "DEAL_STAGE",
+    "SEMANTIC_INFO": {
+      "START_FIELD": "C26:NEW",
+      "FINAL_SUCCESS_FIELD": "C26:WON",
+      "FINAL_UNSUCCESS_FIELD": "C26:LOSE",
+      "FINAL_SORT": 0
+    },
+    "PREFIX": "C26",
+    "FIELD_ATTRIBUTE_SCOPE": "category_26",
+    "ENTITY_TYPE_ID": 2
+  },
+  {
+    "ID": "QUOTE_STATUS",
+    "NAME": "Quote statuses",
+    "SEMANTIC_INFO": {
+      "START_FIELD": "DRAFT",
+      "FINAL_SUCCESS_FIELD": "APPROVED",
+      "FINAL_UNSUCCESS_FIELD": "DECLAINED",
+      "FINAL_SORT": 0
+    }
+  },
+  {
+    "ID": "HONORIFIC",
+    "NAME": "Salutations"
+  },
+  {
+    "ID": "EVENT_TYPE",
+    "NAME": "Event Type"
+  },
+  {
+    "ID": "CALL_LIST",
+    "NAME": "Call statuses"
+  },
+  {
+    "ID": "PRODUCT",
+    "NAME": "Products"
+  }
+]
