@@ -335,5 +335,5 @@ def getProductListToFile():
 
 # Deal.update({"ID": 104, "ADDITIONAL_INFO": "12345"})
 
-print(json.dumps(Contact.get_fields()))
-print(json.dumps(Contact.get(18290)))
+# print(json.dumps(Contact.get_fields()))
+# print(json.dumps(Contact.get(18290)))

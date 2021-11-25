@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 from . import bitrix24_service as bx24, bitrix24_service, mapping_service, haravan_service
 # from dao import deal_dao, product_dao, contact_dao
-from mysqldb.dao.DealDAO import DealDAO 
+from mysqldb.dao.DealDAO import DealDAO
 from mysqldb.dao.ProductDAO import ProductDAO
 from mysqldb.dao.ContactDAO import ContactDAO
 from .bitrix24_service import DealProductRow
@@ -22,7 +22,7 @@ LOGGER = log.get_logger(__name__)
 def create_deal_bitrix(payload=None):
     if payload is None:
         payload = {}
-   
+
     # LOGGER.info("create_deal_bitrix: ", extra={"payload": payload})    
 
     # Sử dụng database để mapping giữa haravan và bitrix
@@ -47,7 +47,7 @@ def create_deal_bitrix(payload=None):
 
     fields = Deal.HaravanToBitrix24(payload)
     fields["CONTACT_ID"] = contact_bitrix_id
-    fields["STAGE_ID"] = "C18:NEW"
+    # fields["STAGE_ID"] = "C18:NEW"
     # fields["UF_CRM_1637252157269"] = str(payload.get("id"))
 
     # Tạo deal mới trên bitrix
@@ -95,8 +95,8 @@ def create_deal_bitrix(payload=None):
 def update_deal_bitrix(payload=None):
     if payload is None:
         payload = {}
-   
-#    LOGGER.info("create_deal_bitrix: ", extra={"payload": payload })
+
+    #    LOGGER.info("create_deal_bitrix: ", extra={"payload": payload })
 
     # Sử dụng database để mapping giữa haravan và bitrix
     haravan_id = payload.get("id") or payload.get("number")
@@ -114,7 +114,7 @@ def update_deal_bitrix(payload=None):
         return None
 
     # # #
-    
+
     fields = Deal.HaravanToBitrix24(payload)
     fields["ID"] = deal_order[0].get('bitrix24_id')
 
@@ -128,7 +128,7 @@ def update_deal_bitrix(payload=None):
 def paid_deal_bitrix(payload=None):
     if payload is None:
         payload = {}
-        
+
     LOGGER.info("create_deal_bitrix: ", extra={"payload": payload})
 
     # Sử dụng database để mapping giữa haravan và bitrix
@@ -138,8 +138,8 @@ def paid_deal_bitrix(payload=None):
     if not deal_order:
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
-    
-    fields = Deal.HaravanToBitrix24(payload) 
+
+    fields = Deal.HaravanToBitrix24(payload)
     fields['STAGE_ID'] = "C18:FINAL_INVOICE"
     # Tạo deal mới trên bitrix
     result = bitrix24_service.Deal.update(fields)
@@ -151,7 +151,7 @@ def paid_deal_bitrix(payload=None):
 def cancelled_deal_bitrix(payload=None):
     if payload is None:
         payload = {}
-        
+
     LOGGER.info("cancelled_deal_bitrix: ", extra={"payload": payload})
     # Sử dụng database để mapping giữa haravan và bitrix
     haravan_id = payload.get("id") or payload.get("number")
@@ -160,8 +160,8 @@ def cancelled_deal_bitrix(payload=None):
     if not deal_order:
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
-    
-    fields = Deal.HaravanToBitrix24(payload) 
+
+    fields = Deal.HaravanToBitrix24(payload)
     fields['STAGE_ID'] = "C18:LOSE"
     # Tạo deal mới trên bitrix0
     result = bitrix24_service.Deal.update(fields)
@@ -174,9 +174,9 @@ def cancelled_deal_bitrix(payload=None):
 def fulfilled_deal_bitrix(payload=None):
     if payload is None:
         payload = {}
-        
+
     LOGGER.info("fulfilled_deal_bitrix: ", extra={"payload": payload})
-    
+
     # Sử dụng database để mapping giữa haravan và bitrix
     haravan_id = payload.get("id") or payload.get("number")
     deal_order = deal_dao.getDataByHaID(haravan_id)
@@ -184,8 +184,8 @@ def fulfilled_deal_bitrix(payload=None):
     if not deal_order:
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
-    
-    fields = Deal.HaravanToBitrix24(payload) 
+
+    fields = Deal.HaravanToBitrix24(payload)
     fields['STAGE_ID'] = "C18:WON"
     # Tạo deal mới trên bitrix
     result = bitrix24_service.Deal.update(fields)
@@ -320,6 +320,18 @@ def create_contact_bitrix(payload):
     # }
 
     contact = mapping_service.convert_object(payload, contact_mapping, "BITRIX")
+    if payload.get("phone"):
+        contact["PHONE"] = [{
+            "VALUE_TYPE": "WORK",
+            "VALUE": payload.get("phone"),
+            "TYPE_ID": "PHONE"
+        }]
+    if payload.get("email"):
+        contact["EMAIL"] = [{
+            "VALUE_TYPE": "WORK",
+            "VALUE": payload.get("email"),
+            "TYPE_ID": "EMAIL"
+        }]
 
     bitrix24_data = bitrix24_service.Contact.insert(fields=contact)
     if bitrix24_data:
@@ -426,29 +438,12 @@ def migrate_customer_haravan_to_bitrix():
             print('Cập nhật vào DB Contact thành công!')
             continue
 
-        contact = mapping_service.convert_object(customer, contact_mapping, "BITRIX")
-        if customer.get("phone"):
-            contact["PHONE"] = [{
-                "VALUE_TYPE": "WORK",
-                "VALUE": customer.get("phone"),
-                "TYPE_ID": "PHONE"
-            }]
-        if customer.get("email"):
-            contact["EMAIL"] = [{
-                "VALUE_TYPE": "WORK",
-                "VALUE": customer.get("email"),
-                "TYPE_ID": "EMAIL"
-            }]
-
-        bitrix24_data = bitrix24_service.Contact.insert(fields=contact)
-        if bitrix24_data:
-            contact_dao.add_new_contact(id, bitrix24_data.get("ID"), json.dumps(customer), json.dumps(bitrix24_data))
-            print('Tạo mới Contact Bitrix24 thành công!')
+        create_contact_bitrix(customer)
 
 def migrate_product_haravan_to_bitrix():
     # Lấy danh sách customer
-    # haravan_products = haravan_service.Product.list()
-    haravan_products = common.readJsonFile("data/haravan/blu-customers.json")
+    haravan_products = haravan_service.Product.list()
+    # haravan_products = common.readJsonFile("data/haravan/blu-customers.json")
     print(haravan_products)
 
     products = haravan_products.get("products")
@@ -467,6 +462,19 @@ def migrate_product_haravan_to_bitrix():
         if bitrix24_data:
             product_dao.add_new_product(id, bitrix24_data.get("ID"), json.dumps(product), json.dumps(bitrix24_data))
             print('Tạo mới Product Bitrix24 thành công!')
+
+def migrate_order_haravan_to_bitrix():
+    # Lấy danh sách customer
+    haravan_orders = haravan_service.Order.list()
+    # haravan_products = common.readJsonFile("data/haravan/blu-customers.json")
+    print(haravan_orders)
+
+    orders = haravan_orders.get("orders")
+
+    # Migrate dữ liệu customer từ haravan sang cho bitrix
+    for order in orders:
+        create_deal_bitrix(order)
+    return haravan_orders
 
 def find_contact_bitrix_by_email_phone(contacts, customer):
     if not contacts:

@@ -128,6 +128,7 @@ def webhooks():
 def migrate_haravan_to_bitrix():
     haravan_customer = haravan_to_bitrix.migrate_customer_haravan_to_bitrix()
     haravan_product = haravan_to_bitrix.migrate_product_haravan_to_bitrix()
+    haravan_order = haravan_to_bitrix.migrate_order_haravan_to_bitrix()
     return build_response_200()
 
 @app.route('/bitrix/webhooks', methods=['GET', 'POST'])
