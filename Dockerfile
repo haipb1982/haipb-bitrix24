@@ -1,5 +1,9 @@
 FROM python:3.9-slim-buster
 
+# Information about author
+LABEL author.name="Phan Ba Hai" \
+  author.email="haipb1982@gmail.com"
+
 COPY .  .
 COPY ./docker-entrypoint.sh ./docker-entrypoint.sh
 
@@ -12,3 +16,4 @@ RUN chmod +x ./docker-entrypoint.sh
 #   && pipenv install --system 
 
 ENTRYPOINT ./docker-entrypoint.sh
+EXPOSE 5000

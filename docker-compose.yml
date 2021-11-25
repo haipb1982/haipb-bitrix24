@@ -1,0 +1,13 @@
+version: '3.5'
+services:
+  app:
+    container_name: haipb-bitrix24
+    build: .
+    volumes:
+      - .:/haipb-bitrix24
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_HOST: mysql
+      DATABASE_USER_NAME: root
+      DATABASE_PASSWORD: root
