@@ -19,8 +19,8 @@ jobs:
         password: ${{ secrets.VPS_PASSWORD }}
         script: |
           cd haipb
-          rm -r haipb-bitrix24          
-          git clone 'git@github.com:haipb1982/haipb-bitrix24.git' haipb-bitrix24
+          rm -r app          
+          git clone 'git@github.com:haipb1982/haipb-bitrix24.git' app
           cd haipb-bitrix24
           docker-compose down
           docker-compose build
