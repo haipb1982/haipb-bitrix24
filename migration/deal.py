@@ -82,8 +82,8 @@ def HaravanToBitrix24(ha):
     bx['UF_CRM_1628149984252'] = ha.get('order_processing_status','confirmed') # trạng thái giao hàng
     
     # More
-
-    bx['UF_CRM_1630417157521'] = 'HARAVAN-BITRIX APP' # người tạo đơn
+    #
+    # bx['UF_CRM_1630417157521'] = 'HARAVAN-BITRIX APP' # người tạo đơn
     bx['UF_CRM_1630417292478'] = ha.get('source_name','New Order') # Kênh bán hàng 
 
     # print('HaravanToBitrix24',bx)

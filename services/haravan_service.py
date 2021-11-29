@@ -180,6 +180,18 @@ class Customer:
             LOGGER.error("Contact::delete:exception", extra={"exception": e})
             return False
 
+class User:
+
+    @staticmethod
+    def list():
+        response = requests.get('https://apis.haravan.com/com/users.json', headers=my_headers)
+        return response.json()
+
+    @staticmethod
+    def get(id):
+        response = requests.get(f'https://apis.haravan.com/com/users/{id}.json', headers=my_headers)
+        return response.json()
+
 def getBluOrders():
 
     response = requests.get('https://apis.haravan.com/com/orders.json', headers=my_headers)
@@ -243,4 +255,9 @@ if __name__ == "__main__":
     # print(res)
 
     # print(json.dumps(Product.get(1036936921)))
-    print(json.dumps(Customer.get(1015946884)))
+    # print(json.dumps(User.get(200000784299)))
+    # response = requests.get('https://apis.haravan.com/com/users.json', headers=my_headers)
+    # print(json.dumps(response.json()))
+
+# res = requests.get("https://product.hstatic.net/1000345452/product/focusqt150569_d0a5bc9239e8474585e1edf448052546.png")
+# print(res.content)

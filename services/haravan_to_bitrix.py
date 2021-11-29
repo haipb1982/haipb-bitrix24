@@ -47,6 +47,15 @@ def create_deal_bitrix(payload=None):
 
     fields = Deal.HaravanToBitrix24(payload)
     fields["CONTACT_ID"] = contact_bitrix_id
+
+    # lấy thông tin người tạo từ haravan để gán cho bitrix
+    user_id = payload.get("user_id")
+    haravan_user = haravan_service.User.get(user_id)
+    if haravan_user and haravan_user.get("user"):
+        user = haravan_user.get("user")
+        fields['UF_CRM_1630417157521'] = user.get("last_name") +" " + user.get("first_name")
+    else:
+        fields['UF_CRM_1630417157521'] = 'HARAVAN-BITRIX APP' # người tạo đơn
     # fields["STAGE_ID"] = "C18:NEW"
     # fields["UF_CRM_1637252157269"] = str(payload.get("id"))
 
@@ -70,7 +79,8 @@ def create_deal_bitrix(payload=None):
         if product_result:
             product_id = product_result.get("bitrix24_id")
         else:
-            product_bitrix = create_product_bitrix(product_haravan)
+            product = haravan_service.Product.get(product_haravan.get("id"))
+            product_bitrix = create_product_bitrix(product)
             product_id = product_bitrix.get("ID")
         productrow["PRODUCT_ID"] = product_id
         productrow["PRICE"] = product_haravan.get("price")
