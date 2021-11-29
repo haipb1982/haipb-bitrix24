@@ -18,7 +18,8 @@ jobs:
         username: ${{ secrets.VPS_USERNAME }}
         password: ${{ secrets.VPS_PASSWORD }}
         script: |
-          cd ./haipb/haipb-bitrix24
+          cd haipb/app
+          git fetch
           git pull
           docker-compose down
           docker-compose build

@@ -1,4 +1,4 @@
-FROM python:3.9-slim-buster
+FROM python:3.8-slim-buster
 
 # Information about author
 LABEL author.name="Phan Ba Hai" \
@@ -16,4 +16,9 @@ RUN chmod +x ./docker-entrypoint.sh
 #   && pipenv install --system 
 
 ENTRYPOINT ./docker-entrypoint.sh
+
+# RUN export FLASK_APP=app.py
+# CMD [ "pythonw", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5000"]
+
+# CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5000"]
 EXPOSE 5000

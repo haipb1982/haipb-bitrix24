@@ -1,7 +1,13 @@
 version: '3.5'
-services:
+services:  
+  # docker-lib:    
+  #   container_name: docker-lib
+  #   build: ./docker-lib
+
   app:
     container_name: haipb-bitrix24
+    # depends_on:
+    #   - docker-lib
     build: .
     volumes:
       - .:/haipb-bitrix24
