@@ -15,5 +15,6 @@ RUN chmod +x ./docker-entrypoint.sh
 #   && rm -rf .venv \
 #   && pipenv install --system 
 
-ENTRYPOINT ./docker-entrypoint.sh
+# ENTRYPOINT ./docker-entrypoint.sh
+CMD [ "pythonw", "-m" , "flask", "run", "--host=0.0.0.0", "--port=5000"]
 EXPOSE 5000
