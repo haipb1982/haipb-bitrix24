@@ -8,7 +8,12 @@ class DealDAO(object):
         self.__db = DbHelper()
 
     def getAllDeals(self):
-        return self.__db.query("SELECT * FROM tbl_deal_order", None)
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status,bitrix_status,update_ts FROM tbl_deal_order", None)
+        return res.get('data')
+
+    def getAllDealsPages(self, __from, __to):
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status,bitrix_status,update_ts FROM tbl_deal_order LIMIT %s,%s", (__from, __to))
+        return res.get('data')
 
     def addNewDeal(self, hanravan_id, bitrix24_id, haravan_data="", bitrix_data=""):
         # print('addNewDeal',hanravan_id,bitrix24_id)

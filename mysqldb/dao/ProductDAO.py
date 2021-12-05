@@ -8,7 +8,11 @@ class ProductDAO(object):
         self.__db = DbHelper()
 
     def getAllProducts(self):
-        return self.__db.query("SELECT * FROM tbl_product", None)
+        return self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product", None)
+
+    def getAllProductsPages(self, __from, __to):
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product LIMIT %s,%s", (__from, __to))
+        return res.get('data')
     
     def add_new_product(self,hanravan_id, bitrix24_id, haravan_data, bitrix_data):
         sql = '''INSERT INTO tbl_product(haravan_id, bitrix24_id, haravan_data, bitrix_data) VALUES (%s,%s,%s,%s)'''

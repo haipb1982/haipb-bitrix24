@@ -7,6 +7,18 @@ class ContactDAO(object):
     def __init__(self):
         self.__db = DbHelper()
 
+    
+    def getAllContacts(self):
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_contact_customer", None)
+        if res.get("status"):
+            return res.get("data")
+        else:
+            return None
+
+    def getAllContactsPages(self, __from, __to):
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_contact_customer LIMIT %s,%s", (__from, __to))
+        return res.get('data')
+
     def get_contacts(self):
         res = self.__db.query("SELECT * FROM tbl_contact_customer", None)
         if res.get("status"):

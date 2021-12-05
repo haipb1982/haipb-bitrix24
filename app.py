@@ -2,11 +2,11 @@ import json
 from calendar import mdays
 from datetime import datetime, timedelta
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 import bx24 as Bx24
 from dao import deal_dao, db
-from services import haravan_to_bitrix, bitrix_to_haravan, haravan_service
+from services import haravan_to_bitrix, bitrix_to_haravan, webapp_service
 from utils import log
 from utils.common import build_response_200
 
@@ -241,6 +241,36 @@ def api_deal_delete():
     # Bx24.deleteDeal(req)
 
     return {'message': endpoint + 'orders/delete'}
+
+# Các API cho webapp 
+# Moi trang 20 ket qua
+page_size = 20
+@app.route('/api/v1/orders', methods=['GET'])
+def webapp_get_all_orders():
+    __page = request.args.get("page")
+    if __page:
+        res = webapp_service.get_all_orders_pages(int(__page)*page_size,(int(__page)+1)*page_size)
+    else:
+        res = webapp_service.get_all_orders()
+    return jsonify({'message': 'get_all_orders', 'data': res})
+
+@app.route('/api/v1/products', methods=['GET'])
+def webapp_get_all_products():
+    __page = int(request.args.get("page"))
+    if __page:
+        res = webapp_service.get_all_products_pages(int(__page)*page_size,(int(__page)+1)*page_size)
+    else:
+        res = webapp_service.get_all_products()
+    return jsonify({'message': 'get_all_products', 'data': res})
+
+@app.route('/api/v1/contacts', methods=['GET'])
+def webapp_get_all_contacts():
+    __page = int(request.args.get("page"))
+    if __page:
+        res = webapp_service.get_all_contacts_pages(int(__page)*page_size,(int(__page)+1)*page_size)
+    else:
+        res = webapp_service.get_all_contacts()
+    return jsonify({'message': 'get_all_contacts', 'data': res})
 
 
 if __name__ == "__main__":
