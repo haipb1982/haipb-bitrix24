@@ -275,6 +275,6 @@ def webapp_get_all_contacts():
     return jsonify({'message': 'get_all_contacts', 'data': res})
 
 
-if __name__ == "__main__":
-    app.run(host="localhost", port=5000, use_reloader=True)
+# if __name__ == "__main__":
+#     app.run(host="localhost", port=5000, use_reloader=True)
     # app.run(ssl_context='adhoc')
