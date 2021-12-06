@@ -8,6 +8,7 @@ services:
     container_name: haipb-bitrix24
     # depends_on:
     #   - docker-lib
+    network_mode: "host"
     build: .
     volumes:
       - .:/haipb-bitrix24
