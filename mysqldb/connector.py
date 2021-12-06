@@ -7,10 +7,10 @@ from mysql.connector import errorcode
 # pwd: vpin.pinart123
 
 config = {
-  'host': 'localhost',
-  'user': 'blu_bitrix24',
-  'password': '6(aLWwks[(qnS)3*',
-  'database': 'blu_bitrix24',
+  'host': '103.159.51.249',
+  'user': 'vnztech',
+  'password': 'Vietnam@68',
+  'database': 'vnztech_blubx24',
   'raise_on_warnings': True
 }
 

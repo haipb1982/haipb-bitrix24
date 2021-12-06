@@ -27,3 +27,18 @@ docker logs -f haipb-api
 API Endpoint:
 https://vnztech.com:5000/
 https://vnztech.com:3000/
+
+----------------------
+cmd hay dung
+
+firewall-cmd --list-all --permanent
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --reload
+firewall-cmd --complete-reload 
+firewall-cmd --zone=public --remove-interface=eth0 --permanent
+firewall-cmd --zone=public --add-service=http
+firewall-cmd --zone=public --add-service=https
+firewall-cmd --zone=public --remove-port=80/tcp --permanent
+firewall-cmd --add-masquerade
+firewall-cmd --remove-masquerade
+

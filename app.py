@@ -3,6 +3,8 @@ from calendar import mdays
 from datetime import datetime, timedelta
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 
 import bx24 as Bx24
 from dao import deal_dao, db
@@ -13,7 +15,7 @@ from utils.common import build_response_200
 LOGGER = log.get_logger(__name__)
 
 app = Flask(__name__)
-
+CORS(app) 
 
 @app.route('/')
 def home():
