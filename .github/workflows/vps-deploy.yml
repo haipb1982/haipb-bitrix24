@@ -2,7 +2,7 @@ name: remote ssh and deploy
 on:
   push:
     branches:
-    - 'main'
+    - 'no-deploy'
 
 jobs:
 
