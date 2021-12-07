@@ -13,7 +13,7 @@ RUN pip install --requirement requirements.txt
 
 RUN export FLASK_APP=app.py
 
-EXPOSE 5000
+EXPOSE 5000:5000
 
 CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
 # CMD [ "python3", "-m" , "flask", "run","--cert=adhoc"]
