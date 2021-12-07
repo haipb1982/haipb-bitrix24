@@ -15,7 +15,8 @@ from utils.common import build_response_200
 LOGGER = log.get_logger(__name__)
 
 app = Flask(__name__)
-CORS(app) 
+CORS(app)
+
 
 @app.route('/')
 def home():
@@ -126,12 +127,14 @@ def webhooks():
 
     return build_response_200()
 
+
 @app.route('/haravan-to-bitrix', methods=['GET', 'POST'])
 def migrate_haravan_to_bitrix():
     haravan_customer = haravan_to_bitrix.migrate_customer_haravan_to_bitrix()
     haravan_product = haravan_to_bitrix.migrate_product_haravan_to_bitrix()
     haravan_order = haravan_to_bitrix.migrate_order_haravan_to_bitrix()
     return build_response_200()
+
 
 @app.route('/bitrix/webhooks', methods=['GET', 'POST'])
 def bitrix_webhooks():
@@ -244,35 +247,81 @@ def api_deal_delete():
 
     return {'message': endpoint + 'orders/delete'}
 
-# Các API cho webapp 
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Các API cho webapp
 # Moi trang 20 ket qua
-page_size = 20
+__page_size = 20
+
+
 @app.route('/api/v1/orders', methods=['GET'])
 def webapp_get_all_orders():
-    __page = request.args.get("page")
-    if __page:
-        res = webapp_service.get_all_orders_pages(int(__page)*page_size,(int(__page)+1)*page_size)
+    page = request.args.get("page")
+    if page:
+        res = webapp_service.get_all_orders_pages(
+            int(page)*__page_size, (int(page)+1)*__page_size)
     else:
         res = webapp_service.get_all_orders()
     return jsonify({'message': 'get_all_orders', 'data': res})
 
+
 @app.route('/api/v1/products', methods=['GET'])
 def webapp_get_all_products():
-    __page = int(request.args.get("page"))
-    if __page:
-        res = webapp_service.get_all_products_pages(int(__page)*page_size,(int(__page)+1)*page_size)
+    page = int(request.args.get("page"))
+    if page:
+        res = webapp_service.get_all_products_pages(
+            int(page)*__page_size, (int(page)+1)*__page_size)
     else:
         res = webapp_service.get_all_products()
     return jsonify({'message': 'get_all_products', 'data': res})
 
+
 @app.route('/api/v1/contacts', methods=['GET'])
 def webapp_get_all_contacts():
-    __page = int(request.args.get("page"))
-    if __page:
-        res = webapp_service.get_all_contacts_pages(int(__page)*page_size,(int(__page)+1)*page_size)
+    page = int(request.args.get("page"))
+    if page:
+        res = webapp_service.get_all_contacts_pages(
+            int(page)*__page_size, (int(page)+1)*__page_size)
     else:
         res = webapp_service.get_all_contacts()
     return jsonify({'message': 'get_all_contacts', 'data': res})
+
+@app.route('/api/v1/orders', methods=['POST'])
+def webapp_order_actions():
+    req = request.form
+
+    action = req.get('action', None)
+    __id =  req.get('id', None)
+    haravan_id = req.get('haravan_id', None)
+    bitrix24_id = req.get('bitrix24_id', None)
+
+    res = {}
+
+    if not action:
+        res['message'] = 'No action found!'
+
+    if action == 'delete':
+        if not __id:
+            res['message'] = 'DELETE record but wrong data!'
+        else:            
+            res['data'] = webapp_service.delete_order_record(__id)
+
+    if action == 'update':
+
+        if not (__id and haravan_id and bitrix24_id):
+            res['message'] = 'UPDATE record but wrong data!'
+        else:
+            res['data'] = webapp_service.update_order_record(
+                __id, haravan_id, bitrix24_id)
+
+    if action == 'insert':
+        if not( haravan_id and bitrix24_id):
+            res['message'] = 'INSERT record but wrong data!'
+        else:
+            res['data'] = webapp_service.insert_order_record(
+                haravan_id, bitrix24_id)
+
+    return jsonify(res)
 
 
 # if __name__ == "__main__":

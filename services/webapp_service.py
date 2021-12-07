@@ -25,6 +25,15 @@ def get_all_orders():
 def get_all_orders_pages(from_page, to_page):
     return deal_dao.getAllDealsPages(from_page, to_page)
 
+def delete_order_record(id):
+    return deal_dao.deleteDealRecord(id)
+
+def update_order_record(id, haravan_id, bitrix24_id):
+    return deal_dao.updateDealRecord(id, haravan_id, bitrix24_id)
+
+def insert_order_record(id, haravan_id, bitrix24_id):
+    return deal_dao.insertDealRecord(haravan_id, bitrix24_id)
+
 def get_all_products():
     return product_dao.getAllProducts()
 

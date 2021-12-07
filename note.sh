@@ -15,10 +15,15 @@ cd ./haipb/api
 git fetch
 git pull
 
-CMD #4 - chạy docker:
+CMD #4 - chạy docker: --> ko open port 
 docker-compose down
 docker-compose build
 docker-compose up
+
+CMD #4 - chạy docker:
+docker-compose build
+docker run -d -p 5000:5000 haipb-bitrix24 #  in background
+docker run -p 5000:5000 haipb-bitrix24
 
 CMD #5 - check logs:
 docker logs -f haipb-bitrix24
