@@ -203,7 +203,7 @@ def webapp_get_all_orders():
 
 @app.route('/api/v1/products', methods=['GET'])
 def webapp_get_all_products():
-    page = int(request.args.get("page"))
+    page = request.args.get("page")
     if page:
         res = webapp_service.get_all_products_pages(
             int(page)*__page_size, (int(page)+1)*__page_size)
@@ -220,7 +220,7 @@ def webapp_get_all_products():
 
 @app.route('/api/v1/contacts', methods=['GET'])
 def webapp_get_all_contacts():
-    page = int(request.args.get("page"))
+    page = request.args.get("page")
     if page:
         res = webapp_service.get_all_contacts_pages(
             int(page)*__page_size, (int(page)+1)*__page_size)

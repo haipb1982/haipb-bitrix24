@@ -9,15 +9,12 @@ class ProductDAO(object):
 
     def getAllProducts(self):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product", None)
-        if res.get("status"):
-            return res.get("data")
-        else:
-            return None
+        return res
         
 
     def getAllProductsPages(self, __from, __to):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product LIMIT %s,%s", (__from, __to))
-        return res.get('data')
+        return res
     
     def add_new_product(self,hanravan_id, bitrix24_id, haravan_data, bitrix_data):
         sql = '''INSERT INTO tbl_product(haravan_id, bitrix24_id, haravan_data, bitrix_data) VALUES (%s,%s,%s,%s)'''
