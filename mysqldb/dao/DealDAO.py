@@ -9,19 +9,19 @@ class DealDAO(object):
 
     def getAllDeals(self):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status,bitrix_status,update_ts FROM tbl_deal_order", None)
-        return res.get('data')
+        return res
 
     def getAllDealsPages(self, __from, __to):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status,bitrix_status,update_ts FROM tbl_deal_order LIMIT %s,%s", (__from, __to))
-        return res.get('data')
+        return res
     
     def deleteDealRecord(self,id):
         res = self.__db.query("DELETE FROM tbl_deal_order WHERE id=%s", id)
-        return res.get('data')
+        return res
     
     def updateDealRecord(self,id, haravan_id, bitrix24_id):
         res = self.__db.query("UPDATE tbl_deal_order SET haravan_id=%s, bitrix24_id=%s WHERE id=%s", (haravan_id,bitrix24_id,id))
-        return res.get('data')
+        return res
     
     def insertDealRecord(self, hanravan_id, bitrix24_id):
         # print('addNewDeal',hanravan_id,bitrix24_id)
@@ -29,13 +29,7 @@ class DealDAO(object):
         
         res = self.__db.query(sql, (hanravan_id, bitrix24_id))
 
-        if res.get("status"):
-            print('--> insertDealRecord successful ',hanravan_id,bitrix24_id)
-            return True
-        else:
-            print('--> insertDealRecord failed ',hanravan_id,bitrix24_id)
-            print(res.get("data"))
-            return False
+        return res
 
     def addNewDeal(self, hanravan_id, bitrix24_id, haravan_data="", bitrix_data=""):
         # print('addNewDeal',hanravan_id,bitrix24_id)
