@@ -28,10 +28,14 @@ class DbHelper:
             print('mySQL:',query, params)
             self.__cursor.execute(query, params)            
             result['status'] = True
+            result['code'] = 200
+            result['message'] = 'success'
             result['data'] = self.__cursor.fetchall()
             self.__connection.commit()
         except pymysql.Error as err:
             result['status'] = False
+            result['code'] = 500
+            result['message'] = 'error'
             result['data'] = err
             self.__connection.rollback()
         return result

@@ -10,7 +10,7 @@ import bx24 as Bx24
 from dao import deal_dao, db
 from services import haravan_to_bitrix, bitrix_to_haravan, webapp_service
 from utils import log
-from utils.common import build_response_200
+from utils.common import build_response_200, build_response_400, build_response_500
 
 LOGGER = log.get_logger(__name__)
 
@@ -178,120 +178,66 @@ def bitrix_webhooks():
     return build_response_200()
 
 
-@app.route('/api/v1/bitrix24/webhooks/deal', methods=['GET', 'POST'])
-def webhook_deal():
-    _form = request.form
-    _dealID = _form.get('data[FIELDS][ID]', None)
-    # if _dealID is not None:
-    #     _data = Bx24.getDeal(_dealID)
-    #     print(f'get deal detail ', _data)
-
-    # print(f'bitrix24 _form:', _form)
-    # print(f'data[FIELDS][ID]: DEAL ID', _dealID)
-    # print(f'get deal detail ', _data)
-
-    return {'message': f'/api/v1/bitrix24/webhooks/deal done _dealID {_dealID}'}
-
-
-@app.route('/api/v1/bitrix24/webhooks/product', methods=['GET', 'POST'])
-def webhook_product():
-    _form = request.form
-    _productID = _form.get('data[FIELDS][ID]', None)
-
-    return {'message': f'/api/v1/bitrix24/webhooks/product done _productID {_productID}'}
-
-
-@app.route('/api/v1/bitrix24/webhooks/contact', methods=['GET', 'POST'])
-def webhook_contact():
-    _form = request.form
-    _contactID = _form.get('data[FIELDS][ID]', None)
-
-    return {'message': f'/api/v1/bitrix24/webhooks/contact done _contactID {_contactID}'}
-
-
-endpoint = '/api/v1/bitrix24/'
-
-
-@app.route(endpoint + 'orders/updated', methods=['GET', 'POST'])
-def api_deal_updated():
-    print('api_deal_updated')
-    req = request.json
-    Bx24.updateDeal(req)
-
-    return {'message': endpoint + 'orders/updated'}
-
-
-@app.route(endpoint + 'orders/create.json', methods=['GET', 'POST'])
-def api_deal_create():
-    print('api_deal_create')
-    req = request.json
-    # Bx24.createDeal(req)
-
-    return {'message': endpoint + 'orders/create.json'}
-
-
-@app.route(endpoint + 'orders/paid', methods=['GET', 'POST'])
-def api_deal_paid():
-    print('api_deal_paid')
-    req = request.json
-    # Bx24.paidDeal(req)
-
-    return {'message': endpoint + 'orders/paid'}
-
-
-@app.route(endpoint + 'orders/delete', methods=['GET', 'POST'])
-def api_deal_delete():
-    print('api_deal_delete')
-    req = request.json
-    # Bx24.deleteDeal(req)
-
-    return {'message': endpoint + 'orders/delete'}
-
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Các API cho webapp
 # Moi trang 20 ket qua
 __page_size = 20
 
-
 @app.route('/api/v1/orders', methods=['GET'])
 def webapp_get_all_orders():
-    page = request.args.get("page",None)
+    page = request.args.get("page")
     if page:
         res = webapp_service.get_all_orders_pages(
             int(page)*__page_size, (int(page)+1)*__page_size)
     else:
         res = webapp_service.get_all_orders()
-    return jsonify({'message': 'get_all_orders', 'data': res})
+    
+    if res['code'] == 400:
+        return build_response_400(res['message'],res['data'])
+    elif res['code'] == 500:
+        return build_response_500(res['message'],res['data'])
+    else:
+        return build_response_200(res['message'],res['data'])
 
 
 @app.route('/api/v1/products', methods=['GET'])
 def webapp_get_all_products():
-    page = request.args.get("page",None)
+    page = int(request.args.get("page"))
     if page:
         res = webapp_service.get_all_products_pages(
             int(page)*__page_size, (int(page)+1)*__page_size)
     else:
         res = webapp_service.get_all_products()
-    return jsonify({'message': 'get_all_products', 'data': res})
+    
+    if res['code'] == 400:
+        return build_response_400(res['message'],res['data'])
+    elif res['code'] == 500:
+        return build_response_500(res['message'],res['data'])
+    else:
+        return build_response_200(res['message'],res['data'])
 
 
 @app.route('/api/v1/contacts', methods=['GET'])
 def webapp_get_all_contacts():
-    page = request.args.get("page",None)
+    page = int(request.args.get("page"))
     if page:
         res = webapp_service.get_all_contacts_pages(
             int(page)*__page_size, (int(page)+1)*__page_size)
     else:
         res = webapp_service.get_all_contacts()
-    return jsonify({'message': 'get_all_contacts', 'data': res})
+    
+    if res['code'] == 400:
+        return build_response_400(res['message'],res['data'])
+    elif res['code'] == 500:
+        return build_response_500(res['message'],res['data'])
+    else:
+        return build_response_200(res['message'],res['data'])
 
 @app.route('/api/v1/orders', methods=['POST'])
 def webapp_order_actions():
-    req = request.json
-    req = req.get('params',None)
-    
-    print('webapp_order_actions',req.get('bitrix24_id', None))
+    req = request.form
+
     action = req.get('action', None)
     __id =  req.get('id', None)
     haravan_id = req.get('haravan_id', None)
@@ -300,29 +246,39 @@ def webapp_order_actions():
     res = {}
 
     if not action:
+        res['code'] = 400
         res['message'] = 'No action found!'
 
     if action == 'delete':
         if not __id:
+            res['code'] = 400
             res['message'] = 'DELETE record but wrong data!'
         else:            
-            res['data'] = webapp_service.delete_order_record(__id)
+            res = webapp_service.delete_order_record(__id)
 
     if action == 'update':
 
         if not (__id and haravan_id and bitrix24_id):
+            res['code'] = 400
             res['message'] = 'UPDATE record but wrong data!'
         else:
-            res['data'] = webapp_service.update_order_record(
+            res = webapp_service.update_order_record(
                 __id, haravan_id, bitrix24_id)
 
     if action == 'insert':
         if not( haravan_id and bitrix24_id):
+            res['code'] = 400
             res['message'] = 'INSERT record but wrong data!'
-        else:
-            res['data'] = webapp_service.insert_order_record(haravan_id, bitrix24_id)
+        else:            
+            res = webapp_service.insert_order_record(
+                haravan_id, bitrix24_id)
 
-    return jsonify(res)
+    if res['code'] == 400:
+        return build_response_400(res['message'],res['data'])
+    elif res['code'] == 500:
+        return build_response_500(res['message'],res['data'])
+    else:
+        return build_response_200(res['message'],res['data'])
 
 
 # if __name__ == "__main__":
