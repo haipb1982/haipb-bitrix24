@@ -9,10 +9,10 @@ from . import log
 LOGGER = log.get_logger(__name__)
 
 RESPONSE_HEADERS = {
-    # 'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,x-requested-with',
-    # 'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,x-requested-with',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
     'Access-Control-Allow-Origin': '*',
-    # 'Allow': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+    'Allow': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
     'Content-Type': 'application/json'
 }
 
