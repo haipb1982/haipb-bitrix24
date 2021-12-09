@@ -31,7 +31,7 @@ def delete_order_record(id):
 def update_order_record(id, haravan_id, bitrix24_id):
     return deal_dao.updateDealRecord(id, haravan_id, bitrix24_id)
 
-def insert_order_record(id, haravan_id, bitrix24_id):
+def insert_order_record(haravan_id, bitrix24_id):
     return deal_dao.insertDealRecord(haravan_id, bitrix24_id)
 
 def get_all_products():

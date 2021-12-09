@@ -26,9 +26,8 @@ class DealDAO(object):
     def insertDealRecord(self, hanravan_id, bitrix24_id):
         # print('addNewDeal',hanravan_id,bitrix24_id)
         sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id) VALUES (%s,%s)'''
-        pamrs = [hanravan_id, bitrix24_id]
-
-        res = self.__db.query(sql, pamrs)
+        
+        res = self.__db.query(sql, (hanravan_id, bitrix24_id))
 
         if res.get("status"):
             print('--> insertDealRecord successful ',hanravan_id,bitrix24_id)

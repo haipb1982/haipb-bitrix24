@@ -8,7 +8,12 @@ class ProductDAO(object):
         self.__db = DbHelper()
 
     def getAllProducts(self):
-        return self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product", None)
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product", None)
+        if res.get("status"):
+            return res.get("data")
+        else:
+            return None
+        
 
     def getAllProductsPages(self, __from, __to):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product LIMIT %s,%s", (__from, __to))

@@ -256,7 +256,7 @@ __page_size = 20
 
 @app.route('/api/v1/orders', methods=['GET'])
 def webapp_get_all_orders():
-    page = request.args.get("page")
+    page = request.args.get("page",None)
     if page:
         res = webapp_service.get_all_orders_pages(
             int(page)*__page_size, (int(page)+1)*__page_size)
@@ -267,7 +267,7 @@ def webapp_get_all_orders():
 
 @app.route('/api/v1/products', methods=['GET'])
 def webapp_get_all_products():
-    page = int(request.args.get("page"))
+    page = request.args.get("page",None)
     if page:
         res = webapp_service.get_all_products_pages(
             int(page)*__page_size, (int(page)+1)*__page_size)
@@ -278,7 +278,7 @@ def webapp_get_all_products():
 
 @app.route('/api/v1/contacts', methods=['GET'])
 def webapp_get_all_contacts():
-    page = int(request.args.get("page"))
+    page = request.args.get("page",None)
     if page:
         res = webapp_service.get_all_contacts_pages(
             int(page)*__page_size, (int(page)+1)*__page_size)
@@ -288,8 +288,10 @@ def webapp_get_all_contacts():
 
 @app.route('/api/v1/orders', methods=['POST'])
 def webapp_order_actions():
-    req = request.form
-
+    req = request.json
+    req = req.get('params',None)
+    
+    print('webapp_order_actions',req.get('bitrix24_id', None))
     action = req.get('action', None)
     __id =  req.get('id', None)
     haravan_id = req.get('haravan_id', None)
@@ -318,8 +320,7 @@ def webapp_order_actions():
         if not( haravan_id and bitrix24_id):
             res['message'] = 'INSERT record but wrong data!'
         else:
-            res['data'] = webapp_service.insert_order_record(
-                haravan_id, bitrix24_id)
+            res['data'] = webapp_service.insert_order_record(haravan_id, bitrix24_id)
 
     return jsonify(res)
 
