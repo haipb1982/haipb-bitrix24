@@ -193,6 +193,8 @@ def webapp_get_all_orders():
     else:
         res = webapp_service.get_all_orders()
     
+    return jsonify(res)
+    
     if res['code'] == 400:
         return build_response_400(res['message'],res['data'])
     elif res['code'] == 500:
