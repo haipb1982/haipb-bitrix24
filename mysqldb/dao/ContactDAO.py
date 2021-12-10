@@ -7,17 +7,32 @@ class ContactDAO(object):
     def __init__(self):
         self.__db = DbHelper()
 
-    
+    # # # for webapp API # # #
     def getAllContacts(self):
-        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_contact_customer", None)
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_contact_customer ORDER BY id DESC", None)
         if res.get("status"):
             return res
         else:
             return None
 
     def getAllContactsPages(self, __from, __to):
-        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_contact_customer LIMIT %s,%s", (__from, __to))
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_contact_customer LIMIT %s,%s ORDER BY id DESC", (__from, __to))
         return res
+
+    def deleteContactRecord(self,id):
+        res = self.__db.query("DELETE FROM tbl_deal_order WHERE id=%s", id)
+        return res
+    
+    def updateContactRecord(self,id, haravan_id, bitrix24_id):
+        res = self.__db.query("UPDATE tbl_deal_order SET haravan_id=%s, bitrix24_id=%s WHERE id=%s", (haravan_id,bitrix24_id,id))
+        return res
+    
+    def insertContactRecord(self, hanravan_id, bitrix24_id):
+        sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id) VALUES (%s,%s)'''        
+        res = self.__db.query(sql, (hanravan_id, bitrix24_id))
+        return res
+
+    # # # # # #
 
     def get_contacts(self):
         res = self.__db.query("SELECT * FROM tbl_contact_customer", None)

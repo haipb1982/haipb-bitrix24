@@ -7,12 +7,13 @@ class DealDAO(object):
     def __init__(self):
         self.__db = DbHelper()
 
+    # # # for webapp API # # #
     def getAllDeals(self):
-        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status,bitrix_status,update_ts FROM tbl_deal_order", None)
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status,bitrix_status,update_ts FROM tbl_deal_order ORDER BY id DESC", None)
         return res
 
     def getAllDealsPages(self, __from, __to):
-        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status,bitrix_status,update_ts FROM tbl_deal_order LIMIT %s,%s", (__from, __to))
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status,bitrix_status,update_ts FROM tbl_deal_order LIMIT %s,%s ORDER BY id DESC", (__from, __to))
         return res
     
     def deleteDealRecord(self,id):
@@ -24,12 +25,11 @@ class DealDAO(object):
         return res
     
     def insertDealRecord(self, hanravan_id, bitrix24_id):
-        # print('addNewDeal',hanravan_id,bitrix24_id)
-        sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id) VALUES (%s,%s)'''
-        
+        sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id) VALUES (%s,%s)'''        
         res = self.__db.query(sql, (hanravan_id, bitrix24_id))
-
         return res
+    
+    # # # # # #
 
     def addNewDeal(self, hanravan_id, bitrix24_id, haravan_data="", bitrix_data=""):
         # print('addNewDeal',hanravan_id,bitrix24_id)
