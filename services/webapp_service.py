@@ -34,15 +34,35 @@ def update_order_record(id, haravan_id, bitrix24_id):
 def insert_order_record(haravan_id, bitrix24_id):
     return deal_dao.insertDealRecord(haravan_id, bitrix24_id)
 
+#######################################
+
 def get_all_products():
     return product_dao.getAllProducts()
 
 def get_all_products_pages(from_page, to_page):
     return product_dao.getAllProductsPages(from_page, to_page)
 
+def delete_product_record(id):
+    return product_dao.deleteProductRecord(id)
+
+def update_product_record(id, haravan_id, bitrix24_id):
+    return product_dao.updateProductRecord(id, haravan_id, bitrix24_id)
+
+def insert_product_record(haravan_id, bitrix24_id):
+    return product_dao.insertProductRecord(haravan_id, bitrix24_id)
+
+#######################################
 def get_all_contacts():
     return contact_dao.getAllContacts()
 
 def get_all_contacts_pages(from_page, to_page):
     return contact_dao.getAllContactsPages(from_page, to_page)
-    
+
+def delete_contact_record(id):
+    return contact_dao.deleteContactRecord(id)
+
+def update_contact_record(id, haravan_id, bitrix24_id):
+    return contact_dao.updateContactRecord(id, haravan_id, bitrix24_id)
+
+def insert_contact_record(haravan_id, bitrix24_id):
+    return contact_dao.insertContactRecord(haravan_id, bitrix24_id)

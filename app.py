@@ -194,14 +194,6 @@ def webapp_get_all_orders():
         res = webapp_service.get_all_orders()
     
     return jsonify(res)
-    
-    if res['code'] == 400:
-        return build_response_400(res['message'],res['data'])
-    elif res['code'] == 500:
-        return build_response_500(res['message'],res['data'])
-    else:
-        return build_response_200(res['message'],res['data'])
-
 
 @app.route('/api/v1/products', methods=['GET'])
 def webapp_get_all_products():
@@ -212,13 +204,7 @@ def webapp_get_all_products():
     else:
         res = webapp_service.get_all_products()
     
-    if res['code'] == 400:
-        return build_response_400(res['message'],res['data'])
-    elif res['code'] == 500:
-        return build_response_500(res['message'],res['data'])
-    else:
-        return build_response_200(res['message'],res['data'])
-
+    return jsonify(res)
 
 @app.route('/api/v1/contacts', methods=['GET'])
 def webapp_get_all_contacts():
@@ -229,12 +215,7 @@ def webapp_get_all_contacts():
     else:
         res = webapp_service.get_all_contacts()
     
-    if res['code'] == 400:
-        return build_response_400(res['message'],res['data'])
-    elif res['code'] == 500:
-        return build_response_500(res['message'],res['data'])
-    else:
-        return build_response_200(res['message'],res['data'])
+    return jsonify(res)
 
 @app.route('/api/v1/orders', methods=['POST'])
 def webapp_order_actions():
@@ -274,13 +255,97 @@ def webapp_order_actions():
         else:            
             res = webapp_service.insert_order_record(
                 haravan_id, bitrix24_id)
+    
+    return jsonify(res)
+    # if res['code'] == 400:
+    #     return build_response_400(res['message'],res['data'])
+    # elif res['code'] == 500:
+    #     return build_response_500(res['message'],res['data'])
+    # else:
+    #     return build_response_200(res['message'],res['data'])
 
-    if res['code'] == 400:
-        return build_response_400(res['message'],res['data'])
-    elif res['code'] == 500:
-        return build_response_500(res['message'],res['data'])
-    else:
-        return build_response_200(res['message'],res['data'])
+@app.route('/api/v1/products', methods=['POST'])
+def webapp_product_actions():
+    req = request.form
+
+    action = req.get('action', None)
+    __id =  req.get('id', None)
+    haravan_id = req.get('haravan_id', None)
+    bitrix24_id = req.get('bitrix24_id', None)
+
+    res = {}
+
+    if not action:
+        res['code'] = 400
+        res['message'] = 'No action found!'
+
+    if action == 'delete':
+        if not __id:
+            res['code'] = 400
+            res['message'] = 'DELETE record but wrong data!'
+        else:            
+            res = webapp_service.delete_product_record(__id)
+
+    if action == 'update':
+
+        if not (__id and haravan_id and bitrix24_id):
+            res['code'] = 400
+            res['message'] = 'UPDATE record but wrong data!'
+        else:
+            res = webapp_service.update_product_record(
+                __id, haravan_id, bitrix24_id)
+
+    if action == 'insert':
+        if not( haravan_id and bitrix24_id):
+            res['code'] = 400
+            res['message'] = 'INSERT record but wrong data!'
+        else:            
+            res = webapp_service.insert_product_record(
+                haravan_id, bitrix24_id)
+    
+    return jsonify(res)
+
+
+@app.route('/api/v1/contacts', methods=['POST'])
+def webapp_contact_actions():
+    req = request.form
+
+    action = req.get('action', None)
+    __id =  req.get('id', None)
+    haravan_id = req.get('haravan_id', None)
+    bitrix24_id = req.get('bitrix24_id', None)
+
+    res = {}
+
+    if not action:
+        res['code'] = 400
+        res['message'] = 'No action found!'
+
+    if action == 'delete':
+        if not __id:
+            res['code'] = 400
+            res['message'] = 'DELETE record but wrong data!'
+        else:            
+            res = webapp_service.delete_contact_record(__id)
+
+    if action == 'update':
+
+        if not (__id and haravan_id and bitrix24_id):
+            res['code'] = 400
+            res['message'] = 'UPDATE record but wrong data!'
+        else:
+            res = webapp_service.update_contact_record(
+                __id, haravan_id, bitrix24_id)
+
+    if action == 'insert':
+        if not( haravan_id and bitrix24_id):
+            res['code'] = 400
+            res['message'] = 'INSERT record but wrong data!'
+        else:            
+            res = webapp_service.insert_contact_record(
+                haravan_id, bitrix24_id)
+    
+    return jsonify(res)
 
 
 # if __name__ == "__main__":

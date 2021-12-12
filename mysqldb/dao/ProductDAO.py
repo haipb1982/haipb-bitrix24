@@ -7,14 +7,30 @@ class ProductDAO(object):
     def __init__(self):
         self.__db = DbHelper()
 
+    # # # for webapp API # # #
     def getAllProducts(self):
-        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product", None)
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product ORDER BY id DESC", None)
         return res
         
 
     def getAllProductsPages(self, __from, __to):
-        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product LIMIT %s,%s", (__from, __to))
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product LIMIT %s,%s ORDER BY id DESC", (__from, __to))
         return res
+    
+    def deleteProductRecord(self,id):
+        res = self.__db.query("DELETE FROM tbl_deal_order WHERE id=%s", id)
+        return res
+    
+    def updateProductRecord(self,id, haravan_id, bitrix24_id):
+        res = self.__db.query("UPDATE tbl_deal_order SET haravan_id=%s, bitrix24_id=%s WHERE id=%s", (haravan_id,bitrix24_id,id))
+        return res
+    
+    def insertProductRecord(self, hanravan_id, bitrix24_id):
+        sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id) VALUES (%s,%s)'''
+        res = self.__db.query(sql, (hanravan_id, bitrix24_id))
+        return res
+    
+    # # # # # # # 
     
     def add_new_product(self,hanravan_id, bitrix24_id, haravan_data, bitrix_data):
         sql = '''INSERT INTO tbl_product(haravan_id, bitrix24_id, haravan_data, bitrix_data) VALUES (%s,%s,%s,%s)'''
