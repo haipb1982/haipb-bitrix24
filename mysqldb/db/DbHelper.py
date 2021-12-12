@@ -38,7 +38,6 @@ class DbHelper:
             result['message'] = 'error'
             result['data'] = err
             self.__connection.rollback()
+        finally:
+            self.__connection.close()
         return result
-
-    def close(self):
-        self.__connection.close();
