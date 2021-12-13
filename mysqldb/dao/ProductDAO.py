@@ -9,12 +9,12 @@ class ProductDAO(object):
 
     # # # for webapp API # # #
     def getAllProducts(self):
-        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product ORDER BY id DESC", None)
+        res = self.__db.query("SELECT id,haravan_id,haravan_data,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product ORDER BY id DESC", None)
         return res
         
 
     def getAllProductsPages(self, __from, __to):
-        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product LIMIT %s,%s ORDER BY id DESC", (__from, __to))
+        res = self.__db.query("SELECT id,haravan_id,haravan_data,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product LIMIT %s,%s ORDER BY id DESC", (__from, __to))
         return res
     
     def deleteProductRecord(self,id):

@@ -50,9 +50,12 @@ def create_deal_bitrix(payload=None):
 
     # lấy thông tin người tạo từ haravan để gán cho bitrix
     user_id = payload.get("user_id")
+    print('người tạo đơn',user_id)
     haravan_user = haravan_service.User.get(user_id)
+    print('người tạo đơn',haravan_user)
     if haravan_user and haravan_user.get("user"):
         user = haravan_user.get("user")
+        print('người tạo đơn',user)
         fields['UF_CRM_1630417157521'] = user.get("last_name") +" " + user.get("first_name")
     else:
         fields['UF_CRM_1630417157521'] = 'HARAVAN-BITRIX APP' # người tạo đơn
