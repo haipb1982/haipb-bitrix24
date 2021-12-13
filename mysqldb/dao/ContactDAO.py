@@ -9,14 +9,14 @@ class ContactDAO(object):
 
     # # # for webapp API # # #
     def getAllContacts(self):
-        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_contact_customer ORDER BY id DESC", None)
+        res = self.__db.query("SELECT id,haravan_id,haravan_data,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_contact_customer ORDER BY id DESC", None)
         if res.get("status"):
             return res
         else:
             return None
 
     def getAllContactsPages(self, __from, __to):
-        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_contact_customer LIMIT %s,%s ORDER BY id DESC", (__from, __to))
+        res = self.__db.query("SELECT id,haravan_id,haravan_data,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_contact_customer LIMIT %s,%s ORDER BY id DESC", (__from, __to))
         return res
 
     def deleteContactRecord(self,id):
