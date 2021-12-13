@@ -235,7 +235,7 @@ def webapp_order_actions():
     if action == 'delete':
         if not __id:
             res['code'] = 400
-            res['message'] = 'DELETE record but wrong data!'
+            res['message'] = 'DELETE record but wrong input data!'
         else:            
             res = webapp_service.delete_order_record(__id)
 
@@ -243,7 +243,7 @@ def webapp_order_actions():
 
         if not (__id and haravan_id and bitrix24_id):
             res['code'] = 400
-            res['message'] = 'UPDATE record but wrong data!'
+            res['message'] = 'UPDATE record but wrong input data!'
         else:
             res = webapp_service.update_order_record(
                 __id, haravan_id, bitrix24_id)
@@ -282,7 +282,7 @@ def webapp_product_actions():
     if action == 'delete':
         if not __id:
             res['code'] = 400
-            res['message'] = 'DELETE record but wrong data!'
+            res['message'] = 'DELETE record but wrong input data!'
         else:            
             res = webapp_service.delete_product_record(__id)
 
@@ -290,7 +290,7 @@ def webapp_product_actions():
 
         if not (__id and haravan_id and bitrix24_id):
             res['code'] = 400
-            res['message'] = 'UPDATE record but wrong data!'
+            res['message'] = 'UPDATE record but wrong input data!'
         else:
             res = webapp_service.update_product_record(
                 __id, haravan_id, bitrix24_id)
@@ -298,7 +298,7 @@ def webapp_product_actions():
     if action == 'insert':
         if not( haravan_id and bitrix24_id):
             res['code'] = 400
-            res['message'] = 'INSERT record but wrong data!'
+            res['message'] = 'INSERT record but wrong input data!'
         else:            
             res = webapp_service.insert_product_record(
                 haravan_id, bitrix24_id)
@@ -324,7 +324,7 @@ def webapp_contact_actions():
     if action == 'delete':
         if not __id:
             res['code'] = 400
-            res['message'] = 'DELETE record but wrong data!'
+            res['message'] = 'DELETE record but wrong input data!'
         else:            
             res = webapp_service.delete_contact_record(__id)
 
@@ -332,7 +332,7 @@ def webapp_contact_actions():
 
         if not (__id and haravan_id and bitrix24_id):
             res['code'] = 400
-            res['message'] = 'UPDATE record but wrong data!'
+            res['message'] = 'UPDATE record but wrong input data!'
         else:
             res = webapp_service.update_contact_record(
                 __id, haravan_id, bitrix24_id)
@@ -340,10 +340,23 @@ def webapp_contact_actions():
     if action == 'insert':
         if not( haravan_id and bitrix24_id):
             res['code'] = 400
-            res['message'] = 'INSERT record but wrong data!'
+            res['message'] = 'INSERT record but wrong input data!'
         else:            
             res = webapp_service.insert_contact_record(
                 haravan_id, bitrix24_id)
+    
+    return jsonify(res)
+
+@app.route('/api/v1/sync', methods=['GET'])
+def webapp_get_sync():
+    type = request.args.get("type")
+    id = request.args.get("id")
+    res = {}
+    if type and id:
+        res = webapp_service.get_sync(type, id)
+    else:
+        res['code'] = 400
+        res['message'] = 'SYNC data but wrong input data!'
     
     return jsonify(res)
 
