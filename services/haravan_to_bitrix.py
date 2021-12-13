@@ -56,7 +56,7 @@ def create_deal_bitrix(payload=None):
     if haravan_user and haravan_user.get("user"):
         user = haravan_user.get("user")
         print('người tạo đơn',user)
-        fields['UF_CRM_1630417157521'] = user.get("last_name") +" " + user.get("first_name")
+        fields['UF_CRM_1630417157521'] = user.get("last_name", "") + " " + user.get("first_name", "")
     else:
         fields['UF_CRM_1630417157521'] = 'HARAVAN-BITRIX APP' # người tạo đơn
     # fields["STAGE_ID"] = "C18:NEW"
