@@ -9,7 +9,7 @@ services:
     # depends_on:
     #   - docker-lib
     # remove network_mode to run docker-compose up
-    network_mode: "host" 
+    # network_mode: "host" 
     build: .
     volumes:
       - .:/haipb-bitrix24
