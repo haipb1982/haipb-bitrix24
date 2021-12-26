@@ -6,6 +6,9 @@ from datetime import datetime, timedelta
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+import threading, queue
+
+q = queue.Queue()
 
 import bx24 as Bx24
 from dao import deal_dao, db
@@ -378,9 +381,22 @@ def webapp_get_sync():
     
     return jsonify(res)
 
-# timer loop every 15 minutes
-RETRY_JOBS_IN_MINUTES = 15
-while True:
-    print('retry_all_jobs!')
-    retryjob_service.retry_all_jobs()
-    time.sleep(RETRY_JOBS_IN_MINUTES*60)
+@app.route('/api/v1/retry_all_jobs', methods=['GET'])
+def api_retry_all_jobs():
+    q.put('api_retry_all_jobs')
+    q.join()
+    return 'processing /api/v1/retry_all_jobs'
+
+
+def worker():
+    while True:
+        item = q.get()
+        print(f'Working on {item}')
+        retryjob_service.retry_all_jobs()
+        time.sleep(20)
+        print(f'Finished {item}')
+        q.task_done()
+
+# turn-on the worker thread
+threading.Thread(target=worker, daemon=True).start()
+

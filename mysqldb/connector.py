@@ -1,11 +1,7 @@
 import mysql.connector
 from mysql.connector import errorcode
 
-# Cpanel - phpmyAdmin
-# url: http://45.252.249.23:2083/
-# user: asuofvsy
-# pwd: vpin.pinart123
-
+# "host":"host.docker.internal",
 config = {
   'host': '103.159.51.249',
   'user': 'vnztech',
