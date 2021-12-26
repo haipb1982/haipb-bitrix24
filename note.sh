@@ -25,6 +25,8 @@ docker-compose build
 docker run -d -p 5000:5000 haipb-bitrix24 #  in background
 docker run -p 5000:5000 haipb-bitrix24
 
+docker run -p 5000:5000 --add-host host.docker.internal:host-gateway blu_app
+
 CMD #5 - check logs:
 docker logs -f haipb-bitrix24
 docker logs -f haipb-api

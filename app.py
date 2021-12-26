@@ -381,22 +381,10 @@ def webapp_get_sync():
     
     return jsonify(res)
 
+
 @app.route('/api/v1/retry_all_jobs', methods=['GET'])
 def api_retry_all_jobs():
-    q.put('api_retry_all_jobs')
-    q.join()
-    return 'processing /api/v1/retry_all_jobs'
-
-
-def worker():
-    while True:
-        item = q.get()
-        print(f'Working on {item}')
+    def worker():
         retryjob_service.retry_all_jobs()
-        time.sleep(20)
-        print(f'Finished {item}')
-        q.task_done()
-
-# turn-on the worker thread
-threading.Thread(target=worker, daemon=True).start()
-
+    threading.Thread(target=worker, daemon=True).start()
+    return 'processing /api/v1/retry_all_jobs'    
