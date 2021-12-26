@@ -1,4 +1,5 @@
 import json
+import time
 from calendar import mdays
 from datetime import datetime, timedelta
 
@@ -8,7 +9,7 @@ from flask_cors import CORS
 
 import bx24 as Bx24
 from dao import deal_dao, db
-from services import haravan_to_bitrix, bitrix_to_haravan, webapp_service
+from services import haravan_to_bitrix, bitrix_to_haravan, webapp_service, retryjob_service
 from utils import log
 from utils.common import build_response_200, build_response_400, build_response_500
 
@@ -40,12 +41,15 @@ def webhooks():
     # next_month_of_today = today + timedelta(mdays[today.month])
     # LOGGER.info("TIME: ", extra={"today": today})
 
+    haravanID = body.get('id',None)
+
     if topic == 'orders/create':
         status = haravan_to_bitrix.create_deal_bitrix(body)
         if status:
             return build_response_200("Thêm dữ liệu thành công")
         else:
-            return build_response_200("Dữ liệu đã tồn tại")
+            retryjob_service.insert(haravanID,body,None,None,'ORDERS','CREATE')
+            return build_response_200("Thêm dữ liệu không thành công")
 
     # Nếu đã có dữ liệu thì sẽ cập nhật còn nếu ko thì sẽ tạo mới rồi lưu vào database
     if topic == 'orders/updated':
@@ -53,6 +57,7 @@ def webhooks():
         if status:
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
+            retryjob_service.insert(haravanID,body,None,None,'ORDERS','UPDATED')
             return build_response_200("Cập nhật dữ liệu không thành công")
 
     elif topic == 'orders/paid':
@@ -60,6 +65,7 @@ def webhooks():
         if status:
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
+            retryjob_service.insert(haravanID,body,None,None,'ORDERS','PAID')
             return build_response_200("Cập nhật dữ liệu không thành công")
 
     elif topic == 'orders/cancelled':
@@ -67,6 +73,7 @@ def webhooks():
         if status:
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
+            retryjob_service.insert(haravanID,body,None,None,'ORDERS','CANCELLED')
             return build_response_200("Cập nhật dữ liệu không thành công")
 
     elif topic == 'orders/fulfilled':
@@ -74,6 +81,7 @@ def webhooks():
         if status:
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
+            retryjob_service.insert(haravanID,body,None,None,'ORDERS','FULFILLED')
             return build_response_200("Cập nhật dữ liệu không thành công")
 
     elif topic == 'orders/delete':
@@ -82,6 +90,7 @@ def webhooks():
         if status:
             return build_response_200("Xóa dữ liệu thành công")
         else:
+            retryjob_service.insert(haravanID,body,None,None,'ORDERS','DELETE')
             return build_response_200("Xóa dữ liệu không thành công")
 
     elif topic == 'products/create':
@@ -89,6 +98,7 @@ def webhooks():
         if result:
             return build_response_200("Thêm dữ liệu thành công")
         else:
+            retryjob_service.insert(haravanID,body,None,None,'PRODUCTS','CREATE')
             return build_response_200("Thêm dữ liệu không thành công")
 
     elif topic == 'products/update':
@@ -96,19 +106,21 @@ def webhooks():
         if result:
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
+            retryjob_service.insert(haravanID,body,None,None,'PRODUCTS','UPDATE')
             return build_response_200("Cập nhật dữ liệu không thành công")
     elif topic == 'products/delete':
-        id = body.get("id")
-        status = haravan_to_bitrix.deleted_product_bitrix(id)
+        status = haravan_to_bitrix.deleted_product_bitrix(haravanID)
         if status:
             return build_response_200("Xóa dữ liệu thành công")
         else:
+            retryjob_service.insert(haravanID,body,None,None,'PRODUCTS','DELETE')
             return build_response_200("Xóa dữ liệu không thành công")
     elif topic == 'customers/create':
         result = haravan_to_bitrix.create_contact_bitrix(body)
         if result:
             return build_response_200("Thêm dữ liệu thành công")
         else:
+            retryjob_service.insert(haravanID,body,None,None,'CUSTOMERS','CREATE')
             return build_response_200("Thêm dữ liệu không thành công")
 
     elif topic == 'customers/update':
@@ -116,13 +128,14 @@ def webhooks():
         if status:
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
+            retryjob_service.insert(haravanID,body,None,None,'CUSTOMERS','UPDATE')
             return build_response_200("Cập nhật dữ liệu không thành công")
     elif topic == 'customers/delete':
-        id = body.get("id")
-        status = haravan_to_bitrix.delete_contact_bitrix(id)
+        status = haravan_to_bitrix.delete_contact_bitrix(haravanID)
         if status:
             return build_response_200("Xóa dữ liệu thành công")
         else:
+            retryjob_service.insert(haravanID,body,None,None,'CUSTOMERS','DELETE')
             return build_response_200("Xóa dữ liệu không thành công")
 
     return build_response_200()
@@ -138,7 +151,7 @@ def migrate_haravan_to_bitrix():
 
 @app.route('/bitrix/webhooks', methods=['GET', 'POST'])
 def bitrix_webhooks():
-    return build_response_200()
+    # return build_response_200()
 
     body = request.get_json()
     _form = request.form
@@ -175,8 +188,13 @@ def bitrix_webhooks():
     if event == "ONCRMCONTACTDELETE":
         res = bitrix_to_haravan.delete_contact_haravan(ID)
 
-    return build_response_200()
+    if res:
+        return build_response_200('Cập nhật Bitrix24 --> Haravan thành công')
+    else:
+        retryjob_service.insert(None,None,ID,None,event,event)
+        return build_response_200('Cập nhật Bitrix24 --> Haravan thất bại!!!')
 
+    return build_response_200()
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -360,7 +378,9 @@ def webapp_get_sync():
     
     return jsonify(res)
 
-
-# if __name__ == "__main__":
-#     app.run(host="localhost", port=5000, use_reloader=True)
-    # app.run(ssl_context='adhoc')
+# timer loop every 15 minutes
+RETRY_JOBS_IN_MINUTES = 15
+while True:
+    print('retry_all_jobs!')
+    retryjob_service.retry_all_jobs()
+    time.sleep(RETRY_JOBS_IN_MINUTES*60)

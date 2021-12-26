@@ -24,9 +24,9 @@ class DealDAO(object):
         res = self.__db.query("UPDATE tbl_deal_order SET haravan_id=%s, bitrix24_id=%s WHERE id=%s", (haravan_id,bitrix24_id,id))
         return res
     
-    def insertDealRecord(self, hanravan_id, bitrix24_id):
+    def insertDealRecord(self, haravan_id, bitrix24_id):
         sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id) VALUES (%s,%s)'''        
-        res = self.__db.query(sql, (hanravan_id, bitrix24_id))
+        res = self.__db.query(sql, (haravan_id, bitrix24_id))
         return res
     
     # # # # # #
