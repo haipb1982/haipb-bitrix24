@@ -108,6 +108,7 @@ def create_deal_bitrix(payload=None):
         "rows": productrows
     }
 
+    print('DealProductRow',fields)
     deal_productrow = DealProductRow.set(fields)
 
     # Lưu dữ liệu từ bitrix vào db để mapping giữa haravan và bitrix
