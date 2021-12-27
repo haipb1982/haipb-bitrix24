@@ -243,14 +243,14 @@ def create_product_bitrix(payload):
         product["PRICE"] = payload.get("variants")[0].get("price")
         
         # DISCOUNT_TYPE_ID - where 1 - is the value in money; 2 - is the value in percentage
-        product["DISCOUNT_SUM"] = 1 
+        product["DISCOUNT_TYPE_ID"] = 1 
         # DISCOUNT_RATE - the percentage of dicsount
         # product["DISCOUNT_RATE"] = 0 
-        # DISCOUNT_SUM - the sum of discount
+        # DISCOUNT_RATE - the sum of discount
         product["DISCOUNT_SUM"] = payload.get("variants")[0].get("total_discount")
         
         if len(payload.get("images")) > 0:
-            fileData = [payload.get("images")[0].get("https://vnztech.com/no-image.png")]
+            fileData = [payload.get("images")[0].get("src","https://vnztech.com/no-image.png")]
             product["PREVIEW_PICTURE"] = {'fileData':fileData}
             product["DETAIL_PICTURE"] = {'fileData':fileData}
     else:
