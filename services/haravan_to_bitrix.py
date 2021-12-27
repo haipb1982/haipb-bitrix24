@@ -91,7 +91,7 @@ def create_deal_bitrix(payload=None):
 
         productrow["PRODUCT_NAME"] = product_haravan.get("name",None) or product_haravan.get("title",None)
         
-        fileData = [product_haravan.get("images")[0].get("src","https://vnztech.com/no-image.png")]
+        fileData = [product_haravan.get("image")[0].get("src","https://vnztech.com/no-image.png")]
         productrow["PREVIEW_PICTURE"] = {'fileData':fileData}
         productrow["DETAIL_PICTURE"] = {'fileData':fileData}
 
