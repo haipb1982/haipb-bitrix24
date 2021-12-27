@@ -64,34 +64,30 @@ def bx24_migrate(job_data):
 
     type =  job_data.get('type')
     action =  job_data.get('action')
+    bitrix24ID = job_data.get('bitrix24_id')
 
     result = False
 
-    if type == 'DEAL':
+    if type == "ONCRMDEALADD":
+        result = bitrix_to_haravan.create_order_haravan(bitrix24ID)
+    if type == "ONCRMDEALUPDATE":
+        result = bitrix_to_haravan.update_order_haravan(bitrix24ID)
+    if type == "ONCRMPRODUCTDELETE":
+        result = bitrix_to_haravan.delete_order_haravan(bitrix24ID)
 
-        if action =='CREATE':
-            pass
-        if action =='UPDATE':
-            bitrix_to_haravan.update_order_haravan(job_data.bitrix24_id)
-            pass
-        if action =='DELETE':
-            pass
+    if type == "ONCRMPRODUCTADD":
+        result = bitrix_to_haravan.create_product_haravan(bitrix24ID)
+    if type == "ONCRMPRODUCTUPDATE":
+        result = bitrix_to_haravan.update_product_haravan(bitrix24ID)
+    if type == "ONCRMPRODUCTDELETE":
+        result = bitrix_to_haravan.delete_product_haravan(bitrix24ID)
 
-    if type == 'CONTACT':
-        if action =='CREATE':
-            pass
-        if action =='UPDATE':
-            pass
-        if action =='DELETE':
-            pass
-
-    if type == 'DEAL':
-        if action =='CREATE':
-            pass
-        if action =='UPDATE':
-            pass
-        if action =='DELETE':
-            pass
+    if type == "ONCRMCONTACTADD":
+        result = bitrix_to_haravan.create_contact_haravan(bitrix24ID)
+    if type == "ONCRMCONTACTUPDATE":
+        result = bitrix_to_haravan.update_contact_haravan(bitrix24ID)
+    if type == "ONCRMCONTACTDELETE":
+        result = bitrix_to_haravan.delete_contact_haravan(bitrix24ID)
     
     return result
 
