@@ -95,8 +95,10 @@ def create_deal_bitrix(payload=None):
             fileData = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
         else:
             fileData = "https://vnztech.com/no-image.png"
-        productrow["PREVIEW_PICTURE"] = {'fileData':[fileData]}
-        productrow["DETAIL_PICTURE"] = {'fileData':[fileData]}
+        # productrow["PREVIEW_PICTURE"] = {'fileData':[fileData]}
+        # productrow["DETAIL_PICTURE"] = {'fileData':[fileData]}
+        productrow["PREVIEW_PICTURE"] = [fileData,fileData]
+        productrow["DETAIL_PICTURE"] = [fileData,fileData]
 
         productrow["DISCOUNT_TYPE_ID"] = 1 
         productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)

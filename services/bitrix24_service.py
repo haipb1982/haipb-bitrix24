@@ -118,7 +118,7 @@ class DealProductRow():
             res = bx24.callMethod("crm.deal.productrows.get", fields=fields)
             return res
         except BitrixError as e:
-            LOGGER.info('Product::insert::exception: ', extra={"e": e})
+            LOGGER.info('productrows::get::exception: ', extra={"e": e})
             return None
 
     @staticmethod
