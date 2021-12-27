@@ -16,9 +16,9 @@ class RetryJobDAO(object):
         res = self.__db.query("DELETE FROM tbl_retry_job WHERE id=%s", id)
         return res
     
-    def insertRetryJobRecord(self, haravan_id, bitrix24_id, haravan_data, bitrix_data, type, action):
+    def insertRetryJobRecord(self, haravan_id, bitrix24_id, haravan_data="", bitrix_data="", type="", action=""):
         sql = '''INSERT INTO tbl_retry_job (haravan_id, bitrix24_id, haravan_data, bitrix_data, type, action) VALUES (%s,%s,%s,%s,%s,%s)'''        
-        pamrs =  [haravan_id, bitrix24_id,haravan_data, bitrix_data, type, action]
+        pamrs =  [haravan_id, bitrix24_id, haravan_data, bitrix_data, type, action]
         res = self.__db.query(sql,pamrs)
         return res
     
