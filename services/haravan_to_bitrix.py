@@ -86,8 +86,17 @@ def create_deal_bitrix(payload=None):
             product_bitrix = create_product_bitrix(product)
             product_id = product_bitrix.get("ID")
         productrow["PRODUCT_ID"] = product_id
-        productrow["PRICE"] = product_haravan.get("price")
-        productrow["QUANTITY"] = product_haravan.get("quantity")
+        productrow["PRICE"] = product_haravan.get("price",0)
+        productrow["QUANTITY"] = product_haravan.get("quantity",0)
+
+        productrow["PRODUCT_NAME"] = product_haravan.get("name",None) or product_haravan.get("title",None)
+        
+        fileData = [product_haravan.get("images")[0].get("src","https://vnztech.com/no-image.png")]
+        productrow["PREVIEW_PICTURE"] = {'fileData':fileData}
+        productrow["DETAIL_PICTURE"] = {'fileData':fileData}
+
+        productrow["DISCOUNT_TYPE_ID"] = 1 
+        productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)
 
         productrows[i] = productrow
         i = i + 1

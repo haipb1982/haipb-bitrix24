@@ -6,8 +6,8 @@ product_mapping = [
     {
         "h_key": "title",
         "b_key": "NAME",
-        "h_default_value": "123",
-        "b_default_value": "123",
+        "h_default_value": "HARAVAN PRODUCT NAME",
+        "b_default_value": "BITRIX24 PRODUCT NAME",
     },
     # {
     #     "h_key": "",
