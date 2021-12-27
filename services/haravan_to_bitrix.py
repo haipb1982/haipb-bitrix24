@@ -35,9 +35,9 @@ def create_deal_bitrix(payload=None):
 
     # Lấy thông tin customer từ khách hàng để set cho CONTACT_ID. Nếu không có sẽ tạo mới customer
     customer = payload.get("customer")
-    customer_id = customer.get("id")
-
-    customer_contact_result = contact_dao.get_by_haravan_id(customer_id)
+    customer_id = customer.get("id",None)
+    if customer_id:
+        customer_contact_result = contact_dao.get_by_haravan_id(customer_id)
     if customer_contact_result:
         contact_bitrix_id = customer_contact_result.get("bitrix24_id")
     else:
