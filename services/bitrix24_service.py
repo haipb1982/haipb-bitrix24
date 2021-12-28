@@ -15,18 +15,30 @@ class Deal():
 
     @staticmethod
     def list():
-        res = bx24.callMethod('crm.deal.list')
-        return res
+        try:
+            res = bx24.callMethod('crm.deal.list')
+            return res
+        except BitrixError as e:
+            LOGGER.info('BX24 list deal::exception: ', extra={"e": e})
+            return None
 
     @staticmethod
     def get(dealID):
-        res = bx24.callMethod("crm.deal.get", id=dealID)
-        return res
+        try:
+            res = bx24.callMethod("crm.deal.get", id=dealID)
+            return res
+        except BitrixError as e:
+            LOGGER.info('BX24 get deal::exception: ', extra={"e": e})
+            return None
 
     @staticmethod
     def get_fields():
-        res = bx24.callMethod("crm.deal.fields")
-        return res
+        try:
+            res = bx24.callMethod("crm.deal.fields")
+            return res
+        except BitrixError as e:
+            LOGGER.info('BX24 get_fields deal::exception: ', extra={"e": e})
+            return None
 
     @staticmethod
     def insert(fields):
@@ -35,7 +47,7 @@ class Deal():
                                  params={"REGISTER_SONET_EVENT": "Y"})
             return Deal.get(id)
         except BitrixError as e:
-            LOGGER.info('add_new_deal::exception: ', extra={"e": e})
+            LOGGER.info('BX24 insert deal::exception: ', extra={"e": e})
             return None
 
     @staticmethod
@@ -44,10 +56,10 @@ class Deal():
         try:
             id = data_fields.get("ID")
             res = bx24.callMethod("crm.deal.update", id=id, fields=data_fields)
-            LOGGER.info('update_deal: ', extra={"res": res})
+            LOGGER.info('BX24 update_deal: ', extra={"res": res})
             return Deal.get(id)
         except Exception as e:
-            LOGGER.info('update_deal::exception: ', extra={"e": e})
+            LOGGER.info('BX24 update deal::exception: ', extra={"e": e})
             return None
 
     @staticmethod
