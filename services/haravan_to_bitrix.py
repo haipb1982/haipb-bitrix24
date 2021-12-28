@@ -157,6 +157,51 @@ def update_deal_bitrix(payload=None):
     # Cập nhật deal trên bitrix
     result = bitrix24_service.Deal.update(fields)
 
+    # Cập nhật products của Deal 
+    product_haravans = payload.get("line_items")
+
+    productrows = {}
+    i = 0
+    for product_haravan in product_haravans:
+        productrow = {}
+        product_result = product_dao.get_by_haravan_id(product_haravan.get("id"))
+        if product_result:
+            product_id = product_result.get("bitrix24_id")
+        else:
+            product = haravan_service.Product.get(product_haravan.get("id"))
+            product_bitrix = create_product_bitrix(product)
+            product_id = product_bitrix.get("ID")
+        productrow["PRODUCT_ID"] = product_id
+        productrow["PRICE"] = product_haravan.get("price",0)
+        productrow["QUANTITY"] = product_haravan.get("quantity",0)
+
+        productrow["PRODUCT_NAME"] = product_haravan.get("name",None) or product_haravan.get("title",None)
+        
+        if product_haravan.get("image"):
+            fileData = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
+        else:
+            fileData = "https://vnztech.com/no-image.png"
+        # productrow["PREVIEW_PICTURE"] = {'fileData':[fileData]}
+        # productrow["DETAIL_PICTURE"] = {'fileData':[fileData]}
+        productrow["PREVIEW_PICTURE"] = fileData
+        productrow["DETAIL_PICTURE"] = fileData
+
+        productrow["DISCOUNT_TYPE_ID"] = 1 
+        productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)
+
+        productrows[i] = productrow
+        i = i + 1
+
+    # Add products vào trong DEAL
+
+    fields = {
+        "id": fields["ID"],
+        "rows": productrows
+    }
+    
+    deal_productrow = DealProductRow.set(fields)
+    print('DealProductRow',deal_productrow)
+
     return deal_dao.updateDeal(haravan_id, json.dumps(payload), json.dumps(result))
 
 
