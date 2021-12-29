@@ -59,28 +59,24 @@ def create_deal_bitrix(payload=None):
         print('người tạo đơn',user)
         fields['UF_CRM_1630417157521'] = user.get("last_name", "") + " " + user.get("first_name", "")
     else:
-        fields['UF_CRM_1630417157521'] = 'HARAVAN-BITRIX APP' # người tạo đơn
+        fields['UF_CRM_1630417157521'] = 'HARAVAN-BITRIX24 APP' # người tạo đơn
     # fields["STAGE_ID"] = "C18:NEW"
     # fields["UF_CRM_1637252157269"] = str(payload.get("id"))
 
-    # Tạo deal mới trên bitrix
+    # Tạo deal mới trên bitrix 
+    
     bitrix24_deal = bitrix24_service.Deal.insert(fields)
-
-    try:
-        deal_dao.addNewDeal(
-            hanravan_id=haravan_id,
-            bitrix24_id=bitrix24_deal.get("ID"),
-            haravan_data=json.dumps(payload),
-            bitrix_data=json.dumps(bitrix24_deal)
-        )
-    except:
-        deal_dao.addNewDeal(
-            hanravan_id=haravan_id,
-            bitrix24_id=bitrix24_deal.get("ID"),
-            haravan_data=None,
-            bitrix_data=None
-        )
-
+    if not bitrix24_deal:
+        print('Không tạo được Bitrix24 Deal mới!')
+        return False
+        
+    deal_dao.addNewDeal(
+        hanravan_id=haravan_id,
+        bitrix24_id=bitrix24_deal.get("ID"),
+        haravan_data=json.dumps(payload),
+        bitrix_data=json.dumps(bitrix24_deal)
+    )
+    
     product_haravans = payload.get("line_items")
 
     productrows = {}
@@ -122,7 +118,7 @@ def create_deal_bitrix(payload=None):
         "rows": productrows
     }
 
-    print('DealProductRow',fields)
+    # print('DealProductRow',fields)
     deal_productrow = DealProductRow.set(fields)
 
     # Lưu dữ liệu từ bitrix vào db để mapping giữa haravan và bitrix

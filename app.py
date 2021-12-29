@@ -32,10 +32,11 @@ def webhooks():
     body = request.get_json()
     headers = request.headers
     topic = headers.get("x-haravan-topic")
-
-    LOGGER.info("/haravan/webhooks TOPIC: ", extra={"topic": topic})
-    LOGGER.info("/haravan/webhooks REQUEST: ",
-                extra={"headers": headers, "body": body})
+    haravanID = body.get('id',None)
+    
+    # LOGGER.info("/haravan/webhooks TOPIC: ", extra={"topic": topic})
+    # LOGGER.info("/haravan/webhooks REQUEST: ",
+    #             extra={"headers": headers, "body": body})
 
     # if id != '1236954857':
     #     return json.dumps({'success':True}), 200, {'ContentType':'application/json'}
@@ -44,7 +45,8 @@ def webhooks():
     # next_month_of_today = today + timedelta(mdays[today.month])
     # LOGGER.info("TIME: ", extra={"today": today})
 
-    haravanID = body.get('id',None)
+
+    LOGGER.info("/haravan/webhooks REQUEST: ", extra={"topic": topic , "haravanID": haravanID})
 
     def worker_orders():
         if topic == 'orders/create':
