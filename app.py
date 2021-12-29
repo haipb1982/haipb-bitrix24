@@ -251,6 +251,7 @@ def webapp_get_all_contacts():
 @app.route('/api/v1/orders', methods=['POST'])
 def webapp_order_actions():
     req = request.form
+    LOGGER.info("/api/v1/orders request --> ", extra={'req':req})
 
     action = req.get('action', None)
     __id =  req.get('id', None)
@@ -286,7 +287,8 @@ def webapp_order_actions():
         else:            
             res = webapp_service.insert_order_record(
                 haravan_id, bitrix24_id)
-    
+
+    LOGGER.info("/api/v1/orders response --> ", extra={'res':res})
     return jsonify(res)
     # if res['code'] == 400:
     #     return build_response_400(res['message'],res['data'])
@@ -298,6 +300,7 @@ def webapp_order_actions():
 @app.route('/api/v1/products', methods=['POST'])
 def webapp_product_actions():
     req = request.form
+    LOGGER.info("/api/v1/products request --> ", extra={'req':req})
 
     action = req.get('action', None)
     __id =  req.get('id', None)
@@ -333,13 +336,14 @@ def webapp_product_actions():
         else:            
             res = webapp_service.insert_product_record(
                 haravan_id, bitrix24_id)
-    
+    LOGGER.info("/api/v1/products response --> ", extra={'res':res})
     return jsonify(res)
 
 
 @app.route('/api/v1/contacts', methods=['POST'])
 def webapp_contact_actions():
     req = request.form
+    LOGGER.info("/api/v1/contacts: ", extra={'req':req})
 
     action = req.get('action', None)
     __id =  req.get('id', None)
@@ -375,7 +379,7 @@ def webapp_contact_actions():
         else:            
             res = webapp_service.insert_contact_record(
                 haravan_id, bitrix24_id)
-    
+    LOGGER.info("/api/v1/contacts response --> ", extra={'res':res})
     return jsonify(res)
 
 @app.route('/api/v1/sync', methods=['GET'])

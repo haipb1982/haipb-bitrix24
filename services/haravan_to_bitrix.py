@@ -22,6 +22,7 @@ LOGGER = log.get_logger(__name__)
 def create_deal_bitrix(payload=None):
     if payload is None:
         payload = {}
+        return False
 
     # LOGGER.info("create_deal_bitrix: ", extra={"payload": payload})    
 
@@ -181,10 +182,10 @@ def update_deal_bitrix(payload=None):
             fileData = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
         else:
             fileData = "https://vnztech.com/no-image.png"
-        # productrow["PREVIEW_PICTURE"] = {'fileData':[fileData]}
-        # productrow["DETAIL_PICTURE"] = {'fileData':[fileData]}
-        productrow["PREVIEW_PICTURE"] = fileData
-        productrow["DETAIL_PICTURE"] = fileData
+        productrow["PREVIEW_PICTURE"] = [{'fileData':fileData}]
+        productrow["DETAIL_PICTURE"] = [{'fileData':fileData}]
+        # productrow["PREVIEW_PICTURE"] = fileData
+        # productrow["DETAIL_PICTURE"] = fileData
 
         productrow["DISCOUNT_TYPE_ID"] = 1 
         productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)
