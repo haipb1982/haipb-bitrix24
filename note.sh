@@ -35,6 +35,13 @@ docker run --name=blu_app -d -p 5000:5000 --add-host host.docker.internal:host-g
 docker run --name=blu_api -d -p 3000:3000 --add-host host.docker.internal:host-gateway blu_api_img
 docker run --name=blu_api -d -p 3000:3000 blu_api_img
 
+docker inspect blu_app | grep IPAddress
+docker inspect blu_api | grep IPAddress
+docker network create blu_net
+
+docker run --name=blu_app -d -p 5000:5000 --add-host host.docker.internal:host-gateway --net blu_net blu_app_img
+docker run --name=blu_api -d -p 3000:3000 --add-host host.docker.internal:host-gateway --net blu_net blu_api_img
+
 CMD #5 - check logs:
 docker logs -f blu_app
 docker logs -f blu_api

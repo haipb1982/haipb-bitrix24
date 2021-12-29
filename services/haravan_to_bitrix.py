@@ -27,7 +27,7 @@ def create_deal_bitrix(payload=None):
     # LOGGER.info("create_deal_bitrix: ", extra={"payload": payload})    
 
     # Sử dụng database để mapping giữa haravan và bitrix
-    haravan_id = payload.get("id") or payload.get("number")
+    haravan_id = payload.get("id",None)
     deal_order = deal_dao.getDataByHaID(haravan_id)
 
     if deal_order:
