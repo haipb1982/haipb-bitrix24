@@ -25,7 +25,6 @@ class DbHelper:
     def query(self, query, params):
         result = {}
         try:
-            print('mySQL:',query, params)
             self.__cursor.execute(query, params)            
             result['status'] = True
             result['code'] = 200
@@ -33,6 +32,7 @@ class DbHelper:
             result['data'] = self.__cursor.fetchall()
             self.__connection.commit()
         except pymysql.Error as err:
+            print('\033[91m','mySQL ERROR:',query, params,'\033[0m')
             result['status'] = False
             result['code'] = 500
             result['message'] = 'error'
