@@ -56,36 +56,12 @@ def webhooks():
                 return build_response_200("Thêm dữ liệu không thành công")
 
         # Nếu đã có dữ liệu thì sẽ cập nhật còn nếu ko thì sẽ tạo mới rồi lưu vào database
-        if topic == 'orders/updated':
-            status = haravan_to_bitrix.update_deal_bitrix(body)
+        if topic in ['orders/updated','orders/paid','orders/cancelled','orders/fulfilled']:
+            status = haravan_to_bitrix.update_deal_bitrix_all(topic,body)
             if status:
                 return build_response_200("Cập nhật dữ liệu thành công")
             else:
                 retryjob_service.insert(haravanID,body,None,None,'ORDERS','UPDATED')
-                return build_response_200("Cập nhật dữ liệu không thành công")
-
-        elif topic == 'orders/paid':
-            status = haravan_to_bitrix.paid_deal_bitrix(body)
-            if status:
-                return build_response_200("Cập nhật dữ liệu thành công")
-            else:
-                retryjob_service.insert(haravanID,body,None,None,'ORDERS','PAID')
-                return build_response_200("Cập nhật dữ liệu không thành công")
-
-        elif topic == 'orders/cancelled':
-            status = haravan_to_bitrix.cancelled_deal_bitrix(body)
-            if status:
-                return build_response_200("Cập nhật dữ liệu thành công")
-            else:
-                retryjob_service.insert(haravanID,body,None,None,'ORDERS','CANCELLED')
-                return build_response_200("Cập nhật dữ liệu không thành công")
-
-        elif topic == 'orders/fulfilled':
-            status = haravan_to_bitrix.fulfilled_deal_bitrix(body)
-            if status:
-                return build_response_200("Cập nhật dữ liệu thành công")
-            else:
-                retryjob_service.insert(haravanID,body,None,None,'ORDERS','FULFILLED')
                 return build_response_200("Cập nhật dữ liệu không thành công")
 
         elif topic == 'orders/delete':

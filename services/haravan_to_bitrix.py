@@ -213,6 +213,97 @@ def update_deal_bitrix(payload=None):
 
     return deal_dao.updateDeal(haravan_id, json.dumps(payload), json.dumps(result))
 
+def update_deal_bitrix_all(topic='', payload=None):
+    if payload is None:
+        payload = {}
+
+    #    LOGGER.info("create_deal_bitrix: ", extra={"payload": payload })
+
+    # Sử dụng database để mapping giữa haravan và bitrix
+    haravan_id = payload.get("id") or payload.get("number")
+    deal_order = deal_dao.getDataByHaID(haravan_id)
+
+    if deal_order:
+        existed_deal = bitrix24_service.Deal.get(deal_order[0].get('bitrix24_id'))
+        if not existed_deal:
+            print('Deal ID chưa có trên Bitrix24 ! Đang tạo mới Deal trên Bitrix24')
+            deal_dao.deleteDealRecord(deal_order[0].get('id'))
+            return create_deal_bitrix(payload)
+
+    else:
+        print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
+        return create_deal_bitrix(payload)
+
+    # TODO: Với trường hợp update thì sẽ cần kiểm tra dữ liệu của webhook data so với dữ liệu trong DB.
+    # Nếu khác nhau sẽ cho cập nhật
+
+    if Deal.CompareHaravanNewData(deal_order, payload):
+        print('No data changed! Không có thay đổi dữ liệu tbl_deal_order')
+        return None
+
+    # # #
+
+    fields = Deal.HaravanToBitrix24(payload)
+    fields["ID"] = deal_order[0].get('bitrix24_id')
+    # if topic in ['orders/updated']:
+    #     fields['STAGE_ID'] = "C18:NEW"
+    if topic in ['orders/paid']:
+        fields['STAGE_ID'] = "C18:FINAL_INVOICE"
+    if topic in ['orders/cancelled']:
+        fields['STAGE_ID'] = "C18:LOSE"
+    if topic in ['orders/fulfilled']:
+        fields['STAGE_ID'] = "C18:WON"
+    
+
+    # Cập nhật deal trên bitrix
+    result = bitrix24_service.Deal.update(fields)
+
+    # Cập nhật products của Deal 
+    product_haravans = payload.get("line_items")
+
+    productrows = {}
+    i = 0
+    for product_haravan in product_haravans:
+        productrow = {}
+        product_result = product_dao.get_by_haravan_id(product_haravan.get("id"))
+        if product_result:
+            product_id = product_result.get("bitrix24_id")
+        else:
+            product = haravan_service.Product.get(product_haravan.get("id"))
+            product_bitrix = create_product_bitrix(product)
+            product_id = product_bitrix.get("ID")
+        productrow["PRODUCT_ID"] = product_id
+        productrow["PRICE"] = product_haravan.get("price",0)
+        productrow["QUANTITY"] = product_haravan.get("quantity",0)
+
+        productrow["PRODUCT_NAME"] = product_haravan.get("name",None) or product_haravan.get("title",None)
+        
+        if product_haravan.get("image"):
+            fileData = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
+        else:
+            fileData = "https://vnztech.com/no-image.png"
+        productrow["PREVIEW_PICTURE"] = [{'fileData':fileData}]
+        productrow["DETAIL_PICTURE"] = [{'fileData':fileData}]
+        # productrow["PREVIEW_PICTURE"] = fileData
+        # productrow["DETAIL_PICTURE"] = fileData
+
+        productrow["DISCOUNT_TYPE_ID"] = 1 
+        productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)
+
+        productrows[i] = productrow
+        i = i + 1
+
+    # Add products vào trong DEAL
+
+    fields = {
+        "id": fields["ID"],
+        "rows": productrows
+    }
+    
+    deal_productrow = DealProductRow.set(fields)
+    print('DealProductRow',deal_productrow)
+
+    return deal_dao.updateDeal(haravan_id, json.dumps(payload), json.dumps(result))
 
 def paid_deal_bitrix(payload=None):
     if payload is None:
