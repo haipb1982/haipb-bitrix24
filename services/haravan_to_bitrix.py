@@ -66,12 +66,20 @@ def create_deal_bitrix(payload=None):
     # Tạo deal mới trên bitrix
     bitrix24_deal = bitrix24_service.Deal.insert(fields)
 
-    deal_dao.addNewDeal(
-        hanravan_id=haravan_id,
-        bitrix24_id=bitrix24_deal.get("ID"),
-        haravan_data=json.dumps(payload),
-        bitrix_data=json.dumps(bitrix24_deal)
-    )
+    try:
+        deal_dao.addNewDeal(
+            hanravan_id=haravan_id,
+            bitrix24_id=bitrix24_deal.get("ID"),
+            haravan_data=json.dumps(payload),
+            bitrix_data=json.dumps(bitrix24_deal)
+        )
+    except:
+        deal_dao.addNewDeal(
+            hanravan_id=haravan_id,
+            bitrix24_id=bitrix24_deal.get("ID"),
+            haravan_data=None,
+            bitrix_data=None
+        )
 
     product_haravans = payload.get("line_items")
 
