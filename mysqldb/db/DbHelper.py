@@ -31,10 +31,10 @@ class DbHelper:
             result['message'] = 'success'
             result['data'] = self.__cursor.fetchall()
             self.__connection.commit()
-        except pymysql.Error as err:
+        except Exception as err:
             print('\033[91m','mySQL ERROR:',err, '\033[0m')
             print('\033[92m','mySQL ERROR query:',query, '\033[0m')
-            print('\033[94m','mySQL ERROR params:', params,'\033[0m')
+            print('mySQL ERROR params:', params)
             result['status'] = False
             result['code'] = 500
             result['message'] = 'error'
