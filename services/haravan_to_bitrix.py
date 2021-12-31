@@ -144,14 +144,7 @@ def update_deal_bitrix(payload=None):
     haravan_id = payload.get("id") or payload.get("number")
     deal_order = deal_dao.getDataByHaID(haravan_id)
 
-    if deal_order:
-        existed_deal = bitrix24_service.Deal.get(deal_order[0].get('bitrix24_id'))
-        if not existed_deal:
-            print('Deal ID chưa có trên Bitrix24 ! Đang tạo mới Deal trên Bitrix24')
-            deal_dao.deleteDealRecord(deal_order[0].get('id'))
-            return create_deal_bitrix(payload)
-
-    else:
+    if not deal_order:
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
 
