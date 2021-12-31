@@ -99,7 +99,7 @@ def Bitrix24ToHaravan(bx):
     return ha
 
 def CompareHaravanNewData(deal_order, payload):
-    print('CompareHaravanNewData',deal_order)
+    
     old = json.loads(deal_order.get('haravan_data'))
     new = payload
 

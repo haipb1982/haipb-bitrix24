@@ -151,16 +151,13 @@ def update_deal_bitrix(payload=None):
     # TODO: Với trường hợp update thì sẽ cần kiểm tra dữ liệu của webhook data so với dữ liệu trong DB.
     # Nếu khác nhau sẽ cho cập nhật
 
-    print('CompareHaravanNewData',deal_order['data'])
-    # if Deal.CompareHaravanNewData(deal_order['data'], payload):
-    #     print('No data changed! Không có thay đổi dữ liệu tbl_deal_order')
-    #     return None
+    if Deal.CompareHaravanNewData(deal_order['data'], payload):
+        print('No data changed! Không có thay đổi dữ liệu tbl_deal_order')
+        return None
 
-    # # #
-    return False
 
     fields = Deal.HaravanToBitrix24(payload)
-    fields["ID"] = deal_order['data'].get('bitrix24_id')
+    fields["ID"] = deal_order['data'][0].get('bitrix24_id')
 
 
     # Cập nhật deal trên bitrix
@@ -232,16 +229,13 @@ def update_deal_bitrix_all(topic='', payload=None):
     # TODO: Với trường hợp update thì sẽ cần kiểm tra dữ liệu của webhook data so với dữ liệu trong DB.
     # Nếu khác nhau sẽ cho cập nhật
 
-    print('CompareHaravanNewData',deal_order['data'])
-    # if Deal.CompareHaravanNewData(deal_order, payload):
-    #     print('No data changed! Không có thay đổi dữ liệu tbl_deal_order')
-    #     return None
+    if Deal.CompareHaravanNewData(deal_order, payload):
+        print('No data changed! Không có thay đổi dữ liệu tbl_deal_order')
+        return None
 
-    # # #
-    return False
 
     fields = Deal.HaravanToBitrix24(payload)
-    fields["ID"] = deal_order['data'].get('bitrix24_id')
+    fields["ID"] = deal_order['data'][0].get('bitrix24_id')
     # if topic in ['orders/updated']:
     #     fields['STAGE_ID'] = "C18:NEW"
     if topic in ['orders/paid']:
@@ -377,11 +371,11 @@ def delete_deal_bitrix(id):
     # LOGGER.info("delete_deal_bitrix: ", extra={"today": today})
     deal_order = deal_dao.getDealOrderByHaID(id)
 
-    if not deal_order.get('data',None) or deal_order['data'].get('status') == "DELETE":
+    if not deal_order.get('data',None) or deal_order['data'][0].get('status') == "DELETE":
         print('Bản ghi tbl_deal_order không tìm thấy!')
         return True
     # Xoá deal trên bitrix
-    bitrix24_service.Deal.delete(deal_order['data'].get('bitrix24_id'))
+    bitrix24_service.Deal.delete(deal_order['data'][0].get('bitrix24_id'))
     return deal_dao.delete_by_haravan_id(id)
 
 def create_product_bitrix(payload):
