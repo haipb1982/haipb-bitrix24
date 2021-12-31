@@ -157,6 +157,7 @@ def update_deal_bitrix(payload=None):
     #     return None
 
     # # #
+    return False
 
     fields = Deal.HaravanToBitrix24(payload)
     fields["ID"] = deal_order['data'].get('bitrix24_id')
@@ -235,7 +236,8 @@ def update_deal_bitrix_all(topic='', payload=None):
     #     return None
 
     # # #
-
+    return False
+    
     fields = Deal.HaravanToBitrix24(payload)
     fields["ID"] = deal_order['data'].get('bitrix24_id')
     # if topic in ['orders/updated']:
