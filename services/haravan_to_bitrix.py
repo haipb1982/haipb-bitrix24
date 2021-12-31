@@ -28,9 +28,9 @@ def create_deal_bitrix(payload=None):
 
     # Sử dụng database để mapping giữa haravan và bitrix
     haravan_id = payload.get("id",None)
-    deal_order = deal_dao.getDataByHaID(haravan_id)
+    deal_order = deal_dao.getDealOrderByHaID(haravan_id)
 
-    if deal_order.get('id',None):
+    if deal_order.get('data',None):
         print('HaravanID đã tồn tại trong database')
         return False
 
@@ -142,9 +142,9 @@ def update_deal_bitrix(payload=None):
 
     # Sử dụng database để mapping giữa haravan và bitrix
     haravan_id = payload.get("id") or payload.get("number")
-    deal_order = deal_dao.getDataByHaID(haravan_id)
+    deal_order = deal_dao.getDealOrderByHaID(haravan_id)
 
-    if not deal_order.get('id',None):
+    if not deal_order.get('data',None):
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
 
@@ -219,9 +219,9 @@ def update_deal_bitrix_all(topic='', payload=None):
 
     # Sử dụng database để mapping giữa haravan và bitrix
     haravan_id = payload.get("id") or payload.get("number")
-    deal_order = deal_dao.getDataByHaID(haravan_id)
+    deal_order = deal_dao.getDealOrderByHaID(haravan_id)
 
-    if not deal_order.get('id',None):
+    if not deal_order.get('data',None):
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
 
@@ -304,9 +304,9 @@ def paid_deal_bitrix(payload=None):
 
     # Sử dụng database để mapping giữa haravan và bitrix
     haravan_id = payload.get("id") or payload.get("number")
-    deal_order = deal_dao.getDataByHaID(haravan_id)
+    deal_order = deal_dao.getDealOrderByHaID(haravan_id)
 
-    if not deal_order.get('id',None):
+    if not deal_order.get('data',None):
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
 
@@ -326,9 +326,9 @@ def cancelled_deal_bitrix(payload=None):
     LOGGER.info("cancelled_deal_bitrix: ", extra={"payload": payload})
     # Sử dụng database để mapping giữa haravan và bitrix
     haravan_id = payload.get("id") or payload.get("number")
-    deal_order = deal_dao.getDataByHaID(haravan_id)
+    deal_order = deal_dao.getDealOrderByHaID(haravan_id)
 
-    if not deal_order.get('id',None):
+    if not deal_order.get('data',None):
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
 
@@ -350,9 +350,9 @@ def fulfilled_deal_bitrix(payload=None):
 
     # Sử dụng database để mapping giữa haravan và bitrix
     haravan_id = payload.get("id") or payload.get("number")
-    deal_order = deal_dao.getDataByHaID(haravan_id)
+    deal_order = deal_dao.getDealOrderByHaID(haravan_id)
 
-    if not deal_order.get('id',None):
+    if not deal_order.get('data',None):
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
 
@@ -369,8 +369,9 @@ def fulfilled_deal_bitrix(payload=None):
 def delete_deal_bitrix(id):
     today = datetime.now()
     # LOGGER.info("delete_deal_bitrix: ", extra={"today": today})
-    deal_order = deal_dao.getDataByHaID(id)
-    if not deal_order.get('id',None) or deal_order[0].get('status') == "DELETE":
+    deal_order = deal_dao.getDealOrderByHaID(id)
+
+    if not deal_order.get('data',None) or deal_order[0].get('status') == "DELETE":
         print('Bản ghi tbl_deal_order không tìm thấy!')
         return True
     # Xoá deal trên bitrix

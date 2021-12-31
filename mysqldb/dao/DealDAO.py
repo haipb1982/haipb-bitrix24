@@ -12,6 +12,10 @@ class DealDAO(object):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status, haravan_data, bitrix_status,update_ts FROM tbl_deal_order ORDER BY id DESC", None)
         return res
 
+    def getDealOrderByHaID(self,haravan_id):
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status, haravan_data, bitrix_status,update_ts FROM tbl_deal_order WHERE haravan_id=%s", haravan_id)
+        return res
+
     def getAllDealsPages(self, __from, __to):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status,haravan_data,bitrix_status,update_ts FROM tbl_deal_order LIMIT %s,%s ORDER BY id DESC", (__from, __to))
         return res

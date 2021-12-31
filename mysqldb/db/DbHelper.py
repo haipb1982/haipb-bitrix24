@@ -37,8 +37,8 @@ class DbHelper:
             print('mySQL ERROR params:', params)
             result['status'] = False
             result['code'] = 500
-            result['message'] = 'error'
-            result['data'] = err
+            result['message'] = f'error:{err}'
+            result['data'] = None
             # self.__connection.rollback()
         # finally:
             # self.__connection.close()
