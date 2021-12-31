@@ -30,7 +30,7 @@ def create_deal_bitrix(payload=None):
     haravan_id = payload.get("id",None)
     deal_order = deal_dao.getDataByHaID(haravan_id)
 
-    if deal_order:
+    if deal_order.get('id',None):
         print('HaravanID đã tồn tại trong database')
         return False
 
@@ -144,7 +144,7 @@ def update_deal_bitrix(payload=None):
     haravan_id = payload.get("id") or payload.get("number")
     deal_order = deal_dao.getDataByHaID(haravan_id)
 
-    if not deal_order:
+    if not deal_order.get('id',None):
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
 
@@ -221,14 +221,7 @@ def update_deal_bitrix_all(topic='', payload=None):
     haravan_id = payload.get("id") or payload.get("number")
     deal_order = deal_dao.getDataByHaID(haravan_id)
 
-    if deal_order:
-        existed_deal = bitrix24_service.Deal.get(deal_order[0].get('bitrix24_id'))
-        if not existed_deal:
-            print('Deal ID chưa có trên Bitrix24 ! Đang tạo mới Deal trên Bitrix24')
-            deal_dao.deleteDealRecord(deal_order[0].get('id'))
-            return create_deal_bitrix(payload)
-
-    else:
+    if not deal_order.get('id',None):
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
 
@@ -313,7 +306,7 @@ def paid_deal_bitrix(payload=None):
     haravan_id = payload.get("id") or payload.get("number")
     deal_order = deal_dao.getDataByHaID(haravan_id)
 
-    if not deal_order:
+    if not deal_order.get('id',None):
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
 
@@ -335,7 +328,7 @@ def cancelled_deal_bitrix(payload=None):
     haravan_id = payload.get("id") or payload.get("number")
     deal_order = deal_dao.getDataByHaID(haravan_id)
 
-    if not deal_order:
+    if not deal_order.get('id',None):
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
 
@@ -359,7 +352,7 @@ def fulfilled_deal_bitrix(payload=None):
     haravan_id = payload.get("id") or payload.get("number")
     deal_order = deal_dao.getDataByHaID(haravan_id)
 
-    if not deal_order:
+    if not deal_order.get('id',None):
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
 
@@ -377,7 +370,7 @@ def delete_deal_bitrix(id):
     today = datetime.now()
     # LOGGER.info("delete_deal_bitrix: ", extra={"today": today})
     deal_order = deal_dao.getDataByHaID(id)
-    if not deal_order or deal_order[0].get('status') == "DELETE":
+    if not deal_order.get('id',None) or deal_order[0].get('status') == "DELETE":
         print('Bản ghi tbl_deal_order không tìm thấy!')
         return True
     # Xoá deal trên bitrix
