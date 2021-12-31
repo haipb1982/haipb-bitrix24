@@ -66,16 +66,25 @@ def create_deal_bitrix(payload=None):
     # Tạo deal mới trên bitrix 
     
     bitrix24_deal = bitrix24_service.Deal.insert(fields)
-    if not bitrix24_deal:
+    if not bitrix24_deal.get("ID"):
         print('Không tạo được Bitrix24 Deal mới!')
         return False
         
-    deal_dao.addNewDeal(
+    add_result = deal_dao.addNewDeal(
         hanravan_id=haravan_id,
         bitrix24_id=bitrix24_deal.get("ID"),
         haravan_data=json.dumps(payload),
         bitrix_data=json.dumps(bitrix24_deal)
     )
+    # Nếu không thành công thì chỉ add id và chạy update lại
+    if add_result:
+        deal_dao.addNewDeal(
+        hanravan_id=haravan_id,
+        bitrix24_id=bitrix24_deal.get("ID"),
+        haravan_data=None,
+        bitrix_data=None
+        )
+        update_deal_bitrix_all(topic='orders/updated', payload=payload)
     
     product_haravans = payload.get("line_items")
 
