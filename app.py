@@ -33,7 +33,7 @@ def webhooks():
     headers = request.headers
     topic = headers.get("x-haravan-topic")
     haravanID = body.get('id',None)
-    
+
     # LOGGER.info("/haravan/webhooks TOPIC: ", extra={"topic": topic})
     # LOGGER.info("/haravan/webhooks REQUEST: ",
     #             extra={"headers": headers, "body": body})
@@ -48,86 +48,76 @@ def webhooks():
 
     LOGGER.info("/haravan/webhooks REQUEST: ", extra={"topic": topic , "haravanID": haravanID})
 
-    def worker_orders():
-        if topic == 'orders/create':
-            status = haravan_to_bitrix.create_deal_bitrix(body)
-            if status:
-                return build_response_200("Thêm dữ liệu thành công")
-            else:
-                retryjob_service.insert(haravanID,body,None,None,'ORDERS','CREATE')
-                return build_response_200("Thêm dữ liệu không thành công")
+    if topic == 'orders/create':
+        status = haravan_to_bitrix.create_deal_bitrix(body)
+        if status:
+            return build_response_200("Thêm dữ liệu thành công")
+        else:
+            retryjob_service.insert(haravanID,body,None,None,'ORDERS','CREATE')
+            return build_response_200("Thêm dữ liệu không thành công")
 
-        # Nếu đã có dữ liệu thì sẽ cập nhật còn nếu ko thì sẽ tạo mới rồi lưu vào database
-        if topic in ['orders/updated','orders/paid','orders/cancelled','orders/fulfilled']:
-            status = haravan_to_bitrix.update_deal_bitrix_all(topic,body)
-            if status:
-                return build_response_200("Cập nhật dữ liệu thành công")
-            else:
-                retryjob_service.insert(haravanID,body,None,None,'ORDERS','UPDATED')
-                return build_response_200("Cập nhật dữ liệu không thành công")
+    # Nếu đã có dữ liệu thì sẽ cập nhật còn nếu ko thì sẽ tạo mới rồi lưu vào database
+    if topic in ['orders/updated','orders/paid','orders/cancelled','orders/fulfilled']:
+        status = haravan_to_bitrix.update_deal_bitrix_all(topic,body)
+        if status:
+            return build_response_200("Cập nhật dữ liệu thành công")
+        else:
+            retryjob_service.insert(haravanID,body,None,None,'ORDERS','UPDATED')
+            return build_response_200("Cập nhật dữ liệu không thành công")
 
-        elif topic == 'orders/delete':
-            id = body.get("id")
-            status = haravan_to_bitrix.delete_deal_bitrix(id)
-            if status:
-                return build_response_200("Xóa dữ liệu thành công")
-            else:
-                retryjob_service.insert(haravanID,body,None,None,'ORDERS','DELETE')
-                return build_response_200("Xóa dữ liệu không thành công")
-    
-    def worker_products():
-        if topic == 'products/create':
-            result = haravan_to_bitrix.create_product_bitrix(body)
-            if result:
-                return build_response_200("Thêm dữ liệu thành công")
-            else:
-                retryjob_service.insert(haravanID,body,None,None,'PRODUCTS','CREATE')
-                return build_response_200("Thêm dữ liệu không thành công")
+    elif topic == 'orders/delete':
+        id = body.get("id")
+        status = haravan_to_bitrix.delete_deal_bitrix(id)
+        if status:
+            return build_response_200("Xóa dữ liệu thành công")
+        else:
+            retryjob_service.insert(haravanID,body,None,None,'ORDERS','DELETE')
+            return build_response_200("Xóa dữ liệu không thành công")
 
-        elif topic == 'products/update':
-            result = haravan_to_bitrix.update_product_bitrix(body)
-            if result:
-                return build_response_200("Cập nhật dữ liệu thành công")
-            else:
-                retryjob_service.insert(haravanID,body,None,None,'PRODUCTS','UPDATE')
-                return build_response_200("Cập nhật dữ liệu không thành công")
-        elif topic == 'products/delete':
-            status = haravan_to_bitrix.deleted_product_bitrix(haravanID)
-            if status:
-                return build_response_200("Xóa dữ liệu thành công")
-            else:
-                retryjob_service.insert(haravanID,body,None,None,'PRODUCTS','DELETE')
-                return build_response_200("Xóa dữ liệu không thành công")
-        elif topic == 'customers/create':
-            result = haravan_to_bitrix.create_contact_bitrix(body)
-            if result:
-                return build_response_200("Thêm dữ liệu thành công")
-            else:
-                retryjob_service.insert(haravanID,body,None,None,'CUSTOMERS','CREATE')
-                return build_response_200("Thêm dữ liệu không thành công")
+    if topic == 'products/create':
+        result = haravan_to_bitrix.create_product_bitrix(body)
+        if result:
+            return build_response_200("Thêm dữ liệu thành công")
+        else:
+            retryjob_service.insert(haravanID,body,None,None,'PRODUCTS','CREATE')
+            return build_response_200("Thêm dữ liệu không thành công")
 
-    def worker_customers():
-        if topic == 'customers/update':
-            status = haravan_to_bitrix.update_contact_bitrix(body)
-            if status:
-                return build_response_200("Cập nhật dữ liệu thành công")
-            else:
-                retryjob_service.insert(haravanID,body,None,None,'CUSTOMERS','UPDATE')
-                return build_response_200("Cập nhật dữ liệu không thành công")
-        elif topic == 'customers/delete':
-            status = haravan_to_bitrix.delete_contact_bitrix(haravanID)
-            if status:
-                return build_response_200("Xóa dữ liệu thành công")
-            else:
-                retryjob_service.insert(haravanID,body,None,None,'CUSTOMERS','DELETE')
-                return build_response_200("Xóa dữ liệu không thành công")
-    
-    if "orders" in topic:
-        threading.Thread(target=worker_orders, daemon=True).start()
-    if "products" in topic:
-        threading.Thread(target=worker_products, daemon=True).start()
-    if "customers" in topic:
-        threading.Thread(target=worker_customers, daemon=True).start()
+    elif topic == 'products/update':
+        result = haravan_to_bitrix.update_product_bitrix(body)
+        if result:
+            return build_response_200("Cập nhật dữ liệu thành công")
+        else:
+            retryjob_service.insert(haravanID,body,None,None,'PRODUCTS','UPDATE')
+            return build_response_200("Cập nhật dữ liệu không thành công")
+    elif topic == 'products/delete':
+        status = haravan_to_bitrix.deleted_product_bitrix(haravanID)
+        if status:
+            return build_response_200("Xóa dữ liệu thành công")
+        else:
+            retryjob_service.insert(haravanID,body,None,None,'PRODUCTS','DELETE')
+            return build_response_200("Xóa dữ liệu không thành công")
+    elif topic == 'customers/create':
+        result = haravan_to_bitrix.create_contact_bitrix(body)
+        if result:
+            return build_response_200("Thêm dữ liệu thành công")
+        else:
+            retryjob_service.insert(haravanID,body,None,None,'CUSTOMERS','CREATE')
+            return build_response_200("Thêm dữ liệu không thành công")
+
+    if topic == 'customers/update':
+        status = haravan_to_bitrix.update_contact_bitrix(body)
+        if status:
+            return build_response_200("Cập nhật dữ liệu thành công")
+        else:
+            retryjob_service.insert(haravanID,body,None,None,'CUSTOMERS','UPDATE')
+            return build_response_200("Cập nhật dữ liệu không thành công")
+    elif topic == 'customers/delete':
+        status = haravan_to_bitrix.delete_contact_bitrix(haravanID)
+        if status:
+            return build_response_200("Xóa dữ liệu thành công")
+        else:
+            retryjob_service.insert(haravanID,body,None,None,'CUSTOMERS','DELETE')
+            return build_response_200("Xóa dữ liệu không thành công")
 
     return build_response_200()
 
