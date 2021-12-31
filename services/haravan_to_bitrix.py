@@ -151,7 +151,7 @@ def update_deal_bitrix(payload=None):
     # TODO: Với trường hợp update thì sẽ cần kiểm tra dữ liệu của webhook data so với dữ liệu trong DB.
     # Nếu khác nhau sẽ cho cập nhật
 
-    if Deal.CompareHaravanNewData(deal_order['data'], payload):
+    if Deal.CompareHaravanNewData(deal_order['data'][0], payload):
         print('No data changed! Không có thay đổi dữ liệu tbl_deal_order')
         return None
 
@@ -229,7 +229,7 @@ def update_deal_bitrix_all(topic='', payload=None):
     # TODO: Với trường hợp update thì sẽ cần kiểm tra dữ liệu của webhook data so với dữ liệu trong DB.
     # Nếu khác nhau sẽ cho cập nhật
 
-    if Deal.CompareHaravanNewData(deal_order, payload):
+    if Deal.CompareHaravanNewData(deal_order["data"][0], payload):
         print('No data changed! Không có thay đổi dữ liệu tbl_deal_order')
         return None
 
