@@ -223,6 +223,8 @@ def update_deal_bitrix_all(topic='', payload=None):
     haravan_id = payload.get("id") or payload.get("number")
     deal_order = deal_dao.getDealOrderByHaID(haravan_id)
 
+    print('update_deal_bitrix_all',deal_order)
+
     if not deal_order.get('data',None):
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
@@ -237,7 +239,7 @@ def update_deal_bitrix_all(topic='', payload=None):
 
     # # #
     return False
-    
+
     fields = Deal.HaravanToBitrix24(payload)
     fields["ID"] = deal_order['data'].get('bitrix24_id')
     # if topic in ['orders/updated']:
