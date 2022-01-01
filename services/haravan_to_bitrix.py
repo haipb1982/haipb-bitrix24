@@ -91,34 +91,35 @@ def create_deal_bitrix(payload=None):
     productrows = {}
     i = 0
     for product_haravan in product_haravans:
-        productrow = {}
-        product_result = product_dao.get_by_haravan_id(product_haravan.get("id",None))
-        if product_result:
-            product_id = product_result.get("bitrix24_id")
-        else:
-            product = haravan_service.Product.get(product_haravan.get("id",None))
-            product_bitrix = create_product_bitrix(product)
-            product_id = product_bitrix.get("ID")
-        productrow["PRODUCT_ID"] = product_id
-        productrow["PRICE"] = product_haravan.get("price",0)
-        productrow["QUANTITY"] = product_haravan.get("quantity",0)
+        if product_haravan.get("id",None):
+            productrow = {}
+            product_result = product_dao.get_by_haravan_id(product_haravan.get("id",None))
+            if product_result:
+                product_id = product_result.get("bitrix24_id")
+            else:
+                product = haravan_service.Product.get(product_haravan.get("id",None))
+                product_bitrix = create_product_bitrix(product)
+                product_id = product_bitrix.get("ID")
+            productrow["PRODUCT_ID"] = product_id
+            productrow["PRICE"] = product_haravan.get("price",0)
+            productrow["QUANTITY"] = product_haravan.get("quantity",0)
 
-        productrow["PRODUCT_NAME"] = product_haravan.get("name",None) or product_haravan.get("title",None)
-        
-        if product_haravan.get("image",None):
-            fileData = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
-        else:
-            fileData = "https://vnztech.com/no-image.png"
-        # productrow["PREVIEW_PICTURE"] = {'fileData':[fileData]}
-        # productrow["DETAIL_PICTURE"] = {'fileData':[fileData]}
-        productrow["PREVIEW_PICTURE"] = [fileData,fileData]
-        productrow["DETAIL_PICTURE"] = [fileData,fileData]
+            productrow["PRODUCT_NAME"] = product_haravan.get("name",None) or product_haravan.get("title",None)
+            
+            if product_haravan.get("image",None):
+                fileData = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
+            else:
+                fileData = "https://vnztech.com/no-image.png"
+            # productrow["PREVIEW_PICTURE"] = {'fileData':[fileData]}
+            # productrow["DETAIL_PICTURE"] = {'fileData':[fileData]}
+            productrow["PREVIEW_PICTURE"] = [fileData,fileData]
+            productrow["DETAIL_PICTURE"] = [fileData,fileData]
 
-        productrow["DISCOUNT_TYPE_ID"] = 1 
-        productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)
+            productrow["DISCOUNT_TYPE_ID"] = 1 
+            productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)
 
-        productrows[i] = productrow
-        i = i + 1
+            productrows[i] = productrow
+            i = i + 1
 
     # Add product vào trong DEAL
 
@@ -183,34 +184,35 @@ def update_deal_bitrix_all(topic='', payload=None):
     productrows = {}
     i = 0
     for product_haravan in product_haravans:
-        productrow = {}
-        product_result = product_dao.get_by_haravan_id(product_haravan.get("id",None))
-        if product_result:
-            product_id = product_result.get("bitrix24_id")
-        else:
-            product = haravan_service.Product.get(product_haravan.get("id",None))
-            product_bitrix = create_product_bitrix(product)
-            product_id = product_bitrix.get("ID")
-        productrow["PRODUCT_ID"] = product_id
-        productrow["PRICE"] = product_haravan.get("price",0)
-        productrow["QUANTITY"] = product_haravan.get("quantity",0)
+        if product_haravan.get("id",None):
+            productrow = {}
+            product_result = product_dao.get_by_haravan_id(product_haravan.get("id",None))
+            if product_result:
+                product_id = product_result.get("bitrix24_id")
+            else:
+                product = haravan_service.Product.get(product_haravan.get("id",None))
+                product_bitrix = create_product_bitrix(product)
+                product_id = product_bitrix.get("ID")
+            productrow["PRODUCT_ID"] = product_id
+            productrow["PRICE"] = product_haravan.get("price",0)
+            productrow["QUANTITY"] = product_haravan.get("quantity",0)
 
-        productrow["PRODUCT_NAME"] = product_haravan.get("name",None) or product_haravan.get("title",None)
-        
-        if product_haravan.get("image",None):
-            fileData = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
-        else:
-            fileData = "https://vnztech.com/no-image.png"
-        productrow["PREVIEW_PICTURE"] = [{'fileData':fileData}]
-        productrow["DETAIL_PICTURE"] = [{'fileData':fileData}]
-        # productrow["PREVIEW_PICTURE"] = fileData
-        # productrow["DETAIL_PICTURE"] = fileData
+            productrow["PRODUCT_NAME"] = product_haravan.get("name",None) or product_haravan.get("title",None)
+            
+            if product_haravan.get("image",None):
+                fileData = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
+            else:
+                fileData = "https://vnztech.com/no-image.png"
+            productrow["PREVIEW_PICTURE"] = [{'fileData':fileData}]
+            productrow["DETAIL_PICTURE"] = [{'fileData':fileData}]
+            # productrow["PREVIEW_PICTURE"] = fileData
+            # productrow["DETAIL_PICTURE"] = fileData
 
-        productrow["DISCOUNT_TYPE_ID"] = 1 
-        productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)
+            productrow["DISCOUNT_TYPE_ID"] = 1 
+            productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)
 
-        productrows[i] = productrow
-        i = i + 1
+            productrows[i] = productrow
+            i = i + 1
 
     # Add products vào trong DEAL
 
