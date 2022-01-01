@@ -190,6 +190,7 @@ def update_deal_bitrix_all(topic='', payload=None):
     for product_haravan in product_haravans:
         if product_haravan.get("id"):
             productrow = {}
+            product_id  = None
             product_result = product_dao.get_by_haravan_id(product_haravan.get("id"))
             # Nếu có product trong tbl_product thì lấy bx24_id
             if product_result:
@@ -201,7 +202,8 @@ def update_deal_bitrix_all(topic='', payload=None):
                 product = haravan_service.Product.get(product_haravan.get("id"))
                 product_bitrix = create_product_bitrix(product)
                 print('check5',product_bitrix)
-                product_id = product_bitrix.get("ID",None)
+                if product_bitrix:
+                    product_id = product_bitrix.get("ID")
             productrow["PRODUCT_ID"] = product_id
             productrow["PRICE"] = product_haravan.get("price",0)
             productrow["QUANTITY"] = product_haravan.get("quantity",0)
@@ -219,9 +221,9 @@ def update_deal_bitrix_all(topic='', payload=None):
 
             productrow["DISCOUNT_TYPE_ID"] = 1 
             productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)
-
-            productrows[i] = productrow
-            i = i + 1
+            if product_id:
+                productrows[i] = productrow
+                i = i + 1
 
     # Add products vào trong DEAL
 
