@@ -184,11 +184,11 @@ def update_deal_bitrix_all(topic='', payload=None):
     i = 0
     for product_haravan in product_haravans:
         productrow = {}
-        product_result = product_dao.get_by_haravan_id(product_haravan.get("id"),None)
+        product_result = product_dao.get_by_haravan_id(product_haravan.get("id",None))
         if product_result:
             product_id = product_result.get("bitrix24_id")
         else:
-            product = haravan_service.Product.get(product_haravan.get("id"),None)
+            product = haravan_service.Product.get(product_haravan.get("id",None))
             product_bitrix = create_product_bitrix(product)
             product_id = product_bitrix.get("ID")
         productrow["PRODUCT_ID"] = product_id
