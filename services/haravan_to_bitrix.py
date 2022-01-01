@@ -86,17 +86,17 @@ def create_deal_bitrix(payload=None):
         )
         update_deal_bitrix_all(topic='orders/updated', payload=payload)
     
-    product_haravans = payload.get("line_items")
+    product_haravans = payload.get("line_items",None)
 
     productrows = {}
     i = 0
     for product_haravan in product_haravans:
         productrow = {}
-        product_result = product_dao.get_by_haravan_id(product_haravan.get("id"))
+        product_result = product_dao.get_by_haravan_id(product_haravan.get("id",None))
         if product_result:
             product_id = product_result.get("bitrix24_id")
         else:
-            product = haravan_service.Product.get(product_haravan.get("id"))
+            product = haravan_service.Product.get(product_haravan.get("id",None))
             product_bitrix = create_product_bitrix(product)
             product_id = product_bitrix.get("ID")
         productrow["PRODUCT_ID"] = product_id
@@ -105,7 +105,7 @@ def create_deal_bitrix(payload=None):
 
         productrow["PRODUCT_NAME"] = product_haravan.get("name",None) or product_haravan.get("title",None)
         
-        if product_haravan.get("image"):
+        if product_haravan.get("image",None):
             fileData = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
         else:
             fileData = "https://vnztech.com/no-image.png"
@@ -164,17 +164,17 @@ def update_deal_bitrix(payload=None):
     result = bitrix24_service.Deal.update(fields)
 
     # Cập nhật products của Deal 
-    product_haravans = payload.get("line_items")
+    product_haravans = payload.get("line_items", None)
 
     productrows = {}
     i = 0
     for product_haravan in product_haravans:
         productrow = {}
-        product_result = product_dao.get_by_haravan_id(product_haravan.get("id"))
+        product_result = product_dao.get_by_haravan_id(product_haravan.get("id",None))
         if product_result:
             product_id = product_result.get("bitrix24_id")
         else:
-            product = haravan_service.Product.get(product_haravan.get("id"))
+            product = haravan_service.Product.get(product_haravan.get("id",None))
             product_bitrix = create_product_bitrix(product)
             product_id = product_bitrix.get("ID")
         productrow["PRODUCT_ID"] = product_id
@@ -183,7 +183,7 @@ def update_deal_bitrix(payload=None):
 
         productrow["PRODUCT_NAME"] = product_haravan.get("name",None) or product_haravan.get("title",None)
         
-        if product_haravan.get("image"):
+        if product_haravan.get("image",None):
             fileData = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
         else:
             fileData = "https://vnztech.com/no-image.png"
@@ -220,11 +220,13 @@ def update_deal_bitrix_all(topic='', payload=None):
     haravan_id = payload.get("id") or payload.get("number")
     deal_order = deal_dao.getDealOrderByHaID(haravan_id)
 
-    print('update_deal_bitrix_all',deal_order)
+    # print('update_deal_bitrix_all',deal_order)
 
     if not deal_order.get('data',None):
         print('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24')
         return create_deal_bitrix(payload)
+    else:
+        print('HaravanID có trong database!')
 
     # TODO: Với trường hợp update thì sẽ cần kiểm tra dữ liệu của webhook data so với dữ liệu trong DB.
     # Nếu khác nhau sẽ cho cập nhật
@@ -232,6 +234,8 @@ def update_deal_bitrix_all(topic='', payload=None):
     if Deal.CompareHaravanNewData(deal_order["data"][0], payload):
         print('No data changed! Không có thay đổi dữ liệu tbl_deal_order')
         return None
+    else:
+        print('Data changed! continue updating...')
 
 
     fields = Deal.HaravanToBitrix24(payload)
@@ -248,6 +252,7 @@ def update_deal_bitrix_all(topic='', payload=None):
 
     # Cập nhật deal trên bitrix
     result = bitrix24_service.Deal.update(fields)
+    print('Cập nhật trên bitrix',result)
 
     # Cập nhật products của Deal 
     product_haravans = payload.get("line_items")
@@ -292,7 +297,7 @@ def update_deal_bitrix_all(topic='', payload=None):
     }
     
     deal_productrow = DealProductRow.set(fields)
-    print('DealProductRow',deal_productrow)
+    # print('DealProductRow',deal_productrow)
 
     return deal_dao.updateDeal(haravan_id, json.dumps(payload), json.dumps(result))
 

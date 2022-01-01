@@ -58,10 +58,10 @@ class DealDAO(object):
         res = self.__db.query(sql, pamrs)
 
         if res.get("status"):
-            print('--> updateDeal successful ',id)
+            print('--> DAO updateDeal successful ',id)
             return True
         else:
-            print('--> updateDeal failed ',id)
+            print('--> DAO updateDeal failed ',id)
             print(res.get("data"))
             return False
 
