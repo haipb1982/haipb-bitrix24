@@ -1,6 +1,6 @@
 {
     "mysql":{
-        "host":"127.0.0.1",
+        "host":"host.docker.internal",
         "user":"vnztech",
         "password":"Vietnam@68",
         "db":"vnztech_blubx24"
