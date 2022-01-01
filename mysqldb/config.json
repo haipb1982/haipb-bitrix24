@@ -1,6 +1,6 @@
 {
     "mysql":{
-        "host":"172.19.0.1",
+        "host":"127.0.0.1",
         "user":"vnztech",
         "password":"Vietnam@68",
         "db":"vnztech_blubx24"
