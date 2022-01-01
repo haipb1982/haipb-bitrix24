@@ -75,9 +75,15 @@ class Deal():
 
 class Product():
 
+    
     @staticmethod
     def list():
         res = bx24.callMethod('crm.product.list')
+        return res
+
+    @staticmethod
+    def listWithFilter(filter={}):
+        res = bx24.callMethod('crm.product.list', filter=filter)
         return res
 
     @staticmethod

@@ -181,14 +181,21 @@ def update_deal_bitrix_all(topic='', payload=None):
     # Cập nhật products của Deal 
     product_haravans = payload.get("line_items",None)
 
+    if not product_haravans:
+        print('Không có product trong Order Haravan')
+        return None
+
     productrows = {}
     i = 0
     for product_haravan in product_haravans:
-        if product_haravan.get("id",None):
+        if product_haravan.get("id"):
             productrow = {}
             product_result = product_dao.get_by_haravan_id(product_haravan.get("id"))
+            # Nếu có product trong tbl_product thì lấy bx24_id
             if product_result:
                 product_id = product_result.get("bitrix24_id")
+
+            # Nếu không có product trong tbl_product thì tạo mới   
             else:
                 product = haravan_service.Product.get(product_haravan.get("id"))
                 product_bitrix = create_product_bitrix(product)
