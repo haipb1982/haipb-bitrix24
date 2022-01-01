@@ -237,7 +237,11 @@ def delete_deal_bitrix(id):
     return deal_dao.delete_by_haravan_id(id)
 
 def create_product_bitrix(payload):
-    id = payload.get("id")
+    
+    id = payload.get("id",None)
+    if not id:
+        return None
+
     haravan_product = product_dao.get_by_haravan_id(id)
     if haravan_product or (haravan_product and (haravan_product.get('haravan_data').get('status') == "DELETE")):
         return None
@@ -282,7 +286,10 @@ def create_product_bitrix(payload):
 
 
 def update_product_bitrix(payload):
-    id = payload.get("id")
+    id = payload.get("id",None)
+    if not id:
+        return None
+
     haravan_product = product_dao.get_by_haravan_id(id)
 
     if not haravan_product:
@@ -333,7 +340,10 @@ def deleted_product_bitrix(id):
     return None
 
 def create_contact_bitrix(payload):
-    id = payload.get("id")
+    id = payload.get("id",None)
+    if not id:
+        return None
+
     haravan_contact = contact_dao.get_by_haravan_id(id)
 
     # Nếu đã có dữ liệu để tạo thì sẽ không cần tạo lại nữa. Tránh trường hợp bitrix gửi sai hoặc bị vòng lặp
@@ -381,7 +391,10 @@ def create_contact_bitrix(payload):
     return None
 
 def update_contact_bitrix(payload):
-    haravan_id = payload.get("id")
+    haravan_id = payload.get("id",None)
+    if not haravan_id:
+        return None
+
     haravan_contact = contact_dao.get_by_haravan_id(haravan_id)
 
     # Nếu đã có dữ liệu để tạo thì sẽ không cần tạo lại nữa. Tránh trường hợp bitrix gửi sai hoặc bị vòng lặp
