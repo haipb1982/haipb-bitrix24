@@ -197,8 +197,10 @@ def update_deal_bitrix_all(topic='', payload=None):
 
             # Nếu không có product trong tbl_product thì tạo mới   
             else:
+                print('check4',product_haravan.get("id"))
                 product = haravan_service.Product.get(product_haravan.get("id"))
                 product_bitrix = create_product_bitrix(product)
+                print('check5',product_bitrix)
                 product_id = product_bitrix.get("ID")
             productrow["PRODUCT_ID"] = product_id
             productrow["PRICE"] = product_haravan.get("price",0)
