@@ -201,7 +201,7 @@ def update_deal_bitrix_all(topic='', payload=None):
                 product = haravan_service.Product.get(product_haravan.get("id"))
                 product_bitrix = create_product_bitrix(product)
                 print('check5',product_bitrix)
-                product_id = product_bitrix.get("ID")
+                product_id = product_bitrix.get("ID",None)
             productrow["PRODUCT_ID"] = product_id
             productrow["PRICE"] = product_haravan.get("price",0)
             productrow["QUANTITY"] = product_haravan.get("quantity",0)
