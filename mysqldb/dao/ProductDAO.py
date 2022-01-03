@@ -10,29 +10,29 @@ class ProductDAO(object):
     # # # for webapp API # # #
     def getAllProducts(self):
         res = self.__db.query("SELECT id,haravan_id,haravan_data,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product ORDER BY id DESC", None)
-        self.__db.close()
+        
         return res
         
 
     def getAllProductsPages(self, __from, __to):
         res = self.__db.query("SELECT id,haravan_id,haravan_data,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_product LIMIT %s,%s ORDER BY id DESC", (__from, __to))
-        self.__db.close()
+        
         return res
     
     def deleteProductRecord(self,id):
         res = self.__db.query("DELETE FROM tbl_deal_order WHERE id=%s", id)
-        self.__db.close()
+        
         return res
     
     def updateProductRecord(self,id, haravan_id, bitrix24_id):
         res = self.__db.query("UPDATE tbl_deal_order SET haravan_id=%s, bitrix24_id=%s WHERE id=%s", (haravan_id,bitrix24_id,id))
-        self.__db.close()
+        
         return res
     
     def insertProductRecord(self, hanravan_id, bitrix24_id):
         sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id) VALUES (%s,%s)'''
         res = self.__db.query(sql, (hanravan_id, bitrix24_id))
-        self.__db.close()
+        
         return res
     
     # # # # # # # 
@@ -42,7 +42,7 @@ class ProductDAO(object):
         pamrs = [hanravan_id, bitrix24_id, haravan_data, bitrix_data]
         
         res = self.__db.query(sql, pamrs)
-        self.__db.close()
+        
         
         if res.get("status"):
             return True
@@ -56,7 +56,7 @@ class ProductDAO(object):
         pamrs = [id]
 
         res = self.__db.query(sql, pamrs)
-        self.__db.close()
+        
         
         if res.get("status"):
             data = res.get("data")
@@ -70,7 +70,7 @@ class ProductDAO(object):
         pamrs = [id]
         
         res = self.__db.query(sql, pamrs)
-        self.__db.close()
+        
         
         if res.get("status"):
             data = res.get("data")
@@ -83,7 +83,7 @@ class ProductDAO(object):
         pamrs = [haravan_data, bitrix_data, id]
         
         res = self.__db.query(sql, pamrs)
-        self.__db.close()
+        
 
         if res.get("status"):
             return True
@@ -96,7 +96,7 @@ class ProductDAO(object):
         pamrs = ["DELETE", id]
         
         res = self.__db.query(sql, pamrs)
-        self.__db.close()
+        
         
         if res.get("status"):
             return res.get("data")
@@ -107,7 +107,7 @@ class ProductDAO(object):
         pamrs = ["DELETE", id]
         
         res = self.__db.query(sql, pamrs)
-        self.__db.close()
+        
         
         if res.get("status"):
             return res.get("data")
@@ -118,7 +118,7 @@ class ProductDAO(object):
         pamrs = []
 
         res = self.__db.query(sql, pamrs)
-        self.__db.close()
+        
         
         if res.get("status") and len(res.get("data")) > 0:
             return res.get("data")[0]
@@ -129,7 +129,7 @@ class ProductDAO(object):
         pamrs = []
         
         res = self.__db.query(sql, pamrs)
-        self.__db.close()
+        
         
         if res.get("status") and len(res.get("data")) > 0:
             data = res.get("data")
