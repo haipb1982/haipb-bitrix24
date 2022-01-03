@@ -1,5 +1,6 @@
 import pymysql.cursors
 import pymysql
+import json
 from mysqldb.config import config
 
 
@@ -21,10 +22,28 @@ class DbHelper:
     # def query(self, query, params):
     #    self.__cursor.execute(query, params)
     #    return self.__cursor;
+    def default(self,obj):
+        """Default JSON serializer."""
+        import calendar, datetime
 
+        if isinstance(obj, datetime.datetime):
+            if obj.utcoffset() is not None:
+                obj = obj - obj.utcoffset()
+            millis = int(
+                calendar.timegm(obj.timetuple()) * 1000 +
+                obj.microsecond / 1000
+            )
+            return millis
+        raise TypeError('Not sure how to serialize %s' % (obj,))
 
-    def dbresponse(status=True,code=200,message='success',data=None):
-        return {'status':status,'code':code,'message':message,'data':data}
+    def dbresponse(self,status=True,code=200,message='success',data=None):
+        res = {}
+        res['status'] = status
+        res['code'] = code
+        res['message'] = message
+        # res['data'] = json.dumps(data, default=self.default)
+        res['data'] = data
+        return res
 
     def query(self, query, params):
         result = {}
@@ -40,7 +59,6 @@ class DbHelper:
             # self.__connection.rollback()
         # finally:
             # self.__connection.close()
-        print(result)
         return result
 
     def execute(self, query, params):
@@ -63,7 +81,9 @@ class DbHelper:
         result = {}
         try:
             self.__cursor.execute(query, params)            
-            result = self.dbresponse(data=self.__cursor.fetchall())
+            data = self.__cursor.fetchall()
+            # print(data)
+            result = self.dbresponse(data=data)
         except Exception as err:
             print('\033[91m','mySQL ERROR:',err, '\033[0m')
             print('\033[92m','mySQL ERROR query:',query, '\033[0m')
