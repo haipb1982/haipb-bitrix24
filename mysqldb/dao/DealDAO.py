@@ -10,27 +10,33 @@ class DealDAO(object):
     # # # for webapp API # # #
     def getAllDeals(self):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status, haravan_data, bitrix_status,update_ts FROM tbl_deal_order ORDER BY id DESC", None)
+        self.__db.close()
         return res
 
     def getDealOrderByHaID(self,haravan_id):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status, haravan_data, bitrix_status,update_ts FROM tbl_deal_order WHERE haravan_id=%s", haravan_id)
+        self.__db.close()
         return res
 
     def getAllDealsPages(self, __from, __to):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status,haravan_data,bitrix_status,update_ts FROM tbl_deal_order LIMIT %s,%s ORDER BY id DESC", (__from, __to))
+        self.__db.close()
         return res
     
     def deleteDealRecord(self,id):
         res = self.__db.query("DELETE FROM tbl_deal_order WHERE id=%s", id)
+        self.__db.close()
         return res
     
     def updateDealRecord(self,id, haravan_id, bitrix24_id):
         res = self.__db.query("UPDATE tbl_deal_order SET haravan_id=%s, bitrix24_id=%s WHERE id=%s", (haravan_id,bitrix24_id,id))
+        self.__db.close()
         return res
     
     def insertDealRecord(self, haravan_id, bitrix24_id):
         sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id) VALUES (%s,%s)'''        
         res = self.__db.query(sql, (haravan_id, bitrix24_id))
+        self.__db.close()
         return res
     
     # # # # # #
@@ -41,7 +47,8 @@ class DealDAO(object):
         pamrs = [hanravan_id, bitrix24_id, haravan_data, bitrix_data]
 
         res = self.__db.query(sql, pamrs)
-
+        self.__db.close()
+        
         if res.get("status"):
             print('--> addNewDeal successful ',hanravan_id,bitrix24_id)
             return True
@@ -56,7 +63,8 @@ class DealDAO(object):
         pamrs = [haravan_data, bitrix_data, id]
 
         res = self.__db.query(sql, pamrs)
-
+        self.__db.close()
+        
         if res.get("status"):
             print('--> DAO updateDeal successful ',id)
             return True
@@ -69,6 +77,8 @@ class DealDAO(object):
         sql = '''SELECT * FROM tbl_deal_order WHERE haravan_id = %s'''
         pamrs = [id]
         res = self.__db.query(sql, pamrs)
+        self.__db.close()
+        
         if res.get("status"):
             return res.get("data")
         return None
@@ -77,6 +87,8 @@ class DealDAO(object):
         sql = '''SELECT * FROM tbl_deal_order WHERE haravan_id = %s'''
         pamrs = [id]
         res = self.__db.query(sql, pamrs)
+        self.__db.close()
+        
         if res.get("status"):
             return res.get("data")
         return None
@@ -85,6 +97,8 @@ class DealDAO(object):
         sql = '''SELECT * FROM tbl_deal_order WHERE bitrix24_id = %s'''
         pamrs = [id]
         res = self.__db.query(sql, pamrs)
+        self.__db.close()
+        
         if res.get("status"):
             return res.get("data")
         return None
@@ -94,7 +108,8 @@ class DealDAO(object):
         pamrs = [id]
 
         res = self.__db.query(sql, pamrs)
-
+        self.__db.close()
+        
         if res.get("status"):
             return res.get("data")
         return None
@@ -104,7 +119,8 @@ class DealDAO(object):
         pamrs = ["DELETE", id]
 
         res = self.__db.query(sql, pamrs)
-
+        self.__db.close()
+        
         if res.get("status"):
             return res.get("data")
         return None
@@ -114,7 +130,8 @@ class DealDAO(object):
         pamrs = ["DELETE", id]
 
         res = self.__db.query(sql, pamrs)
-
+        self.__db.close()
+        
         if res.get("status"):
             return res.get("data")
         return None
