@@ -22,23 +22,53 @@ class DbHelper:
     #    self.__cursor.execute(query, params)
     #    return self.__cursor;
 
+
+    def dbresponse(status=True,code=200,message='success',data=None):
+        return {'status':status,'code':code,'message':message,'data':data}
+
     def query(self, query, params):
         result = {}
         try:
             self.__cursor.execute(query, params)            
-            result['status'] = True
-            result['code'] = 200
-            result['message'] = 'success'
-            result['data'] = self.__cursor.fetchall()
+            result = self.dbresponse(data=self.__cursor.fetchall())
             self.__connection.commit()
         except Exception as err:
             print('\033[91m','mySQL ERROR:',err, '\033[0m')
             print('\033[92m','mySQL ERROR query:',query, '\033[0m')
             print('mySQL ERROR params:', params)
-            result['status'] = False
-            result['code'] = 500
-            result['message'] = f'error:{err}'
-            result['data'] = None
+            result = self.dbresponse(False,500,f'error:{err}',None)
+            # self.__connection.rollback()
+        # finally:
+            # self.__connection.close()
+        print(result)
+        return result
+
+    def execute(self, query, params):
+        result = {}
+        try:
+            self.__cursor.execute(query, params)            
+            result = self.dbresponse(data=self.__cursor.fetchall())
+            self.__connection.commit()
+        except Exception as err:
+            print('\033[91m','mySQL ERROR:',err, '\033[0m')
+            print('\033[92m','mySQL ERROR query:',query, '\033[0m')
+            print('mySQL ERROR params:', params)
+            result = self.dbresponse(False,500,f'error:{err}',None)
+            # self.__connection.rollback()
+        # finally:
+            # self.__connection.close()
+        return result
+
+    def fetch(self, query, params):
+        result = {}
+        try:
+            self.__cursor.execute(query, params)            
+            result = self.dbresponse(data=self.__cursor.fetchall())
+        except Exception as err:
+            print('\033[91m','mySQL ERROR:',err, '\033[0m')
+            print('\033[92m','mySQL ERROR query:',query, '\033[0m')
+            print('mySQL ERROR params:', params)
+            result = self.dbresponse(False,500,f'error:{err}',None)
             # self.__connection.rollback()
         # finally:
             # self.__connection.close()
@@ -46,3 +76,6 @@ class DbHelper:
 
     def close(self):
         self.__connection.close();
+
+    
+
