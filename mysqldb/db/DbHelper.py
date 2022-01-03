@@ -73,8 +73,6 @@ class DbHelper:
             print('mySQL ERROR params:', params)
             result = self.dbresponse(False,500,f'error:{err}',None)
             # self.__connection.rollback()
-        # finally:
-            # self.__connection.close()
         return result
 
     def fetch(self, query, params):
@@ -82,16 +80,12 @@ class DbHelper:
         try:
             self.__cursor.execute(query, params)            
             data = self.__cursor.fetchall()
-            # print(data)
             result = self.dbresponse(data=data)
         except Exception as err:
             print('\033[91m','mySQL ERROR:',err, '\033[0m')
             print('\033[92m','mySQL ERROR query:',query, '\033[0m')
             print('mySQL ERROR params:', params)
             result = self.dbresponse(False,500,f'error:{err}',None)
-            # self.__connection.rollback()
-        # finally:
-            # self.__connection.close()
         return result
 
     def close(self):
