@@ -9,18 +9,18 @@ from mysqldb.dao.ProductDAO import ProductDAO
 from mysqldb.dao.ContactDAO import ContactDAO
 from .bitrix24_service import DealProductRow
 
-from utils import Logger
-
 deal_dao = DealDAO()
 product_dao = ProductDAO()
 contact_dao = ContactDAO()
 
-from utils import log, common
+from utils import log, common, logger
+from utils.logger import Logger
 import migration.deal as Deal
 from .mapping_service import convert_object, product_mapping, contact_mapping
 
-LOGGER = log.get_logger(__name__)
-# LOGGER = Logger(__name__).get()
+# LOGGER = log.get_logger(__name__)
+LOGGER = Logger(__name__).get()
+
 
 
 def create_deal_bitrix(payload=None):
