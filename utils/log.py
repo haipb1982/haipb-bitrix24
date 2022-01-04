@@ -2,16 +2,6 @@ import logging
 from datetime import datetime
 
 from pythonjsonlogger import jsonlogger
-
-from . import env
-
-# minimize boto3 loggging
-logging.getLogger('boto3').setLevel(logging.CRITICAL)
-logging.getLogger('botocore').setLevel(logging.CRITICAL)
-logging.getLogger('s3transfer').setLevel(logging.CRITICAL)
-logging.getLogger('urllib3').setLevel(logging.CRITICAL)
-
-
 class CustomJsonFormatter(jsonlogger.JsonFormatter):
     def add_fields(self, log_record, record, message_dict):
         super(CustomJsonFormatter, self).add_fields(log_record, record, message_dict)
@@ -32,8 +22,8 @@ def get_logger(name: str) -> logging.Logger:
     # Create a custom logger
     logger = logging.getLogger(name)
 
-    # Setup logger level
-    logger.setLevel(env.LOGLEVEL)
+    # # Setup logger level
+    # logger.setLevel(env.LOGLEVEL)
 
     # Setup logger custom handler
     handler = logging.StreamHandler()

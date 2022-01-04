@@ -10,8 +10,6 @@ import threading, queue
 
 q = queue.Queue()
 
-import bx24 as Bx24
-from dao import deal_dao, db
 from services import haravan_to_bitrix, bitrix_to_haravan, webapp_service, retryjob_service
 from utils import log
 from utils.common import build_response_200, build_response_400, build_response_500

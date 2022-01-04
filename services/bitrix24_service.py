@@ -2,7 +2,7 @@ import json
 
 from bitrix24 import *
 
-from utils import log, common
+from utils import log
 
 LOGGER = log.get_logger(__name__)
 
@@ -234,10 +234,10 @@ class Catalog:
 
 # # # # # # # # # # # # # # # PRODUCT FUNCTIONS # # # # # # # # # # # # # # #
 
-# lay product list
-def getProductListToFile():
-    res = bx24.callMethod("crm.product.list")
-    common.writeFile(res, "crm.contact.list.json")
+# # lay product list
+# def getProductListToFile():
+#     res = bx24.callMethod("crm.product.list")
+#     common.writeFile(res, "crm.contact.list.json")
 
 
 # res = bx24.callMethod("crm.catalog.list")
