@@ -52,7 +52,7 @@ def create_deal_bitrix(payload=None):
         LOGGER.info('Tạo mới Contact Bx24...')
         contact_bitrix = create_contact_bitrix(customer)
         contact_bitrix_id = contact_bitrix.get("ID")
-        LOGGER.info('Tạo mới Contact Bx24 thành công:',contact_bitrix_id)
+        LOGGER.info(f'Tạo mới Contact Bx24 thành công:{contact_bitrix_id}')
 
 
     fields = Deal.HaravanToBitrix24(payload)
@@ -63,11 +63,11 @@ def create_deal_bitrix(payload=None):
     haravan_user = haravan_service.User.get(user_id)
     if haravan_user and haravan_user.get("user"):
         user = haravan_user.get("user")
-        LOGGER.info('người tạo đơn',user)
+        LOGGER.info('người tạo đơn',extra={'user',user})
         fields['UF_CRM_1630417157521'] = user.get("last_name", "") + " " + user.get("first_name", "")
     else:
         fields['UF_CRM_1630417157521'] = 'HARAVAN-BITRIX24 APP' # người tạo đơn
-        LOGGER.info('Không tìm thấy người tạo đơn mặc định HARAVAN-BITRIX24 APP')
+        LOGGER.info('Không tìm thấy người tạo đơn mặc định --> HARAVAN-BITRIX24 APP')
     # fields["STAGE_ID"] = "C18:NEW"
     # fields["UF_CRM_1637252157269"] = str(payload.get("id"))
 
@@ -78,9 +78,9 @@ def create_deal_bitrix(payload=None):
         LOGGER.error('Không tạo được Bitrix24 Deal mới!')
         return False
     else:
-        LOGGER.info('Tạo mới Deal Bx24 thành công',bitrix24_deal.get("ID"))
+        LOGGER.info(f'Tạo mới Deal Bx24 thành công{bitrix24_deal.get("ID")}')
         
-    LOGGER.info('Tạo mới record tbl_deal_order',haravan_id,bitrix24_deal.get("ID"))
+    LOGGER.info(f'Tạo mới record tbl_deal_order {haravan_id,bitrix24_deal.get("ID")}')
     add_new_result = deal_dao.addNewDeal(
         hanravan_id=haravan_id,
         bitrix24_id=bitrix24_deal.get("ID"),
@@ -89,9 +89,9 @@ def create_deal_bitrix(payload=None):
     )
     # Nếu không thành công thì chỉ add id và chạy update lại
     if not add_new_result:
-        LOGGER.error('Tạo mới record tbl_deal_order lần 1 thất bại:',haravan_id,bitrix24_deal.get("ID"))
+        LOGGER.error(f'Tạo mới record tbl_deal_order lần 1 thất bại: {haravan_id} , {bitrix24_deal.get("ID")}')
     else:
-        LOGGER.info('Tạo mới record tbl_deal_order lần 2 ...',haravan_id,bitrix24_deal.get("ID"))
+        LOGGER.info(f'Tạo mới record tbl_deal_order lần 2 ... {haravan_id} , {bitrix24_deal.get("ID")}')
         add_new_result2 = deal_dao.addNewDeal(
         hanravan_id=haravan_id,
         bitrix24_id=bitrix24_deal.get("ID"),
@@ -101,12 +101,12 @@ def create_deal_bitrix(payload=None):
         if add_new_result2:
             update_deal_bitrix_all(topic='orders/updated', payload=payload)
         else:
-            LOGGER.error('Tạo mới record tbl_deal_order lần 2 thất bại:',haravan_id,bitrix24_deal.get("ID"))
+            LOGGER.error(f'Tạo mới record tbl_deal_order lần 2 thất bại: {haravan_id} {bitrix24_deal.get("ID")}')
     
     
     product_haravans = payload.get("line_items",None)
     if not product_haravans:
-        LOGGER.error('Không tìm thấy sản phẩm trong Order Haravan',extra={payload:payload})
+        LOGGER.error('Không tìm thấy sản phẩm trong Order Haravan',extra={"payload":payload})
     else:
         LOGGER.info('Tìm thấy sản phẩm trong Order Haravan...')
 
@@ -114,7 +114,7 @@ def create_deal_bitrix(payload=None):
     i = 0
     for product_haravan in product_haravans:
         if product_haravan.get("id",None):
-            LOGGER.info('Tìm thấy ID sản phẩm trong Order Haravan...',product_haravan.get("id"))
+            LOGGER.info(f'Tìm thấy ID sản phẩm trong Order Haravan... {product_haravan.get("id")}')
 
             productrow = {}
             product_result = product_dao.get_by_haravan_id(product_haravan.get("id"))
@@ -128,7 +128,7 @@ def create_deal_bitrix(payload=None):
                 product_bitrix = create_product_bitrix(product)
                 product_id = product_bitrix.get("ID")
                 if product_id:
-                    LOGGER.info('Tạo mới product trên Bx24 thành công',product_id)
+                    LOGGER.info(f'Tạo mới product trên Bx24 thành công {product_id}')
                 else:
                     LOGGER.error('Tạo mới product trên Bx24 thất bại')
 
@@ -151,7 +151,7 @@ def create_deal_bitrix(payload=None):
             productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)
 
             if product_id:
-                LOGGER.info('Thêm product vào Deal Bx',product_id)
+                LOGGER.info(f'Thêm product vào Deal Bx {product_id}')
                 productrows[i] = productrow
                 i = i + 1
         else:
@@ -164,10 +164,10 @@ def create_deal_bitrix(payload=None):
         "rows": productrows
     }
 
-    LOGGER.info('Cập nhật DealProductRow Deal Bx24',fields)
+    LOGGER.info('Cập nhật DealProductRow Deal Bx24',extra={'fields',fields})
     deal_productrow = DealProductRow.set(fields)
     if deal_productrow:
-        LOGGER.info('Cập nhật DealProductRow Deal Bx24 thành công',deal_productrow)
+        LOGGER.info('Cập nhật DealProductRow Deal Bx24 thành công',extra={'deal_productrow':deal_productrow})
     # Lưu dữ liệu từ bitrix vào db để mapping giữa haravan và bitrix
     return deal_productrow
 
@@ -177,15 +177,15 @@ def update_deal_bitrix_all(topic='', payload=None):
 
     # Sử dụng database để mapping giữa haravan và bitrix
     haravan_id = payload.get("id") or payload.get("number")
-    LOGGER.info('Cập nhật Haravan-->Bx24 update_deal_bitrix_all',haravan_id)
+    LOGGER.info(f'Cập nhật Haravan-->Bx24 update_deal_bitrix_all {haravan_id}')
     
     deal_order = deal_dao.getDealOrderByHaID(haravan_id)
 
     if not deal_order.get('data',None):
-        LOGGER.warning('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24',deal_order.get('data'))
+        LOGGER.warning('HaravanID chưa có trong database! Đang tạo mới Deal trên Bitrix24',extra={'data',deal_order.get('data')})
         return create_deal_bitrix(payload)
     else:
-        LOGGER.info('HaravanID có trong database!',deal_order.get('data'))
+        LOGGER.info('HaravanID có trong database!')
 
     # TODO: Với trường hợp update thì sẽ cần kiểm tra dữ liệu của webhook data so với dữ liệu trong DB.
     # Nếu khác nhau sẽ cho cập nhật
@@ -209,10 +209,10 @@ def update_deal_bitrix_all(topic='', payload=None):
     if topic in ['orders/fulfilled']:
         fields['STAGE_ID'] = "C18:WON"
     
-    LOGGER.info('Cập nhật dữ liệu trên bitrix',extra={fields:fields})
+    LOGGER.info('Cập nhật dữ liệu trên bitrix',extra={'fields',fields})
     # Cập nhật deal trên bitrix
     result = bitrix24_service.Deal.update(fields)
-    LOGGER.info('Cập nhật trên bitrix kết quả',result)
+    LOGGER.info('Cập nhật trên bitrix kết quả',extra={'result',result})
 
     # Cập nhật products của Deal 
     product_haravans = payload.get("line_items",None)
@@ -239,7 +239,7 @@ def update_deal_bitrix_all(topic='', payload=None):
                     product_bitrix = create_product_bitrix(product)
                     product_id = product_bitrix.get("ID")
                 else:
-                    LOGGER.warning('Không tìm thấy haravan product',product_haravan.get("id"))
+                    LOGGER.warning(f'Không tìm thấy haravan product{product_haravan.get("id")}')
 
             productrow["PRODUCT_ID"] = product_id
             productrow["PRICE"] = product_haravan.get("price",0)
@@ -272,7 +272,7 @@ def update_deal_bitrix_all(topic='', payload=None):
     }
     
     deal_productrow = DealProductRow.set(fields)
-    LOGGER.info('Thêm mới DealProductRow vào Deal Bx24',deal_productrow)
+    LOGGER.info('Thêm mới DealProductRow vào Deal Bx24',extra={'deal_productrow',deal_productrow})
 
     LOGGER.info('Cập nhật dữ liệu trên tbl_deal_order')
     update_result = deal_dao.updateDeal(haravan_id, json.dumps(payload), json.dumps(result))
