@@ -7,8 +7,9 @@ class CustomJsonFormatter(jsonlogger.JsonFormatter):
         super(CustomJsonFormatter, self).add_fields(log_record, record, message_dict)
         if not log_record.get('timestamp'):
             # this doesn't use record.created, so it is slightly off
-            now = datetime.utcnow().isoformat()
-            log_record['timestamp'] = now
+            # now = datetime.utcnow().isoformat()
+            now = datetime.now()
+            log_record['timestamp'] = now.strftime("%d/%m/%Y %H:%M:%S")
 
         if log_record.get('level'):
             log_record['level'] = log_record['level'].upper()

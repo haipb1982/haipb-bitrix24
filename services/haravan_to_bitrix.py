@@ -18,8 +18,8 @@ from utils.Logger import Logger
 import migration.deal as Deal
 from .mapping_service import convert_object, product_mapping, contact_mapping
 
-# LOGGER = log.get_logger(__name__)
-LOGGER = Logger(__name__).get()
+LOGGER = log.get_logger(__name__)
+# LOGGER = Logger(__name__).get()
 
 
 
