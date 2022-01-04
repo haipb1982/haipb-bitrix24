@@ -13,8 +13,8 @@ deal_dao = DealDAO()
 product_dao = ProductDAO()
 contact_dao = ContactDAO()
 
-from utils import log, common, logger
-from utils.logger import Logger
+from utils import Logger, log, common
+from utils.Logger import Logger
 import migration.deal as Deal
 from .mapping_service import convert_object, product_mapping, contact_mapping
 
