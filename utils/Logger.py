@@ -10,8 +10,9 @@ class Logger(object):
         logger.setLevel(logging.DEBUG)
         if not logger.handlers:
             # file_name = os.path.join(settings.LOGGING_DIR, '%s.log' % name)    # usually I keep the LOGGING_DIR defined in some global settings file
-            file_name = os.path.join("logs", '%s.log' % name)
-            handler = logging.FileHandler(file_name)
+            # file_name = os.path.join("logs", '%s.log' % name)
+            # handler = logging.FileHandler(file_name)
+            handler = logging.StreamHandler()
             formatter = logging.Formatter('%(asctime)s %(levelname)s:%(name)s %(message)s')
             handler.setFormatter(formatter)
             handler.setLevel(logging.DEBUG)
