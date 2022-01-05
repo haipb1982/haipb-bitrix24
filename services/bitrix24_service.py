@@ -59,7 +59,7 @@ class Deal():
             LOGGER.info('BX24 update_deal: ', extra={"res": res})
             return Deal.get(id)
         except Exception as e:
-            LOGGER.error('BX24 update deal::exception: ', extra={"e": e})
+            LOGGER.error('BX24 update deal::exception: ', extra={"e": e,"data_fields":data_fields})
             return None
 
     @staticmethod
@@ -103,7 +103,7 @@ class Product():
             id = bx24.callMethod("crm.product.add", fields=fields)
             return Product.get(id)
         except BitrixError as e:
-            LOGGER.error('Product::insert::exception: ', extra={"e": e})
+            LOGGER.error('Product::insert::exception: ', extra={"e": e,"fields":fields})
             return None
 
     @staticmethod
@@ -114,7 +114,7 @@ class Product():
             LOGGER.info('Product:update: ', extra={"res": res})
             return Product.get(data_fields.get("ID"))
         except Exception as e:
-            LOGGER.error('Product::update::exception: ', extra={"e": e})
+            LOGGER.error('Product::update::exception: ', extra={"e": e,"data_fields":data_fields})
             return None
 
     @staticmethod
@@ -124,7 +124,7 @@ class Product():
             LOGGER.info('Product::delete: ', extra={"res": res})
             return True
         except Exception as e:
-            LOGGER.error('Product::delete::exception: ', extra={"e": e})
+            LOGGER.error(f'Product::delete::exception: ID={id} ', extra={"e": e})
             return False
 
 
@@ -147,7 +147,7 @@ class DealProductRow():
             LOGGER.info('ProductRow:update: ', extra={"res": res})
             return DealProductRow.get(data_fields.get("ID"))
         except Exception as e:
-            LOGGER.error('Product::update::exception: ', extra={"e": e})
+            LOGGER.error('Product::update::exception: ', extra={"e": e, "data_fields":data_fields})
             return None
 
 
@@ -177,7 +177,7 @@ class Contact():
             res = Contact.get(id)
             return res
         except BitrixError as e:
-            LOGGER.error('Contact::insert::exception: ', extra={"e": e})
+            LOGGER.error('Contact::insert::exception: ', extra={"e": e,"fields":fields})
             return None
 
     @staticmethod
@@ -189,7 +189,7 @@ class Contact():
             if result:
                 return Contact.get(data_fields.get("ID"))
         except Exception as e:
-            LOGGER.error('Contact::update::exception: ', extra={"e": e})
+            LOGGER.error('Contact::update::exception: ', extra={"e": e,"data_fields":data_fields})
             return None
 
     @staticmethod
@@ -199,7 +199,7 @@ class Contact():
             LOGGER.info('Contact::delete: ', extra={"res": res})
             return True
         except Exception as e:
-            LOGGER.error('Contact::delete::exception: ', extra={"e": e})
+            LOGGER.error(f'Contact::delete::exception: ID={id}', extra={"e": e})
             return False
 
 

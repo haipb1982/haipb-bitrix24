@@ -158,8 +158,8 @@ def update_deal_bitrix_all(topic='', payload=None):
     product_haravans = payload.get("line_items",None)
 
     if product_haravans:
-        # LOGGER.info('Cập nhật sản phẩm từ Order sang Deal ...')
-        LOGGER.info('Cập nhật sản phẩm từ Order sang Deal',extra={'extra':product_haravans})
+        LOGGER.info('Cập nhật sản phẩm từ Order sang Deal ...')
+        # LOGGER.info('Cập nhật sản phẩm từ Order sang Deal',extra={'extra':product_haravans})
     else:
         LOGGER.warning('Không có product trong Order Haravan')
         return None
@@ -258,13 +258,13 @@ def update_deal_bitrix_all(topic='', payload=None):
         "id": fields["ID"],
         "rows": productrows
     }
-    LOGGER.info('Thêm mới DealProductRow vào Deal Bx24',extra={'extra':fields})
+    # LOGGER.info('Thêm mới DealProductRow vào Deal Bx24',extra={'extra':fields})
 
     deal_productrow = DealProductRow.set(fields)
     if deal_productrow:
-        LOGGER.warning('Thêm mới DealProductRow vào Deal Bx24 thất bại')
+        LOGGER.warning('Thêm mới DealProductRow vào Deal Bx24 thất bại',extra={'extra':fields})
     else:
-        LOGGER.info('Thêm mới DealProductRow vào Deal Bx24 thành công',extra={'extra':deal_productrow})
+        LOGGER.info('Thêm mới DealProductRow vào Deal Bx24 thành công')
 
     LOGGER.info('Cập nhật dữ liệu trên tbl_deal_order')
     update_result = deal_dao.updateDeal(haravan_id, json.dumps(payload), json.dumps(result))
