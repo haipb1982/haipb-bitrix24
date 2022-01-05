@@ -87,18 +87,22 @@ def insert_contact_record(haravan_id, bitrix24_id):
 
 # Sync data bằng cách cập nhật update_ts order, product, contact. Sau đó auto trigger webhook để đồng bộ 2 chiều
 def get_sync(type, haravan_id):
+    LOGGER.info(f'Sync data {type} from Haravan ID={haravan_id}')
     res = {}
-    data = {'updated_at': datetime.now()}
+    res['code'] = 200
+    res['message'] = 'SYNC data successful!'
+    data = {'updated_at': datetime.now().isoformat()}
     try:
-        if type == 'order':
+        if type in ['order','orders'] :
             haravan_service.Order.update(haravan_id, data)
-        if type == 'product':
+        elif type in ['product','products']:
             haravan_service.Product.update(haravan_id, data)
-        if type == 'contact':
+        elif type in ['contact','contacts']:
             haravan_service.Customer.update(haravan_id, data)
-
-        res['code'] = 200
-        res['message'] = 'SYNC data successful!'
+        else:
+            res['code'] = 200
+            res['message'] = 'NOT found type! SYNC data failed...'
+        
     except:
         res['code'] = 500
         res['message'] = 'SYNC data failed!'
