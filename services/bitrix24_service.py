@@ -66,10 +66,10 @@ class Deal():
     def delete(id):
         try:
             res = bx24.callMethod("crm.deal.delete", id=id)
-            LOGGER.info('delete_deal: ', extra={"res": res})
+            LOGGER.info(f'delete_deal: {id} ', extra={"res": res})
             return True
         except Exception as e:
-            LOGGER.info('delete_deal::exception: ', extra={"e": e})
+            LOGGER.info(f'delete_deal {id} ::exception: ', extra={"e": e})
             return False
 
 

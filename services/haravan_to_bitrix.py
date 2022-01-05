@@ -89,8 +89,9 @@ def create_deal_bitrix(payload=None):
     )
     # Nếu không thành công thì chỉ add id và chạy update lại
     if not add_new_result:
-        LOGGER.error(f'Tạo mới record tbl_deal_order lần 1 thất bại: {haravan_id} , {bitrix24_deal.get("ID")}')
+        LOGGER.error(f'Tạo mới record tbl_deal_order lần 1 thành công: {haravan_id} , {bitrix24_deal.get("ID")}')
     else:
+        LOGGER.error(f'Tạo mới record tbl_deal_order lần 1 thất bại')
         LOGGER.info(f'Tạo mới record tbl_deal_order lần 2 ... {haravan_id} , {bitrix24_deal.get("ID")}')
         add_new_result2 = deal_dao.addNewDeal(
         hanravan_id=haravan_id,
@@ -104,6 +105,9 @@ def create_deal_bitrix(payload=None):
             LOGGER.error(f'Tạo mới record tbl_deal_order lần 2 thất bại: {haravan_id} {bitrix24_deal.get("ID")}')
     
     # update_deal_bitrix_all('orders/updated',payload)
+    
+    update_time_data = {'updated_at': datetime.now()}
+    haravan_service.Order.update(haravan_id, update_time_data)
 
     return True
 
