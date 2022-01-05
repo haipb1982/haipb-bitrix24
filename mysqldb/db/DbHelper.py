@@ -35,7 +35,8 @@ class DbHelper:
             result['code'] = 200
             result['message'] = 'success'
             result['data'] = self.__cursor.fetchall()
-            # LOGGER.info('mySQL query done',extra={"extra":result['data']})
+            # LOGGER.info('mySQL query done 1')
+            # LOGGER.info('mySQL query done 2',extra={"extra":result['data']})
             self.__connection.commit()
         except Exception as err:
             LOGGER.error('mySQL ERROR:',{"extra":err})

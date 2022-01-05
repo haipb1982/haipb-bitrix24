@@ -4,7 +4,9 @@ import logging
 
 class myFormatter(logging.Formatter):
     def format(self, record):
-        print('Got extra:', record) # or do whatever you want with _extra
+        if 'extra' not in dir(record):
+            # print('Got extra:', record.extra) # or do whatever you want with _extra
+            record.extra = None
         return super().format(record)
 
 class ExtraLogFormatter(logging.Formatter):                                                                             
@@ -31,7 +33,8 @@ class Logger(object):
             
             handler = logging.StreamHandler()
             # formatter = logging.Formatter('%(levelname)s - %(asctime)s : %(name)s %(message)s')
-            formatter = ExtraLogFormatter('*** %(levelname)s | %(asctime)s | %(name)s %(message)s -extra- %(extra)s')
+            # formatter = ExtraLogFormatter('*** %(levelname)s | %(asctime)s | %(name)s %(message)s -extra- %(extra)s')
+            formatter =myFormatter('*** %(levelname)s | %(asctime)s | %(name)s *** %(message)s ### %(extra)s')
 
             handler.setFormatter(formatter)
             handler.setLevel(logging.DEBUG)
