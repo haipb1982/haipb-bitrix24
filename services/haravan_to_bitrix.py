@@ -186,8 +186,9 @@ def update_deal_bitrix_all(topic='', payload=None):
                 if product.get('variant'):
                     LOGGER.info('Không Tìm thấy sản phẩm trong Haravan Variant. Tạo mới trên Bx24...')
                     product_bitrix = create_product_bitrix(product['variant'])
-                    product_id = product_bitrix.get("ID",None)
-                    if product_id:
+                    
+                    if product_bitrix:
+                        product_id = product_bitrix.get("ID")
                         LOGGER.info(f'Tạo mới trên Bx24 Product thanh cong... {product_id}')
                     else:
                         LOGGER.warning(f'Tạo mới trên Bx24 Product that bai')
@@ -213,8 +214,9 @@ def update_deal_bitrix_all(topic='', payload=None):
                     if product.get('product'):
                         LOGGER.info('Không Tìm thấy sản phẩm trong Haravan product. Tạo mới trên Bx24...')
                         product_bitrix = create_product_bitrix(product['product'])
-                        product_id = product_bitrix.get("ID")
-                        if product_id:
+                        
+                        if product_bitrix:
+                            product_id = product_bitrix.get("ID")
                             LOGGER.info(f'Tạo mới trên Bx24 Product thanh cong... {product_id}')
                         else:
                             LOGGER.warning(f'Tạo mới trên Bx24 Product that bai')
