@@ -91,8 +91,12 @@ def update_order_haravan(id):
     result = deal_dao.getBitrix24ID(id)
 
     # Nếu đã có dữ liệu để tạo thì sẽ không cần tạo lại nữa. Tránh trường hợp bitrix gửi sai hoặc bị vòng lặp
+    # Nếu không có dữ liệu sẽ tạo mới record tbl_deal_order theo HaravanID trong Bx Deal
+    if not result:
+        create_order_deal(id) 
+    
     # Nếu dữ liệu của haravan hoặc bitrix bị xóa thì sẽ ko cho xử lý
-    if not result or result[0].get('status') == "DELETE":
+    if result[0].get('status') == "DELETE":
         return None
 
     haravan_id = result[0].get('haravan_id')
