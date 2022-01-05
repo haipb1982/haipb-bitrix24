@@ -2,11 +2,29 @@ import os
 import logging 
 # import settings   # alternativly from whereever import settings  
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 class myFormatter(logging.Formatter):
     def format(self, record):
         if 'extra' not in dir(record):
             # print('Got extra:', record.extra) # or do whatever you want with _extra
             record.extra = None
+        # color log
+        if record.levelname == 'INFO':
+            record.levelname = bcolors.OKCYAN + record.levelname + bcolors.ENDC
+        if record.levelname == 'ERROR':
+            record.levelname = bcolors.FAIL + record.levelname + bcolors.ENDC
+        if record.levelname == 'WARNING' or record.levelname == 'WARN':
+            record.levelname = bcolors.WARNING + record.levelname + bcolors.ENDC
+
         return super().format(record)
 
 class ExtraLogFormatter(logging.Formatter):                                                                             
