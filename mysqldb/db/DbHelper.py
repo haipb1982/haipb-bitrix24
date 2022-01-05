@@ -3,7 +3,10 @@ import pymysql
 from mysqldb.config import config
 
 from utils import log
-LOGGER = log.get_logger(__name__)
+# LOGGER = log.get_logger(__name__)
+
+from utils.Logger import Logger
+LOGGER = Logger(__name__).get()
 
 class DbHelper:
 
@@ -32,11 +35,12 @@ class DbHelper:
             result['code'] = 200
             result['message'] = 'success'
             result['data'] = self.__cursor.fetchall()
-            LOGGER.info('mySQL query done',)
+            # LOGGER.info('mySQL query done',extra={"extra":result['data']})
             self.__connection.commit()
         except Exception as err:
-            LOGGER.error('\033[91m','mySQL ERROR:',err, '\033[0m')
-            LOGGER.error('mySQL ERROR query:' ,extra={query:query,params:params})
+            LOGGER.error('mySQL ERROR:',{"extra":err})
+            LOGGER.error('mySQL ERROR query:' ,extra={"extra":query})
+            LOGGER.error('mySQL ERROR params:' ,extra={"extra":params})
             result['status'] = False
             result['code'] = 500
             result['message'] = f'error:{err}'

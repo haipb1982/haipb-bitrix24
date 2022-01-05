@@ -37,7 +37,7 @@ def create_order_haravan(id):
     # Nếu dữ liệu có thay đổi thì sẽ cho cập lại những thay đổi
     data = mapping_service.convert_object(deal_bitrix, deal_mapping, "HARAVAN")
 
-    LOGGER.info("RESULT: ", extra={"data": data})
+    LOGGER.info("RESULT: ", extra={"extra": data})
 
     # TODO: Đây sẽ là dữ liệu tạm thời để có thể tạo order bitrix sang haravan
     # Cần lấy sản phẩm đúng thay vì mock sản phẩm
@@ -61,6 +61,25 @@ def create_order_haravan(id):
         return deal_dao.addNewDeal(haravan_id, id, haravan_data=json.dumps(order), bitrix_data=json.dumps(deal_bitrix))
     else:
         return None
+
+# Tạo record in tbl_deal_order
+def create_order_deal(bitrix24_id):
+    bx_data = bitrix24_service.Deal.get(bitrix24_id)
+    if bx_data:
+        haravan_id = bx_data.get('UF_CRM_1623809034975',None)
+        if haravan_id:
+            LOGGER.info(f'Tìm thấy HaravanID --> Thêm mới record tbl_deal_order... {haravan_id} {bitrix24_id}')
+            result = deal_dao.addNewDeal(haravan_id, bitrix24_id, None, None)
+            if result:
+                LOGGER.info(f'Thêm mới record tbl_deal_order thành công! {haravan_id} {bitrix24_id}')
+            else:
+                LOGGER.info(f'Thêm mới record tbl_deal_order thất bại ! {haravan_id} {bitrix24_id}')
+                LOGGER.info(f'Đang xoá Bx24 Deal {bitrix24_id} ...')
+                _delete = bitrix24_service.Deal.delete(bitrix24_id) 
+                LOGGER.info(f'--> Xoá Bx24 Deal {bitrix24_id}',extra={'extra':_delete})       
+    else:
+        LOGGER.info(f'Không có HaravanID trong Bx24 Deal {bitrix24_id}')
+    return None
 
 # Haravan chỉ cho phép chỉnh sửa note, shipping_address, tags còn những thong tin khác ko cho chỉnh sửa
 # TODO: Sẽ cần xử lý về sau
@@ -89,7 +108,7 @@ def update_order_haravan(id):
     # Nếu dữ liệu có thay đổi thì sẽ cho cập lại những thay đổi
     data_update = mapping_service.convert_object(changed_data, deal_mapping, "HARAVAN")
 
-    LOGGER.info("RESULT: ", extra={"data_update": data_update})
+    LOGGER.info("RESULT: ", extra={"extra": data_update})
 
     order_haravan = haravan_service.Order.update(haravan_id, data_update)
 

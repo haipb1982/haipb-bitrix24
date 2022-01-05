@@ -11,8 +11,14 @@ class CustomJsonFormatter(jsonlogger.JsonFormatter):
 
         if log_record.get('level'):
             log_record['level'] = log_record['level'].upper()
+            if log_record['level'] == 'WARNING':
+                log_record['level'] = '\033[93m' + log_record['level'] + '\033[0m'
         else:
             log_record['level'] = record.levelname
+
+        # if log_record.get('message'):
+        #     s = log_record['message']
+        #     log_record['message'] = s.decode('utf-8')    
 
 
 def get_logger(name: str) -> logging.Logger:
@@ -29,7 +35,7 @@ def get_logger(name: str) -> logging.Logger:
 
     formatter = CustomJsonFormatter('%(level)s - %(timestamp)s : %(name)s %(message)s')
     # formatter = CustomJsonFormatter()
-    
+
     handler.setFormatter(formatter)
     logger.handlers.clear()
     logger.addHandler(handler)

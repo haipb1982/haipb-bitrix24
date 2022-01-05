@@ -157,8 +157,9 @@ def bitrix_webhooks():
     ID = _form.get('data[FIELDS][ID]')
 
     # chưa cần nên comment
-    # if event == "ONCRMDEALADD":
-    #     res = bitrix_to_haravan.create_order_haravan(ID)
+    if event == "ONCRMDEALADD":
+        # res = bitrix_to_haravan.create_order_haravan(ID)
+        res = bitrix_to_haravan.create_order_deal(ID)
 
     if event == "ONCRMDEALUPDATE":
         res = bitrix_to_haravan.update_order_haravan(ID)
