@@ -318,7 +318,9 @@ def create_product_bitrix(payload):
     product["DISCOUNT_TYPE_ID"] = 1 
     product["DISCOUNT_SUM"] = payload.get("total_discount")
 
-    fileData = [payload.get("image")[0].get("src","https://vnztech.com/no-image.png")]
+    fileData = ["https://vnztech.com/no-image.png"]
+    if payload.get("image",None):
+        fileData = [payload.get("image")[0].get("src","https://vnztech.com/no-image.png")]
     product["PREVIEW_PICTURE"] = {'fileData':fileData}
     product["DETAIL_PICTURE"] = {'fileData':fileData}
 
