@@ -297,22 +297,30 @@ def create_product_bitrix(payload):
     # }
     product = convert_object(payload, product_mapping, "BITRIX")
 
-    if payload.get("variants") :
-        product["PRICE"] = payload.get("variants")[0].get("price")
+    # if payload.get("variants") :
+    #     product["PRICE"] = payload.get("variants")[0].get("price")
         
-        # DISCOUNT_TYPE_ID - where 1 - is the value in money; 2 - is the value in percentage
-        product["DISCOUNT_TYPE_ID"] = 1 
-        # DISCOUNT_RATE - the percentage of dicsount
-        # product["DISCOUNT_RATE"] = 0 
-        # DISCOUNT_RATE - the sum of discount
-        product["DISCOUNT_SUM"] = payload.get("variants")[0].get("total_discount")
+    #     # DISCOUNT_TYPE_ID - where 1 - is the value in money; 2 - is the value in percentage
+    #     product["DISCOUNT_TYPE_ID"] = 1 
+    #     # DISCOUNT_RATE - the percentage of dicsount
+    #     # product["DISCOUNT_RATE"] = 0 
+    #     # DISCOUNT_RATE - the sum of discount
+    #     product["DISCOUNT_SUM"] = payload.get("variants")[0].get("total_discount")
         
-        if len(payload.get("images")) > 0:
-            fileData = [payload.get("images")[0].get("src","https://vnztech.com/no-image.png")]
-            product["PREVIEW_PICTURE"] = {'fileData':fileData}
-            product["DETAIL_PICTURE"] = {'fileData':fileData}
-    else:
-        product["PRICE"] = 0
+    #     if len(payload.get("images")) > 0:
+    #         fileData = [payload.get("images")[0].get("src","https://vnztech.com/no-image.png")]
+    #         product["PREVIEW_PICTURE"] = {'fileData':fileData}
+    #         product["DETAIL_PICTURE"] = {'fileData':fileData}
+    # else:
+    #     product["PRICE"] = 0
+
+    product["PRICE"] = payload.get('price')
+    product["DISCOUNT_TYPE_ID"] = 1 
+    product["DISCOUNT_SUM"] = payload.get("total_discount")
+
+    fileData = [payload.get("image")[0].get("src","https://vnztech.com/no-image.png")]
+    product["PREVIEW_PICTURE"] = {'fileData':fileData}
+    product["DETAIL_PICTURE"] = {'fileData':fileData}
 
     bitrix24_data = bitrix24_service.Product.insert(fields=product)
     if bitrix24_data:
