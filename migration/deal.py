@@ -99,39 +99,41 @@ def Bitrix24ToHaravan(bx):
     return ha
 
 def CompareHaravanNewData(deal_order, payload):
-    
-    old = json.loads(deal_order.get('haravan_data'))
-    new = payload
+    try:
+        old = json.loads(deal_order.get('haravan_data'))
+        new = payload
 
-    if old.get('billing_address') != new.get('billing_address'):
-        return  False
+        if old.get('billing_address') != new.get('billing_address'):
+            return  False
 
-    if old.get('financial_status') != new.get('financial_status'):
-        return  False
+        if old.get('financial_status') != new.get('financial_status'):
+            return  False
 
-    if old.get('fulfillment_status') != new.get('fulfillment_status'):
-        return  False
+        if old.get('fulfillment_status') != new.get('fulfillment_status'):
+            return  False
 
-    if old.get('line_items') != new.get('line_items'):
-        return  False
+        if old.get('line_items') != new.get('line_items'):
+            return  False
 
-    if old.get('name') != new.get('name'):
-        return  False
+        if old.get('name') != new.get('name'):
+            return  False
 
-    if old.get('note') != new.get('note'):
-        return  False
-    
-    if old.get('shipping_address') != new.get('shipping_address'):
-        return  False
-    
-    if old.get('cancelled_status') != new.get('cancelled_status'):
-        return  False
-    
-    if old.get('confirmed_status') != new.get('confirmed_status'):
-        return  False
-    
-    if old.get('order_processing_status') != new.get('order_processing_status'):
-        return  False
+        if old.get('note') != new.get('note'):
+            return  False
+        
+        if old.get('shipping_address') != new.get('shipping_address'):
+            return  False
+        
+        if old.get('cancelled_status') != new.get('cancelled_status'):
+            return  False
+        
+        if old.get('confirmed_status') != new.get('confirmed_status'):
+            return  False
+        
+        if old.get('order_processing_status') != new.get('order_processing_status'):
+            return  False
+    except:
+        return False
     
     return True
 
