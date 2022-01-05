@@ -157,7 +157,7 @@ def update_deal_bitrix_all(topic='', payload=None):
     # Cập nhật products của Deal 
     product_haravans = payload.get("line_items",None)
 
-    if not product_haravans:
+    if product_haravans:
         # LOGGER.info('Cập nhật sản phẩm từ Order sang Deal ...')
         LOGGER.info('Cập nhật sản phẩm từ Order sang Deal',extra={'extra':product_haravans})
     else:
