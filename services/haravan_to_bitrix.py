@@ -103,7 +103,7 @@ def create_deal_bitrix(payload=None):
         else:
             LOGGER.error(f'Tạo mới record tbl_deal_order lần 2 thất bại: {haravan_id} {bitrix24_deal.get("ID")}')
     
-    update_deal_bitrix_all('orders/updated',payload)
+    # update_deal_bitrix_all('orders/updated',payload)
 
     return True
 
