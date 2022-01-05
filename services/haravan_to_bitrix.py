@@ -251,16 +251,20 @@ def update_deal_bitrix_all(topic='', payload=None):
         "id": fields["ID"],
         "rows": productrows
     }
-    
+    LOGGER.info('Thêm mới DealProductRow vào Deal Bx24',extra={'extra':fields})
+
     deal_productrow = DealProductRow.set(fields)
-    LOGGER.info('Thêm mới DealProductRow vào Deal Bx24',extra={'extra':deal_productrow})
+    if deal_productrow:
+        LOGGER.warning('Thêm mới DealProductRow vào Deal Bx24 thất bại')
+    else:
+        LOGGER.info('Thêm mới DealProductRow vào Deal Bx24 thành công',extra={'extra':deal_productrow})
 
     LOGGER.info('Cập nhật dữ liệu trên tbl_deal_order')
     update_result = deal_dao.updateDeal(haravan_id, json.dumps(payload), json.dumps(result))
     if update_result:
         LOGGER.info('Cập nhật dữ liệu trên tbl_deal_order thành công')
     else:
-        LOGGER.info('Cập nhật dữ liệu trên tbl_deal_order thất bại')
+        LOGGER.warning('Cập nhật dữ liệu trên tbl_deal_order thất bại')
     return update_result
 
 def delete_deal_bitrix(id):
