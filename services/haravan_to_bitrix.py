@@ -186,7 +186,7 @@ def update_deal_bitrix_all(topic='', payload=None):
                 if product.get('variant'):
                     LOGGER.info('Không Tìm thấy sản phẩm trong Haravan Variant. Tạo mới trên Bx24...')
                     product_bitrix = create_product_bitrix(product['variant'])
-                    product_id = product_bitrix.get("ID")
+                    product_id = product_bitrix.get("ID",None)
                     if product_id:
                         LOGGER.info(f'Tạo mới trên Bx24 Product thanh cong... {product_id}')
                     else:
