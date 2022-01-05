@@ -54,9 +54,10 @@ class Order:
                 **my_headers
             }
             response = requests.put('https://apis.haravan.com/com/orders/{}.json'.format(id), headers=headers, data=json.dumps(payload))
+            # LOGGER.info("Orders:update:", extra={"response": response.json()})
             return response.json().get("order")
         except Exception as e:
-            LOGGER.error("Deal:update:exception: ", extra={"exception": e})
+            LOGGER.error("Orders:update:exception: ", extra={"exception": e})
             return None
 
     @staticmethod
