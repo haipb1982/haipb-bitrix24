@@ -312,7 +312,7 @@ def create_product_bitrix(payload):
     #     "DATE_CREATE": payload.get("created_at"),
     #     "CURRENCY_ID": "VND",
     # }
-    product = convert_object(payload, product_mapping, "BITRIX")
+    product = mapping_service.convert_object(payload, product_mapping, "BITRIX")
     
 
     # if payload.get("variants") :
