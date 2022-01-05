@@ -34,7 +34,7 @@ class Logger(object):
             handler = logging.StreamHandler()
             # formatter = logging.Formatter('%(levelname)s - %(asctime)s : %(name)s %(message)s')
             # formatter = ExtraLogFormatter('*** %(levelname)s | %(asctime)s | %(name)s %(message)s -extra- %(extra)s')
-            formatter =myFormatter('*** %(levelname)s | %(asctime)s | %(name)s *** %(message)s ### %(extra)s')
+            formatter =myFormatter('*** %(levelname)s | %(asctime)s | %(name)s | %(message)s | %(extra)s')
 
             handler.setFormatter(formatter)
             handler.setLevel(logging.DEBUG)
