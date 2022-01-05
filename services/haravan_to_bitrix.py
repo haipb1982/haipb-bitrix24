@@ -164,11 +164,14 @@ def update_deal_bitrix_all(topic='', payload=None):
     productrows = {}
     i = 0
     for product_haravan in product_haravans:
-        product_haravan_id = product_haravan.get("id",None)
-        if product_haravan_id:
-            productrow = {}
-            product_id  = None
-            product_result = product_dao.get_by_haravan_id(product_haravan_id)
+
+        productrow = {}
+        product_id  = None
+
+        # Xử lý product variants trước
+        variant_haravan_id = product_haravan.get("variant_id",None)
+        if variant_haravan_id:
+            product_result = product_dao.get_by_haravan_id(variant_haravan_id)
             
             # Nếu có product trong tbl_product thì lấy bx24_id
             if product_result:
@@ -178,41 +181,67 @@ def update_deal_bitrix_all(topic='', payload=None):
             # Nếu không có product trong tbl_product thì tạo mới   
             else:
                 LOGGER.warning(f'Không Tìm thấy sản phẩm trong tbl_product')
-                product = haravan_service.Product.get(product_haravan_id)
+                product = haravan_service.Product.getVariant(variant_haravan_id)
 
-                if product.get('product'):
-                    LOGGER.info('Không Tìm thấy sản phẩm trong Haravan product. Tạo mới trên Bx24...')
-                    product_bitrix = create_product_bitrix(product)
+                if product.get('variant'):
+                    LOGGER.info('Không Tìm thấy sản phẩm trong Haravan Variant. Tạo mới trên Bx24...')
+                    product_bitrix = create_product_bitrix(product['variant'])
                     product_id = product_bitrix.get("ID")
                     if product_id:
                         LOGGER.info(f'Tạo mới trên Bx24 Product thanh cong... {product_id}')
                     else:
                         LOGGER.warning(f'Tạo mới trên Bx24 Product that bai')
                 else:
-                    LOGGER.warning(f'Không tìm thấy Haravan product {product_haravan_id}')
-
-            productrow["PRODUCT_ID"] = product_id
-            productrow["PRICE"] = product_haravan.get("price",0)
-            productrow["QUANTITY"] = product_haravan.get("quantity",0)
-
-            productrow["PRODUCT_NAME"] = product_haravan.get("name",None) or product_haravan.get("title",None)
-            
-            if product_haravan.get("image",None):
-                fileData = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
-            else:
-                fileData = "https://vnztech.com/no-image.png"
-            productrow["PREVIEW_PICTURE"] = [{'fileData':fileData}]
-            productrow["DETAIL_PICTURE"] = [{'fileData':fileData}]
-            # productrow["PREVIEW_PICTURE"] = fileData
-            # productrow["DETAIL_PICTURE"] = fileData
-
-            productrow["DISCOUNT_TYPE_ID"] = 1 
-            productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)
-            if product_id:
-                productrows[i] = productrow
-                i = i + 1
+                    LOGGER.warning(f'Không tìm thấy Haravan Variant {variant_haravan_id}')
+        
+        # Không tìm thấy variant_id tiếp tục xử lý product_id
         else:
-            LOGGER.warning('Không tìm thấy product ID trong line_items')
+            product_haravan_id = product_haravan.get("product_id",None)
+            if product_haravan_id:
+                product_result = product_dao.get_by_haravan_id(product_haravan_id)
+                
+                # Nếu có product trong tbl_product thì lấy bx24_id
+                if product_result:
+                    LOGGER.info('Tìm thấy sản phẩm trong tbl_product')
+                    product_id = product_result.get("bitrix24_id")
+
+                # Nếu không có product trong tbl_product thì tạo mới   
+                else:
+                    LOGGER.warning(f'Không Tìm thấy sản phẩm trong tbl_product')
+                    product = haravan_service.Product.get(product_haravan_id)
+
+                    if product.get('product'):
+                        LOGGER.info('Không Tìm thấy sản phẩm trong Haravan product. Tạo mới trên Bx24...')
+                        product_bitrix = create_product_bitrix(product['product'])
+                        product_id = product_bitrix.get("ID")
+                        if product_id:
+                            LOGGER.info(f'Tạo mới trên Bx24 Product thanh cong... {product_id}')
+                        else:
+                            LOGGER.warning(f'Tạo mới trên Bx24 Product that bai')
+                    else:
+                        LOGGER.warning(f'Không tìm thấy Haravan product {product_haravan_id}')
+            
+
+        productrow["PRODUCT_ID"] = product_id
+        productrow["PRICE"] = product_haravan.get("price",0)
+        productrow["QUANTITY"] = product_haravan.get("quantity",0)
+
+        productrow["PRODUCT_NAME"] = product_haravan.get("name",None) or product_haravan.get("title",None)
+        
+        if product_haravan.get("image",None):
+            fileData = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
+        else:
+            fileData = "https://vnztech.com/no-image.png"
+        productrow["PREVIEW_PICTURE"] = [{'fileData':fileData}]
+        productrow["DETAIL_PICTURE"] = [{'fileData':fileData}]
+        # productrow["PREVIEW_PICTURE"] = fileData
+        # productrow["DETAIL_PICTURE"] = fileData
+
+        productrow["DISCOUNT_TYPE_ID"] = 1 
+        productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)
+        if product_id:
+            productrows[i] = productrow
+            i = i + 1
 
     # Add products vào trong DEAL
 

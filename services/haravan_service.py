@@ -83,6 +83,11 @@ class Product:
     def get(id):
         response = requests.get(f'https://apis.haravan.com/com/products/{id}.json', headers=my_headers)
         return response.json()
+    
+    @staticmethod
+    def getVariant(id):
+        response = requests.get(f'https://apis.haravan.com/com/variants/{id}.json', headers=my_headers)
+        return response.json()
 
     @staticmethod
     def create(data):
