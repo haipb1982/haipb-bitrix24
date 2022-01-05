@@ -313,6 +313,7 @@ def create_product_bitrix(payload):
     #     "CURRENCY_ID": "VND",
     # }
     product = convert_object(payload, product_mapping, "BITRIX")
+    
 
     # if payload.get("variants") :
     #     product["PRICE"] = payload.get("variants")[0].get("price")
@@ -340,11 +341,13 @@ def create_product_bitrix(payload):
         fileData = [payload.get("image")[0].get("src","https://vnztech.com/no-image.png")]
     product["PREVIEW_PICTURE"] = {'fileData':fileData}
     product["DETAIL_PICTURE"] = {'fileData':fileData}
-
+    
     bitrix24_data = bitrix24_service.Product.insert(fields=product)
     if bitrix24_data:
         product_dao.add_new_product(id, bitrix24_data.get("ID"), json.dumps(payload), json.dumps(bitrix24_data))
         return bitrix24_data
+    else:
+        LOGGER.info('Tạo mới product trên Bx24 thất bại',extra={"extra":product})
 
     return None
 
