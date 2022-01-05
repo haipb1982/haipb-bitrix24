@@ -240,13 +240,9 @@ def update_deal_bitrix_all(topic='', payload=None):
             productrow["PRODUCT_NAME"] = product_haravan.get("name",None) or product_haravan.get("title",None)
             
             if product_haravan.get("image",None):
-                fileData = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
-            else:
-                fileData = "https://vnztech.com/no-image.png"
-            productrow["PREVIEW_PICTURE"] = [{'fileData':fileData}]
-            productrow["DETAIL_PICTURE"] = [{'fileData':fileData}]
-            # productrow["PREVIEW_PICTURE"] = fileData
-            # productrow["DETAIL_PICTURE"] = fileData
+                img_src = product_haravan["image"].get("src","https://vnztech.com/no-image.png")
+                productrow["PREVIEW_PICTURE"] = img_src
+                productrow["DETAIL_PICTURE"] = img_src
 
             productrow["DISCOUNT_TYPE_ID"] = 1 
             productrow["DISCOUNT_SUM"] = product_haravan.get("total_discount",0)
@@ -336,11 +332,10 @@ def create_product_bitrix(payload):
     product["DISCOUNT_TYPE_ID"] = 1 
     product["DISCOUNT_SUM"] = payload.get("total_discount")
 
-    fileData = ["https://vnztech.com/no-image.png"]
     if payload.get("image",None):
-        fileData = [payload.get("image")[0].get("src","https://vnztech.com/no-image.png")]
-    product["PREVIEW_PICTURE"] = {'fileData':fileData}
-    product["DETAIL_PICTURE"] = {'fileData':fileData}
+        img_scr = payload.get("image")[0].get("src","https://vnztech.com/no-image.png")
+        product["PREVIEW_PICTURE"] = img_scr
+        product["DETAIL_PICTURE"] = img_scr
     
     bitrix24_data = bitrix24_service.Product.insert(fields=product)
     if bitrix24_data:
