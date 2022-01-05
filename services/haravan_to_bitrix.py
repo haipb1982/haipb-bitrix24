@@ -131,8 +131,6 @@ def update_deal_bitrix_all(topic='', payload=None):
     # Nếu khác nhau sẽ cho cập nhật
 
     deal_order_data = deal_order["data"][0]
-    if not deal_order_data:
-        deal_order_data={'haravan_data':{}}
     
     # LOGGER.info('So sánh dữ liệu tbl_deal_order',extra={"extra":deal_order_data})
     LOGGER.info('So sánh dữ liệu tbl_deal_order')
