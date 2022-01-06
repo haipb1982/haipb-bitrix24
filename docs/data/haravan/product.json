@@ -1,0 +1,342 @@
+{
+   "product":{
+      "body_html":"<p>...</p>",
+      "body_plain":"None",
+      "created_at":"2020-11-05T06:55:40.206Z",
+      "handle":"liah-but-ngoc-trai-bac-uc-caro-bach-kim-1",
+      "id":1028879920,
+      "images":[
+         {
+            "created_at":"2021-06-03T02:11:22.648",
+            "id":1198746823,
+            "position":4,
+            "product_id":1028879920,
+            "src":"https://product.hstatic.net/1000345452/product/03_cc4c8091a74f445187fc1d6ef874dbf8.jpg",
+            "updated_at":"2021-09-27T03:09:47.016",
+            "filename":"03_cc4c8091a74f445187fc1d6ef874dbf8.jpg",
+            "variant_ids":[
+               
+            ]
+         },
+         {
+            "created_at":"2021-06-03T02:11:22.648",
+            "id":1198746825,
+            "position":5,
+            "product_id":1028879920,
+            "src":"https://product.hstatic.net/1000345452/product/04_96bea00792ad4d8a9fdce1b0acce0124.jpg",
+            "updated_at":"2021-09-27T03:09:47.016",
+            "filename":"04_96bea00792ad4d8a9fdce1b0acce0124.jpg",
+            "variant_ids":[
+               
+            ]
+         },
+         {
+            "created_at":"2021-06-03T02:11:22.648",
+            "id":1198746826,
+            "position":3,
+            "product_id":1028879920,
+            "src":"https://product.hstatic.net/1000345452/product/06_ce656ba73d4f404896111ac76c790f74.jpg",
+            "updated_at":"2021-09-27T03:09:47.016",
+            "filename":"06_ce656ba73d4f404896111ac76c790f74.jpg",
+            "variant_ids":[
+               
+            ]
+         },
+         {
+            "created_at":"2021-06-03T02:11:22.648",
+            "id":1198746828,
+            "position":6,
+            "product_id":1028879920,
+            "src":"https://product.hstatic.net/1000345452/product/08_13362600d8bc47f78db428db2a002eea.jpg",
+            "updated_at":"2021-09-27T03:09:47.016",
+            "filename":"08_13362600d8bc47f78db428db2a002eea.jpg",
+            "variant_ids":[
+               
+            ]
+         },
+         {
+            "created_at":"2021-06-30T11:01:00.416",
+            "id":1202957026,
+            "position":7,
+            "product_id":1028879920,
+            "src":"https://product.hstatic.net/1000345452/product/02_23d7f0d798e94de19219b162e99f5558.jpg",
+            "updated_at":"2021-09-27T03:09:47.016",
+            "filename":"02_23d7f0d798e94de19219b162e99f5558.jpg",
+            "variant_ids":[
+               
+            ]
+         },
+         {
+            "created_at":"2021-08-06T03:57:47.692",
+            "id":1208716318,
+            "position":1,
+            "product_id":1028879920,
+            "src":"https://product.hstatic.net/1000345452/product/31_5683572d9b1f4a429ff1fd630827bdde.png",
+            "updated_at":"2021-09-27T03:09:47.016",
+            "filename":"31_5683572d9b1f4a429ff1fd630827bdde.png",
+            "variant_ids":[
+               1064071188,
+               1077083758,
+               1077083759,
+               1077083760,
+               1077083763,
+               1077083764
+            ]
+         },
+         {
+            "created_at":"2021-08-06T03:57:53.454",
+            "id":1208716329,
+            "position":2,
+            "product_id":1028879920,
+            "src":"https://product.hstatic.net/1000345452/product/32_aa9849c11f3641698a0e5104865cc77b.png",
+            "updated_at":"2021-09-27T03:09:47.016",
+            "filename":"32_aa9849c11f3641698a0e5104865cc77b.png",
+            "variant_ids":[
+               
+            ]
+         },
+         {
+            "created_at":"2021-08-25T05:00:42.274",
+            "id":1210799360,
+            "position":8,
+            "product_id":1028879920,
+            "src":"https://product.hstatic.net/1000345452/product/cnh-nap_f7f962587c51420f82cf15d8c06eb730.jpg",
+            "updated_at":"2021-09-27T03:09:47.016",
+            "filename":"cnh-nap_f7f962587c51420f82cf15d8c06eb730.jpg",
+            "variant_ids":[
+               
+            ]
+         },
+         {
+            "created_at":"2021-08-25T05:00:42.274",
+            "id":1210799362,
+            "position":9,
+            "product_id":1028879920,
+            "src":"https://product.hstatic.net/1000345452/product/cnh-vitri_3f00efe7d1a44901840e8e2e994e4766.jpg",
+            "updated_at":"2021-09-27T03:09:47.016",
+            "filename":"cnh-vitri_3f00efe7d1a44901840e8e2e994e4766.jpg",
+            "variant_ids":[
+               
+            ]
+         },
+         {
+            "created_at":"2021-09-27T03:10:09.009",
+            "id":1214753179,
+            "position":10,
+            "product_id":1028879920,
+            "src":"https://product.hstatic.net/1000345452/product/cnh-than_23dfb378ffb146bdb9178406367a20cb.jpg",
+            "updated_at":"2021-09-27T03:10:09.009",
+            "filename":"cnh-than_23dfb378ffb146bdb9178406367a20cb.jpg",
+            "variant_ids":[
+               
+            ]
+         }
+      ],
+      "product_type":"Bút Ngọc Trai",
+      "published_at":"2020-11-05T05:51:04.648Z",
+      "published_scope":"global",
+      "tags":"Tất cả bút",
+      "template_suffix":"product",
+      "title":"Liah - Caro - Bút Bi Ngọc Trai Trắng Bắc Úc & Đen Tahiti - Mạ Bạch Kim",
+      "updated_at":"2022-01-03T05:35:37.51Z",
+      "variants":[
+         {
+            "barcode":"8938513309599",
+            "compare_at_price":5999000.0,
+            "created_at":"2020-11-05T06:55:40.206Z",
+            "fulfillment_service":"None",
+            "grams":0.0,
+            "id":1064071188,
+            "inventory_management":"haravan",
+            "inventory_policy":"continue",
+            "inventory_quantity":0,
+            "position":6,
+            "price":3299000.0,
+            "product_id":1028879920,
+            "requires_shipping":true,
+            "sku":"BLLBW0441C",
+            "taxable":true,
+            "title":"Mạ Bạch Kim / F(0.5 mm) / Xanh",
+            "updated_at":"2021-12-11T07:36:04.872Z",
+            "image_id":1208716318,
+            "option1":"Mạ Bạch Kim",
+            "option2":"F(0.5 mm)",
+            "option3":"Xanh",
+            "inventory_advance":{
+               "qty_available":0,
+               "qty_onhand":1,
+               "qty_commited":1,
+               "qty_incoming":0
+            }
+         },
+         {
+            "barcode":"8938513309599",
+            "compare_at_price":5999000.0,
+            "created_at":"2021-08-09T15:12:33.408Z",
+            "fulfillment_service":"None",
+            "grams":0.0,
+            "id":1077083758,
+            "inventory_management":"haravan",
+            "inventory_policy":"continue",
+            "inventory_quantity":1,
+            "position":1,
+            "price":3299000.0,
+            "product_id":1028879920,
+            "requires_shipping":true,
+            "sku":"BLLBW0441D",
+            "taxable":true,
+            "title":"Mạ Bạch Kim / F(0.5 mm) / Đen",
+            "updated_at":"2021-12-11T07:34:20.623Z",
+            "image_id":1208716318,
+            "option1":"Mạ Bạch Kim",
+            "option2":"F(0.5 mm)",
+            "option3":"Đen",
+            "inventory_advance":{
+               "qty_available":1,
+               "qty_onhand":1,
+               "qty_commited":0,
+               "qty_incoming":0
+            }
+         },
+         {
+            "barcode":"8938513309599",
+            "compare_at_price":5999000.0,
+            "created_at":"2021-08-09T15:12:40.35Z",
+            "fulfillment_service":"None",
+            "grams":0.0,
+            "id":1077083759,
+            "inventory_management":"haravan",
+            "inventory_policy":"continue",
+            "inventory_quantity":1,
+            "position":2,
+            "price":3299000.0,
+            "product_id":1028879920,
+            "requires_shipping":true,
+            "sku":"BLLBW0441F",
+            "taxable":true,
+            "title":"Mạ Bạch Kim / M(0.7 mm) / Đen",
+            "updated_at":"2021-12-11T07:35:30.382Z",
+            "image_id":1208716318,
+            "option1":"Mạ Bạch Kim",
+            "option2":"M(0.7 mm)",
+            "option3":"Đen",
+            "inventory_advance":{
+               "qty_available":1,
+               "qty_onhand":1,
+               "qty_commited":0,
+               "qty_incoming":0
+            }
+         },
+         {
+            "barcode":"8938513309599",
+            "compare_at_price":5999000.0,
+            "created_at":"2021-08-09T15:12:48.214Z",
+            "fulfillment_service":"None",
+            "grams":0.0,
+            "id":1077083760,
+            "inventory_management":"haravan",
+            "inventory_policy":"continue",
+            "inventory_quantity":0,
+            "position":3,
+            "price":3299000.0,
+            "product_id":1028879920,
+            "requires_shipping":true,
+            "sku":"BLLBW0441E",
+            "taxable":true,
+            "title":"Mạ Bạch Kim / M(0.7 mm) / Xanh",
+            "updated_at":"2022-01-03T05:35:37.51Z",
+            "image_id":1208716318,
+            "option1":"Mạ Bạch Kim",
+            "option2":"M(0.7 mm)",
+            "option3":"Xanh",
+            "inventory_advance":{
+               "qty_available":0,
+               "qty_onhand":0,
+               "qty_commited":0,
+               "qty_incoming":0
+            }
+         },
+         {
+            "barcode":"8938513309599",
+            "compare_at_price":5999000.0,
+            "created_at":"2021-08-09T15:13:03.677Z",
+            "fulfillment_service":"None",
+            "grams":0.0,
+            "id":1077083763,
+            "inventory_management":"haravan",
+            "inventory_policy":"continue",
+            "inventory_quantity":1,
+            "position":4,
+            "price":3299000.0,
+            "product_id":1028879920,
+            "requires_shipping":true,
+            "sku":"BLLBW0441A",
+            "taxable":true,
+            "title":"Mạ Bạch Kim / B(1.0 mm) / Xanh",
+            "updated_at":"2021-12-11T07:35:47.157Z",
+            "image_id":1208716318,
+            "option1":"Mạ Bạch Kim",
+            "option2":"B(1.0 mm)",
+            "option3":"Xanh",
+            "inventory_advance":{
+               "qty_available":1,
+               "qty_onhand":1,
+               "qty_commited":0,
+               "qty_incoming":0
+            }
+         },
+         {
+            "barcode":"8938513309599",
+            "compare_at_price":5999000.0,
+            "created_at":"2021-08-09T15:13:13.268Z",
+            "fulfillment_service":"None",
+            "grams":0.0,
+            "id":1077083764,
+            "inventory_management":"haravan",
+            "inventory_policy":"continue",
+            "inventory_quantity":1,
+            "position":5,
+            "price":3299000.0,
+            "product_id":1028879920,
+            "requires_shipping":true,
+            "sku":"BLLBW0441B",
+            "taxable":true,
+            "title":"Mạ Bạch Kim / B(1.0 mm) / Đen",
+            "updated_at":"2021-12-11T07:35:55.609Z",
+            "image_id":1208716318,
+            "option1":"Mạ Bạch Kim",
+            "option2":"B(1.0 mm)",
+            "option3":"Đen",
+            "inventory_advance":{
+               "qty_available":1,
+               "qty_onhand":1,
+               "qty_commited":0,
+               "qty_incoming":0
+            }
+         }
+      ],
+      "vendor":"BLUSAIGON",
+      "options":[
+         {
+            "name":"Color",
+            "id":2459734896,
+            "position":1,
+            "product_id":1028879920
+         },
+         {
+            "name":"Nét Chữ",
+            "id":2459734897,
+            "position":2,
+            "product_id":1028879920
+         },
+         {
+            "name":"Màu Mực",
+            "id":2459734898,
+            "position":3,
+            "product_id":1028879920
+         }
+      ],
+      "only_hide_from_list":false,
+      "not_allow_promotion":false
+   }
+}

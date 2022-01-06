@@ -1,0 +1,38 @@
+{
+   "fulfillable_quantity":1,
+   "fulfillment_service":"None",
+   "fulfillment_status":"notfulfilled",
+   "grams":100,
+   "id":1374008288,
+   "price":1499000,
+   "price_original":1499000,
+   "price_promotion":0,
+   "product_id":1018226873,
+   "quantity":1,
+   "requires_shipping":true,
+   "sku":"BLHBB0031A",
+   "title":"Hermes - Ngọc Trai Đen Tahiti - Mạ Gold Titanium",
+   "variant_id":1036083436,
+   "variant_title":"Mạ Gold Titanium / M(0.7 mm) / Xanh",
+   "vendor":"BLUSAIGON",
+   "type":"Bút Ngọc Trai",
+   "name":"Hermes - Ngọc Trai Đen Tahiti - Mạ Gold Titanium - Mạ Gold Titanium / M(0.7 mm) / Xanh",
+   "gift_card":false,
+   "taxable":true,
+   "tax_lines":"None",
+   "product_exists":true,
+   "barcode":"8938513309070",
+   "properties":[
+      
+   ],
+   "applied_discounts":[
+      
+   ],
+   "total_discount":0,
+   "image":{
+      "src":"https://product.hstatic.net/1000345452/product/den_72b8812bf54e4a07a0d02d12c77f42c7.png"
+   },
+   "not_allow_promotion":false,
+   "ma_cost_amount":600000.43,
+   "actual_price":1499000
+}

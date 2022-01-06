@@ -1,0 +1,81 @@
+[
+   {
+      "fulfillable_quantity":1,
+      "fulfillment_service":"None",
+      "fulfillment_status":"notfulfilled",
+      "grams":100,
+      "id":1374008288,
+      "price":1499000,
+      "price_original":1499000,
+      "price_promotion":0,
+      "product_id":1018226873,
+      "quantity":1,
+      "requires_shipping":true,
+      "sku":"BLHBB0031A",
+      "title":"Hermes - Ngọc Trai Đen Tahiti - Mạ Gold Titanium",
+      "variant_id":1036083436,
+      "variant_title":"Mạ Gold Titanium / M(0.7 mm) / Xanh",
+      "vendor":"BLUSAIGON",
+      "type":"Bút Ngọc Trai",
+      "name":"Hermes - Ngọc Trai Đen Tahiti - Mạ Gold Titanium - Mạ Gold Titanium / M(0.7 mm) / Xanh",
+      "gift_card":false,
+      "taxable":true,
+      "tax_lines":"None",
+      "product_exists":true,
+      "barcode":"8938513309070",
+      "properties":[
+         
+      ],
+      "applied_discounts":[
+         
+      ],
+      "total_discount":0,
+      "image":{
+         "src":"https://product.hstatic.net/1000345452/product/den_72b8812bf54e4a07a0d02d12c77f42c7.png"
+      },
+      "not_allow_promotion":false,
+      "ma_cost_amount":600000.43,
+      "actual_price":1499000
+   },
+   {
+      "fulfillable_quantity":1,
+      "fulfillment_service":"None",
+      "fulfillment_status":"notfulfilled",
+      "grams":0,
+      "id":1374008289,
+      "price":0,
+      "price_original":500000,
+      "price_promotion":0,
+      "product_id":1029302712,
+      "quantity":1,
+      "requires_shipping":true,
+      "sku":"BLBX002",
+      "title":"BO04 - Hộp Xanh Giấy Cao Cấp - Bút & Khuy Măng Sét",
+      "variant_id":1065063751,
+      "variant_title":"Xanh",
+      "vendor":"BLUSaigon",
+      "type":"Hộp Bút",
+      "name":"BO04 - Hộp Xanh Giấy Cao Cấp - Bút & Khuy Măng Sét - Xanh",
+      "gift_card":false,
+      "taxable":true,
+      "tax_lines":"None",
+      "product_exists":true,
+      "barcode":"None",
+      "properties":[
+         
+      ],
+      "applied_discounts":[
+         {
+            "description":"None",
+            "amount":500000
+         }
+      ],
+      "total_discount":500000,
+      "image":{
+         "src":"https://product.hstatic.net/1000345452/product/qt014017_12cdb2bacc1949aa95d66e4b43725d87_large_7e6b9a38d61f4cfc80638a65459e782a.png"
+      },
+      "not_allow_promotion":false,
+      "ma_cost_amount":100732.75,
+      "actual_price":0
+   }
+]
