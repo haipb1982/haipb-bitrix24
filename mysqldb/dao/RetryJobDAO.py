@@ -1,11 +1,13 @@
-from mysqldb.db.DbHelper import DbHelper
+# from mysqldb.db.DbHelper import DbHelper
+from mysqldb.db.MySQLPool import MySQLPool
 
 
 class RetryJobDAO(object):
     __db = None
 
     def __init__(self):
-        self.__db = DbHelper()
+        # self.__db = DbHelper()
+        self.__db = MySQLPool()
 
     # # # for webapp API # # #
     def getAllRetryJobRecords(self,retry_time_limit=5):
@@ -16,7 +18,7 @@ class RetryJobDAO(object):
         res = self.__db.query("DELETE FROM tbl_retry_job WHERE id=%s", id)
         return res
     
-    def insertRetryJobRecord(self, haravan_id, bitrix24_id, haravan_data="", bitrix_data="", type="", action=""):
+    def insertRetryJobRecord(self, haravan_id=None, bitrix24_id=None, haravan_data="", bitrix_data="", type="", action=""):
         sql = '''INSERT INTO tbl_retry_job (haravan_id, bitrix24_id, haravan_data, bitrix_data, type, action) VALUES (%s,%s,%s,%s,%s,%s)'''        
         pamrs =  [haravan_id, bitrix24_id, haravan_data, bitrix_data, type, action]
         res = self.__db.query(sql,pamrs)

@@ -1,11 +1,13 @@
 from mysqldb.db.DbHelper import DbHelper
+from mysqldb.db.MySQLPool import MySQLPool
 
 
 class DealDAO(object):
     __db = None
 
     def __init__(self):
-        self.__db = DbHelper()
+        # self.__db = DbHelper()
+        self.__db = MySQLPool()
 
     # # # for webapp API # # #
     def getAllDeals(self):
@@ -14,6 +16,10 @@ class DealDAO(object):
 
     def getDealOrderByHaID(self,haravan_id):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status, haravan_data, bitrix_status,update_ts FROM tbl_deal_order WHERE haravan_id=%s", haravan_id)
+        return res
+
+    def getDealOrderByIDs(self,haravan_id,bitrix24_id):
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status, haravan_data, bitrix_status,update_ts FROM tbl_deal_order WHERE haravan_id=%s and bitrix24_id=%s", (haravan_id,bitrix24_id))
         return res
 
     def getAllDealsPages(self, __from, __to):
