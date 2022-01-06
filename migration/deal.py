@@ -79,6 +79,7 @@ def HaravanToBitrix24(ha):
     bx['UF_CRM_1623809034975'] = str(ha.get('id',0)) # haravan ID
     bx['UF_CRM_1627457986'] = ha.get('note','Không tìm thấy ghi chú') # ghi chú đơn hàng
     bx['UF_CRM_1628149922667'] = ha.get('fulfillment_status','Chưa rõ trạng thái') # trạng thái đơn hàng
+    bx['UF_CRM_1628149948721'] = ha.get('financial_status','pending') # trạng thái thanh toán
     bx['UF_CRM_1628149984252'] = ha.get('order_processing_status','confirmed') # trạng thái giao hàng
     
     # More
