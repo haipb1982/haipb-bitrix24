@@ -1,4 +1,9 @@
 import json
+from utils import Logger, log, common
+from utils.Logger import Logger
+
+LOGGER = log.get_logger(__name__)
+# LOGGER = Logger(__name__).get()
 
 import dictdiffer
 
@@ -210,14 +215,15 @@ def get_dict(key_item, value) -> dict:
     return data
 
 def get_changed_data(old_data: dict, new_data: dict):
-    differents = list(dictdiffer.diff(old_data, new_data))
-
     new = {}
-
-    for diff in differents:
-        if diff[0] == 'add' or diff[0] == 'change':
-            new[diff[1]] = diff[2][1]
-        elif diff[0] == 'remove':
-            new[diff[1]] = ""
-
-    return new
+    try:
+        differents = list(dictdiffer.diff(old_data, new_data))
+        for diff in differents:
+            if diff[0] == 'add' or diff[0] == 'change':
+                new[diff[1]] = diff[2][1]
+            elif diff[0] == 'remove':
+                new[diff[1]] = ""
+    except:
+        LOGGER.error('Lỗi khi so sánh dữ liệu', extra={'old_data':old_data,'new_data':new_data})
+    finally:
+        return new
