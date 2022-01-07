@@ -36,8 +36,8 @@ class DealDAO(object):
         return res
     
     def updateNameRecord(self,name='BLU ORDER DEAL NAME',id='', haravan_id='',bitrix24_id=''):
-        sql = "UPDATE tbl_deal_order SET name=%s, bitrix24_id=%s WHERE haravan_id=%s OR bitrix24_id=%s OR id=%s"
-        parms = [name,haravan_id,bitrix24_id,id]
+        sql = "UPDATE tbl_deal_order SET name=%s WHERE haravan_id=%s OR bitrix24_id=%s OR id=%s"
+        parms = (name,haravan_id,bitrix24_id,id)
         res = self.__db.query(sql, parms)
         
         return res
