@@ -19,8 +19,8 @@ class DbHelper:
                                             user = __db_config['user'],
                                             password = __db_config['password'],
                                             db = __db_config['db'],
-                                            charset = 'utf8mb4',
-                                            cursorclass = pymysql.cursors.DictCursor);
+                                            autocommit = True, charset = 'utf8mb4', 
+                                            cursorclass = pymysql.cursors.DictCursor)
         self.__cursor = self.__connection.cursor();
     
     # def query(self, query, params):
@@ -35,8 +35,6 @@ class DbHelper:
             result['code'] = 200
             result['message'] = 'success'
             result['data'] = self.__cursor.fetchall()
-            # LOGGER.info('mySQL query done 1')
-            # LOGGER.info('mySQL query done 2',extra={"extra":result['data']})
             self.__connection.commit()
         except Exception as err:
             LOGGER.error('mySQL ERROR:',{"extra":err})

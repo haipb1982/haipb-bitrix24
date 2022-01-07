@@ -1,12 +1,12 @@
-# from mysqldb.db.DbHelper import DbHelper
-from mysqldb.db.MySQLPool import MySQLPool
+from mysqldb.db.DbHelper import DbHelper
+from mysqldb.db.DBUtils import DBUtils
 
 class ContactDAO(object):
     __db = None
 
     def __init__(self):
         # self.__db = DbHelper()
-        self.__db = MySQLPool()
+        self.__db = DBUtils()
 
     # # # for webapp API # # #
     def getAllContacts(self):

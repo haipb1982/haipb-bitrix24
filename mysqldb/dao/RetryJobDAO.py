@@ -1,5 +1,5 @@
-# from mysqldb.db.DbHelper import DbHelper
-from mysqldb.db.MySQLPool import MySQLPool
+from mysqldb.db.DbHelper import DbHelper
+from mysqldb.db.DBUtils import DBUtils
 
 
 class RetryJobDAO(object):
@@ -7,7 +7,7 @@ class RetryJobDAO(object):
 
     def __init__(self):
         # self.__db = DbHelper()
-        self.__db = MySQLPool()
+        self.__db = DBUtils()
 
     # # # for webapp API # # #
     def getAllRetryJobRecords(self,retry_time_limit=5):

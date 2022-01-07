@@ -1,5 +1,5 @@
 from mysqldb.db.DbHelper import DbHelper
-from mysqldb.db.MySQLPool import MySQLPool
+from mysqldb.db.DBUtils import DBUtils
 
 
 class DealDAO(object):
@@ -7,19 +7,20 @@ class DealDAO(object):
 
     def __init__(self):
         # self.__db = DbHelper()
-        self.__db = MySQLPool()
+        self.__db = DBUtils()
+
 
     # # # for webapp API # # #
     def getAllDeals(self):
-        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status, haravan_data, bitrix_status,update_ts FROM tbl_deal_order ORDER BY id DESC", None)
+        res = self.__db.query("SELECT id, name, haravan_id,bitrix24_id,havavan_status, bitrix_status,update_ts FROM tbl_deal_order ORDER BY id DESC", None)
         return res
 
     def getDealOrderByHaID(self,haravan_id):
-        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status, haravan_data, bitrix_status,update_ts FROM tbl_deal_order WHERE haravan_id=%s", haravan_id)
+        res = self.__db.query("SELECT id,name, haravan_id,bitrix24_id,havavan_status, bitrix_status,update_ts FROM tbl_deal_order WHERE haravan_id=%s", (haravan_id,))
         return res
 
-    def getDealOrderByIDs(self,haravan_id,bitrix24_id):
-        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status, haravan_data, bitrix_status,update_ts FROM tbl_deal_order WHERE haravan_id=%s and bitrix24_id=%s", (haravan_id,bitrix24_id))
+    def getDealOrderByIDs(self,haravan_id=0,bitrix24_id=0):
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status, haravan_data, bitrix_status,update_ts FROM tbl_deal_order WHERE haravan_id=%s or bitrix24_id=%s", (haravan_id,bitrix24_id))
         return res
 
     def getAllDealsPages(self, __from, __to):
