@@ -117,6 +117,8 @@ def update_deal_bitrix_all(topic='', payload=None):
 
     # Sử dụng database để mapping giữa haravan và bitrix
     haravan_id = payload.get("id") or payload.get("number")
+    haravan_name = payload.get("name") or payload.get("order_number")
+
     LOGGER.info(f'Cập nhật Haravan-->Bx24 update_deal_bitrix_all {haravan_id}')
     
     deal_order = deal_dao.getDealOrderByHaID(haravan_id)
@@ -271,6 +273,9 @@ def update_deal_bitrix_all(topic='', payload=None):
 
     LOGGER.info('Cập nhật dữ liệu trên tbl_deal_order')
     update_result = deal_dao.updateDeal(haravan_id, json.dumps(payload), json.dumps(result))
+    # LOGGER.info('Cập nhật name trên tbl_deal_order')
+    deal_dao.updateNameRecord(name=haravan_name,haravan_id=haravan_id)
+
     if update_result:
         LOGGER.info('Cập nhật dữ liệu trên tbl_deal_order thành công')
     else:
