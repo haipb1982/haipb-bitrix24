@@ -19,7 +19,7 @@ class DealDAO(object):
         res = self.__db.query("SELECT id,name, haravan_id,bitrix24_id,havavan_status, bitrix_status,update_ts FROM tbl_deal_order WHERE haravan_id=%s", (haravan_id,))
         return res
 
-    def getDealOrderByIDs(self,haravan_id=0,bitrix24_id=0):
+    def getDealOrderByIDs(self,haravan_id='',bitrix24_id=''):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status, haravan_data, bitrix_status,update_ts FROM tbl_deal_order WHERE haravan_id=%s or bitrix24_id=%s", (haravan_id,bitrix24_id))
         return res
 
@@ -36,7 +36,7 @@ class DealDAO(object):
         return res
     
     def updateNameRecord(self,name='BLU ORDER DEAL NAME',id='', haravan_id='',bitrix24_id=''):
-        res = self.__db.query("UPDATE tbl_deal_order SET name=%s, bitrix24_id=%s WHERE haravan_id=%s OR bitrix24_id=%s OR id=%s", (haravan_id,bitrix24_id,id))
+        res = self.__db.query("UPDATE tbl_deal_order SET name=%s, bitrix24_id=%s WHERE haravan_id=%s OR bitrix24_id=%s OR id=%s", (name,haravan_id,bitrix24_id,id))
         return res
 
     def insertDealRecord(self, haravan_id, bitrix24_id):
