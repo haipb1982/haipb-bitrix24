@@ -216,14 +216,15 @@ def get_dict(key_item, value) -> dict:
 
 def get_changed_data(old_data: dict, new_data: dict):
     new = {}
-    try:
-        differents = list(dictdiffer.diff(old_data, new_data))
-        for diff in differents:
+
+    differents = list(dictdiffer.diff(old_data, new_data))
+    for diff in differents:
+        try:
             if diff[0] == 'add' or diff[0] == 'change':
                 new[diff[1]] = diff[2][1]
             elif diff[0] == 'remove':
                 new[diff[1]] = ""
-    except:
-        LOGGER.error('Lỗi khi so sánh dữ liệu', extra={'old_data':old_data,'new_data':new_data})
-    finally:
-        return new
+        except:
+            LOGGER.error('Lỗi khi so sánh dữ liệu', extra={'extra':diff})
+    
+    return new
