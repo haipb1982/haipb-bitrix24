@@ -225,6 +225,6 @@ def get_changed_data(old_data: dict, new_data: dict):
             elif diff[0] == 'remove':
                 new[diff[1]] = ""
         except:
-            LOGGER.error('Lỗi khi so sánh dữ liệu', extra={'extra':diff})
+            LOGGER.error('Error when get changed data!', extra={'extra':diff})
     
     return new
