@@ -36,7 +36,10 @@ class DealDAO(object):
         return res
     
     def updateNameRecord(self,name='BLU ORDER DEAL NAME',id='', haravan_id='',bitrix24_id=''):
-        res = self.__db.query("UPDATE tbl_deal_order SET name=%s, bitrix24_id=%s WHERE haravan_id=%s OR bitrix24_id=%s OR id=%s", (name,haravan_id,bitrix24_id,id))
+        sql = "UPDATE tbl_deal_order SET name=%s, bitrix24_id=%s WHERE haravan_id=%s OR bitrix24_id=%s OR id=%s"
+        parms = [name,haravan_id,bitrix24_id,id]
+        res = self.__db.query(sql, parms)
+        
         return res
 
     def insertDealRecord(self, haravan_id, bitrix24_id):
@@ -49,9 +52,9 @@ class DealDAO(object):
     def addNewDeal(self, hanravan_id, bitrix24_id, haravan_data="", bitrix_data=""):
         # print('addNewDeal',hanravan_id,bitrix24_id)
         sql = '''INSERT INTO tbl_deal_order(haravan_id, bitrix24_id, haravan_data, bitrix_data) VALUES (%s,%s,%s,%s)'''
-        pamrs = [hanravan_id, bitrix24_id, haravan_data, bitrix_data]
+        parms = [hanravan_id, bitrix24_id, haravan_data, bitrix_data]
 
-        res = self.__db.query(sql, pamrs)
+        res = self.__db.query(sql, parms)
 
         if res.get("status"):
             print('--> addNewDeal successful ',hanravan_id,bitrix24_id)
@@ -64,9 +67,9 @@ class DealDAO(object):
     def updateDeal(self, id, haravan_data="", bitrix_data=""):
         # print('updateDeal',id)
         sql = '''UPDATE tbl_deal_order SET haravan_data=%s, bitrix_data=%s WHERE haravan_id=%s'''
-        pamrs = [haravan_data, bitrix_data, id]
+        parms = [haravan_data, bitrix_data, id]
 
-        res = self.__db.query(sql, pamrs)
+        res = self.__db.query(sql, parms)
 
         if res.get("status"):
             print('--> DAO updateDeal successful ',id)
@@ -78,33 +81,33 @@ class DealDAO(object):
 
     def getHaravanID(self, id):
         sql = '''SELECT * FROM tbl_deal_order WHERE haravan_id = %s'''
-        pamrs = [id]
-        res = self.__db.query(sql, pamrs)
+        parms = [id]
+        res = self.__db.query(sql, parms)
         if res.get("status"):
             return res.get("data")
         return None
 
     def getDataByHaID(self, id):
         sql = '''SELECT * FROM tbl_deal_order WHERE haravan_id = %s'''
-        pamrs = [id]
-        res = self.__db.query(sql, pamrs)
+        parms = [id]
+        res = self.__db.query(sql, parms)
         if res.get("status"):
             return res.get("data")
         return None
     
     def getDataByBxID(self, id):
         sql = '''SELECT * FROM tbl_deal_order WHERE bitrix24_id = %s'''
-        pamrs = [id]
-        res = self.__db.query(sql, pamrs)
+        parms = [id]
+        res = self.__db.query(sql, parms)
         if res.get("status"):
             return res.get("data")
         return None
 
     def getBitrix24ID(self, id):
         sql = '''SELECT * FROM tbl_deal_order WHERE bitrix24_id = %s'''
-        pamrs = [id]
+        parms = [id]
 
-        res = self.__db.query(sql, pamrs)
+        res = self.__db.query(sql, parms)
 
         if res.get("status"):
             return res.get("data")
@@ -112,9 +115,9 @@ class DealDAO(object):
 
     def delete_by_haravan_id(self, id):
         sql = '''UPDATE tbl_deal_order SET haravan_status = %s WHERE haravan_id = %s'''
-        pamrs = ["DELETE", id]
+        parms = ["DELETE", id]
 
-        res = self.__db.query(sql, pamrs)
+        res = self.__db.query(sql, parms)
 
         if res.get("status"):
             return res.get("data")
@@ -122,9 +125,9 @@ class DealDAO(object):
 
     def delete_by_bitrix_id(self, id):
         sql = '''UPDATE tbl_deal_order SET bitrix_status = %s WHERE bitrix24_id = %s'''
-        pamrs = ["DELETE", id]
+        parms = ["DELETE", id]
 
-        res = self.__db.query(sql, pamrs)
+        res = self.__db.query(sql, parms)
 
         if res.get("status"):
             return res.get("data")

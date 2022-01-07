@@ -20,8 +20,8 @@ class RetryJobDAO(object):
     
     def insertRetryJobRecord(self, haravan_id=None, bitrix24_id=None, haravan_data="", bitrix_data="", type="", action=""):
         sql = '''INSERT INTO tbl_retry_job (haravan_id, bitrix24_id, haravan_data, bitrix_data, type, action) VALUES (%s,%s,%s,%s,%s,%s)'''        
-        pamrs =  [haravan_id, bitrix24_id, haravan_data, bitrix_data, type, action]
-        res = self.__db.query(sql,pamrs)
+        parms =  [haravan_id, bitrix24_id, haravan_data, bitrix_data, type, action]
+        res = self.__db.query(sql,parms)
         return res
     
     def updateRetryTime(self):
