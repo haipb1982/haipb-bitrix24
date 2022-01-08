@@ -21,7 +21,7 @@ class DBUtils:
   __cursor = None;
 
   def __init__(self):
-        __db_config = config['mysql'];
+        __db_config = config;
         self.__connection = pymysql.connect(host=__db_config['host'],
                                             user = __db_config['user'],
                                             password = __db_config['password'],
