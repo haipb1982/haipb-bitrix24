@@ -1,6 +1,5 @@
 import pymysql
 from dbutils.steady_db import connect
-from mysqldb.config import config
 
 from utils import log
 # LOGGER = log.get_logger(__name__)
@@ -8,7 +7,7 @@ from utils import log
 from utils.Logger import Logger
 LOGGER = Logger(__name__).get()
 
-__config = {
+config = {
     'host': 'host.docker.internal',
     'port':'3306',
     'user': 'vnztech',
