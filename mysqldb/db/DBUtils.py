@@ -1,5 +1,8 @@
 import pymysql
-from dbutils.pooled_db import connect
+# from dbutils.simple_pooled_db import connect
+from dbutils.steady_db import connect
+# from dbutils.steady_db import connect
+# from dbutils.pooled_db import connect
 
 from utils import log
 # LOGGER = log.get_logger(__name__)
@@ -28,6 +31,12 @@ class DBUtils:
                                             db = __db_config['database'],
                                             autocommit = True, charset = 'utf8mb4', 
                                             cursorclass = pymysql.cursors.DictCursor)
+        self.__connection = connect(creator = pymysql, # the rest keyword arguments belong to pymysql
+                host=__db_config['host'], user=__db_config["user"],
+                                password=__db_config["password"], database=__db_config["database"],
+                autocommit = True, charset = 'utf8mb4', 
+                cursorclass = pymysql.cursors.DictCursor)
+
         self.__cursor = self.__connection.cursor();
 
   def query(self, query, params):
