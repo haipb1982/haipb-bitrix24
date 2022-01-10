@@ -269,15 +269,15 @@ def update_deal_bitrix_all(topic='', payload=None):
         LOGGER.info(f'Thêm Discount (product) {total_discounts} cho Bx24 Deal ...')
         _productrow = {}
         _productrow["PRODUCT_ID"] = 6755
-        _productrow["PRICE"] = "1.00"
-        _productrow["PRICE_EXCLUSIVE"] = "1.00"
-        _productrow["PRICE_NETTO"] = "1.00"
-        _productrow["PRICE_BRUTTO"] = "1.00"
-        _productrow["PRICE_ACCOUNT"] = "1.00"
+        _productrow["PRICE"] = "-"+total_discounts
+        _productrow["PRICE_EXCLUSIVE"] = "-"+total_discounts
+        _productrow["PRICE_NETTO"] = "-"+total_discounts
+        _productrow["PRICE_BRUTTO"] = "-"+total_discounts
+        _productrow["PRICE_ACCOUNT"] = "-"+total_discounts
         _productrow["QUANTITY"] = "1"
         _productrow["PRODUCT_NAME"] = 'Discount - Giảm giá của đơn hàng Haravan'
-        _productrow["DISCOUNT_TYPE_ID"] = 1 
-        _productrow["DISCOUNT_SUM"] = total_discounts
+        # _productrow["DISCOUNT_TYPE_ID"] = 1 
+        # _productrow["DISCOUNT_SUM"] = total_discounts
         productrows[i] = _productrow
     
     # Add products vào trong DEAL
