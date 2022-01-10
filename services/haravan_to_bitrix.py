@@ -264,21 +264,21 @@ def update_deal_bitrix_all(topic='', payload=None):
 
     # Discount của đơn hàng (khác discount của sản phẩm)
     # Tạo 1 sản phẩm ID=7077 để chứa discount của đơn hàng do Bx24 không có giảm giá theo Deal
-    total_discounts = payload.get("total_discounts",None)
-    if total_discounts:
-        LOGGER.info(f'Thêm Discount (product) {total_discounts} cho Bx24 Deal ...')
-        _productrow = {}
-        _productrow["PRODUCT_ID"] = 6755
-        _productrow["PRICE"] = "0.00"
-        _productrow["PRICE_EXCLUSIVE"] = "0.00"
-        _productrow["PRICE_NETTO"] = "0.00"
-        _productrow["PRICE_BRUTTO"] = "0.00"
-        _productrow["PRICE_ACCOUNT"] = "0.00"
-        _productrow["QUANTITY"] = "1"
-        _productrow["PRODUCT_NAME"] = 'Discount - Giảm giá của đơn hàng Haravan'
-        _productrow["DISCOUNT_TYPE_ID"] = 1 
-        _productrow["DISCOUNT_SUM"] = total_discounts
-        productrows[i] = _productrow
+    # total_discounts = payload.get("total_discounts",None)
+    # if total_discounts:
+    #     LOGGER.info(f'Thêm Discount (product) {total_discounts} cho Bx24 Deal ...')
+    #     _productrow = {}
+    #     _productrow["PRODUCT_ID"] = 6755
+    #     _productrow["PRICE"] = "0.00"
+    #     _productrow["PRICE_EXCLUSIVE"] = "0.00"
+    #     _productrow["PRICE_NETTO"] = "0.00"
+    #     _productrow["PRICE_BRUTTO"] = "0.00"
+    #     _productrow["PRICE_ACCOUNT"] = "0.00"
+    #     _productrow["QUANTITY"] = "1"
+    #     _productrow["PRODUCT_NAME"] = 'Discount - Giảm giá của đơn hàng Haravan'
+    #     _productrow["DISCOUNT_TYPE_ID"] = 1 
+    #     _productrow["DISCOUNT_SUM"] = total_discounts
+    #     productrows[i] = _productrow
     
     # Add products vào trong DEAL
 
