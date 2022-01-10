@@ -57,7 +57,7 @@ class Order:
             # LOGGER.info("Orders:update:", extra={"response": response.json()})
             return response.json().get("order")
         except Exception as e:
-            LOGGER.error("Orders:update:exception: ", extra={"exception": e})
+            LOGGER.error("Orders:update:exception: ", extra={"exception": e, "res":response})
             return None
 
     @staticmethod

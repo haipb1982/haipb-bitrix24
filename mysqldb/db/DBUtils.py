@@ -1,5 +1,5 @@
 import pymysql
-from dbutils.steady_db import connect
+from dbutils.pooled_db import connect
 
 from utils import log
 # LOGGER = log.get_logger(__name__)
@@ -8,7 +8,7 @@ from utils.Logger import Logger
 LOGGER = Logger(__name__).get()
 
 config = {
-    'host': 'host.docker.internal',
+    'host': '103.159.51.249',
     'port':'3306',
     'user': 'vnztech',
     'password': 'Vietnam@68',

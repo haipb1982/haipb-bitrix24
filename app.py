@@ -51,7 +51,7 @@ def webhooks():
         if status:
             return build_response_200("Thêm dữ liệu thành công")
         else:
-            retryjob_service.insert(haravanID,body,None,None,'ORDERS','CREATE')
+            retryjob_service.insert(haravan_id=haravanID,haravan_data=body,type='ORDERS',action='CREATE')
             return build_response_200("Thêm dữ liệu không thành công")
 
     # Nếu đã có dữ liệu thì sẽ cập nhật còn nếu ko thì sẽ tạo mới rồi lưu vào database
@@ -61,6 +61,7 @@ def webhooks():
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
             retryjob_service.insert(haravanID,body,None,None,'ORDERS','UPDATED')
+            retryjob_service.insert(haravan_id=haravanID,haravan_data=body,type='ORDERS',action='UPDATED')
             return build_response_200("Cập nhật dữ liệu không thành công")
 
     elif topic == 'orders/delete':
@@ -69,7 +70,7 @@ def webhooks():
         if status:
             return build_response_200("Xóa dữ liệu thành công")
         else:
-            retryjob_service.insert(haravanID,body,None,None,'ORDERS','DELETE')
+            retryjob_service.insert(haravan_id=haravanID,haravan_data=body,type='ORDERS',action='DELETE')
             return build_response_200("Xóa dữ liệu không thành công")
 
     if topic == 'products/create':
@@ -77,7 +78,7 @@ def webhooks():
         if result:
             return build_response_200("Thêm dữ liệu thành công")
         else:
-            retryjob_service.insert(haravanID,body,None,None,'PRODUCTS','CREATE')
+            retryjob_service.insert(haravan_id=haravanID,haravan_data=body,type='PRODUCTS',action='CREATE')
             return build_response_200("Thêm dữ liệu không thành công")
 
     elif topic == 'products/update':
@@ -85,14 +86,14 @@ def webhooks():
         if result:
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
-            retryjob_service.insert(haravanID,body,None,None,'PRODUCTS','UPDATE')
+            retryjob_service.insert(haravan_id=haravanID,haravan_data=body,type='PRODUCTS',action='UPDATE')
             return build_response_200("Cập nhật dữ liệu không thành công")
     elif topic == 'products/delete':
         status = haravan_to_bitrix.deleted_product_bitrix(haravanID)
         if status:
             return build_response_200("Xóa dữ liệu thành công")
         else:
-            retryjob_service.insert(haravanID,body,None,None,'PRODUCTS','DELETE')
+            retryjob_service.insert(haravan_id=haravanID,haravan_data=body,type='PRODUCTS',action='DELETE')
             return build_response_200("Xóa dữ liệu không thành công")
     elif topic == 'customers/create':
         result = haravan_to_bitrix.create_contact_bitrix(body)
@@ -100,6 +101,7 @@ def webhooks():
             return build_response_200("Thêm dữ liệu thành công")
         else:
             retryjob_service.insert(haravanID,body,None,None,'CUSTOMERS','CREATE')
+            retryjob_service.insert(haravan_id=haravanID,haravan_data=body,type='CUSTOMERS',action='CREATE')
             return build_response_200("Thêm dữ liệu không thành công")
 
     if topic == 'customers/update':
@@ -107,7 +109,7 @@ def webhooks():
         if status:
             return build_response_200("Cập nhật dữ liệu thành công")
         else:
-            retryjob_service.insert(haravanID,body,None,None,'CUSTOMERS','UPDATE')
+            retryjob_service.insert(haravan_id=haravanID,haravan_data=body,type='CUSTOMERS',action='UPDATE')
             return build_response_200("Cập nhật dữ liệu không thành công")
     elif topic == 'customers/delete':
         status = haravan_to_bitrix.delete_contact_bitrix(haravanID)
@@ -115,6 +117,7 @@ def webhooks():
             return build_response_200("Xóa dữ liệu thành công")
         else:
             retryjob_service.insert(haravanID,body,None,None,'CUSTOMERS','DELETE')
+            retryjob_service.insert(haravan_id=haravanID,haravan_data=body,type='CUSTOMERS',action='DELETE')
             return build_response_200("Xóa dữ liệu không thành công")
     
     return build_response_200()

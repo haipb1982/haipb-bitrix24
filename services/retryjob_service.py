@@ -12,10 +12,12 @@ LOGGER = log.get_logger(__name__)
 JOB_RETRY_TIME_LIMIT = 10
 
 # thêm mới job vào table tbl_retry_job
-def insert(haravan_id, haravan_data, bitrix24_id, bitrix_data , type, action):
+def insert(haravan_id='', haravan_data='', bitrix24_id='', bitrix_data='' , type='', action=''):
     return retryJob_dao.insertRetryJobRecord(haravan_id, bitrix24_id, json.dumps(haravan_data), json.dumps(bitrix_data), type, action)
 
-                
+def getAll():
+    return retryJob_dao.getAllRetryJobRecords()
+
 def haravan_migrate(job_data):
     
     type =  job_data.get('type')

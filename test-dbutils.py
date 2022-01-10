@@ -1,5 +1,5 @@
 import pymysql
-from dbutils.steady_db import connect
+from dbutils.pooled_db import connect
 import time
 
 dbconfig = {
