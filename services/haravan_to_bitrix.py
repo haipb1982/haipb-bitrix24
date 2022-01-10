@@ -269,6 +269,8 @@ def update_deal_bitrix_all(topic='', payload=None):
         LOGGER.info(f'Thêm Discount (product) {total_discounts} cho Bx24 Deal ...')
         productrow["PRODUCT_ID"] = 7707
         productrow["PRICE"] = "0.00"
+        productrow["PRICE_NETTO"] = "0.00"
+        productrow["PRICE_BRUTTO"] = "0.00"
         productrow["QUANTITY"] = "1"
         productrow["PRODUCT_NAME"] = 'Discount - Giảm giá của đơn hàng Haravan'
         productrow["DISCOUNT_TYPE_ID"] = 1 
@@ -287,7 +289,7 @@ def update_deal_bitrix_all(topic='', payload=None):
     if deal_productrow:
         LOGGER.warning('Thêm mới DealProductRow vào Deal Bx24 thất bại',extra={'extra':fields})
     else:
-        LOGGER.info('Thêm mới DealProductRow vào Deal Bx24 thành công')
+        LOGGER.info('Thêm mới DealProductRow vào Deal Bx24 thành công', extra={'extra': fields})
 
     LOGGER.info('Cập nhật dữ liệu trên tbl_deal_order')
     update_result = deal_dao.updateDeal(haravan_id, json.dumps(payload), json.dumps(result))

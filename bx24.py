@@ -74,6 +74,9 @@ def deleteDeal(data_fields):
         print(e)
         return False
 
+def getProductRowByDealID(dealID):
+    res = bx24.callMethod("crm.deal.productrows.get", id=dealID)
+    print(res)
 
 # lay product by deal id
 def getProductByDealID(dealID):
@@ -165,4 +168,6 @@ if __name__ == "__main__":
     # res = Deal.HaravanToBitrix24(payload)
     # print(res)
 
-    getContactByID(272)
+    # getContactByID(272)
+
+    getProductRowByDealID(5665)
