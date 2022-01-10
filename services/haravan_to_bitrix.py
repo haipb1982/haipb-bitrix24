@@ -240,7 +240,7 @@ def update_deal_bitrix_all(topic='', payload=None):
 
 
         if product_id:
-            LOGGER.info(f'Tạo Product ID={product_id} cho Bx24 Deal ...')
+            LOGGER.info(f'Thêm Product ID={product_id} cho Bx24 Deal ...')
 
             productrow["PRODUCT_ID"] = product_id
             productrow["PRICE"] = product_haravan.get("price",0)
@@ -266,9 +266,10 @@ def update_deal_bitrix_all(topic='', payload=None):
     # Tạo 1 sản phẩm ID=7077 để chứa discount của đơn hàng do Bx24 không có giảm giá theo Deal
     total_discounts = payload.get("total_discounts",None)
     if total_discounts:
+        LOGGER.info(f'Thêm Discount (product) {total_discounts} cho Bx24 Deal ...')
         productrow["PRODUCT_ID"] = 7707
-        productrow["PRICE"] = 0
-        productrow["QUANTITY"] = 1
+        productrow["PRICE"] = "0.00"
+        productrow["QUANTITY"] = "1"
         productrow["PRODUCT_NAME"] = 'Discount - Giảm giá của đơn hàng Haravan'
         productrow["DISCOUNT_TYPE_ID"] = 1 
         productrow["DISCOUNT_SUM"] = total_discounts
