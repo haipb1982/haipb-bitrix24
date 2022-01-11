@@ -200,6 +200,11 @@ def webapp_get_all_orders():
     
     return jsonify(res)
 
+@app.route('/api/v1/orders/check_duplicates', methods=['GET'])
+def webapp_check_duplicates_orders():
+    res = webapp_service.check_duplicates()
+    return jsonify(res)
+
 @app.route('/api/v1/products', methods=['GET'])
 def webapp_get_all_products():
     page = request.args.get("page")
