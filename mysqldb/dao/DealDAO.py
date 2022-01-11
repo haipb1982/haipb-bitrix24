@@ -27,6 +27,10 @@ class DealDAO(object):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id,havavan_status,haravan_data,bitrix_status,update_ts FROM tbl_deal_order LIMIT %s,%s ORDER BY id DESC", (__from, __to))
         return res
     
+    def getMaxDealID(self):
+        res = self.__db.query("SELECT MAX(bitrix24_id) as bitrix24_id FROM tbl_deal_order", None)
+        return res
+    
     def deleteDealRecord(self,id):
         res = self.__db.query("DELETE FROM tbl_deal_order WHERE id=%s", id)
         return res

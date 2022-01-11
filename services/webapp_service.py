@@ -109,3 +109,39 @@ def get_sync(type, haravan_id):
         res['message'] = 'SYNC data failed!'
 
     return res
+
+def check_duplicates():
+    
+    latest_id = deal_dao.getMaxDealID().get('data',None)
+    if not latest_id:
+        return
+
+    latest_id = latest_id[0].get('bitrix24_id')
+    check_numbers = 10
+    while latest_id < latest_id + check_numbers:
+        # print(id)
+        try:
+            data = bitrix24_service.Deal.get(latest_id)
+            if data:
+                ha_id = data.get('UF_CRM_1623809034975', None)
+                if ha_id:
+                    # Nếu có ha_id tìm record tbl_deal_order
+                    dao = deal_dao.getDealOrderByHaID(ha_id)
+                    # print(dao)
+
+                    if dao.get('data',None):
+                        bx_id = dao['data'][0].get('bitrix24_id', None)
+
+                        if bx_id:
+                            # Nếu có bx_id so sánh với id
+                            if not latest_id == bx_id:
+                                # Nếu id khác bx_id xoá Deal=id
+                                bitrix24_service.Deal.delete(latest_id)
+                    else:
+                        # Nếu không có ha_id thêm mới record tbl_deal_order
+                        print(deal_dao.addNewDeal(ha_id, latest_id, None, None))
+        except Exception as err:
+            # retry_dao.insertRetryJobRecord(bitrix24_id=latest_id)
+            print(f'ERROR {latest_id}: ', err)
+
+    latest_id += 2
