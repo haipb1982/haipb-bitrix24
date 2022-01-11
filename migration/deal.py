@@ -62,7 +62,7 @@ def HaravanToBitrix24(ha):
     financial_status = ha["financial_status"] # Trạng thái thanh toán của đơn hàng
 
     if order_status == "complete":
-        bx['STAGE_ID'] = "WIN"
+        bx['STAGE_ID'] = "C18:WON"
     elif order_status == "cancel":
         bx['STAGE_ID'] = "C18:LOSE"
     elif order_status == "confirmed" and fulfillment_status == "notfulfilled":
@@ -70,7 +70,7 @@ def HaravanToBitrix24(ha):
     elif order_status == "confirmed" and fulfillment_status == "notfulfilled" and financial_status == "pending":
         bx['STAGE_ID'] = "C18:NEW"
     elif order_status == "confirmed" and fulfillment_status == "notfulfilled" and financial_status == "paid":
-        bx['STAGE_ID'] = "P"
+        bx['STAGE_ID'] = "C18:P"
 
 
     # Đơn hàng Haravan
