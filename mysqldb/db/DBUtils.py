@@ -10,8 +10,10 @@ from utils import log
 from utils.Logger import Logger
 LOGGER = Logger(__name__).get()
 
+# host.docker.internal
+# 103.159.51.249
 config = {
-    'host': '103.159.51.249',
+    'host': 'host.docker.internal',
     'port':'3306',
     'user': 'vnztech',
     'password': 'Vietnam@68',
