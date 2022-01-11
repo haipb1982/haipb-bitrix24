@@ -1,8 +1,8 @@
 import pymysql
 # from dbutils.simple_pooled_db import connect
-from dbutils.steady_db import connect
 # from dbutils.steady_db import connect
-# from dbutils.pooled_db import connect
+from dbutils.pooled_db import connect
+# from dbutils.persistent_db import connect
 
 from utils import log
 # LOGGER = log.get_logger(__name__)
