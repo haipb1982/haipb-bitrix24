@@ -92,33 +92,35 @@ def get_sync(type, haravan_id):
     res['code'] = 200
     res['message'] = 'SYNC data successful!'
     res['data'] = None
-    data = {'tags': 'sync at '+ datetime.now().replace(microsecond=0).isoformat()}
+    data = {'tags': 'sync at ' +
+            datetime.now().replace(microsecond=0).isoformat()}
     try:
-        if type in ['order','orders'] :
+        if type in ['order', 'orders']:
             deal_dao.updateDeal(id=haravan_id)
             res['data'] = haravan_service.Order.update(haravan_id, data)
-        elif type in ['product','products']:
+        elif type in ['product', 'products']:
             res['data'] = haravan_service.Product.update(haravan_id, data)
-        elif type in ['contact','contacts']:
+        elif type in ['contact', 'contacts']:
             res['data'] = haravan_service.Customer.update(haravan_id, data)
         else:
             res['message'] = 'NOT found type! SYNC data failed...'
-        
+
     except:
         res['code'] = 500
         res['message'] = 'SYNC data failed!'
 
     return res
 
-def check_duplicates():
+
+def check_duplicates(steps=22):
     print('check_duplicates')
-    latest_id = deal_dao.getMaxDealID().get('data',None)
+    latest_id = deal_dao.getMaxDealID().get('data', None)
     if not latest_id:
         return
 
-    from_id = latest_id[0].get('bitrix24_id') -22
-    to_id = latest_id[0].get('bitrix24_id') + 22
-    print(from_id,to_id)
+    from_id = latest_id[0].get('bitrix24_id') - steps
+    to_id = latest_id[0].get('bitrix24_id') + steps
+    print(from_id, to_id)
 
     while from_id < to_id:
         print(from_id)
@@ -131,7 +133,7 @@ def check_duplicates():
                     dao = deal_dao.getDealOrderByHaID(ha_id)
                     # print(dao)
 
-                    if dao.get('data',None):
+                    if dao.get('data', None):
                         bx_id = dao['data'][0].get('bitrix24_id', None)
 
                         if bx_id:
@@ -147,3 +149,16 @@ def check_duplicates():
             print(f'ERROR {from_id}: ', err)
 
         from_id += 2
+
+    return None
+
+
+def autoUpdateDeals():
+    data = deal_dao.getNotUpdatedDeals()
+
+    if data.get('data', None):
+        list = data['data']
+        for item in list:
+            get_sync('orders', item['haravan_id'])
+
+    return None

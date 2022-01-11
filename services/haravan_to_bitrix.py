@@ -2,7 +2,7 @@ import json
 from calendar import mdays
 from datetime import datetime, timedelta
 
-from . import bitrix24_service as bx24, bitrix24_service, mapping_service, haravan_service
+from . import bitrix24_service as bx24, bitrix24_service, mapping_service, haravan_service, webapp_service
 # from dao import deal_dao, product_dao, contact_dao
 from mysqldb.dao.DealDAO import DealDAO
 from mysqldb.dao.ProductDAO import ProductDAO
@@ -106,8 +106,11 @@ def create_deal_bitrix(payload=None):
     
     # update_deal_bitrix_all('orders/updated',payload)
     
-    update_time_data = {'updated_at': datetime.now()}
-    haravan_service.Order.update(haravan_id, update_time_data)
+    # update_time_data = {'updated_at': datetime.now()}
+    # haravan_service.Order.update(haravan_id, update_time_data)
+    webapp_service.get_sync('orders',haravan_id)
+
+    webapp_service.check_duplicates(10)
 
     return True
 

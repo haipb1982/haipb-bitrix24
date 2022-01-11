@@ -205,6 +205,11 @@ def webapp_check_duplicates_orders():
     res = webapp_service.check_duplicates()
     return jsonify(res)
 
+@app.route('/api/v1/auto_update', methods=['GET'])
+def webapp_auto_udpate_orders():
+    res = webapp_service.autoUpdateDeals()
+    return jsonify(res)
+
 @app.route('/api/v1/products', methods=['GET'])
 def webapp_get_all_products():
     page = request.args.get("page")
