@@ -148,14 +148,16 @@ def update_deal_bitrix_all(topic='', payload=None):
 
     fields = Deal.HaravanToBitrix24(payload)
     fields["ID"] = deal_order['data'][0].get('bitrix24_id')
+    # Chỉ yêu cầu cập nhật vào C18:NEW
+    fields['STAGE_ID'] = "C18:NEW"
     # if topic in ['orders/updated']:
     #     fields['STAGE_ID'] = "C18:NEW"
-    if topic in ['orders/paid']:
-        fields['STAGE_ID'] = "C18:FINAL_INVOICE"
-    if topic in ['orders/cancelled']:
-        fields['STAGE_ID'] = "C18:LOSE"
-    if topic in ['orders/fulfilled']:
-        fields['STAGE_ID'] = "C18:WON"
+    # if topic in ['orders/paid']:
+    #     fields['STAGE_ID'] = "C18:FINAL_INVOICE"
+    # if topic in ['orders/cancelled']:
+    #     fields['STAGE_ID'] = "C18:LOSE"
+    # if topic in ['orders/fulfilled']:
+    #     fields['STAGE_ID'] = "C18:WON"
     
     LOGGER.info('Cập nhật dữ liệu trên bitrix',extra={'extra':fields})
     # Cập nhật deal trên bitrix

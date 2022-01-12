@@ -55,26 +55,117 @@ def HaravanToBitrix24(ha):
 
     # Kiểm tra trạng thái của đơn hàng
 
+    # 12-01-2022: Huỷ không cập nhật Trạng thái từ Haravan --> Bx24 
+    # order_status = ha["order_processing_status"]
+
+    # fulfillment_status = ha["fulfillment_status"] # Trạng thái của đơn hàng
+
+    # financial_status = ha["financial_status"] # Trạng thái thanh toán của đơn hàng
+
+    # if order_status == "complete":
+    #     bx['STAGE_ID'] = "C18:WON"
+    # elif order_status == "cancel":
+    #     bx['STAGE_ID'] = "C18:LOSE"
+    # elif order_status == "confirmed" and fulfillment_status == "notfulfilled":
+    #     bx['STAGE_ID'] = "C18:NEW"
+    # elif order_status == "confirmed" and fulfillment_status == "notfulfilled" and financial_status == "pending":
+    #     bx['STAGE_ID'] = "C18:NEW"
+    # elif order_status == "confirmed" and fulfillment_status == "notfulfilled" and financial_status == "paid":
+    #     bx['STAGE_ID'] = "C18:P"
+
     order_status = ha["order_processing_status"]
+    # Trạng thái đơn hàng: 'UF_CRM_1641976282': 
+    bx['UF_CRM_1641976282'] = ""
+    # Verified 419
+    if order_status ==  "Verified":
+        bx['UF_CRM_1641976282'] = "419"
+    # Change location 421
+    if order_status ==  "Change location":
+        bx['UF_CRM_1641976282'] = "421"
+    # Available confirmed 423
+    if order_status ==  "Available confirmed":
+        bx['UF_CRM_1641976282'] = "423"
+    # Out of stock 425
+    if order_status ==  "Out of stock":
+        bx['UF_CRM_1641976282'] = "425"
+    # Exported 427
+    if order_status ==  "Exported":
+        bx['UF_CRM_1641976282'] = "427"
+    # On transported 429
+    if order_status ==  "On transported":
+        bx['UF_CRM_1641976282'] = "429"
+    # Self delivery 431
+    if order_status ==  "Self delivery":
+        bx['UF_CRM_1641976282'] = "431"
+    # Completed 433
+    if order_status ==  "Completed":
+        bx['UF_CRM_1641976282'] = "433"
+
+    financial_status = ha["financial_status"]
+    # Trạng thái thanh toán 'UF_CRM_1641976342': 
+    bx['UF_CRM_1641976342'] = ""
+    # Paid 337
+    if financial_status ==  "Paid":
+        bx['UF_CRM_1641976342'] = "337"
+    # Partially refund 339
+    if financial_status ==  "Partially refund":
+        bx['UF_CRM_1641976342'] = "339"
+    # Partially paid 341
+    if financial_status ==  "Partially paid":
+        bx['UF_CRM_1641976342'] = "341"
+    # Pending 343
+    if financial_status ==  "Pending":
+        bx['UF_CRM_1641976342'] = "343"
+    # Refunded 345
+    if financial_status ==  "Refunded":
+        bx['UF_CRM_1641976342'] = "345"
+    # Unpaid 347
+    if financial_status ==  "Unpaid":
+        bx['UF_CRM_1641976342'] = "347"
+    # Canceled 349
+    if financial_status ==  "Canceled":
+        bx['UF_CRM_1641976342'] = "349"
 
     fulfillment_status = ha["fulfillment_status"] # Trạng thái của đơn hàng
-
-    financial_status = ha["financial_status"] # Trạng thái thanh toán của đơn hàng
-
-    if order_status == "complete":
-        bx['STAGE_ID'] = "C18:WON"
-    elif order_status == "cancel":
-        bx['STAGE_ID'] = "C18:LOSE"
-    elif order_status == "confirmed" and fulfillment_status == "notfulfilled":
-        bx['STAGE_ID'] = "C18:NEW"
-    elif order_status == "confirmed" and fulfillment_status == "notfulfilled" and financial_status == "pending":
-        bx['STAGE_ID'] = "C18:NEW"
-    elif order_status == "confirmed" and fulfillment_status == "notfulfilled" and financial_status == "paid":
-        bx['STAGE_ID'] = "C18:P"
+    # Trạng thái giao hàng 'UF_CRM_1641976377': '', 
+    bx['UF_CRM_1641976377'] = ""
+    # Ready 359
+    if fulfillment_status ==  "Ready":
+        bx['UF_CRM_1641976377'] = "359"
+    # Picking up 361
+    if fulfillment_status ==  "Picking":
+        bx['UF_CRM_1641976377'] = "361"
+    # On the way 363
+    if fulfillment_status ==  "On the way":
+        bx['UF_CRM_1641976377'] = "363"
+    # Delivered 365
+    if fulfillment_status ==  "Delivered":
+        bx['UF_CRM_1641976377'] = "365"
+    # Delivery canceled 367
+    if fulfillment_status ==  "Delivery canceled":
+        bx['UF_CRM_1641976377'] = "367"
+    # Return 369
+    if fulfillment_status ==  "Return":
+        bx['UF_CRM_1641976377'] = "369"
+    # Waiting to deliver 371
+    if fulfillment_status ==  "Waiting to deliver":
+        bx['UF_CRM_1641976377'] = "371"
+    # Customer absent 373
+    if fulfillment_status ==  "Customer absent":
+        bx['UF_CRM_1641976377'] = "373"
+    # Waiting for return 375
+    if fulfillment_status ==  "Waiting for return":
+        bx['UF_CRM_1641976377'] = "375"
+    # Not finished 377
+    if fulfillment_status ==  "Not finished":
+        bx['UF_CRM_1641976377'] = "377"
+    # Processing failed 379
+    if fulfillment_status ==  "Processing failed":
+        bx['UF_CRM_1641976377'] = "379"
 
 
     # Đơn hàng Haravan
-    bx['UF_CRM_1637252157269'] = ha.get('name','New Order') # mã đơn
+    bx['UF_CRM_1630416306053'] = ha.get('name','not found name') # mã đơn
     bx['UF_CRM_1623725469652'] = 'https://blusaigon.myharavan.com/admin/orders/' + str(ha.get('id',0)) # đơn hàng haravan
     bx['UF_CRM_1623809034975'] = str(ha.get('id',0)) # haravan ID
     bx['UF_CRM_1627457986'] = ha.get('note','Không tìm thấy ghi chú') # ghi chú đơn hàng
@@ -85,7 +176,7 @@ def HaravanToBitrix24(ha):
     # More
     #
     # bx['UF_CRM_1630417157521'] = 'HARAVAN-BITRIX APP' # người tạo đơn
-    bx['UF_CRM_1630417292478'] = ha.get('source_name','New Order') # Kênh bán hàng 
+    bx['UF_CRM_1630417292478'] = ha.get('source_name','not found source_name') # Kênh bán hàng 
 
     # print('HaravanToBitrix24',bx)
     return bx
