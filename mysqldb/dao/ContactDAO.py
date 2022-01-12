@@ -9,6 +9,13 @@ class ContactDAO(object):
         self.__db = DBUtils()
 
     # # # for webapp API # # #
+    def getAllContactsWithName(self):
+        res = self.__db.query("SELECT id, name, haravan_id,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_contact_customer ORDER BY id DESC", None)
+        if res.get("status"):
+            return res
+        else:
+            return None
+
     def getAllContacts(self):
         res = self.__db.query("SELECT id,haravan_id,haravan_data,bitrix24_id,bitrix_status,update_ts,haravan_status FROM tbl_contact_customer ORDER BY id DESC", None)
         if res.get("status"):

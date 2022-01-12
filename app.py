@@ -235,11 +235,13 @@ def webapp_get_all_contacts():
 @app.route('/api/v1/orders', methods=['POST'])
 def webapp_order_actions():
     req = request.form
-    LOGGER.info("/api/v1/orders request.form --> ", extra={'req':req.form})
+    LOGGER.info("/api/v1/orders request.form --> ", extra={'req':request.form})
 
-    LOGGER.info("/api/v1/orders request.values --> ", extra={'req':req.values})
+    LOGGER.info("/api/v1/orders request.values --> ", extra={'req':request.values})
 
-    LOGGER.info("/api/v1/orders request.args --> ", extra={'req':req.args})
+    LOGGER.info("/api/v1/orders request.args --> ", extra={'req':request.args})
+
+    LOGGER.info("/api/v1/orders request.data --> ", extra={'req':request.data})
 
     action = req.get('action', None)
     __id =  req.get('id', None)
