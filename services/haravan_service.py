@@ -1,3 +1,4 @@
+from datetime import datetime
 import requests
 import json
 
@@ -117,6 +118,23 @@ class Product:
             **my_headers
         }
         response = requests.put(f'https://apis.haravan.com/com/products/{id}.json', headers=headers, data=json.dumps(payload))
+        return response.json()
+
+    @staticmethod
+    def updateVariant(id, data):
+        print('updateVariant',id,data)
+        payload = {
+            "variant": {
+                "id": id,
+                **data
+            }
+        }
+        
+        headers = {
+            "Content-Type": "application/json",
+            **my_headers
+        }
+        response = requests.put(f'https://apis.haravan.com/com/variants/{id}.json', headers=headers, data=json.dumps(payload))
         return response.json()
 
     @staticmethod

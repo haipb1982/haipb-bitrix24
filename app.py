@@ -236,13 +236,8 @@ def webapp_get_all_contacts():
 def webapp_order_actions():
     # req = request.data
     req = request.get_json(force=True)
-    # LOGGER.info("/api/v1/orders request.form --> ", extra={'req':request.form})
-    # LOGGER.info("/api/v1/orders request.values --> ", extra={'req':request.values})
-    # LOGGER.info("/api/v1/orders request.args --> ", extra={'req':request.args})
-    # LOGGER.info("/api/v1/orders request.data --> ", extra={'req':request.data})
-
     req = req.get('params',None)
-    LOGGER.info("/api/v1/orders request.data['params] --> ", extra={'req':req})
+    # LOGGER.info("/api/v1/orders request.data['params] --> ", extra={'req':req})
 
     action = req.get('action', None)
     __id =  req.get('id', None)
@@ -290,8 +285,9 @@ def webapp_order_actions():
 
 @app.route('/api/v1/products', methods=['POST'])
 def webapp_product_actions():
-    req = request.form
-    LOGGER.info("/api/v1/products request --> ", extra={'req':req})
+    req = request.get_json(force=True)
+    req = req.get('params',None)
+    # LOGGER.info("/api/v1/orders request.data['params] --> ", extra={'req':req})
 
     action = req.get('action', None)
     __id =  req.get('id', None)
@@ -333,8 +329,9 @@ def webapp_product_actions():
 
 @app.route('/api/v1/contacts', methods=['POST'])
 def webapp_contact_actions():
-    req = request.form
-    LOGGER.info("/api/v1/contacts: ", extra={'req':req})
+    req = request.get_json(force=True)
+    req = req.get('params',None)
+    # LOGGER.info("/api/v1/orders request.data['params] --> ", extra={'req':req})
 
     action = req.get('action', None)
     __id =  req.get('id', None)
@@ -378,6 +375,7 @@ def webapp_get_sync():
     type = request.args.get("type")
     id = request.args.get("id")
     res = {}
+    
     if type and id:
         res = webapp_service.get_sync(type, id)
     else:

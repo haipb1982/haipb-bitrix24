@@ -65,11 +65,11 @@ class DealDAO(object):
         res = self.__db.query(sql, parms)
 
         if res.get("status"):
-            print('--> addNewDeal successful ',hanravan_id,bitrix24_id)
+            # print('--> addNewDeal successful ',hanravan_id,bitrix24_id)
             return True
         else:
-            print('--> addNewDeal failed ',hanravan_id,bitrix24_id)
-            print(res.get("data"))
+            # print('--> addNewDeal failed ',hanravan_id,bitrix24_id)
+            # print(res.get("data"))
             return False
 
     def updateDeal(self, id, haravan_data="", bitrix_data=""):
@@ -80,11 +80,11 @@ class DealDAO(object):
         res = self.__db.query(sql, parms)
 
         if res.get("status"):
-            print('--> DAO updateDeal successful ',id)
+            # print('--> DAO updateDeal successful ',id)
             return True
         else:
-            print('--> DAO updateDeal failed ',id)
-            print(res.get("data"))
+            # print('--> DAO updateDeal failed ',id)
+            # print(res.get("data"))
             return False
 
     def getHaravanID(self, id):

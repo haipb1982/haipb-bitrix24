@@ -92,15 +92,22 @@ def get_sync(type, haravan_id):
     res['code'] = 200
     res['message'] = 'SYNC data successful!'
     res['data'] = None
-    data = {'tags': 'sync at ' +
-            datetime.now().replace(microsecond=0).isoformat()}
+    # data = {'tags': 'sync at ' +
+    #         datetime.now().replace(microsecond=0).isoformat()}
+    data = {'updated_at': datetime.now().isoformat()}
+
     try:
         if type in ['order', 'orders']:
             deal_dao.updateDeal(id=haravan_id)
             res['data'] = haravan_service.Order.update(haravan_id, data)
         elif type in ['product', 'products']:
+            data = {'barcode': datetime.now().isoformat()}
             res['data'] = haravan_service.Product.update(haravan_id, data)
+            if res['data'].get('errors', None):
+                res['data'] = haravan_service.Product.updateVariant(
+                    haravan_id, data)
         elif type in ['contact', 'contacts']:
+            data = {'tags': datetime.now().isoformat()}
             res['data'] = haravan_service.Customer.update(haravan_id, data)
         else:
             res['message'] = 'NOT found type! SYNC data failed...'
