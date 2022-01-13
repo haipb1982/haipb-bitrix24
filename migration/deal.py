@@ -102,7 +102,7 @@ def HaravanToBitrix24(ha):
     if order_status ==  "Completed":
         changed = "433"
     
-    bx['UF_CRM_1641976282'] = [changed] 
+    bx['UF_CRM_1641976282'] = order_status 
 
     financial_status = ha["financial_status"]
     # Trạng thái thanh toán 'UF_CRM_1641976342': 
@@ -129,7 +129,7 @@ def HaravanToBitrix24(ha):
     if financial_status ==  "Canceled":
         changed = "349"
 
-    bx['UF_CRM_1641976342'] = [changed] 
+    bx['UF_CRM_1641976342'] = [financial_status] 
 
     fulfillment_status = ha["fulfillment_status"] # Trạng thái của đơn hàng
     # Trạng thái giao hàng 'UF_CRM_1641976377': '', 
@@ -168,7 +168,7 @@ def HaravanToBitrix24(ha):
     if fulfillment_status ==  "Processing failed":
         changed = "379"
     
-    bx['UF_CRM_1641976377'] = [changed] 
+    bx['UF_CRM_1641976377'] = {fulfillment_status} 
 
 
     # Đơn hàng Haravan
@@ -185,7 +185,7 @@ def HaravanToBitrix24(ha):
     # bx['UF_CRM_1630417157521'] = 'HARAVAN-BITRIX APP' # người tạo đơn
     bx['UF_CRM_1630417292478'] = ha.get('source_name','not found source_name') # Kênh bán hàng 
 
-    # print('HaravanToBitrix24',bx)
+    print('HaravanToBitrix24',bx)
     return bx
 
 
