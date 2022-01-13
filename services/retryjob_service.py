@@ -124,6 +124,8 @@ def retry_orders():
     orders = common.readCSV('retry_orders.csv')
     for order in orders:
         if order[0]:
-            res = webapp_service.getx_sync('orders',order[0])
+            res = webapp_service.get_sync('orders',order[0])
+            print(res['data'])
             if res['data']:
-                common.removeRowCSV(order[0],retry_orders.csv,'retry_orders.csv')
+                print('OK retry!!!')
+                common.removeRowCSV(order[0],'retry_orders.csv')
