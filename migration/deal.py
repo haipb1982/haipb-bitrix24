@@ -73,95 +73,102 @@ def HaravanToBitrix24(ha):
     # elif order_status == "confirmed" and fulfillment_status == "notfulfilled" and financial_status == "paid":
     #     bx['STAGE_ID'] = "C18:P"
 
+    changed = ""
     order_status = ha["order_processing_status"]
     # Trạng thái đơn hàng: 'UF_CRM_1641976282': 
-    bx['UF_CRM_1641976282'] = ""
+    changed = ""
     # Verified 419
     if order_status ==  "Verified":
-        bx['UF_CRM_1641976282'] = "419"
+        changed = "419"
     # Change location 421
     if order_status ==  "Change location":
-        bx['UF_CRM_1641976282'] = "421"
+        changed = "421"
     # Available confirmed 423
     if order_status ==  "Available confirmed":
-        bx['UF_CRM_1641976282'] = "423"
+        changed = "423"
     # Out of stock 425
     if order_status ==  "Out of stock":
-        bx['UF_CRM_1641976282'] = "425"
+        changed = "425"
     # Exported 427
     if order_status ==  "Exported":
-        bx['UF_CRM_1641976282'] = "427"
+        changed = "427"
     # On transported 429
     if order_status ==  "On transported":
-        bx['UF_CRM_1641976282'] = "429"
+        changed = "429"
     # Self delivery 431
     if order_status ==  "Self delivery":
-        bx['UF_CRM_1641976282'] = "431"
+        changed = "431"
     # Completed 433
     if order_status ==  "Completed":
-        bx['UF_CRM_1641976282'] = "433"
+        changed = "433"
+    
+    bx['UF_CRM_1641976282'] = [changed] 
 
     financial_status = ha["financial_status"]
     # Trạng thái thanh toán 'UF_CRM_1641976342': 
-    bx['UF_CRM_1641976342'] = ""
+    changed = ""
     # Paid 337
     if financial_status ==  "Paid":
-        bx['UF_CRM_1641976342'] = "337"
+        changed = "337"
     # Partially refund 339
     if financial_status ==  "Partially refund":
-        bx['UF_CRM_1641976342'] = "339"
+        changed = "339"
     # Partially paid 341
     if financial_status ==  "Partially paid":
-        bx['UF_CRM_1641976342'] = "341"
+        changed = "341"
     # Pending 343
     if financial_status ==  "Pending":
-        bx['UF_CRM_1641976342'] = "343"
+        changed = "343"
     # Refunded 345
     if financial_status ==  "Refunded":
-        bx['UF_CRM_1641976342'] = "345"
+        changed = "345"
     # Unpaid 347
     if financial_status ==  "Unpaid":
-        bx['UF_CRM_1641976342'] = "347"
+        changed = "347"
     # Canceled 349
     if financial_status ==  "Canceled":
-        bx['UF_CRM_1641976342'] = "349"
+        changed = "349"
+
+    bx['UF_CRM_1641976342'] = [changed] 
 
     fulfillment_status = ha["fulfillment_status"] # Trạng thái của đơn hàng
     # Trạng thái giao hàng 'UF_CRM_1641976377': '', 
-    bx['UF_CRM_1641976377'] = ""
+    changed = ""
     # Ready 359
     if fulfillment_status ==  "Ready":
-        bx['UF_CRM_1641976377'] = "359"
+        changed = "359"
     # Picking up 361
     if fulfillment_status ==  "Picking":
-        bx['UF_CRM_1641976377'] = "361"
+        changed = "361"
     # On the way 363
     if fulfillment_status ==  "On the way":
-        bx['UF_CRM_1641976377'] = "363"
+        changed = "363"
     # Delivered 365
     if fulfillment_status ==  "Delivered":
-        bx['UF_CRM_1641976377'] = "365"
+        changed = "365"
     # Delivery canceled 367
     if fulfillment_status ==  "Delivery canceled":
-        bx['UF_CRM_1641976377'] = "367"
+        changed = "367"
     # Return 369
     if fulfillment_status ==  "Return":
-        bx['UF_CRM_1641976377'] = "369"
+        changed = "369"
     # Waiting to deliver 371
     if fulfillment_status ==  "Waiting to deliver":
-        bx['UF_CRM_1641976377'] = "371"
+        changed = "371"
     # Customer absent 373
     if fulfillment_status ==  "Customer absent":
-        bx['UF_CRM_1641976377'] = "373"
+        changed = "373"
     # Waiting for return 375
     if fulfillment_status ==  "Waiting for return":
-        bx['UF_CRM_1641976377'] = "375"
+        changed = "375"
     # Not finished 377
     if fulfillment_status ==  "Not finished":
-        bx['UF_CRM_1641976377'] = "377"
+        changed = "377"
     # Processing failed 379
     if fulfillment_status ==  "Processing failed":
-        bx['UF_CRM_1641976377'] = "379"
+        changed = "379"
+    
+    bx['UF_CRM_1641976377'] = [changed] 
 
 
     # Đơn hàng Haravan

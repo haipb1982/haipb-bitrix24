@@ -1,9 +1,9 @@
 from datetime import datetime
 from mysqldb.dao.DealDAO import DealDAO
 from mysqldb.dao.RetryJobDAO import RetryJobDAO
-from services import bitrix24_service, haravan_service, webapp_service
+from services import bitrix24_service, haravan_service, webapp_service, retryjob_service
 
-print(bitrix24_service.Deal.get(7687))
+# print(bitrix24_service.Deal.get(7713))
 
 deal_dao = DealDAO()
 
@@ -34,11 +34,8 @@ retry_dao = RetryJobDAO()
 # res = bitrix24_service.Deal.get(7655)
 # print(res)
 
-# fields = {
-#         "id": 5665,
-#     }
-
-# bitrix24_service.DealProductRow.get(fields)
+res = bitrix24_service.DealProductRow.get(7713)
+print(res)
 
 # webapp_service.check_duplicates()
 
@@ -51,4 +48,7 @@ retry_dao = RetryJobDAO()
 # res = haravan_service.Customer.update(1023539137, {'updated_at': my_date.strftime('%Y-%m-%dT%H:%M:%S')})
 
 # # res = haravan_service.Customer.get(1023539137)
+# print(res)
+
+# res =  retryjob_service.insert(haravan_id='1261838819',type='ORDERS')
 # print(res)

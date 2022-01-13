@@ -2,7 +2,7 @@ import json
 from calendar import mdays
 from datetime import datetime, timedelta
 
-from . import bitrix24_service as bx24, bitrix24_service, mapping_service, haravan_service, webapp_service
+from . import bitrix24_service as bx24, bitrix24_service, mapping_service, haravan_service, webapp_service, retryjob_service
 # from dao import deal_dao, product_dao, contact_dao
 from mysqldb.dao.DealDAO import DealDAO
 from mysqldb.dao.ProductDAO import ProductDAO
@@ -33,6 +33,8 @@ def create_deal_bitrix(payload=None):
 
     # Sử dụng database để mapping giữa haravan và bitrix
     haravan_id = payload.get("id",None)
+    retryjob_service.insertRetryOrderCSV(haravan_id)
+        
     deal_order = deal_dao.getDealOrderByHaID(haravan_id)
 
     if deal_order.get('data',None):
@@ -274,15 +276,15 @@ def update_deal_bitrix_all(topic='', payload=None):
         LOGGER.info(f'Thêm Discount (product) {total_discounts} cho Bx24 Deal ...')
         _productrow = {}
         _productrow["PRODUCT_ID"] = 6755
-        _productrow["PRICE"] = 0
-        # _productrow["PRICE"] = 0-total_discounts
-        # _productrow["PRICE_EXCLUSIVE"] = 0-total_discounts
-        # _productrow["PRICE_NETTO"] = 0-total_discounts
-        # _productrow["PRICE_BRUTTO"] = 0-total_discounts
-        # _productrow["PRICE_ACCOUNT"] = 0-total_discounts
+        _productrow["PRICE"] = 0 - total_discounts
+        _productrow["PRICE_EXCLUSIVE"] = 0 - total_discounts
+        _productrow["PRICE_NETTO"] = 0
+        _productrow["PRICE_BRUTTO"] = 0
+        _productrow["PRICE_ACCOUNT"] = 0 - total_discounts
         _productrow["QUANTITY"] = "1"
         _productrow["PRODUCT_NAME"] = 'Discount - Giảm giá của đơn hàng Haravan'
-        _productrow["DISCOUNT_TYPE_ID"] = 1 
+        _productrow["DISCOUNT_TYPE_ID"] = 1
+        _productrow["DISCOUNT_RATE"] = 0
         _productrow["DISCOUNT_SUM"] = total_discounts
         productrows[i] = _productrow
     

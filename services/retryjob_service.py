@@ -10,11 +10,15 @@ retryJob_dao = RetryJobDAO()
 LOGGER = log.get_logger(__name__)
 
 JOB_RETRY_TIME_LIMIT = 10
+RETRY_ORDERS_CSV = 'retry_orders.csv'
+
+def insertRetryOrderCSV(id):
+    common.addRowCSV([id],RETRY_ORDERS_CSV)
 
 # thêm mới job vào table tbl_retry_job
 def insert(haravan_id=None, haravan_data=None, bitrix24_id=None, bitrix_data=None , type=None, action=None):
     if type=='ORDERS' or type=='ORDER':
-        common.addRowCSV([haravan_id],'retry_orders.csv')
+        insertRetryOrderCSV(haravan_id)
     return retryJob_dao.insertRetryJobRecord(haravan_id, bitrix24_id, json.dumps(haravan_data), json.dumps(bitrix_data), type, action)
 
 def getAll():
@@ -122,11 +126,11 @@ def retry_all_jobs():
             retryJob_dao.deleteRetryJobRecord(job.get('id'))
 
 def retry_orders():
-    orders = common.readCSV('retry_orders.csv')
+    orders = common.readCSV(RETRY_ORDERS_CSV)
     for order in orders:
         if order[0]:
             res = webapp_service.get_sync('orders',order[0])
             # print(res['data'])
             if res['data']:
                 # print('OK retry!!!')
-                common.removeRowCSV(order[0],'retry_orders.csv')
+                common.removeRowCSV(order[0],RETRY_ORDERS_CSV)
