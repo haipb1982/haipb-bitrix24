@@ -13,7 +13,7 @@ JOB_RETRY_TIME_LIMIT = 10
 
 # thêm mới job vào table tbl_retry_job
 def insert(haravan_id='', haravan_data='', bitrix24_id='', bitrix_data='' , type='', action=''):
-    common.addRowCSV(haravan_id)
+    common.addRowCSV(haravan_id,'retry_orders.csv')
     return retryJob_dao.insertRetryJobRecord(haravan_id, bitrix24_id, json.dumps(haravan_data), json.dumps(bitrix_data), type, action)
 
 def getAll():
@@ -126,4 +126,4 @@ def retry_orders():
         if order[0]:
             res = webapp_service.getx_sync('orders',order[0])
             if res['data']:
-                common.removeRowCSV(order[0])
+                common.removeRowCSV(order[0],retry_orders.csv,'retry_orders.csv')
