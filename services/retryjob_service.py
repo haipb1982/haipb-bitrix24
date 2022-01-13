@@ -3,7 +3,7 @@ from utils import log, common
 import json
 
 from mysqldb.dao.RetryJobDAO import RetryJobDAO
-from services import haravan_to_bitrix ,bitrix_to_haravan
+from services import haravan_to_bitrix ,bitrix_to_haravan, webapp_service
 
 retryJob_dao = RetryJobDAO()
 
@@ -13,10 +13,14 @@ JOB_RETRY_TIME_LIMIT = 10
 
 # thêm mới job vào table tbl_retry_job
 def insert(haravan_id='', haravan_data='', bitrix24_id='', bitrix_data='' , type='', action=''):
+    common.addRowCSV(haravan_id)
     return retryJob_dao.insertRetryJobRecord(haravan_id, bitrix24_id, json.dumps(haravan_data), json.dumps(bitrix_data), type, action)
 
 def getAll():
     return retryJob_dao.getAllRetryJobRecords()
+
+def getOrders():
+    return retryJob_dao.getOrderRetryJobRecords()
 
 def haravan_migrate(job_data):
     
@@ -115,3 +119,11 @@ def retry_all_jobs():
 
         if result:
             retryJob_dao.deleteRetryJobRecord(job.get('id'))
+
+def retry_orders():
+    orders = common.readCSV('retry_orders.csv')
+    for order in orders:
+        if order[0]:
+            res = webapp_service.getx_sync('orders',order[0])
+            if res['data']:
+                common.removeRowCSV(order[0])

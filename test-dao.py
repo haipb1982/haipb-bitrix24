@@ -9,13 +9,13 @@ contact_dao = ContactDAO()
 
 # deal_dao.insertDealRecord(111,222)
 
- # test...
-while True:
-    t0 = time.time()
-    for i in range(10):
-        print(i)
-        print(deal_dao.getDealOrderByHaID(1259418605))
-    print("time cousumed:", time.time() - t0)
+#  # test...
+# while True:
+#     t0 = time.time()
+#     for i in range(10):
+#         print(i)
+#         print(deal_dao.getDealOrderByHaID(1259418605))
+#     print("time cousumed:", time.time() - t0)
 
 
 # ['WEB103364', 1259726417, '', '']

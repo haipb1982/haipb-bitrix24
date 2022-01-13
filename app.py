@@ -391,3 +391,11 @@ def api_retry_all_jobs():
         retryjob_service.retry_all_jobs()
     threading.Thread(target=worker, daemon=True).start()
     return 'processing /api/v1/retry_all_jobs'    
+
+
+@app.route('/api/v1/retry_orders', methods=['GET'])
+def api_retry_orders():
+    def worker():
+        retryjob_service.retry_orders()
+    threading.Thread(target=worker, daemon=True).start()
+    return 'processing /api/v1/retry_orders'  

@@ -1,6 +1,7 @@
 import base64
 import decimal
 import json
+import csv
 import re
 
 from .model import Payload
@@ -85,3 +86,35 @@ def readJsonFile(filename):
     with open(filename) as json_file:
         data = json.load(json_file)
     return data
+
+def writeCSV(rows,filename):
+    # writing to csv file 
+    with open(filename, 'w') as csvfile: 
+        # creating a csv writer object 
+        csvwriter = csv.writer(csvfile) 
+        # writing the data rows 
+        csvwriter.writerows(rows)
+
+def readCSV(filename):
+    result = []
+    with open(filename, mode ='r')as file:
+        # reading the CSV file
+        data = csv.reader(file)
+        for item in data:
+            result.append(item)
+    return result
+
+def addRowCSV(rows,filename):
+    old_rows = readCSV(filename)
+    old_rows.append(rows)
+    writeCSV(old_rows,filename)
+
+def removeRowCSV(rows,filename):
+    old_rows = readCSV(filename)
+    new_rows = old_rows
+    for row in old_rows:
+        if row[0] == rows[0]:
+            new_rows.remove(row)
+    
+    writeCSV(new_rows,filename)
+

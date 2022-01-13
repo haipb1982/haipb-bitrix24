@@ -14,6 +14,10 @@ class RetryJobDAO(object):
         res = self.__db.query("SELECT id,haravan_id,bitrix24_id, haravan_data, type, action, retry_times FROM tbl_retry_job WHERE retry_times < %s ORDER BY id DESC", (retry_time_limit))
         return res
 
+    def getOrderRetryJobRecords(self):
+        res = self.__db.query("SELECT id,haravan_id,bitrix24_id FROM tbl_retry_job WHERE haravan_id IS NOT NULL AND bitrix24_id IS NOT NULL", None)
+        return res
+
     def deleteRetryJobRecord(self,id):
         res = self.__db.query("DELETE FROM tbl_retry_job WHERE id=%s", id)
         return res

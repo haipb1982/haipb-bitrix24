@@ -1,0 +1,33 @@
+Trạng thái đơn hàng: 'UF_CRM_1641976282': '419'
+
+Verified 419
+Change location 421
+Available confirmed 423
+Out of stock 425
+Exported 427
+On transported 429
+Self delivery 431
+Completed 433
+
+Trạng thái thanh toán 'UF_CRM_1641976342': '', 
+Paid 337
+Partially refund 339
+Partially paid 341
+Pending 343
+Refunded 345
+Unpaid 347
+Canceled 349
+
+Trạng thái giao hàng 'UF_CRM_1641976377': '', 
+
+Ready 359
+Picking up 361
+On the way 363
+Delivered 365
+Delivery canceled 357
+Return 369
+Waiting to deliver 371
+Customer absent 373
+Waiting for return 375
+Not finished 377
+Processing failed 379

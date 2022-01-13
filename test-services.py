@@ -1,8 +1,9 @@
+from datetime import datetime
 from mysqldb.dao.DealDAO import DealDAO
 from mysqldb.dao.RetryJobDAO import RetryJobDAO
 from services import bitrix24_service, haravan_service, webapp_service
 
-# print(bitrix24_service.Deal.get(57113))
+print(bitrix24_service.Deal.get(7687))
 
 deal_dao = DealDAO()
 
@@ -13,7 +14,7 @@ retry_dao = RetryJobDAO()
 
 # print(product)
 
-# order = haravan_service.Order.get(1259070647)
+# order = haravan_service.Order.get(1261613090)
 # print(order)
 
 # product = {'NAME': 'Mạ Gold Titanium / M(0.7 mm) / Xanh', 'DATE_CREATE': '2019-01-01T02:37:46.219Z', 'CURRENCY_ID': 'VND', 'PRICE': 1499000.0, 'DISCOUNT_TYPE_ID': 1, 'DISCOUNT_SUM': None, 'PREVIEW_PICTURE': 'https://vnztech.com/no-image.png', 'DETAIL_PICTURE':  'https://vnztech.com/no-image.png'}
@@ -30,11 +31,24 @@ retry_dao = RetryJobDAO()
 # res = webapp_service.get_sync('orders',1258983116)
 # print(res)
 
-# res = bitrix24_service.Deal.get(5665)
+# res = bitrix24_service.Deal.get(7655)
 # print(res)
 
-fields = {
-        "id": 5665,
-    }
+# fields = {
+#         "id": 5665,
+#     }
 
-bitrix24_service.DealProductRow.get(fields)
+# bitrix24_service.DealProductRow.get(fields)
+
+# webapp_service.check_duplicates()
+
+# my_date = datetime.now()
+# print(my_date.strftime('%Y-%m-%dT%H:%M:%S'))
+
+# # res = haravan_service.Product.updateVariant(1063936869,{'updated_at': datetime.now().isoformat()})
+# # res = haravan_service.Product.getVariant(1063936869)
+
+# res = haravan_service.Customer.update(1023539137, {'updated_at': my_date.strftime('%Y-%m-%dT%H:%M:%S')})
+
+# # res = haravan_service.Customer.get(1023539137)
+# print(res)
