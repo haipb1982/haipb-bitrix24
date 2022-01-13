@@ -101,7 +101,8 @@ def readCSV(filename):
         # reading the CSV file
         data = csv.reader(file)
         for item in data:
-            result.append(item)
+            if item:
+                result.append(item)
     return result
 
 def addRowCSV(rows,filename):
@@ -113,10 +114,8 @@ def removeRowCSV(rows,filename):
     old_rows = readCSV(filename)
     new_rows = old_rows
     for row in old_rows:
-        print(rows,row[0])
         if row[0] in rows:
             new_rows.remove(row)
     
-    print('removeRowCSV',new_rows)
     writeCSV(new_rows,filename)
 
