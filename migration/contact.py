@@ -27,7 +27,7 @@ def HaravanToBitrix24(ha):
     bx["PHONE"] = ha.get("phone")
 
     bx["NAME"] = ha.get("last_name")
-    bx["LAST_NAME"] = ha.get("last_name")
+    # bx["LAST_NAME"] = ha.get("last_name")
     bx["SECOND_NAME"] = ha.get("email")
     bx["BIRTHDAY"] = ha.get("birthday")
 
