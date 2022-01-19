@@ -149,7 +149,7 @@ def HaravanToBitrix24(ha):
     
     fulfillment_status = ha.get("fulfillment_status", "")
     if len(ha.get('fulfillments')) > 0:        
-        fulfillment_status = ha['fulfillments'][0].get("carrier_status_code","")    
+        fulfillment_status = ha['fulfillments'][0].get("carrier_status_code","NOTFULFILLED")    
 
     # Trạng thái giao hàng 'UF_CRM_1641976377': '',
     changed = ""
