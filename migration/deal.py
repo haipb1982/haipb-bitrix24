@@ -75,6 +75,7 @@ def HaravanToBitrix24(ha):
 
     changed = ""
     order_status = ha.get("order_processing_status",None)
+    print('-------->',order_status)
     # Trạng thái đơn hàng: 'UF_CRM_1641976282': 
     changed = ""
     # Verified 419
@@ -105,6 +106,7 @@ def HaravanToBitrix24(ha):
     bx['UF_CRM_1641976282'] = changed
 
     financial_status = ha.get("financial_status",None)
+    print('-------->',financial_status)
     # Trạng thái thanh toán 'UF_CRM_1641976342': 
     changed = ""
     # Paid 337
@@ -129,9 +131,10 @@ def HaravanToBitrix24(ha):
     if financial_status ==  "Canceled":
         changed = "349"
 
-    bx['UF_CRM_1641976342'] = {'ID':changed}
+    bx['UF_CRM_1641976342'] = changed
 
     fulfillment_status = ha.get("fulfillment_status",None) # Trạng thái của đơn hàng
+    print('-------->',fulfillment_status)
     # Trạng thái giao hàng 'UF_CRM_1641976377': '', 
     changed = ""
     # Ready 359
