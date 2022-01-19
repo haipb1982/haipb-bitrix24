@@ -74,37 +74,37 @@ def HaravanToBitrix24(ha):
     #     bx['STAGE_ID'] = "C18:P"
 
     changed = ""
-    order_status = ha["order_processing_status"]
+    order_status = ha.get("order_processing_status",None)
     # Trạng thái đơn hàng: 'UF_CRM_1641976282': 
     changed = ""
     # Verified 419
     if order_status ==  "Verified":
-        changed = 419
+        changed = "419"
     # Change location 421
     if order_status ==  "Change location":
-        changed = 421
+        changed = "421"
     # Available confirmed 423
     if order_status ==  "Available confirmed":
-        changed = 423
+        changed = "423"
     # Out of stock 425
     if order_status ==  "Out of stock":
-        changed = 425
+        changed = "425"
     # Exported 427
     if order_status ==  "Exported":
-        changed = 427
+        changed = "427"
     # On transported 429
     if order_status ==  "On transported":
-        changed = 429
+        changed = "429"
     # Self delivery 431
     if order_status ==  "Self delivery":
-        changed = 431
+        changed = "431"
     # Completed 433
     if order_status ==  "Completed":
-        changed = 433
+        changed = "433"
     
-    bx['UF_CRM_1641976282'] = [changed]
+    bx['UF_CRM_1641976282'] = changed
 
-    financial_status = ha["financial_status"]
+    financial_status = ha.get("financial_status",None)
     # Trạng thái thanh toán 'UF_CRM_1641976342': 
     changed = ""
     # Paid 337
@@ -131,7 +131,7 @@ def HaravanToBitrix24(ha):
 
     bx['UF_CRM_1641976342'] = {'ID':changed}
 
-    fulfillment_status = ha["fulfillment_status"] # Trạng thái của đơn hàng
+    fulfillment_status = ha.get("fulfillment_status",None) # Trạng thái của đơn hàng
     # Trạng thái giao hàng 'UF_CRM_1641976377': '', 
     changed = ""
     # Ready 359
@@ -168,7 +168,7 @@ def HaravanToBitrix24(ha):
     if fulfillment_status ==  "Processing failed":
         changed = "379"
     
-    bx['UF_CRM_1641976377'] = {changed}
+    bx['UF_CRM_1641976377'] = changed
 
 
     # Đơn hàng Haravan
