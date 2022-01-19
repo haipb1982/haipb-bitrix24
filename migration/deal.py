@@ -155,37 +155,37 @@ def HaravanToBitrix24(ha):
     changed = ""
     # Ready 359
     if fulfillment_status.upper() in ["READY","READYTOPICK"]:
-        changed = "359"
+        changed = "381"
     # Picking up 361
     if fulfillment_status.upper() in ["PICKING"]:
-        changed = "361"
+        changed = "383"
     # On the way 363
     if fulfillment_status.upper() in ["ON THE WAY","ON_THE_WAY","ONTHEWAY","DELIVERING"]:
-        changed = "363"
+        changed = "385"
     # Delivered 365
     if fulfillment_status.upper() in ["DELIVERED","FULFILLED"]:
-        changed = "365"
+        changed = "387"
     # Delivery canceled 367
     if fulfillment_status.upper() in ["DELIVERY CANCELED","DELIVERY_CANCELED","DELIVERYCANCELED"]:
-        changed = "367"
+        changed = "389"
     # Return 369
     if fulfillment_status.upper() in ["RETURN"]:
-        changed = "369"
+        changed = "391"
     # Waiting to deliver 371
     if fulfillment_status.upper() in ["WAITING TO DELIVER","WAITING_TO_DELIVER","WAITINGTODELIVER"]:
-        changed = "371"
+        changed = "393"
     # Customer absent 373
     if fulfillment_status.upper() in ["CUSTOMER ABSENT","CUSTOMER_ABSENT","CUSTOMERABSENT"]:
-        changed = "373"
+        changed = "395"
     # Waiting for return 375
     if fulfillment_status.upper() in ["WAITING FOR RETURN","WAITINGFORRETURN"]:
-        changed = "375"
+        changed = "397"
     # Not finished 377
     if fulfillment_status.upper() in ["NOT FINISHED", 'NOTFULFILLED',"NOTFINISHED"]:
-        changed = "377"
+        changed = "399"
     # Processing failed 379
     if fulfillment_status.upper() in ["PROCESSING FAILED"]:
-        changed = "379"
+        changed = "401"
 
     bx['UF_CRM_1641976377'] = changed
 
