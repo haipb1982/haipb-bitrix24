@@ -162,11 +162,11 @@ def update_deal_bitrix_all(topic='', payload=None):
     # if topic in ['orders/fulfilled']:
     #     fields['STAGE_ID'] = "C18:WON"
     
-    LOGGER.info('Cập nhật trên bitrix bitrix payload',extra={'extra':payload})
-    LOGGER.info('Cập nhật dữ liệu trên bitrix fields',extra={'extra':fields})
+    # LOGGER.info('Cập nhật trên bitrix bitrix payload',extra={'extra':payload})
+    # LOGGER.info('Cập nhật dữ liệu trên bitrix fields',extra={'extra':fields})
     # Cập nhật deal trên bitrix
     result = bitrix24_service.Deal.update(fields)
-    LOGGER.info('Cập nhật trên bitrix kết quả',extra={'extra':result})
+    # LOGGER.info('Cập nhật trên bitrix kết quả',extra={'extra':result})
 
 
     # Cập nhật products của Deal 
