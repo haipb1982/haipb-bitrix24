@@ -86,33 +86,33 @@ def HaravanToBitrix24(ha):
     # bx['UF_CRM_1628149984252'] = ha.get('order_processing_status','confirmed') # trạng thái giao hàng
 
     changed = ""
-    order_status = ha.get("order_processing_status", "")
+    order_processing_status = ha.get("order_processing_status", "")
 
-    # Trạng thái đơn hàng: 'UF_CRM_1641976282':
+    # Trạng thái xử lý đơn hàng: 'UF_CRM_1641976282':
     changed = ""
     # Verified 419
-    if order_status.upper() in ["VERIFIED", "CONFIRMED"]:
+    if order_processing_status.upper() in ["VERIFIED", "CONFIRMED"]:
         changed = "419"
     # Change location 421
-    if order_status.upper() in ["CHANGE LOCATION","CHANGE_LOCATION","CHANGELOCATION"]:
+    if order_processing_status.upper() in ["CHANGE LOCATION","CHANGE_LOCATION","CHANGELOCATION"]:
         changed = "421"
     # Available confirmed 423
-    if order_status.upper() in ["AVAILABLE CONFIRMED","AVAILABLE_CONFIRMED","AVAILABLECONFIRMED"]:
+    if order_processing_status.upper() in ["AVAILABLE CONFIRMED","AVAILABLE_CONFIRMED","AVAILABLECONFIRMED"]:
         changed = "423"
     # Out of stock 425
-    if order_status.upper() in ["OUT OF STOCK","OUT_OF_STOCK","OUTOFSTOCK"]:
+    if order_processing_status.upper() in ["OUT OF STOCK","OUT_OF_STOCK","OUTOFSTOCK"]:
         changed = "425"
     # Exported 427
-    if order_status.upper() in ["EXPORTED", "EXPORT_CONFIRM"]:
+    if order_processing_status.upper() in ["EXPORTED", "EXPORT_CONFIRM"]:
         changed = "427"
     # On transported 429
-    if order_status.upper() in ["ON TRANSPORTED","ON_TRANSPORTED","ONTRANSPORTED"]:
+    if order_processing_status.upper() in ["ON TRANSPORTED","ON_TRANSPORTED","ONTRANSPORTED"]:
         changed = "429"
     # Self delivery 431
-    if order_status.upper() in ["SELF DELIVERY","SELF_DELIVERY","SELFDELIVERY"]:
+    if order_processing_status.upper() in ["SELF DELIVERY","SELF_DELIVERY","SELFDELIVERY"]:
         changed = "431"
     # Completed 433
-    if order_status.upper() in ["COMPLETED","COMPLETE"]:
+    if order_processing_status.upper() in ["COMPLETED","COMPLETE"]:
         changed = "433"
 
     bx['UF_CRM_1641976282'] = changed
@@ -145,7 +145,7 @@ def HaravanToBitrix24(ha):
 
     bx['UF_CRM_1641976342'] = changed
 
-    # Trạng thái của đơn hàng
+    # Trạng thái giao hàng của đơn hàng
     
     fulfillment_status = ha.get("fulfillment_status", "")
     if len(ha.get('fulfillments')) > 0:        
@@ -188,6 +188,34 @@ def HaravanToBitrix24(ha):
         changed = "401"
 
     bx['UF_CRM_1641976377'] = changed
+
+    
+    # Trạng thái đơn hàng "UF_CRM_1645172854":"487"
+    
+    changed = ""
+    
+    confirmed_status = ha.get("confirmed_status", "")
+    if confirmed_status.upper() in ["CONFIRMED"]:
+        changed = "487"
+    
+    if (financial_status in ["PENDING"]) or (order_processing_status in ["PENDING"])  :
+        changed = "489"
+        
+    cancelled_status = ha.get("cancelled_status", "")
+    if cancelled_status.upper() in ["CANCELLED"]:
+        changed = "491"
+    
+    if order_processing_status in ["SELF_DELIVERY"]:
+        changed = "493"
+
+    if order_processing_status in ["EXPORT_CONFIRM"]:
+        changed = "495"
+
+    if order_processing_status.upper() in ["COMPLETE"]:
+        changed = "497"
+
+    bx['UF_CRM_1645172854'] = changed
+    
 
     # More
     #
