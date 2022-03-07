@@ -170,4 +170,11 @@ if __name__ == "__main__":
 
     # getContactByID(272)
 
-    getProductRowByDealID(5665)
+    # getProductRowByDealID(5665)
+
+
+    res = bx24.callMethod("crm.deal.userfield.get", id="731")
+    print(res)
+
+    # res = bx24.callMethod('lists.element.get',IBLOCK_TYPE_ID='731')
+    # print(res)
