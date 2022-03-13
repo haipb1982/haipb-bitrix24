@@ -152,7 +152,7 @@ def bitrix_webhooks():
     # chưa cần nên comment
     if event == "ONCRMDEALADD":
         # res = bitrix_to_haravan.create_order_haravan(ID)
-        res = bitrix_to_haravan.create_order_deal(ID)
+        res = bitrix_to_haravan.delete_order_deal_if_existed(ID)
 
     if event == "ONCRMDEALUPDATE":
         res = bitrix_to_haravan.update_order_haravan(ID)

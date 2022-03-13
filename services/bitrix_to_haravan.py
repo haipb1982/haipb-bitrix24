@@ -63,7 +63,7 @@ def create_order_haravan(id):
         return None
 
 # Tạo record in tbl_deal_order
-def create_order_deal(bitrix24_id):
+def delete_order_deal_if_existed(bitrix24_id):
     bx_data = bitrix24_service.Deal.get(bitrix24_id)
     if bx_data:
         haravan_id = bx_data.get('UF_CRM_1623809034975',None)
@@ -93,7 +93,7 @@ def update_order_haravan(id):
     # Nếu đã có dữ liệu để tạo thì sẽ không cần tạo lại nữa. Tránh trường hợp bitrix gửi sai hoặc bị vòng lặp
     # Nếu không có dữ liệu sẽ tạo mới record tbl_deal_order theo HaravanID trong Bx Deal
     if not result:
-        create_order_deal(id) 
+        delete_order_deal_if_existed(id) 
     
     # Nếu dữ liệu của haravan hoặc bitrix bị xóa thì sẽ ko cho xử lý
     if result[0].get('status') == "DELETE":
