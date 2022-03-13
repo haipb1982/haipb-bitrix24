@@ -23,4 +23,4 @@ jobs:
           git pull
           docker build -t blu_app_img .
           docker stop blu_app && docker rm blu_app
-          docker run --name=blu_app -d -p 5000:5000 --add-host host.docker.internal:host-gateway blu_app_img
+          docker run --name=blu_app -d -p 5555:5555 --add-host host.docker.internal:host-gateway blu_app_img
