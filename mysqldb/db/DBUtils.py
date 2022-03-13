@@ -14,7 +14,7 @@ LOGGER = Logger(__name__).get()
 # 103.159.51.249
 
 config = {
-    'host': '127.0.0.1',
+    'host': '172.17.0.1',
     'port':'3306',
     'user': 'vnztech',
     'password': 'Vietnam@68',
