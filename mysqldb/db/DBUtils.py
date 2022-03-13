@@ -13,7 +13,7 @@ LOGGER = Logger(__name__).get()
 # host.docker.internal
 # 103.159.51.249
 config = {
-    'host': 'host.docker.internal',
+    'host': '127.0.0.1',
     'port':'3306',
     'user': 'vnztech',
     'password': 'Vietnam@68',
